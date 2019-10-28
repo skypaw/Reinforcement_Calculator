@@ -9,7 +9,7 @@ class BasicValuesPillars {
     private float fYd;
     private float E_S;
 
-    private BasicValuesPillars(float h, float a1, float a2, float E_CU_3, float E_C_3, float fYd, int E_S) {
+    BasicValuesPillars(float h, float a1, float a2, float E_CU_3, float E_C_3, float fYd, int E_S) {
         //constructor
         this.h =h;
         this.a1 = a1;
@@ -22,47 +22,34 @@ class BasicValuesPillars {
     }
 
     private float dDimension() {
-        float d = h - a1;
-        System.out.println("Wysokosc uzyteczna przekroju = " + d);
-
-        return d;
+        return h - a1;
     }
 
     private double xLimVar() {
-        double xLim = (E_CU_3 * dDimension()) / (E_CU_3 + (fYd / E_S));
-
-        System.out.println("xLim = " + xLim);
-        return xLim;
+        return (E_CU_3 * dDimension()) / (E_CU_3 + (fYd / E_S));
     }
 
     private double xMinYdVar() {
-        double xMinYd = (E_CU_3 * a2) / (E_CU_3 - (fYd / E_S));
-        System.out.println("xMinYd = " + xMinYd);
-        return xMinYd;
+        return (E_CU_3 * a2) / (E_CU_3 - (fYd / E_S));
     }
 
     private double xMinMinusYdVar() {
-        double xMinMinusYd = (E_CU_3 * a2) / (E_CU_3 + (fYd / E_S));
-        System.out.println("xMinMinusYd = " + xMinMinusYd);
-        return xMinMinusYd;
+        return (E_CU_3 * a2) / (E_CU_3 + (fYd / E_S));
     }
 
     private double epsilonYdVar() {
-        double epsilonYd = fYd / E_S;
-        System.out.println("epssilonYd = " + epsilonYd);
-        return epsilonYd;
+        return fYd / E_S;
     }
 
     private double x0Var() {
-        double x0 = (1 - E_C_3 / E_CU_3) * h;
-        System.out.println("x0 = " + x0);
-        return x0;
-
+        return (1 - E_C_3 / E_CU_3) * h;
     }
 
-    private double xYdMax() {
-        double xYdMax = (epsilonYdVar() * x0Var() - E_C_3 * a2) / (epsilonYdVar() - E_C_3);
-        System.out.println("xYdMax = " + xYdMax);
-        return xYdMax;
+    private double xYdMaxVar() {
+        return (epsilonYdVar() * x0Var() - E_C_3 * a2) / (epsilonYdVar() - E_C_3);
+    }
+
+    double[] values(){
+        return new double[]{dDimension(), xLimVar(), xMinYdVar(), xMinMinusYdVar(), x0Var(), xYdMaxVar()};
     }
 }
