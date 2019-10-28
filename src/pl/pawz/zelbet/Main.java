@@ -1,5 +1,7 @@
 package pl.pawz.zelbet;
 
+import java.util.Arrays;
+
 public class Main {
     static final float E_CU_3 = 0.0035f;
     static final float E_C_3 = 0.00175f;
@@ -7,7 +9,9 @@ public class Main {
 
     public static void main(String[] args) {
 
-        float d = dDimension();
+
+
+
         float E_CU_3 = 0.0035f;
         float E_C_3 = 0.00175f;
         int E_S = 200000; // TODO not constant
@@ -23,7 +27,23 @@ public class Main {
         float lambdaConcrete = 0.8f;
         float mEd = 0.9f;
 
-        BendingBeamRectangle cokolwiek = new BendingBeamRectangle(mEd, fCd, E_CU_3, lambdaConcrete, etaConcrete, fYd, E_S, b, a2, d);
+        BasicValuesPillars basicValuesPillars = new BasicValuesPillars(h, a1, a2, E_CU_3, E_C_3, fYd, E_S);
+
+        double[] d = basicValuesPillars.values();
+        System.out.println(Arrays.toString(d));
+
+        double dDimension = d[0];
+        System.out.println(dDimension);
+
+        BendingBeamRectangle resultsBeam = new BendingBeamRectangle(mEd, fCd, E_CU_3, lambdaConcrete, etaConcrete, fYd, E_S, b, a2, dDimension);
+        double[] results = resultsBeam.resultsBendingBeamRectangle();
+        System.out.println(Arrays.toString(results));
+
+
+
+
+
+
 
     }
 }

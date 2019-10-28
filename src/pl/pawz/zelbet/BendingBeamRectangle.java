@@ -1,7 +1,5 @@
 package pl.pawz.zelbet;
 
-import java.util.Arrays;
-
 public class BendingBeamRectangle {
 
     private float mEd;
@@ -13,10 +11,10 @@ public class BendingBeamRectangle {
     private int E_S;
     private float b;
     private float a2;
-    private float d;
+    private double d;
 
 
-    public BendingBeamRectangle(float mEd, float fCd, float E_CU_3, float lambdaConcrete, float etaConcrete, float fYd, int E_S, float b, float a2, float d) {
+    public BendingBeamRectangle(float mEd, float fCd, float E_CU_3, float lambdaConcrete, float etaConcrete, float fYd, int E_S, float b, float a2, double d) {
         //constructor
         this.mEd = mEd;
         this.fCd = fCd;
@@ -28,25 +26,6 @@ public class BendingBeamRectangle {
         this.b = b;
         this.a2 = a2;
         this.d = d;
-
-        double xLim = xiLimVar();
-        System.out.println(xLim);
-        double zetaLim = zetaLimVar();
-        System.out.println(zetaLim);
-        double aZeroLim = aZeroLimVar();
-        System.out.println(aZeroLim);
-        double aZero = aZeroVar();
-        System.out.println(aZero);
-
-        if (aZero<=aZeroLim){
-            double[] results = aZeroSmallerThanAZeroLim();
-            System.out.println("Wyniki = " + Arrays.toString(results));
-        } else {
-            double[] results = aZeroGreaterThanAZeroLim();
-            System.out.println("Wyniki = " + Arrays.toString(results));
-        }
-
-
     }
 
     private double xiLimVar() {
@@ -80,6 +59,17 @@ public class BendingBeamRectangle {
         double aS12 = (mEd - mRdLim) / (fYd * (d - a2));
         double aS1 = aS11 + aS12;
         return new double[]{aS1, aS12};
+    }
+
+    double[] resultsBendingBeamRectangle(){
+        double aZeroLim = aZeroLimVar();
+        double aZero = aZeroVar();
+
+        if (aZero<=aZeroLim){
+            return aZeroSmallerThanAZeroLim();
+        } else {
+            return aZeroGreaterThanAZeroLim();
+        }
     }
 
 }
