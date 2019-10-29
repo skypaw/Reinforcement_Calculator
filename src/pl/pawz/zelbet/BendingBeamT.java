@@ -1,0 +1,60 @@
+package pl.pawz.zelbet;
+
+public class BendingBeamT {
+
+    private float mEd;
+    private float fCd;
+    private float E_CU_3;
+    private float etaConcrete;
+    private float lambdaConcrete;
+    private float fYd;
+    private int E_S;
+    private float bEff;
+    private float a2;
+    private double d;
+    private float bW;
+    private float hF;
+
+    public BendingBeamT(float mEd, float fCd, float E_CU_3, float lambdaConcrete, float etaConcrete, float fYd, int E_S, float bEff, float a2, double d, float bW, float hF) {
+        //constructor
+        this.mEd = mEd;
+        this.fCd = fCd;
+        this.E_CU_3 = E_CU_3;
+        this.lambdaConcrete = lambdaConcrete;
+        this.etaConcrete = etaConcrete;
+        this.fYd = fYd;
+        this.E_S = E_S;
+        this.bEff = bEff;
+        this.a2 = a2;
+        this.d = d;
+        this.bW = bW;
+        this.hF = hF;
+    }
+
+    private double mRdHfVar() {
+        return etaConcrete * fCd * bEff * hF * (d - 0.5 * hF);
+    }
+
+    private double[] aZeroVarT() {
+        double mRd1 = etaConcrete * fCd * (bEff - bW) * hF * (d - 0.5 * hF);
+        double aS11 = (bEff - bW) * hF * etaConcrete * fCd / fYd;
+        return new double[]{(mEd - mRd1) / (etaConcrete * fCd * bEff * Math.pow(d, 2)), aS11, mRd1};
+    }
+
+    private double[] aZeroSmallerThanAZeroLimT(){
+        double zeta = (1+Math.sqrt(1-2*aZeroVarT()[0]/2));
+        double aS12 = (mEd-aZeroVarT()[2])/(fYd*zeta*d);
+        double aS1 = aZeroVarT()[1] + aS12;
+        double aS2 = 0;
+        return new double[]{aS1, aS2};
+    }
+
+    private double[] aZeroGreaterThanAZeroLimT(){
+        double mRdLim = ;
+        double aS12 = ;
+        double aS13 = (mEd - aZeroVarT()[2] - mRdLim)/(fYd*(d-a2));
+        double aS1 = aZeroVarT()[1]+aS12+aS13;
+        return new double[]{aS1, aS13};
+    }
+
+}

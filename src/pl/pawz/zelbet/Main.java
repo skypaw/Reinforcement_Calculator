@@ -10,8 +10,6 @@ public class Main {
     public static void main(String[] args) {
 
 
-
-
         float E_CU_3 = 0.0035f;
         float E_C_3 = 0.00175f;
         int E_S = 200000; // TODO not constant
@@ -35,14 +33,9 @@ public class Main {
         double dDimension = d[0];
         System.out.println(dDimension);
 
-        BendingBeamRectangle resultsBeam = new BendingBeamRectangle(mEd, fCd, E_CU_3, lambdaConcrete, etaConcrete, fYd, E_S, b, a2, dDimension);
-        double[] results = resultsBeam.resultsBendingBeamRectangle();
+
+        double[] results = BendingBeamRectangle.resultsBendingBeamRectangle(mEd, fCd, E_CU_3, lambdaConcrete, etaConcrete, fYd, E_S, b, a2, dDimension);
         System.out.println(Arrays.toString(results));
-
-
-
-
-
 
 
     }

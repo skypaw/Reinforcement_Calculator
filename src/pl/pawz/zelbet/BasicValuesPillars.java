@@ -11,7 +11,7 @@ class BasicValuesPillars {
 
     BasicValuesPillars(float h, float a1, float a2, float E_CU_3, float E_C_3, float fYd, int E_S) {
         //constructor
-        this.h =h;
+        this.h = h;
         this.a1 = a1;
         this.a2 = a2;
         this.E_CU_3 = E_CU_3;
@@ -49,7 +49,7 @@ class BasicValuesPillars {
         return (epsilonYdVar() * x0Var() - E_C_3 * a2) / (epsilonYdVar() - E_C_3);
     }
 
-    double[] values(){
+    double[] values() {
         return new double[]{dDimension(), xLimVar(), xMinYdVar(), xMinMinusYdVar(), x0Var(), xYdMaxVar()};
     }
 }

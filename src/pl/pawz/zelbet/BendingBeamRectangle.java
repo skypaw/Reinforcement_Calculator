@@ -61,11 +61,11 @@ public class BendingBeamRectangle {
         return new double[]{aS1, aS12};
     }
 
-    double[] resultsBendingBeamRectangle(){
+    double[] resultsBendingBeamRectangle() {
         double aZeroLim = aZeroLimVar();
         double aZero = aZeroVar();
 
-        if (aZero<=aZeroLim){
+        if (aZero <= aZeroLim) {
             return aZeroSmallerThanAZeroLim();
         } else {
             return aZeroGreaterThanAZeroLim();
