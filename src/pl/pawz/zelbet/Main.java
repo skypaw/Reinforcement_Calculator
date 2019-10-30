@@ -34,8 +34,12 @@ public class Main {
         System.out.println(dDimension);
 
 
-        double[] results = BendingBeamRectangle.resultsBendingBeamRectangle(mEd, fCd, E_CU_3, lambdaConcrete, etaConcrete, fYd, E_S, b, a2, dDimension);
+        double[] results = test.resultsBendingBeamRectangle(mEd, fCd, E_CU_3, lambdaConcrete, etaConcrete, fYd, E_S, b, a2, dDimension);
         System.out.println(Arrays.toString(results));
+
+        BendingBeamRectangle results1 = new BendingBeamRectangle(mEd, fCd, E_CU_3, lambdaConcrete, etaConcrete, fYd, E_S, b, a2, dDimension);
+        double[] results2 =results1.resultsBendingBeamRectangle();
+        System.out.println(Arrays.toString(results2));
 
 
     }

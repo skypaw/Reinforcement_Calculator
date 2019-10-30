@@ -31,6 +31,8 @@ public class BendingBeamT {
         this.hF = hF;
     }
 
+    BendingBeamRectangle bbr = new BendingBeamRectangle(mEd, fCd, E_CU_3, lambdaConcrete, etaConcrete, fYd, E_S, bW, a2, d);
+
     private double mRdHfVar() {
         return etaConcrete * fCd * bEff * hF * (d - 0.5 * hF);
     }
@@ -50,8 +52,8 @@ public class BendingBeamT {
     }
 
     private double[] aZeroGreaterThanAZeroLimT(){
-        double mRdLim = ;
-        double aS12 = ;
+        double mRdLim = 2;
+        double aS12 = 3;
         double aS13 = (mEd - aZeroVarT()[2] - mRdLim)/(fYd*(d-a2));
         double aS1 = aZeroVarT()[1]+aS12+aS13;
         return new double[]{aS1, aS13};
