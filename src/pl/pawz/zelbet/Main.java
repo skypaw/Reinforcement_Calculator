@@ -10,8 +10,6 @@ public class Main {
     public static void main(String[] args) {
 
 
-
-
         float E_CU_3 = 0.0035f;
         float E_C_3 = 0.00175f;
         int E_S = 200000; // TODO not constant
@@ -26,8 +24,9 @@ public class Main {
         float etaConcrete = 1.0f;
         float lambdaConcrete = 0.8f;
         float mEd = 0.9f;
+        float nEd = 0.2f;
 
-        BasicValuesPillars basicValuesPillars = new BasicValuesPillars(h, a1, a2, E_CU_3, E_C_3, fYd, E_S);
+        BasicValuesPillars basicValuesPillars = new BasicValuesPillars(h, a1, a2, E_CU_3, E_C_3, fYd, E_S, mEd, nEd);
 
         double[] d = basicValuesPillars.values();
         System.out.println(Arrays.toString(d));
@@ -38,11 +37,6 @@ public class Main {
         BendingBeamRectangle resultsBeam = new BendingBeamRectangle(mEd, fCd, E_CU_3, lambdaConcrete, etaConcrete, fYd, E_S, b, a2, dDimension);
         double[] results = resultsBeam.resultsBendingBeamRectangle();
         System.out.println(Arrays.toString(results));
-
-
-
-
-
 
 
     }
