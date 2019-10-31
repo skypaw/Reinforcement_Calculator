@@ -60,6 +60,19 @@ public class BendingBeamT {
         return new double[]{aS1, aS13};
     }
 
+    double[] resultsBendingT(){
+        if (mEd<= mRdHf()) {
+            return resultsSeeminglyT;
+        }
+        else {
+            if (mRdHfGreaterThanMEd()[2]<= rectangle.aZeroLimVar()){
+                return aZeroSmallerThanA0LimT();
+            }
+            else {
+                return aZeroGreaterThanA0LimT();
+            }
+        }
+    }
 
 
 
