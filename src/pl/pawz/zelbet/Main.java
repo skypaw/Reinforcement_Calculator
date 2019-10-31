@@ -39,5 +39,10 @@ public class Main {
         System.out.println(Arrays.toString(results));
 
 
+        int[] coeffs = {1,2,3,4};
+        Polynomial resultsPolynomial = new Polynomial(coeffs);
+        String results1 = resultsPolynomial.toString();
+        System.out.println(results1);
+
     }
 }

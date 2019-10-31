@@ -28,7 +28,7 @@ public class BendingBeamRectangle {
         this.d = d;
     }
 
-    private double xiLimVar() {
+    double xiLimVar() {
         return lambdaConcrete * E_CU_3 / (E_CU_3 + fYd / E_S);
     }
 
@@ -36,7 +36,7 @@ public class BendingBeamRectangle {
         return 1 - 0.5 * xiLimVar();
     }
 
-    private double aZeroLimVar() {
+    double aZeroLimVar() {
         return xiLimVar() * zetaLimVar();
     }
 
