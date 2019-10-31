@@ -31,8 +31,8 @@ public class BendingBeamT {
         this.d = d;
     }
 
-    BendingBeamRectangle rectangle = new BendingBeamRectangle(mEd, fCd, E_CU_3, lambdaConcrete, etaConcrete, fYd, E_S, bEff, a2, d);
-    double[] resultsSeeminglyT = rectangle.resultsBendingBeamRectangle();
+    private BendingBeamRectangle rectangle = new BendingBeamRectangle(mEd, fCd, E_CU_3, lambdaConcrete, etaConcrete, fYd, E_S, bEff, a2, d);
+    private double[] resultsSeeminglyT = rectangle.resultsBendingBeamRectangle();
 
     private double mRdHf() {
         return etaConcrete * fCd * bEff * hF * (d - 0.5 * hF);
@@ -73,7 +73,5 @@ public class BendingBeamT {
             }
         }
     }
-
-
 
 }
