@@ -1,6 +1,6 @@
 package pl.pawz.zelbet;
 
-public class DiagnosticBendingBeamAndT {
+class DiagnosticBendingBeamAndT {
     private float fCd;
     private float epsilonCu3;
     private float etaConcrete;
@@ -120,7 +120,7 @@ public class DiagnosticBendingBeamAndT {
         return epsilonCu3 * (xSmallerThanXMinYd()[0] - a2) / xSmallerThanXMinYd()[0] * E_S; //sigmaS2
     }
 
-    public double resultDiagnostic() {
+    double resultDiagnostic() {
         double xVar;
         double sigmaS1;
         double sigmaS2;

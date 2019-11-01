@@ -4,7 +4,7 @@ public class BendingBeamT {
 
     private float mEd;
     private float fCd;
-    private float E_CU_3;
+    private float epsilonCu3;
     private float etaConcrete;
     private float lambdaConcrete;
     private float fYd;
@@ -19,10 +19,10 @@ public class BendingBeamT {
     private double xiLim;
 
 
-    private BendingBeamT(float mEd, float fCd, float E_CU_3, float lambdaConcrete, float etaConcrete, float fYd, int E_S, float bW, float bEff, float hF, float a2, double d) {
+    private BendingBeamT(float mEd, float fCd, float epsilonCu3, float lambdaConcrete, float etaConcrete, float fYd, int E_S, float bW, float bEff, float hF, float a2, double d) {
         this.mEd = mEd;
         this.fCd = fCd;
-        this.E_CU_3 = E_CU_3;
+        this.epsilonCu3 = epsilonCu3;
         this.lambdaConcrete = lambdaConcrete;
         this.etaConcrete = etaConcrete;
         this.fYd = fYd;
@@ -33,7 +33,7 @@ public class BendingBeamT {
         this.a2 = a2;
         this.d = d;
 
-        BendingBeamRectangle rectangle = new BendingBeamRectangle(mEd, fCd, E_CU_3, lambdaConcrete, etaConcrete, fYd, E_S, bEff, a2, d);
+        BendingBeamRectangle rectangle = new BendingBeamRectangle(mEd, fCd, epsilonCu3, lambdaConcrete, etaConcrete, fYd, E_S, bEff, a2, d);
         this.resultsSeeminglyT = rectangle.resultsBendingBeamRectangle();
         this.aZeroLim = rectangle.aZeroLimVar();
         this.xiLim = rectangle.xiLimVar();
