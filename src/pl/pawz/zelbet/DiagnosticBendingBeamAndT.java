@@ -1,7 +1,6 @@
 package pl.pawz.zelbet;
 
 public class DiagnosticBendingBeamAndT {
-    private float mEd;
     private float fCd;
     private float epsilonCu3;
     private float etaConcrete;
@@ -17,9 +16,11 @@ public class DiagnosticBendingBeamAndT {
     private double d;
     private double aS1;
     private double aS2;
+    private double xLim;
+    private double xMinYd;
+    private double xMinMinusYd;
 
-    private DiagnosticBendingBeamAndT(float mEd, float fCd, float epsilonCu3, float lambdaConcrete, float etaConcrete, float fYd, int E_S, float bW, float bEff, float h, float hF, float a1, float a2, double d, double aS1, double aS2) {
-        this.mEd = mEd;
+    DiagnosticBendingBeamAndT(float fCd, float epsilonCu3, float lambdaConcrete, float etaConcrete, float fYd, int E_S, float bW, float bEff, float h, float hF, float a1, float a2, double d, double aS1, double aS2) {
         this.fCd = fCd;
         this.epsilonCu3 = epsilonCu3;
         this.lambdaConcrete = lambdaConcrete;
@@ -35,12 +36,12 @@ public class DiagnosticBendingBeamAndT {
         this.d = d;
         this.aS1 = aS1;
         this.aS2 = aS2;
-    }
 
-    private BasicValuesPillars limitValues = new BasicValuesPillars(h, a1, a2, epsilonCu3, 0, fYd, E_S, 0, 0);
-    private double xLim = limitValues.xLimVar();
-    private double xMinYd = limitValues.xMinYdVar();
-    private double xMinMinusYd = limitValues.xMinMinusYdVar();
+        BasicValuesPillars limitValues = new BasicValuesPillars(h, a1, a2, epsilonCu3, 0, fYd, E_S, 0, 0);
+        this.xLim = limitValues.xLimVar();
+        this.xMinYd = limitValues.xMinYdVar();
+        this.xMinMinusYd = limitValues.xMinMinusYdVar();
+    }
 
     private double xVar() {
         return 1 / lambdaConcrete * (fYd * (aS1 - aS2)) / (etaConcrete * fCd * bEff);
@@ -145,7 +146,7 @@ public class DiagnosticBendingBeamAndT {
                     sigmaS1 = xGreaterThanXLim()[1];
                 }
             }
-
+            System.out.println(sigmaS1);
             return etaConcrete * fCd * bEff * lambdaConcrete * xVar * (d - 0.5 * lambdaConcrete * xVar) + sigmaS2 * aS2 * (d - a2);
         } else {
             xVar = xGreaterThanHfByLambdaT()[0];
@@ -168,7 +169,7 @@ public class DiagnosticBendingBeamAndT {
                     sigmaS1 = xGreaterThanXLimT()[1];
                 }
             }
-
+            System.out.println(sigmaS1);
             return etaConcrete * fCd * (xGreaterThanHfByLambdaT()[1] * (d - 0.5 * hF) + bW * lambdaConcrete * xVar * (d - 0.5 * lambdaConcrete * xVar)) + sigmaS2 * aS2 * (d - a2);
         }
     }
