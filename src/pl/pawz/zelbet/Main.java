@@ -38,6 +38,9 @@ public class Main {
         double[] results = resultsBeam.resultsBendingBeamRectangle();
         System.out.println(Arrays.toString(results));
 
+        DiagnosticBendingBeamAndT resultDiagnosticBeam = new DiagnosticBendingBeamAndT(fCd, E_CU_3, lambdaConcrete, etaConcrete, fYd, E_S, b, b, h, h, a1, a2, dDimension, 0.0012, 0.0012);
+        double resultBeam = resultDiagnosticBeam.resultDiagnostic();
+        System.out.println(resultBeam);
 
     }
 }
