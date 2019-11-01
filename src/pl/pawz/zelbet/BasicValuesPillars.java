@@ -29,15 +29,15 @@ class BasicValuesPillars {
         return h - a1;
     }
 
-    private double xLimVar() {
+    double xLimVar() {
         return (E_CU_3 * dDimension()) / (E_CU_3 + (fYd / E_S));
     }
 
-    private double xMinYdVar() {
+    double xMinYdVar() {
         return (E_CU_3 * a2) / (E_CU_3 - (fYd / E_S));
     }
 
-    private double xMinMinusYdVar() {
+    double xMinMinusYdVar() {
         return (E_CU_3 * a2) / (E_CU_3 + (fYd / E_S));
     }
 
