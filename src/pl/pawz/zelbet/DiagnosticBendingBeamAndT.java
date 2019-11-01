@@ -3,7 +3,7 @@ package pl.pawz.zelbet;
 public class DiagnosticBendingBeamAndT {
     private float mEd;
     private float fCd;
-    private float E_CU_3;
+    private float epsilonCu3;
     private float etaConcrete;
     private float lambdaConcrete;
     private float fYd;
@@ -18,10 +18,10 @@ public class DiagnosticBendingBeamAndT {
     private double aS1;
     private double aS2;
 
-    private DiagnosticBendingBeamAndT(float mEd, float fCd, float E_CU_3, float lambdaConcrete, float etaConcrete, float fYd, int E_S, float bW, float bEff, float h, float hF, float a1, float a2, double d, double aS1, double aS2) {
+    private DiagnosticBendingBeamAndT(float mEd, float fCd, float epsilonCu3, float lambdaConcrete, float etaConcrete, float fYd, int E_S, float bW, float bEff, float h, float hF, float a1, float a2, double d, double aS1, double aS2) {
         this.mEd = mEd;
         this.fCd = fCd;
-        this.E_CU_3 = E_CU_3; //TODO change this to variable epsilonCu3 - for concrete c50< this is a variable
+        this.epsilonCu3 = epsilonCu3;
         this.lambdaConcrete = lambdaConcrete;
         this.etaConcrete = etaConcrete;
         this.fYd = fYd;
@@ -37,7 +37,7 @@ public class DiagnosticBendingBeamAndT {
         this.aS2 = aS2;
     }
 
-    private BasicValuesPillars limitValues = new BasicValuesPillars(h, a1, a2, E_CU_3, 0, fYd, E_S, 0, 0);
+    private BasicValuesPillars limitValues = new BasicValuesPillars(h, a1, a2, epsilonCu3, 0, fYd, E_S, 0, 0);
     private double xLim = limitValues.xLimVar();
     private double xMinYd = limitValues.xMinYdVar();
     private double xMinMinusYd = limitValues.xMinMinusYdVar();
@@ -48,8 +48,8 @@ public class DiagnosticBendingBeamAndT {
 
     private double[] xSmallerThanXMinYd() {
         float sigmaS1 = fYd;
-        double aVar = (E_CU_3 * E_S * aS2 - fYd * aS1) / (etaConcrete * fCd * bEff);
-        double bVar = (4 * lambdaConcrete * E_CU_3 * E_S * aS2) / (etaConcrete * fCd * bEff) * a2;
+        double aVar = (epsilonCu3 * E_S * aS2 - fYd * aS1) / (etaConcrete * fCd * bEff);
+        double bVar = (4 * lambdaConcrete * epsilonCu3 * E_S * aS2) / (etaConcrete * fCd * bEff) * a2;
         double xVar = 1 / lambdaConcrete * ((-aVar + Math.sqrt(Math.pow(aVar, 2) + bVar)) / 2);
         return new double[]{xVar, sigmaS1};
     }
@@ -75,7 +75,7 @@ public class DiagnosticBendingBeamAndT {
     }
 
     private double xGreaterThanXMinMinusYd() {
-        return E_CU_3 * (xSmallerThanXMinYd()[0] - a2) / xSmallerThanXMinYd()[0] * E_S;
+        return epsilonCu3 * (xSmallerThanXMinYd()[0] - a2) / xSmallerThanXMinYd()[0] * E_S;
     }
 
     /*
@@ -90,8 +90,8 @@ public class DiagnosticBendingBeamAndT {
 
     private double[] xSmallerThanXMinYdT() {
         double sigmaS1 = fYd;
-        double aVar = xGreaterThanHfByLambdaT()[1] / bW + (E_CU_3 * E_S * aS2 - fYd * aS1) / (etaConcrete * fCd * bW);
-        double bVar = (4 * lambdaConcrete * E_CU_3 * E_S * aS2) / (etaConcrete * fCd * bW) * a2;
+        double aVar = xGreaterThanHfByLambdaT()[1] / bW + (epsilonCu3 * E_S * aS2 - fYd * aS1) / (etaConcrete * fCd * bW);
+        double bVar = (4 * lambdaConcrete * epsilonCu3 * E_S * aS2) / (etaConcrete * fCd * bW) * a2;
         double xVar = 1 / lambdaConcrete * ((-aVar + Math.sqrt(Math.pow(aVar, 2) + bVar)) / 2);
         return new double[]{xVar, sigmaS1};
     }
@@ -116,7 +116,7 @@ public class DiagnosticBendingBeamAndT {
     }
 
     private double xGreaterThanXMinMinusYdT() {
-        return E_CU_3 * (xSmallerThanXMinYd()[0] - a2) / xSmallerThanXMinYd()[0] * E_S; //sigmaS2
+        return epsilonCu3 * (xSmallerThanXMinYd()[0] - a2) / xSmallerThanXMinYd()[0] * E_S; //sigmaS2
     }
 
     public double resultDiagnostic() {
@@ -148,7 +148,26 @@ public class DiagnosticBendingBeamAndT {
 
             return etaConcrete * fCd * bEff * lambdaConcrete * xVar * (d - 0.5 * lambdaConcrete * xVar) + sigmaS2 * aS2 * (d - a2);
         } else {
+            xVar = xGreaterThanHfByLambdaT()[0];
+            if (xVar < xMinYd) {
+                xVar = xSmallerThanXMinYdT()[0];
+                sigmaS1 = xSmallerThanXMinYdT()[1];
+                if (xVar < xMinMinusYd) {
+                    xVar = xSmallerThanXMinMinusYdT()[0];
+                    sigmaS2 = xSmallerThanXMinMinusYdT()[1];
+                } else {
+                    sigmaS2 = xGreaterThanXMinMinusYdT();
+                }
 
+            } else {
+                sigmaS2 = xGreaterThanXMinYdT();
+                if (xVar <= xLim) {
+                    sigmaS1 = xSmallerThanXLimT();
+                } else {
+                    xVar = xGreaterThanXLimT()[0];
+                    sigmaS1 = xGreaterThanXLimT()[1];
+                }
+            }
 
             return etaConcrete * fCd * (xGreaterThanHfByLambdaT()[1] * (d - 0.5 * hF) + bW * lambdaConcrete * xVar * (d - 0.5 * lambdaConcrete * xVar)) + sigmaS2 * aS2 * (d - a2);
         }
