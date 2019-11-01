@@ -88,12 +88,69 @@ public class DiagnosticBendingBeamAndT {
         return new double[]{xVar, aC1};
     }
 
-    private double[] xSmallerThanXMinYdT(){
+    private double[] xSmallerThanXMinYdT() {
         double sigmaS1 = fYd;
-        double aVar = xGreaterThanHfByLambdaT()[1]/bW+(E_CU_3*E_S*aS2-fYd*aS1)/(etaConcrete*fCd*bW);
-        double bVar = (4*lambdaConcrete*E_CU_3*E_S*aS2)/(etaConcrete*fCd*bW)*a2;
-        double xVar = 1/lambdaConcrete*((-aVar+Math.sqrt(Math.pow(aVar,2)+bVar))/2);
+        double aVar = xGreaterThanHfByLambdaT()[1] / bW + (E_CU_3 * E_S * aS2 - fYd * aS1) / (etaConcrete * fCd * bW);
+        double bVar = (4 * lambdaConcrete * E_CU_3 * E_S * aS2) / (etaConcrete * fCd * bW) * a2;
+        double xVar = 1 / lambdaConcrete * ((-aVar + Math.sqrt(Math.pow(aVar, 2) + bVar)) / 2);
         return new double[]{xVar, sigmaS1};
     }
 
+    private double xGreaterThanXMinYdT() {
+        return fYd; //sigmaS2
+    }
+
+    private double xSmallerThanXLimT() {
+        return fYd; //sigmaS1
+    }
+
+    private double[] xGreaterThanXLimT() {
+        double xVar = xLim;
+        double sigmaS1 = (etaConcrete * fCd * (xGreaterThanHfByLambdaT()[1] + bW * lambdaConcrete * xVar) + fYd * aS2) / aS1;
+        return new double[]{xVar, sigmaS1};
+    }
+
+    private double[] xSmallerThanXMinMinusYdT() {
+        double xVar = 1 / lambdaConcrete * ((fYd * (aS1 + aS2)) / (etaConcrete * fCd * bW) - xGreaterThanHfByLambdaT()[1] / bW);
+        return new double[]{xVar, -fYd}; //-fyd = sigmaS2
+    }
+
+    private double xGreaterThanXMinMinusYdT() {
+        return E_CU_3 * (xSmallerThanXMinYd()[0] - a2) / xSmallerThanXMinYd()[0] * E_S; //sigmaS2
+    }
+
+    public double resultDiagnostic() {
+        double xVar;
+        double sigmaS1;
+        double sigmaS2;
+
+        if (xVar() <= hF / lambdaConcrete) {
+
+            if (xVar() < xMinYd) {
+                xVar = xSmallerThanXMinYd()[0];
+                sigmaS1 = xSmallerThanXMinYd()[1];
+                if (xVar < xMinMinusYd) {
+                    xVar = xSmallerThanXMinMinusYd()[0];
+                    sigmaS2 = xSmallerThanXMinMinusYd()[1];
+                } else {
+                    sigmaS2 = xGreaterThanXMinMinusYd();
+                }
+            } else {
+                xVar = xVar();
+                sigmaS2 = xGreaterThanXMinYd();
+                if (xVar <= xLim) {
+                    sigmaS1 = xSmallerThanXLim();
+                } else {
+                    xVar = xGreaterThanXLim()[0];
+                    sigmaS1 = xGreaterThanXLim()[1];
+                }
+            }
+
+            return etaConcrete * fCd * bEff * lambdaConcrete * xVar * (d - 0.5 * lambdaConcrete * xVar) + sigmaS2 * aS2 * (d - a2);
+        } else {
+
+
+            return etaConcrete * fCd * (xGreaterThanHfByLambdaT()[1] * (d - 0.5 * hF) + bW * lambdaConcrete * xVar * (d - 0.5 * lambdaConcrete * xVar)) + sigmaS2 * aS2 * (d - a2);
+        }
+    }
 }
