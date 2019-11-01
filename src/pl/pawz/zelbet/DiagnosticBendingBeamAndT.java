@@ -78,5 +78,22 @@ public class DiagnosticBendingBeamAndT {
         return E_CU_3 * (xSmallerThanXMinYd()[0] - a2) / xSmallerThanXMinYd()[0] * E_S;
     }
 
+    /*
+    TBeam
+     */
+
+    private double[] xGreaterThanHfByLambdaT() {
+        double aC1 = (bEff - bW) * hF;
+        double xVar = 1 / lambdaConcrete * ((fYd * (aS1 - aS2)) / (etaConcrete * fCd * bW) - aC1 / bW);
+        return new double[]{xVar, aC1};
+    }
+
+    private double[] xSmallerThanXMinYdT(){
+        double sigmaS1 = fYd;
+        double aVar = xGreaterThanHfByLambdaT()[1]/bW+(E_CU_3*E_S*aS2-fYd*aS1)/(etaConcrete*fCd*bW);
+        double bVar = (4*lambdaConcrete*E_CU_3*E_S*aS2)/(etaConcrete*fCd*bW)*a2;
+        double xVar = 1/lambdaConcrete*((-aVar+Math.sqrt(Math.pow(aVar,2)+bVar))/2);
+        return new double[]{xVar, sigmaS1};
+    }
 
 }
