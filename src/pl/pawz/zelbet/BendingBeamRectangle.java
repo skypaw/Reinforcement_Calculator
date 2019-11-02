@@ -3,22 +3,22 @@ package pl.pawz.zelbet;
 public class BendingBeamRectangle {
 
     private float mEd;
-    private float fCd;
-    private float E_CU_3;
-    private float etaConcrete;
-    private float lambdaConcrete;
-    private float fYd;
+    private double fCd;
+    private double epsilonCu3;
+    private double etaConcrete;
+    private double lambdaConcrete;
+    private double fYd;
     private int E_S;
     private float b;
     private float a2;
     private double d;
 
 
-    public BendingBeamRectangle(float mEd, float fCd, float E_CU_3, float lambdaConcrete, float etaConcrete, float fYd, int E_S, float b, float a2, double d) {
+    public BendingBeamRectangle(float mEd, double fCd, double epsilonCu3, double lambdaConcrete, double etaConcrete, double fYd, int E_S, float b, float a2, double d) {
         //constructor
         this.mEd = mEd;
         this.fCd = fCd;
-        this.E_CU_3 = E_CU_3;
+        this.epsilonCu3 = epsilonCu3;
         this.lambdaConcrete = lambdaConcrete;
         this.etaConcrete = etaConcrete;
         this.fYd = fYd;
@@ -29,7 +29,7 @@ public class BendingBeamRectangle {
     }
 
     double xiLimVar() {
-        return lambdaConcrete * E_CU_3 / (E_CU_3 + fYd / E_S);
+        return lambdaConcrete * epsilonCu3 / (epsilonCu3 + fYd / E_S);
     }
 
     private double zetaLimVar() {

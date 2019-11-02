@@ -1,11 +1,11 @@
 package pl.pawz.zelbet;
 
 class DiagnosticBendingBeamAndT {
-    private float fCd;
-    private float epsilonCu3;
-    private float etaConcrete;
-    private float lambdaConcrete;
-    private float fYd;
+    private double fCd;
+    private double epsilonCu3;
+    private double etaConcrete;
+    private double lambdaConcrete;
+    private double fYd;
     private int E_S;
     private float bW;
     private float bEff;
@@ -20,7 +20,7 @@ class DiagnosticBendingBeamAndT {
     private double xMinYd;
     private double xMinMinusYd;
 
-    DiagnosticBendingBeamAndT(float fCd, float epsilonCu3, float lambdaConcrete, float etaConcrete, float fYd, int E_S, float bW, float bEff, float h, float hF, float a1, float a2, double d, double aS1, double aS2) {
+    DiagnosticBendingBeamAndT(double fCd, double epsilonCu3, double lambdaConcrete, double etaConcrete, double fYd, int E_S, float bW, float bEff, float h, float hF, float a1, float a2, double d, double aS1, double aS2) {
         this.fCd = fCd;
         this.epsilonCu3 = epsilonCu3;
         this.lambdaConcrete = lambdaConcrete;
@@ -48,7 +48,7 @@ class DiagnosticBendingBeamAndT {
     }
 
     private double[] xSmallerThanXMinYd() {
-        float sigmaS1 = fYd;
+        double sigmaS1 = fYd;
         double aVar = (epsilonCu3 * E_S * aS2 - fYd * aS1) / (etaConcrete * fCd * bEff);
         double bVar = (4 * lambdaConcrete * epsilonCu3 * E_S * aS2) / (etaConcrete * fCd * bEff) * a2;
         double xVar = 1 / lambdaConcrete * ((-aVar + Math.sqrt(Math.pow(aVar, 2) + bVar)) / 2);
