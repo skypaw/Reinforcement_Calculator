@@ -1,24 +1,24 @@
 package pl.pawz.zelbet;
 
-public class BasicValues {
+class BasicValues {
 
-    public static double dValue(float h, float a1){
+    static double dValue(float h, float a1){
         return h-a1;
     }
 
-    public static double fCdValue(float fCk) {
+    static double fCdValue(float fCk) {
         float alphaCc = 1f;
         float gammaC = 1.4f;
         return alphaCc * fCk / gammaC;
     }
 
-    public static double fYdValue(float fYk) {
+    static double fYdValue(float fYk) {
         float alphaCc = 1f;
         float gammaC = 1.15f;
         return alphaCc * fYk / gammaC;
     }
 
-    public static double lambdaConcreteValue(float fCk) {
+    static double lambdaConcreteValue(float fCk) {
         if (fCk > 50) {
             return 0.8 - (fCk - 50) / 400;
         } else {
@@ -26,7 +26,7 @@ public class BasicValues {
         }
     }
 
-    public static double etaConcreteValue(float fCk) {
+    static double etaConcreteValue(float fCk) {
         if (fCk > 50) {
             return 1.0 - (fCk - 50) / 200;
         } else {
@@ -34,7 +34,7 @@ public class BasicValues {
         }
     }
 
-    public static double epsilonCu3Value(float fCk) {
+    static double epsilonCu3Value(float fCk) {
         if (fCk > 50) {
             return (2.6 + 35 * Math.pow(0.01 * (90 - fCk), 4)) * 0.001;
         } else {
@@ -42,7 +42,7 @@ public class BasicValues {
         }
     }
 
-    public static double epsilonC3Value(float fCk) {
+    static double epsilonC3Value(float fCk) {
         if (fCk > 50) {
             return (1.75 + 0.01375 * (fCk - 50)) * 0.001;
         } else {
