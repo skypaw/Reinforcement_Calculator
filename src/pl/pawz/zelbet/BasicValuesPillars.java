@@ -1,6 +1,6 @@
 package pl.pawz.zelbet;
 
-class BasicValuesPillars {
+public class BasicValuesPillars {
     private float h;
     private float a1;
     private float a2;
@@ -12,7 +12,7 @@ class BasicValuesPillars {
     private float nEd;
 
 
-    BasicValuesPillars(float h, float a1, float a2, double epsilonCu3, double epsilonC3, double fYd, int E_S, float mEd, float nEd) {
+    public BasicValuesPillars(float h, float a1, float a2, double epsilonCu3, double epsilonC3, double fYd, int E_S, float mEd, float nEd) {
         //constructor
         this.h = h;
         this.a1 = a1;
@@ -26,15 +26,15 @@ class BasicValuesPillars {
 
     }
 
-    double xLimVar() {
+    public double xLimVar() {
         return (epsilonCu3 * BasicValues.dValue(h,a1)) / (epsilonCu3 + (fYd / E_S));
     }
 
-    double xMinYdVar() {
+    public double xMinYdVar() {
         return (epsilonCu3 * a2) / (epsilonCu3 - (fYd / E_S));
     }
 
-    double xMinMinusYdVar() {
+    public double xMinMinusYdVar() {
         return (epsilonCu3 * a2) / (epsilonCu3 + (fYd / E_S));
     }
 
@@ -50,21 +50,21 @@ class BasicValuesPillars {
         return (epsilonYdVar() * x0Var() - epsilonC3 * a2) / (epsilonYdVar() - epsilonC3);
     }
 
-    double[] eccentricityCompression() {
+    public double[] eccentricityCompression() {
         double e = Math.abs(mEd / nEd);
         double eS1 = e + 0.5 * h - a1;
         double eS2 = e - 0.5 * h + a2;
         return new double[]{eS1, eS2};
     }
 
-    double[] eccentricityExtension() {
+    public double[] eccentricityExtension() {
         double e = Math.abs(mEd / nEd);
         double eS1 = e - 0.5 * h + a1;
         double eS2 = e + 0.5 * h - a2;
         return new double[]{eS1, eS2};
     }
 
-    double[] values() {
+    public double[] values() {
         return new double[]{xLimVar(), xMinYdVar(), xMinMinusYdVar(), x0Var(), xYdMaxVar()};
     }
 }

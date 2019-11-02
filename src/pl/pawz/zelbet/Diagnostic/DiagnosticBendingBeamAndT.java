@@ -1,6 +1,8 @@
-package pl.pawz.zelbet;
+package pl.pawz.zelbet.Diagnostic;
 
-class DiagnosticBendingBeamAndT {
+import pl.pawz.zelbet.BasicValuesPillars;
+
+public class DiagnosticBendingBeamAndT {
     private double fCd;
     private double epsilonCu3;
     private double etaConcrete;
@@ -20,7 +22,7 @@ class DiagnosticBendingBeamAndT {
     private double xMinYd;
     private double xMinMinusYd;
 
-    DiagnosticBendingBeamAndT(double fCd, double epsilonCu3, double lambdaConcrete, double etaConcrete, double fYd, int E_S, float bW, float bEff, float h, float hF, float a1, float a2, double d, double aS1, double aS2) {
+    public DiagnosticBendingBeamAndT(double fCd, double epsilonCu3, double lambdaConcrete, double etaConcrete, double fYd, int E_S, float bW, float bEff, float h, float hF, float a1, float a2, double d, double aS1, double aS2) {
         this.fCd = fCd;
         this.epsilonCu3 = epsilonCu3;
         this.lambdaConcrete = lambdaConcrete;
@@ -120,7 +122,7 @@ class DiagnosticBendingBeamAndT {
         return epsilonCu3 * (xSmallerThanXMinYd()[0] - a2) / xSmallerThanXMinYd()[0] * E_S; //sigmaS2
     }
 
-    double resultDiagnostic() {
+    public double resultDiagnostic() {
         double xVar;
         double sigmaS1;
         double sigmaS2;

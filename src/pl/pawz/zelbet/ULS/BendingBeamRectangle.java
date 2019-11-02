@@ -1,4 +1,4 @@
-package pl.pawz.zelbet;
+package pl.pawz.zelbet.ULS;
 
 public class BendingBeamRectangle {
 
@@ -61,7 +61,7 @@ public class BendingBeamRectangle {
         return new double[]{aS1, aS12};
     }
 
-    double[] resultsBendingBeamRectangle(){
+    public double[] resultsBendingBeamRectangle(){
         double aZeroLim = aZeroLimVar();
         double aZero = aZeroVar();
 
