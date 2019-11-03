@@ -1,40 +1,41 @@
 package pl.pawz.zelbet;
 
-class BasicValuesPillars {
+public class BasicValuesPillars {
     private float h;
     private float a1;
     private float a2;
-    private float E_CU_3;
-    private float E_C_3;
-    private float fYd;
+    private double epsilonCu3;
+    private double epsilonC3;
+    private double fYd;
     private float E_S;
+    private float mEd;
+    private float nEd;
 
-    BasicValuesPillars(float h, float a1, float a2, float E_CU_3, float E_C_3, float fYd, int E_S) {
+
+    public BasicValuesPillars(float h, float a1, float a2, double epsilonCu3, double epsilonC3, double fYd, int E_S, float mEd, float nEd) {
         //constructor
         this.h = h;
         this.a1 = a1;
         this.a2 = a2;
-        this.E_CU_3 = E_CU_3;
-        this.E_C_3 = E_C_3;
+        this.epsilonCu3 = epsilonCu3;
+        this.epsilonC3 = epsilonC3;
         this.fYd = fYd;
         this.E_S = E_S;
+        this.mEd = mEd;
+        this.nEd = nEd;
 
     }
 
-    private float dDimension() {
-        return h - a1;
+    public double xLimVar() {
+        return (epsilonCu3 * BasicValues.dValue(h,a1)) / (epsilonCu3 + (fYd / E_S));
     }
 
-    private double xLimVar() {
-        return (E_CU_3 * dDimension()) / (E_CU_3 + (fYd / E_S));
+    public double xMinYdVar() {
+        return (epsilonCu3 * a2) / (epsilonCu3 - (fYd / E_S));
     }
 
-    private double xMinYdVar() {
-        return (E_CU_3 * a2) / (E_CU_3 - (fYd / E_S));
-    }
-
-    private double xMinMinusYdVar() {
-        return (E_CU_3 * a2) / (E_CU_3 + (fYd / E_S));
+    public double xMinMinusYdVar() {
+        return (epsilonCu3 * a2) / (epsilonCu3 + (fYd / E_S));
     }
 
     private double epsilonYdVar() {
@@ -42,14 +43,28 @@ class BasicValuesPillars {
     }
 
     private double x0Var() {
-        return (1 - E_C_3 / E_CU_3) * h;
+        return (1 - epsilonC3 / epsilonCu3) * h;
     }
 
     private double xYdMaxVar() {
-        return (epsilonYdVar() * x0Var() - E_C_3 * a2) / (epsilonYdVar() - E_C_3);
+        return (epsilonYdVar() * x0Var() - epsilonC3 * a2) / (epsilonYdVar() - epsilonC3);
     }
 
-    double[] values() {
-        return new double[]{dDimension(), xLimVar(), xMinYdVar(), xMinMinusYdVar(), x0Var(), xYdMaxVar()};
+    public double[] eccentricityCompression() {
+        double e = Math.abs(mEd / nEd);
+        double eS1 = e + 0.5 * h - a1;
+        double eS2 = e - 0.5 * h + a2;
+        return new double[]{eS1, eS2};
+    }
+
+    public double[] eccentricityExtension() {
+        double e = Math.abs(mEd / nEd);
+        double eS1 = e - 0.5 * h + a1;
+        double eS2 = e + 0.5 * h - a2;
+        return new double[]{eS1, eS2};
+    }
+
+    public double[] values() {
+        return new double[]{xLimVar(), xMinYdVar(), xMinMinusYdVar(), x0Var(), xYdMaxVar()};
     }
 }
