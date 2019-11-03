@@ -1,13 +1,13 @@
-package pl.pawz.zelbet;
+package pl.pawz.zelbet.ULS;
 
 public class BendingBeamT {
 
     private float mEd;
-    private float fCd;
-    private float epsilonCu3;
-    private float etaConcrete;
-    private float lambdaConcrete;
-    private float fYd;
+    private double fCd;
+    private double epsilonCu3;
+    private double etaConcrete;
+    private double lambdaConcrete;
+    private double fYd;
     private int E_S;
     private float bW;
     private float bEff;
@@ -19,7 +19,7 @@ public class BendingBeamT {
     private double xiLim;
 
 
-    private BendingBeamT(float mEd, float fCd, float epsilonCu3, float lambdaConcrete, float etaConcrete, float fYd, int E_S, float bW, float bEff, float hF, float a2, double d) {
+    public BendingBeamT(float mEd, double fCd, double epsilonCu3, double lambdaConcrete, double etaConcrete, double fYd, int E_S, float bW, float bEff, float hF, float a2, double d) {
         this.mEd = mEd;
         this.fCd = fCd;
         this.epsilonCu3 = epsilonCu3;
@@ -66,7 +66,7 @@ public class BendingBeamT {
         return new double[]{aS1, aS13};
     }
 
-    double[] resultsBendingT() {
+    public double[] resultsBendingT() {
         if (mEd <= mRdHf()) {
             return resultsSeeminglyT;
         } else {
