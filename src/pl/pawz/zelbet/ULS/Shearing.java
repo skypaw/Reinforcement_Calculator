@@ -21,31 +21,40 @@ public class Shearing {
         this.aSl = aSl;
     }
 
-    private double kValue() {
-        return 1 + Math.sqrt(200 / dValue);
-    }
-
-    private double nuMinValue() {
-        return 0.035 * Math.pow(kValue(), 1.5) * Math.pow(fCk, 0.5);
-    }
-
-    private double sigmaCpValue() {
-        return Math.min(nEd / aC, 0.2 * fCd);  // TODO ask about that line and 'bout Asl
-    }
-
-    private double cRdCValue() {
-        return 0.18 / BasicValues.gammaCConcrete();
-    }
-
-    private double rhoL() {
-        return Math.min(aSl / (bDimension * dValue), 0.02);
-    }
 
     private double vRdCValue() {
+        double kValue = 1 + Math.sqrt(200 / dValue);
+        double nuMin = 0.035 * Math.pow(kValue, 1.5) * Math.pow(fCk, 0.5);
+        double rhoL = Math.min(aSl / (bDimension * dValue), 0.02);
+        double cRdC = 0.18 / BasicValues.gammaCConcrete();
+        double sigmaCp = Math.min(nEd / aC, 0.2 * fCd);  // TODO ask about that line and 'bout Asl
+
         float k1 = 0.15f;
 
-        double vRdC1 = (cRdCValue() * kValue() * Math.pow(100 * rhoL() * fCk, 1 / 3) + k1 * sigmaCpValue()) * bDimension * dValue;
-        double vRdC2 = (nuMinValue() + k1 * sigmaCpValue()) * bDimension * dValue;
+        double vRdC1 = (cRdC * kValue * Math.pow(100 * rhoL * fCk, 0.333) + k1 * sigmaCp) * bDimension * dValue; //TODO 0.333 -> to power 1/3
+        double vRdC2 = (nuMin + k1 * sigmaCp) * bDimension * dValue;
         return Math.max(vRdC1, vRdC2);
+    }
+
+    /*
+    Max value of durability for shearing
+     */
+
+
+    private double vRd() {
+        int alphaCw = 1;
+        double nu1 = 0.6 * (1 - fCk / 250); //from 6.6N EC2
+        double z = 0.9 * dValue;
+
+        double cotTheta = 2; // TODO ask
+        double tanTheta = 0.5;
+
+        double aSw = 0; //TODO ask
+        double s = 0; //TODO ask
+        double fYwd = 0; //TODO ask
+
+        double vRdS = aSw / s * z * fYwd * cotTheta;
+        double vRdMax = (alphaCw * bDimension * z * nu1 * fCd) / (cotTheta + tanTheta);
+        return Math.min(vRdS, vRdMax);
     }
 }

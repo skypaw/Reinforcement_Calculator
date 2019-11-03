@@ -24,7 +24,7 @@ public class Main {
         float mEd = 0.9f;
         float nEd = 0.2f;
 
-        double dValue = BasicValues.dValue(h,a1);
+        double dValue = BasicValues.dValue(h, a1);
         double fCd = BasicValues.fCdValue(fCk);
         double fYd = BasicValues.fYdValue(fYk);
         double epsilonCu3 = BasicValues.epsilonCu3Value(fCk);
@@ -41,13 +41,12 @@ public class Main {
         double resultBeam = resultDiagnosticBeam.resultDiagnostic();
         System.out.println(resultBeam);
 
-        BendingBeamT resultT= new BendingBeamT(mEd, fCd, epsilonCu3, lambdaConcrete, etaConcrete, fYd, E_S, b, b, h, a2, dValue);
+        BendingBeamT resultT = new BendingBeamT(mEd, fCd, epsilonCu3, lambdaConcrete, etaConcrete, fYd, E_S, b, b, h, a2, dValue);
         double[] resultTbeam = resultT.resultsBendingT();
         System.out.println(Arrays.toString(resultTbeam));
 
-        MainWindow window= new MainWindow();
+        MainWindow window = new MainWindow();
         window.mainWindow();
-
 
 
     }

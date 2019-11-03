@@ -1,12 +1,12 @@
 package pl.pawz.zelbet;
 
 public class BasicValues {
-    public static float gammaCConcrete(){
+    public static float gammaCConcrete() {
         return 1.4f;
     }
 
-    public static double dValue(float h, float a1){
-        return h-a1;
+    public static double dValue(float h, float a1) {
+        return h - a1;
     }
 
     public static double fCdValue(float fCk) {
