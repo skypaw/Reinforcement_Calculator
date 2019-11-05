@@ -66,8 +66,10 @@ public class DiagnosticBendingBeamAndT {
     }
 
     private double[] xGreaterThanXLim() {
-        double xVar = xLim;
-        double sigmaS1 = (etaConcrete * fCd * bEff * lambdaConcrete * xVar + fYd * aS2) / aS1;
+        double aVar = (fYd*aS2+epsilonCu3*E_S*aS1)/(etaConcrete*fCd*bW);
+        double bVar = (4*lambdaConcrete*epsilonCu3*E_S*aS1*d)/(etaConcrete*fCd*bEff);
+        double xVar = 1/lambdaConcrete*((-aVar+Math.sqrt(Math.pow(aVar,2)+bVar))/2);
+        double sigmaS1 = epsilonCu3*(d-xVar)/xVar*E_S;
         return new double[]{xVar, sigmaS1};
     }
 
@@ -108,8 +110,10 @@ public class DiagnosticBendingBeamAndT {
     }
 
     private double[] xGreaterThanXLimT() {
-        double xVar = xLim;
-        double sigmaS1 = (etaConcrete * fCd * (xGreaterThanHfByLambdaT()[1] + bW * lambdaConcrete * xVar) + fYd * aS2) / aS1;
+        double aVar = xGreaterThanHfByLambdaT()[1]/bW+(aS2*fYd+epsilonCu3*E_S*aS1)/(etaConcrete*fCd*bW);
+        double bVar = (4*lambdaConcrete*epsilonCu3*E_S*aS1*d)/etaConcrete*fCd*bW;
+        double xVar = 1/lambdaConcrete*((-aVar+Math.sqrt(Math.pow(aVar,2)+bVar))/2);
+        double sigmaS1 = epsilonCu3*(d-xVar)/xVar*E_S;
         return new double[]{xVar, sigmaS1};
     }
 
