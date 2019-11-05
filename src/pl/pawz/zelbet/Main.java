@@ -37,13 +37,13 @@ public class Main {
         double[] results = resultsBeam.resultsBendingBeamRectangle();
         System.out.println(Arrays.toString(results));
 
-        DiagnosticBendingBeamAndT resultDiagnosticBeam = new DiagnosticBendingBeamAndT(fCd, epsilonCu3, lambdaConcrete, etaConcrete, fYd, E_S, b, b, h, h, a1, a2, dValue, 0.0048, 0.0008);
+        DiagnosticBendingBeamAndT resultDiagnosticBeam = new DiagnosticBendingBeamAndT(fCd, epsilonCu3, lambdaConcrete, etaConcrete, fYd, E_S, b, b, h, h, a1, a2, dValue, 0.0048279, 0.0008148);
         double resultBeam = resultDiagnosticBeam.resultDiagnostic();
         System.out.println(resultBeam);
 
         BendingBeamT resultT = new BendingBeamT(mEd, fCd, epsilonCu3, lambdaConcrete, etaConcrete, fYd, E_S, b, b, h, a2, dValue);
-        double[] resultTbeam = resultT.resultsBendingT();
-        System.out.println(Arrays.toString(resultTbeam));
+        double[] resultTBeam = resultT.resultsBendingT();
+        System.out.println(Arrays.toString(resultTBeam));
 
         MainWindow window = new MainWindow();
         window.mainWindow();
