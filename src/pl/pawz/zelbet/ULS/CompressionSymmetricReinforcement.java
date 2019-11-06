@@ -27,7 +27,6 @@ public class CompressionSymmetricReinforcement {
     private double eS2;
 
 
-
     private CompressionSymmetricReinforcement(float nEd, float mEd, double epsilonCu3, double epsilonC3, float fCd, float fYd,
                                               double etaConcrete, double lambdaConcrete, double dDimension, float bDimension,
                                               float hDimension, float a1, float a2, int E_S, double xLim, double xMinusMinYd,
@@ -69,7 +68,7 @@ public class CompressionSymmetricReinforcement {
         double bVar = -2 * (fYd * dDimension - epsilonCu3 * E_S * a2 * (1 + 0.5 * lambdaConcrete));
         double cVar = 2 * ((nEd * (fYd * eS1 - epsilonCu3 * E_S * eS2)) / (lambdaConcrete * etaConcrete * fCd * bDimension) - epsilonCu3 * E_S * Math.pow(a2, 2));
         double dVar = (2 * nEd * epsilonCu3 * E_S * a2 * eS2) / (lambdaConcrete * etaConcrete * fCd * bDimension);
-        return PolynomialSolver.solver(aVar,bVar,cVar,dVar,0);
+        return PolynomialSolver.solver(aVar, bVar, cVar, dVar, 0);
     }
 
     private double[] xGreaterThanXMinYd() {
@@ -95,50 +94,95 @@ public class CompressionSymmetricReinforcement {
         return new double[]{aS1, aS2};
     }
 
-    private double[] xGreaterThanXLim(){
-        double aVar = lambdaConcrete*(fYd+ epsilonCu3*E_S);
-        double bVar = -2*(fYd*a2+epsilonCu3*E_S*dDimension*(1+0.5*lambdaConcrete));
-        double cVar = 2*((nEd*(fYd*eS2+epsilonCu3*E_S*eS1))/(lambdaConcrete*etaConcrete*fCd*bDimension)+epsilonCu3*E_S*Math.pow(dDimension,2));
-        double dVar = (-2*nEd)/(lambdaConcrete*etaConcrete*fCd*bDimension)*epsilonCu3*E_S*dDimension*eS1;
-        return new double[] {PolynomialSolver.solver(aVar,bVar,cVar,dVar,xLim),fYd};
+    private double[] xGreaterThanXLim() {
+        double aVar = lambdaConcrete * (fYd + epsilonCu3 * E_S);
+        double bVar = -2 * (fYd * a2 + epsilonCu3 * E_S * dDimension * (1 + 0.5 * lambdaConcrete));
+        double cVar = 2 * ((nEd * (fYd * eS2 + epsilonCu3 * E_S * eS1)) / (lambdaConcrete * etaConcrete * fCd * bDimension) + epsilonCu3 * E_S * Math.pow(dDimension, 2));
+        double dVar = (-2 * nEd) / (lambdaConcrete * etaConcrete * fCd * bDimension) * epsilonCu3 * E_S * dDimension * eS1;
+        return new double[]{PolynomialSolver.solver(aVar, bVar, cVar, dVar, xLim), fYd}; //sigmas2
     }
 
-    private double xGreaterThanH(){
-        double aVar= lambdaConcrete*(fYd+epsilonC3*E_S);
-        double bVar= -2*(fYd*(a2+0.5*lambdaConcrete*x0)+epsilonC3*E_S*dDimension*(1+0.5*lambdaConcrete));
-        double cVar= 2*((nEd*(fYd*eS2+epsilonC3*E_S*eS1))/(lambdaConcrete*etaConcrete*fCd*bDimension)+epsilonC3*E_S*Math.pow(dDimension,2)+fYd*a2*x0);
-        double dVar= (-2*nEd)/(lambdaConcrete*etaConcrete*fCd*bDimension)*(epsilonC3*E_S*dDimension*eS1+fYd*x0*eS2);
-        return PolynomialSolver.solver(aVar,bVar,cVar,dVar,hDimension);
+    private double xGreaterThanH() {
+        double aVar = lambdaConcrete * (fYd + epsilonC3 * E_S);
+        double bVar = -2 * (fYd * (a2 + 0.5 * lambdaConcrete * x0) + epsilonC3 * E_S * dDimension * (1 + 0.5 * lambdaConcrete));
+        double cVar = 2 * ((nEd * (fYd * eS2 + epsilonC3 * E_S * eS1)) / (lambdaConcrete * etaConcrete * fCd * bDimension) + epsilonC3 * E_S * Math.pow(dDimension, 2) + fYd * a2 * x0);
+        double dVar = (-2 * nEd) / (lambdaConcrete * etaConcrete * fCd * bDimension) * (epsilonC3 * E_S * dDimension * eS1 + fYd * x0 * eS2);
+        return PolynomialSolver.solver(aVar, bVar, cVar, dVar, hDimension);
     }
 
-    private double xSmallerThanH(){
-        return epsilonCu3*(dDimension-xGreaterThanXLim()[0])/xGreaterThanXLim()[0]*E_S; //sigmaS1
+    private double xSmallerThanH() {
+        return epsilonCu3 * (dDimension - xGreaterThanXLim()[0]) / xGreaterThanXLim()[0] * E_S; //sigmaS1
     }
 
-    private double xGreaterThanHbyLambda(){
-        double f1 = nEd*eS1-etaConcrete*fCd*bDimension*hDimension*(0.5*hDimension-a1);
-        double f2 = nEd*eS2+etaConcrete*fCd*bDimension*hDimension*(0.5*hDimension-a2);
-        return (epsilonC3*E_S*dDimension*f1+fYd*x0*f2)/(epsilonC3*E_S*f1+fYd*f2);
+    private double xGreaterThanHbyLambda() {
+        double f1 = nEd * eS1 - etaConcrete * fCd * bDimension * hDimension * (0.5 * hDimension - a1);
+        double f2 = nEd * eS2 + etaConcrete * fCd * bDimension * hDimension * (0.5 * hDimension - a2);
+        return (epsilonC3 * E_S * dDimension * f1 + fYd * x0 * f2) / (epsilonC3 * E_S * f1 + fYd * f2);
     }
 
-    private double xSmallerThanHbyLambda(){
-        return epsilonC3*(dDimension-xGreaterThanH())/(xGreaterThanH()-x0)*E_S;
+    private double xSmallerThanHbyLambda() {
+        return epsilonC3 * (dDimension - xGreaterThanH()) / (xGreaterThanH() - x0) * E_S;
     }
 
-    private double xBelongsToHbyLambdaAndXYdMax(){
-        return epsilonC3*(dDimension-xGreaterThanHbyLambda())/(xGreaterThanHbyLambda()-x0)*E_S;
+    private double xBelongsToHbyLambdaAndXYdMax() {
+        return epsilonC3 * (dDimension - xGreaterThanHbyLambda()) / (xGreaterThanHbyLambda() - x0) * E_S;
     }
 
-    private double[] xDoNotBelongsToHbyLambdaAndXYdMax(){
-        double f1 = nEd*(eS1*dDimension+eS2*a2)+etaConcrete*fCd*bDimension*hDimension*0.5*((a1-a2)*(dDimension+a2)-Math.pow(dDimension-a2,2));
-        double f2 = nEd*(eS1+eS2)+etaConcrete*fCd*bDimension*hDimension*(a1-a2);
-        double x = f1/f2;
-        double sigmaS2 = epsilonC3*(x-a2)/(x-x0)*E_S;
+    private double[] xDoNotBelongsToHbyLambdaAndXYdMax() {
+        double f1 = nEd * (eS1 * dDimension + eS2 * a2) + etaConcrete * fCd * bDimension * hDimension * 0.5 * ((a1 - a2) * (dDimension + a2) - Math.pow(dDimension - a2, 2));
+        double f2 = nEd * (eS1 + eS2) + etaConcrete * fCd * bDimension * hDimension * (a1 - a2);
+        double x = f1 / f2;
+        double sigmaS2 = epsilonC3 * (x - a2) / (x - x0) * E_S;
         return new double[]{x, sigmaS2};
     }
 
-    private double xGreaterOrEqualHByLambda(){
-        return hDimension/lambdaConcrete; //x
+    private double xGreaterOrEqualHByLambda() {
+        return hDimension / lambdaConcrete; //x
     }
 
+    public double[] resultsCompressionSymmetricReinforcement() {
+        double x = xVar();
+        double sigmaS1;
+        double sigmaS2;
+
+        if (x <= xLim) {
+            sigmaS1 = xSmallerThanXLim();
+            if (x < xMinYd) {
+                x = xSmallerThanXMinYd();
+                if (x <= xMinusMinYd) {
+                    x = xSmallerThanXMinusMinYd()[0];
+                    sigmaS2 = xSmallerThanXMinusMinYd()[1];
+                } else {
+                    x = xGreaterThanXMinusMinYd()[0];
+                    sigmaS2 = xGreaterThanXMinusMinYd()[1];
+                }
+            } else {
+                x = xGreaterThanXMinYd()[0];
+                sigmaS2 = xGreaterThanXMinYd()[1];
+            }
+        } else {
+            x= xGreaterThanXLim()[0];
+            sigmaS2 = xGreaterThanXLim()[1];
+            if (x>hDimension){
+                x = xGreaterThanH();
+                if (x>hDimension/lambdaConcrete){
+                    x = xGreaterThanHbyLambda();
+                    if(x>hDimension/lambdaConcrete && x<xMaxYd){
+                        sigmaS1 = xBelongsToHbyLambdaAndXYdMax();
+
+                    }else {
+                        x = xDoNotBelongsToHbyLambdaAndXYdMax()[0];
+                        sigmaS2 = xDoNotBelongsToHbyLambdaAndXYdMax()[1];
+                    }
+
+                }else {
+                    sigmaS1 = xSmallerThanHbyLambda();
+                }
+            }else {
+                sigmaS1 = xSmallerThanH(); //todo green on paper
+            }
+        }
+
+     return resultsCompressionSymmetricReinforcement();
+    }
 }
