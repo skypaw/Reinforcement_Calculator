@@ -1,5 +1,7 @@
 package pl.pawz.zelbet.ULS;
 
+import pl.pawz.zelbet.PolynomialSolver;
+
 public class CompressionSymmetricReinforcement {
 
     private float nEd;
@@ -50,7 +52,6 @@ public class CompressionSymmetricReinforcement {
         this.xMaxYd = xMaxYd;
         this.eS1 = eS1;
         this.eS2 = eS2;
-
     }
 
     private double xVar() {
@@ -66,8 +67,7 @@ public class CompressionSymmetricReinforcement {
         double bVar = -2 * (fYd * dDimension - eCu3 * E_S * a2 * (1 + 0.5 * lambdaConcrete));
         double cVar = 2 * ((nEd * (fYd * eS1 - eCu3 * E_S * eS2)) / (lambdaConcrete * etaConcrete * fCd * bDimension) - eCu3 * E_S * Math.pow(a2, 2));
         double dVar = (2 * nEd * eCu3 * E_S * a2 * eS2) / (lambdaConcrete * etaConcrete * fCd * bDimension);
-        // double[] xArray = {}; TODO Solve the equation - polynomial x^3
-        return 1;
+        return PolynomialSolver.solver(aVar,bVar,cVar,dVar,0);
     }
 
     private double[] xGreaterThanXMinYd() {
