@@ -1,15 +1,13 @@
 package pl.pawz.zelbet;
 
-import org.apache.commons.math3.analysis.UnivariateFunction; //apache library
+import org.apache.commons.math3.analysis.UnivariateFunction; //apache library math for solving polynomial
 import org.apache.commons.math3.analysis.solvers.BrentSolver;
-
-import org.apache.commons.lang3.ArrayUtils;
 
 import java.util.*;
 
 public class PolynomialSolver {
 
-    public double solveIt(double aPolynomial, double bPolynomial, double cPolynomial, double dPolynomial) {
+    public static double solver(double aPolynomial, double bPolynomial, double cPolynomial, double dPolynomial, double limVar) {
         BrentSolver solver = new BrentSolver();
         UnivariateFunction f = new UnivariateFunction() {
 
@@ -19,40 +17,22 @@ public class PolynomialSolver {
             }
         };
 
-        double intervalStart = -100;
+        double intervalStart = limVar;
         double intervalSize = 0.001;
-        double[] results = new double[0];
         int i = 0;
-        int j = 0;
+        ArrayList<Double> results = new ArrayList<Double>(i);
 
-        while (intervalStart < 15) {
+
+        while (intervalStart < 2) {
             intervalStart += intervalSize;
             if (Math.signum(f.value(intervalStart)) != Math.signum(f.value(intervalStart + intervalSize))) {
                 double xVar = solver.solve(1000, f, intervalStart, intervalStart + intervalSize);
-                i++;
-                results = new double[i];
 
-                results[j] = xVar;
-                j++;
-                System.out.println(Arrays.toString(results));
+                results.add(xVar);
+                i++;
+
             }
         }
-
-
-
-
-        Double[] dArray = ArrayUtils.toObject(results);
-        List<Double> dList = Arrays.asList(dArray);
-
-        double returnValue = Collections.min(dList);
-        System.out.println(returnValue);
-
-        return returnValue;
+        return Collections.min(results);
     }
-
-    public static void main(String[] args) {
-        new PolynomialSolver().solveIt(-212.176, -371.769, -10.245, 3.1014);
-    }
-
-
 }
