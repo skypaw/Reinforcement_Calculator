@@ -1,5 +1,6 @@
 package pl.pawz.zelbet.ULS;
 
+import pl.pawz.zelbet.BasicValuesPillars;
 import pl.pawz.zelbet.PolynomialSolver;
 
 public class CompressionSymmetricReinforcement {
@@ -8,8 +9,8 @@ public class CompressionSymmetricReinforcement {
     private float mEd;
     private double epsilonCu3;
     private double epsilonC3;
-    private float fCd;
-    private float fYd;
+    private double fCd;
+    private double fYd;
     private double etaConcrete;
     private double lambdaConcrete;
     private double dDimension;
@@ -27,10 +28,10 @@ public class CompressionSymmetricReinforcement {
     private double eS2;
 
 
-    private CompressionSymmetricReinforcement(float nEd, float mEd, double epsilonCu3, double epsilonC3, float fCd, float fYd,
-                                              double etaConcrete, double lambdaConcrete, double dDimension, float bDimension,
-                                              float hDimension, float a1, float a2, int E_S, double xLim, double xMinusMinYd,
-                                              double xMinYd, double x0, double xMaxYd, double eS1, double eS2) {
+    public CompressionSymmetricReinforcement(float nEd, float mEd, double epsilonCu3, double epsilonC3, double fCd, double fYd,
+                                             double etaConcrete, double lambdaConcrete, double dDimension, float bDimension,
+                                             float hDimension, float a1, float a2, int E_S, double xLim, double xMinusMinYd,
+                                             double xMinYd, double x0, double xMaxYd) {
         this.nEd = nEd;
         this.mEd = mEd;
         this.epsilonCu3 = epsilonCu3;
@@ -50,8 +51,13 @@ public class CompressionSymmetricReinforcement {
         this.xMinYd = xMinYd;
         this.x0 = x0;
         this.xMaxYd = xMaxYd;
-        this.eS1 = eS1;
-        this.eS2 = eS2;
+
+
+        BasicValuesPillars eccentricity = new BasicValuesPillars(hDimension, a1, a2, epsilonCu3, epsilonC3, fYd, E_S, mEd, nEd);
+
+        this.eS1 = eccentricity.eccentricityCompression()[0];
+        this.eS2 = eccentricity.eccentricityCompression()[1];
+
 
     }
 
@@ -77,21 +83,15 @@ public class CompressionSymmetricReinforcement {
     }
 
     private double[] xSmallerThanXMinusMinYd() {
-        float sigmaS2 = -fYd;
-        double x = 1 / (2 * lambdaConcrete) * ((dDimension + a2) - Math.sqrt(Math.pow(dDimension + a2, 2) - (4 * nEd * (eS1 + eS2)) / (etaConcrete * fCd * bDimension)));
+        double sigmaS2 = -fYd;
+        double x = 1 / (2 * lambdaConcrete) * ((dDimension + a2) - Math.sqrt(Math.pow((dDimension + a2), 2) - (4 * nEd * (eS1 + eS2)) / (etaConcrete * fCd * bDimension)));
         return new double[]{x, sigmaS2};
     }
 
     private double[] xGreaterThanXMinusMinYd() {
-        double x = xSmallerThanXLim();
+        double x = xSmallerThanXMinYd();
         double sigmaS2 = epsilonCu3 * (x - a2) / x * E_S;
         return new double[]{x, sigmaS2};
-    }
-
-    double[] resultsCompressionSymmetricReinforcement(double x, double sigmaS1, double sigmaS2) {
-        double aS1 = (nEd * eS2 + etaConcrete * fCd * bDimension * lambdaConcrete * x * (0.5 * lambdaConcrete * x - a2)) / (sigmaS1 * (dDimension - a2));
-        double aS2 = (nEd * eS1 - etaConcrete * fCd * bDimension * lambdaConcrete * x * (dDimension - 0.5 * lambdaConcrete * x)) / (sigmaS2 * (dDimension - a2));
-        return new double[]{aS1, aS2};
     }
 
     private double[] xGreaterThanXLim() {
@@ -132,8 +132,10 @@ public class CompressionSymmetricReinforcement {
         double f1 = nEd * (eS1 * dDimension + eS2 * a2) + etaConcrete * fCd * bDimension * hDimension * 0.5 * ((a1 - a2) * (dDimension + a2) - Math.pow(dDimension - a2, 2));
         double f2 = nEd * (eS1 + eS2) + etaConcrete * fCd * bDimension * hDimension * (a1 - a2);
         double x = f1 / f2;
+        double sigmaS1 = epsilonC3 * (dDimension - x) / (x - x0) * E_S;
         double sigmaS2 = epsilonC3 * (x - a2) / (x - x0) * E_S;
-        return new double[]{x, sigmaS2};
+
+        return new double[]{x, sigmaS1, sigmaS2};
     }
 
     private double xGreaterOrEqualHByLambda() {
@@ -161,28 +163,36 @@ public class CompressionSymmetricReinforcement {
                 sigmaS2 = xGreaterThanXMinYd()[1];
             }
         } else {
-            x= xGreaterThanXLim()[0];
+            x = xGreaterThanXLim()[0];
             sigmaS2 = xGreaterThanXLim()[1];
-            if (x>hDimension){
+            if (x > hDimension) {
                 x = xGreaterThanH();
-                if (x>hDimension/lambdaConcrete){
+                if (x > hDimension / lambdaConcrete) {
                     x = xGreaterThanHbyLambda();
-                    if(x>hDimension/lambdaConcrete && x<xMaxYd){
+                    if (x > hDimension / lambdaConcrete && x < xMaxYd) {
                         sigmaS1 = xBelongsToHbyLambdaAndXYdMax();
 
-                    }else {
+                    } else {
                         x = xDoNotBelongsToHbyLambdaAndXYdMax()[0];
-                        sigmaS2 = xDoNotBelongsToHbyLambdaAndXYdMax()[1];
+                        sigmaS1 = xDoNotBelongsToHbyLambdaAndXYdMax()[1];
+                        sigmaS2 = xDoNotBelongsToHbyLambdaAndXYdMax()[2];
                     }
 
-                }else {
+                } else {
                     sigmaS1 = xSmallerThanHbyLambda();
                 }
-            }else {
+                if (x <= hDimension / lambdaConcrete) {
+                    x = xGreaterOrEqualHByLambda();
+                }
+            } else {
                 sigmaS1 = xSmallerThanH(); //todo green on paper
             }
         }
 
-     return resultsCompressionSymmetricReinforcement();
+
+        double aS1 = (nEd * eS2 + etaConcrete * fCd * bDimension * lambdaConcrete * x * (0.5 * lambdaConcrete * x - a2)) / (sigmaS1 * (dDimension - a2));
+        double aS2 = (nEd * eS1 - etaConcrete * fCd * bDimension * lambdaConcrete * x * (dDimension - 0.5 * lambdaConcrete * x)) / (sigmaS2 * (dDimension - a2));
+        return new double[]{aS1, aS2};
+
     }
 }

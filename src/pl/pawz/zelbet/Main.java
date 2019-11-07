@@ -4,6 +4,7 @@ import pl.pawz.zelbet.Diagnostic.DiagnosticBendingBeamAndT;
 import pl.pawz.zelbet.GUI.MainWindow;
 import pl.pawz.zelbet.ULS.BendingBeamRectangle;
 import pl.pawz.zelbet.ULS.BendingBeamT;
+import pl.pawz.zelbet.ULS.CompressionSymmetricReinforcement;
 
 import java.util.Arrays;
 
@@ -21,8 +22,8 @@ public class Main {
         float a1 = 0.05f; // TODO from scanner
         float a2 = 0.05f; // TODO from scanner
 
-        float mEd = 0.9f;
-        float nEd = 0.2f;
+        float mEd = 0.3f;
+        float nEd = 5f;
 
         double dValue = BasicValues.dValue(h, a1);
         double fCd = BasicValues.fCdValue(fCk);
@@ -33,22 +34,22 @@ public class Main {
         double etaConcrete = BasicValues.etaConcreteValue(fCk);
 
 
-        BendingBeamRectangle resultsBeam = new BendingBeamRectangle(mEd, fCd, epsilonCu3, lambdaConcrete, etaConcrete, fYd, E_S, b, a2, dValue);
-        double[] results = resultsBeam.resultsBendingBeamRectangle();
-        System.out.println(Arrays.toString(results));
+        BasicValuesPillars res = new BasicValuesPillars(h, a1, a2, epsilonCu3, epsilonC3, fYd, E_S, mEd, nEd);
+        double xLim = res.xLimVar();
+        double xMinusMinYd = res.xMinMinusYdVar();
+        double xMinYd = res.xMinYdVar();
+        double x0 = res.x0Var();
+        double xMaxYd = res.xYdMaxVar();
+        double eS1 = res.eccentricityCompression()[0];
+        double eS2 = res.eccentricityCompression()[1];
 
-        DiagnosticBendingBeamAndT resultDiagnosticBeam = new DiagnosticBendingBeamAndT(fCd, epsilonCu3, lambdaConcrete, etaConcrete, fYd, E_S, b, b, h, h, a1, a2, dValue, 0.0048279, 0.0008148);
-        double resultBeam = resultDiagnosticBeam.resultDiagnostic();
-        System.out.println(resultBeam);
+        CompressionSymmetricReinforcement resultCompression = new CompressionSymmetricReinforcement(nEd, mEd, epsilonCu3, epsilonC3, fCd, fYd,
+                etaConcrete, lambdaConcrete, dValue, b,
+                h, a1, a2, E_S, xLim, xMinusMinYd,
+                xMinYd, x0, xMaxYd);
 
-        BendingBeamT resultT = new BendingBeamT(mEd, fCd, epsilonCu3, lambdaConcrete, etaConcrete, fYd, E_S, b, b, h, a2, dValue);
-        double[] resultTBeam = resultT.resultsBendingT();
-        System.out.println(Arrays.toString(resultTBeam));
-
-        MainWindow window = new MainWindow();
-        window.mainWindow();
-
-
-
+        double[] ress = resultCompression.resultsCompressionSymmetricReinforcement();
+        System.out.println(Arrays.toString(ress));
     }
+
 }

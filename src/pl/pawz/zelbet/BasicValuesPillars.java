@@ -42,11 +42,11 @@ public class BasicValuesPillars {
         return fYd / E_S;
     }
 
-    private double x0Var() {
+    public double x0Var() {
         return (1 - epsilonC3 / epsilonCu3) * h;
     }
 
-    private double xYdMaxVar() {
+    public double xYdMaxVar() {
         return (epsilonYdVar() * x0Var() - epsilonC3 * a2) / (epsilonYdVar() - epsilonC3);
     }
 

@@ -23,7 +23,7 @@ public class PolynomialSolver {
         ArrayList<Double> results = new ArrayList<Double>(i);
 
 
-        while (intervalStart < 15) {
+        while (intervalStart < 2) {
             intervalStart += intervalSize;
             if (Math.signum(f.value(intervalStart)) != Math.signum(f.value(intervalStart + intervalSize))) {
                 double xVar = solver.solve(1000, f, intervalStart, intervalStart + intervalSize);
@@ -31,12 +31,8 @@ public class PolynomialSolver {
                 results.add(xVar);
                 i++;
 
-                System.out.println(results);
             }
         }
-
-        System.out.println(Collections.min(results));
-
         return Collections.min(results);
     }
 }
