@@ -4,6 +4,7 @@ import pl.pawz.zelbet.Diagnostic.DiagnosticBendingBeamAndT;
 import pl.pawz.zelbet.GUI.MainWindow;
 import pl.pawz.zelbet.ULS.BendingBeamRectangle;
 import pl.pawz.zelbet.ULS.BendingBeamT;
+import pl.pawz.zelbet.ULS.CompressionAsymmetricReinforcement;
 import pl.pawz.zelbet.ULS.CompressionSymmetricReinforcement;
 
 import java.util.Arrays;
@@ -22,8 +23,8 @@ public class Main {
         float a1 = 0.05f; // TODO from scanner
         float a2 = 0.05f; // TODO from scanner
 
-        float mEd = 0.3f;
-        float nEd = 5f;
+        float mEd = 0.350f;
+        float nEd = 3.50f;
 
         double dValue = BasicValues.dValue(h, a1);
         double fCd = BasicValues.fCdValue(fCk);
@@ -40,15 +41,13 @@ public class Main {
         double xMinYd = res.xMinYdVar();
         double x0 = res.x0Var();
         double xMaxYd = res.xYdMaxVar();
-        double eS1 = res.eccentricityCompression()[0];
-        double eS2 = res.eccentricityCompression()[1];
 
-        CompressionSymmetricReinforcement resultCompression = new CompressionSymmetricReinforcement(nEd, mEd, epsilonCu3, epsilonC3, fCd, fYd,
+        CompressionAsymmetricReinforcement resultCompression = new CompressionAsymmetricReinforcement(nEd, mEd, epsilonCu3, epsilonC3, fCd, fYd,
                 etaConcrete, lambdaConcrete, dValue, b,
                 h, a1, a2, E_S, xLim, xMinusMinYd,
                 xMinYd, x0, xMaxYd);
 
-        double[] ress = resultCompression.resultsCompressionSymmetricReinforcement();
+        double[] ress = resultCompression.resultsCompressionAsymmetricReinforcement();
         System.out.println(Arrays.toString(ress));
     }
 

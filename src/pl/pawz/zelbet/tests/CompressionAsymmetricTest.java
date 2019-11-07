@@ -8,7 +8,7 @@ import static org.junit.Assert.assertEquals;
 
 public class CompressionAsymmetricTest {
 
-    private static final double DELTA = 1e-7;
+    private static final double DELTA = 1e-6;
 
     @Test
     public void test5and10() {
@@ -16,6 +16,7 @@ public class CompressionAsymmetricTest {
         double result1 = res.resultsCompressionAsymmetricReinforcement()[0];
         System.out.println(result1);
         double result2 = res.resultsCompressionAsymmetricReinforcement()[1];
+        System.out.println(result2);
 
         assertEquals(0.219840 * Math.pow(10, -4), result1, DELTA);
         assertEquals(1.8 * Math.pow(10, -4), result2, DELTA);
@@ -27,6 +28,7 @@ public class CompressionAsymmetricTest {
         double result1 = res.resultsCompressionAsymmetricReinforcement()[0];
         System.out.println(result1);
         double result2 = res.resultsCompressionAsymmetricReinforcement()[1];
+        System.out.println(result2);
 
         assertEquals(3.102643 * Math.pow(10, -4), result1, DELTA);
         assertEquals(1.8* Math.pow(10, -4), result2, DELTA);
@@ -38,6 +40,7 @@ public class CompressionAsymmetricTest {
         double result1 = res.resultsCompressionAsymmetricReinforcement()[0];
         System.out.println(result1);
         double result2 = res.resultsCompressionAsymmetricReinforcement()[1];
+        System.out.println(result2);
 
         assertEquals(17.95217 * Math.pow(10, -4), result1, DELTA);
         assertEquals(1.8 * Math.pow(10, -4), result2, DELTA);
@@ -49,6 +52,7 @@ public class CompressionAsymmetricTest {
         double result1 = res.resultsCompressionAsymmetricReinforcement()[0];
         System.out.println(result1);
         double result2 = res.resultsCompressionAsymmetricReinforcement()[1];
+        System.out.println(result2);
 
         assertEquals(29.87916* Math.pow(10, -4), result1, DELTA);
         assertEquals(12.74813 * Math.pow(10, -4), result2, DELTA);
@@ -60,6 +64,7 @@ public class CompressionAsymmetricTest {
         double result1 = res.resultsCompressionAsymmetricReinforcement()[0];
         System.out.println(result1);
         double result2 = res.resultsCompressionAsymmetricReinforcement()[1];
+        System.out.println(result2);
 
         assertEquals(4.025000 * Math.pow(10, -4), result1, DELTA);
         assertEquals(21.79357 * Math.pow(10, -4), result2, DELTA);
@@ -71,6 +76,7 @@ public class CompressionAsymmetricTest {
         double result1 = res.resultsCompressionAsymmetricReinforcement()[0];
         System.out.println(result1);
         double result2 = res.resultsCompressionAsymmetricReinforcement()[1];
+        System.out.println(result2);
 
         assertEquals(4.025 * Math.pow(10, -4), result1, DELTA);
         assertEquals(12.94635 * Math.pow(10, -4), result2, DELTA);
@@ -82,6 +88,7 @@ public class CompressionAsymmetricTest {
         double result1 = res.resultsCompressionAsymmetricReinforcement()[0];
         System.out.println(result1);
         double result2 = res.resultsCompressionAsymmetricReinforcement()[1];
+        System.out.println(result2);
 
         assertEquals(5.75 * Math.pow(10, -4), result1, DELTA);
         assertEquals(26.7423 * Math.pow(10, -4), result2, DELTA);
@@ -93,6 +100,7 @@ public class CompressionAsymmetricTest {
         double result1 = res.resultsCompressionAsymmetricReinforcement()[0];
         System.out.println(result1);
         double result2 = res.resultsCompressionAsymmetricReinforcement()[1];
+        System.out.println(result2);
 
         assertEquals(5.75 * Math.pow(10, -4), result1, DELTA);
         assertEquals(24.60759 * Math.pow(10, -4), result2, DELTA);
@@ -104,6 +112,7 @@ public class CompressionAsymmetricTest {
         double result1 = res.resultsCompressionAsymmetricReinforcement()[0];
         System.out.println(result1);
         double result2 = res.resultsCompressionAsymmetricReinforcement()[1];
+        System.out.println(result2);
 
         assertEquals(4.578443 * Math.pow(10, -4), result1, DELTA);
         assertEquals(23.49285 * Math.pow(10, -4), result2, DELTA);
@@ -115,6 +124,7 @@ public class CompressionAsymmetricTest {
         double result1 = res.resultsCompressionAsymmetricReinforcement()[0];
         System.out.println(result1);
         double result2 = res.resultsCompressionAsymmetricReinforcement()[1];
+        System.out.println(result2);
 
         assertEquals(12.95305 * Math.pow(10, -4), result1, DELTA);
         assertEquals(18.66734 * Math.pow(10, -4), result2, DELTA);
@@ -126,6 +136,7 @@ public class CompressionAsymmetricTest {
         double result1 = res.resultsCompressionAsymmetricReinforcement()[0];
         System.out.println(result1);
         double result2 = res.resultsCompressionAsymmetricReinforcement()[1];
+        System.out.println(result2);
 
         assertEquals(15.58093 * Math.pow(10, -4), result1, DELTA);
         assertEquals(17.00950 * Math.pow(10, -4), result2, DELTA);
@@ -133,10 +144,11 @@ public class CompressionAsymmetricTest {
 
     @Test
     public void test5000and0() {
-        CompressionAsymmetricReinforcement res = new CompressionAsymmetricReinforcement(5f, 0.001f, 0.0035, 0.00175, 21.43, 434.78, 1, 0.8, 0.55, 0.3f, 0.6f, 0.05f, 0.05f, 200000, 0.339273, 0.030843, 0.131996, 0.3, 1.332083);
+        CompressionAsymmetricReinforcement res = new CompressionAsymmetricReinforcement(5f, 0.0001f, 0.0035, 0.00175, 21.43, 434.78, 1, 0.8, 0.55, 0.3f, 0.6f, 0.05f, 0.05f, 200000, 0.339273, 0.030843, 0.131996, 0.3, 1.332083);
         double result1 = res.resultsCompressionAsymmetricReinforcement()[0];
         System.out.println(result1);
         double result2 = res.resultsCompressionAsymmetricReinforcement()[1];
+        System.out.println(result2);
 
         assertEquals(16.32650 * Math.pow(10, -4), result1, DELTA);
         assertEquals(16.32655 * Math.pow(10, -4), result2, DELTA);
