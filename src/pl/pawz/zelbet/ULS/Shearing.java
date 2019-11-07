@@ -31,7 +31,7 @@ public class Shearing {
 
         float k1 = 0.15f;
 
-        double vRdC1 = (cRdC * kValue * Math.pow(100 * rhoL * fCk, 0.333) + k1 * sigmaCp) * bDimension * dValue; //TODO 0.333 -> to power 1/3
+        double vRdC1 = (cRdC * kValue * Math.pow(100 * rhoL * fCk, 0.333333) + k1 * sigmaCp) * bDimension * dValue; //TODO 0.333 -> to power 1/3
         double vRdC2 = (nuMin + k1 * sigmaCp) * bDimension * dValue;
         return Math.max(vRdC1, vRdC2);
     }
