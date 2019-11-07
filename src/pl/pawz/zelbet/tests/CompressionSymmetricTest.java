@@ -8,7 +8,7 @@ import static org.junit.Assert.assertEquals;
 
 public class CompressionSymmetricTest {
 
-    private static final double DELTA = 1e-7;
+    private static final double DELTA = 1e-6;
 
     @Test
     public void test5and10() {

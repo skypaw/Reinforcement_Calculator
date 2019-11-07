@@ -181,11 +181,11 @@ public class CompressionSymmetricReinforcement {
                 } else {
                     sigmaS1 = xSmallerThanHbyLambda();
                 }
-                if (x <= hDimension / lambdaConcrete) {
+                if (x > hDimension / lambdaConcrete) {
                     x = xGreaterOrEqualHByLambda();
                 }
             } else {
-                sigmaS1 = xSmallerThanH(); //todo green on paper
+                sigmaS1 = xSmallerThanH();
             }
         }
 
