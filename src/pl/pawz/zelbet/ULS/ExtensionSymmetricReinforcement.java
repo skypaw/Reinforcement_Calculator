@@ -68,7 +68,7 @@ public class ExtensionSymmetricReinforcement {
 
     private void xSmallerThanXMinMinusYd() {
         sigmaS2 = -fYd;
-        xVar = 1 / (2 * lambdaConcrete) * ((dDimension - a2) - Math.sqrt(Math.pow(dDimension + a2, 2) - (4 * nEd * (eS1 + eS2)) / (etaConcrete * fCd * bDimension)));
+        xVar = 1 / (2 * lambdaConcrete) * ((dDimension + a2) - Math.sqrt(Math.pow(dDimension + a2, 2) - (4 * nEd * (eS1 + eS2)) / (etaConcrete * fCd * bDimension)));
     }
 
     private void xGreaterThanXMinMinusYd() {
