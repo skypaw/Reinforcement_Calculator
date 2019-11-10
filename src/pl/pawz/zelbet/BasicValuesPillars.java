@@ -54,14 +54,14 @@ public class BasicValuesPillars {
         double e = Math.abs(mEd / nEd);
         double eS1 = e + 0.5 * h - a1;
         double eS2 = e - 0.5 * h + a2;
-        return new double[]{eS1, eS2};
+        return new double[]{eS1, eS2, e};
     }
 
     public double[] eccentricityExtension() {
         double e = Math.abs(mEd / nEd);
         double eS1 = e - 0.5 * h + a1;
         double eS2 = e + 0.5 * h - a2;
-        return new double[]{eS1, eS2};
+        return new double[]{eS1, eS2, e};
     }
 
     public double[] values() {

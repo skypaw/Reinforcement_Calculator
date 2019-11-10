@@ -45,7 +45,7 @@ public class BendingBeamRectangle {
     }
 
     private double[] aZeroSmallerThanAZeroLim() {
-        double zeta = (1 + Math.sqrt(1 - 2 * aZeroLimVar()) / 2);
+        double zeta = (1 + Math.sqrt(1 - 2 * aZeroVar()) )/ 2;
         double aS1 = mEd / (fYd * zeta * d);
         double aS2 = 0;
         System.out.println(aS1);
