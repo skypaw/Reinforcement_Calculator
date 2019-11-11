@@ -37,6 +37,7 @@ public class Main {
         double x0 = res.x0Var();
         double xMaxYd = res.xYdMaxVar();
 
+
         DiagnosticCompression resultCompression = new DiagnosticCompression(nEd, mEd, epsilonCu3, epsilonC3, fCd, fYd,
                 etaConcrete, lambdaConcrete, dValue, b,
                 h, a1, a2, E_S, xLim, xMinusMinYd,
