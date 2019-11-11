@@ -82,19 +82,19 @@ public class ExtensionSymmetricReinforcement {
     public double[] resultsExtensionSymmetric() {
 
         xStart();
-        if (xVar<=xMinusMinYd){
+        if (xVar <= xMinusMinYd) {
             xSmallerThanXMinMinusYd();
-            if (xVar<=0){
+            if (xVar <= 0) {
                 xSmallerThan0();
             }
-        }else{
+        } else {
             xGreaterThanXMinMinusYd();
         }
 
         double aS1 = (nEd * eS2 + etaConcrete * fCd * bDimension * lambdaConcrete * xVar * (0.5 * lambdaConcrete * xVar - a2)) / (sigmaS1 * (dDimension - a2));
         double aS2 = (nEd * eS1 - etaConcrete * fCd * bDimension * lambdaConcrete * xVar * (dDimension - 0.5 * lambdaConcrete * xVar)) / (sigmaS2 * (dDimension - a2));
 
-        return new double[]{aS1,aS2};
+        return new double[]{aS1, aS2};
     }
 
 }

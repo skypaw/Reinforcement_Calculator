@@ -64,7 +64,7 @@ public class ExtensionAsymmetricReinforcement {
         sigmaS2 = Math.min(epsilonCu3 * (xVar - a2) / xVar * E_S, fYd);
 
         this.aS2Min = Math.max(0.10 * nEd / fYd, (0.002 * bDimension * 100 * hDimension * 100) * Math.pow(10, -4)) / 2;
-        aS2 = (nEd * eS1 - etaConcrete * fCd * bDimension * lambdaConcrete * xVar * (dDimension - 0.5 * lambdaConcrete * xVar)) / (sigmaS2 *(dDimension-a2));
+        aS2 = (nEd * eS1 - etaConcrete * fCd * bDimension * lambdaConcrete * xVar * (dDimension - 0.5 * lambdaConcrete * xVar)) / (sigmaS2 * (dDimension - a2));
 
     }
 
@@ -87,50 +87,50 @@ public class ExtensionAsymmetricReinforcement {
         xVar = PolynomialSolver.solver(1, aVar, bVar, cVar, 0);
     }
 
-    private void xGreaterThanXMinYd(){
+    private void xGreaterThanXMinYd() {
         sigmaS2 = fYd;
     }
 
-    private void xGreaterThanXMinMinusYd(){
-        sigmaS2 = epsilonCu3*(xVar-a2)/xVar*E_S;
+    private void xGreaterThanXMinMinusYd() {
+        sigmaS2 = epsilonCu3 * (xVar - a2) / xVar * E_S;
     }
 
-    private void xSmallerThanXMinMinusYd(){
+    private void xSmallerThanXMinMinusYd() {
         sigmaS2 = -fYd;
-        xVar = 1/lambdaConcrete*(dDimension-Math.sqrt(Math.pow(dDimension,2)-(2*(nEd*eS1+fYd*aS2*(dDimension-a2)))/(etaConcrete*fCd*bDimension)));
+        xVar = 1 / lambdaConcrete * (dDimension - Math.sqrt(Math.pow(dDimension, 2) - (2 * (nEd * eS1 + fYd * aS2 * (dDimension - a2))) / (etaConcrete * fCd * bDimension)));
     }
 
-    private void xGreaterThanZero(){
-        aS1 = (sigmaS2*aS2+etaConcrete*fCd*bDimension*lambdaConcrete*xVar+nEd)/fYd;
+    private void xGreaterThanZero() {
+        aS1 = (sigmaS2 * aS2 + etaConcrete * fCd * bDimension * lambdaConcrete * xVar + nEd) / fYd;
     }
 
-    private void xSmallerThanZero(){
+    private void xSmallerThanZero() {
         xVar = 0;
-        aS1 = nEd*eS2/(fYd*(dDimension-a2));
-        aS2 = nEd*eS1/(-fYd*(dDimension-a2));
+        aS1 = nEd * eS2 / (fYd * (dDimension - a2));
+        aS2 = nEd * eS1 / (-fYd * (dDimension - a2));
     }
 
     public double[] resultsExtensionAsymmetric() {
-        if (aS2<=aS2Min){
+        if (aS2 <= aS2Min) {
             aS2SmallerThanAS2Min();
-            if (xVar<=xMinYd){
+            if (xVar <= xMinYd) {
                 xSmallerThanXMinYd();
-                if (xVar<=xMinusMinYd){
+                if (xVar <= xMinusMinYd) {
                     xSmallerThanXMinMinusYd();
-                    if (xVar<=0){
+                    if (xVar <= 0) {
                         xSmallerThanZero();
-                    }else {
+                    } else {
                         xGreaterThanZero();
                     }
-                }else {
+                } else {
                     xGreaterThanXMinMinusYd();
                     xGreaterThanZero();
                 }
-            }else {
+            } else {
                 xGreaterThanXMinYd();
                 xGreaterThanZero();
             }
-        }else {
+        } else {
             aS2GreaterThanAS2Min();
         }
 
