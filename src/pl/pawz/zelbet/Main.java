@@ -40,7 +40,7 @@ public class Main {
         DiagnosticCompression resultCompression = new DiagnosticCompression(nEd, mEd, epsilonCu3, epsilonC3, fCd, fYd,
                 etaConcrete, lambdaConcrete, dValue, b,
                 h, a1, a2, E_S, xLim, xMinusMinYd,
-                xMinYd, x0, xMaxYd,29.8791*0.0001,12.748*0.0001);
+                xMinYd, x0, xMaxYd, 29.8791 * 0.0001, 12.748 * 0.0001);
 
         double[] ress = resultCompression.resultsDiagnosticCompression();
         System.out.println(Arrays.toString(ress));
