@@ -59,7 +59,7 @@ public class CompressionAsymmetricReinforcement {
         this.xMinusMinYd = xMinusMinYd;
         this.xMinYd = xMinYd;
         this.x0 = x0;
-        this.xMaxYd = xMaxYd; //TODO Void for x polynomial to count this only once!
+        this.xMaxYd = xMaxYd;
 
 
         BasicValuesPillars eccentricity = new BasicValuesPillars(hDimension, a1, a2, epsilonCu3, epsilonC3, fYd, E_S, mEd, nEd);
