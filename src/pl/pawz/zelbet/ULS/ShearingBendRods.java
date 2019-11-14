@@ -59,7 +59,7 @@ public class ShearingBendRods {
 
     }
 
-    private void vRdMax() {
+    public void vRdMax() {
         int alphaCw = 1;
         double nu1 = 0.6 * (1 - fCk / 250); //from 6.6N EC2
 
@@ -91,6 +91,8 @@ public class ShearingBendRods {
     }
 
     public double resultShearingStirrups() {
+        vRdMax();
+
         if (vEdRed <= vRdC) {
             vEdRedSmallerThanVRdC();
         } else if (vEdRed > vRdC && vEd <= vRdMax) {
