@@ -72,7 +72,7 @@
                     </items>
                 </ChoiceBox>
 
-                <Label text="F_yd" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
+                <Label text="f_yk" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
                 <TextField GridPane.columnIndex="3" GridPane.rowIndex="1" promptText="[MPa]" prefWidth="70"/>
             </GridPane>
 
@@ -194,9 +194,9 @@
                     <Insets top="5" right="5" bottom="5" left="5"/>
                 </padding>
 
-                <CheckBox text="Zbrojenie podłużne" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
-                <CheckBox text="Zbrojenie poprzeczne" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
-                <CheckBox text="SGU" GridPane.columnIndex="2" GridPane.rowIndex="0"/>
+                <CheckBox text="Zbrojenie podłużne" GridPane.columnIndex="0" GridPane.rowIndex="0" fx:id="checkBoxResults1"/>
+                <CheckBox text="Zbrojenie poprzeczne" GridPane.columnIndex="1" GridPane.rowIndex="0" fx:id="checkBoxResults2"/>
+                <CheckBox text="SGU" GridPane.columnIndex="2" GridPane.rowIndex="0" fx:id="checkBoxResults3"/>
 
                 <Button text="Obliczenia" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
 
