@@ -17,11 +17,10 @@ public class GuiWindow extends Application {
 
         Parent root = FXMLLoader.load(getClass().getResource("scene.fxml"));
 
-
         primaryStage.setTitle("Reinforcement Calculator");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
 
-
     }
+
 }
