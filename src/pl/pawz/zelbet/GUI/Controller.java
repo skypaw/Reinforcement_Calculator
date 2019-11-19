@@ -141,6 +141,13 @@ public class Controller {
     }
 
     private void loadsInit() {
+        mEdLoadsTxt.setPrefWidth(70);
+        nEdLoadsTxt.setPrefWidth(70);
+        vEdLoadsTxt.setPrefWidth(70);
+
+        mEdLoadsTxt.setPromptText("[kNm]");
+        nEdLoadsTxt.setPromptText("[kN]");
+        vEdLoadsTxt.setPromptText("[kN]");
 
         GridPane.setConstraints(mEdLoads, 0, 3);
         GridPane.setConstraints(mEdLoadsTxt, 1, 3);
