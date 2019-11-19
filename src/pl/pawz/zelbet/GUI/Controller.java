@@ -89,6 +89,26 @@ public class Controller {
     public void fourLoads() {
         if (checkBoxLoads.isSelected()) {
 
+            mEdLoadsTxt1.setPrefWidth(70);
+            mEdLoadsTxt2.setPrefWidth(70);
+            mEdLoadsTxt3.setPrefWidth(70);
+            mEdLoadsTxt4.setPrefWidth(70);
+
+            nEdLoadsTxt1.setPrefWidth(70);
+            nEdLoadsTxt2.setPrefWidth(70);
+            nEdLoadsTxt3.setPrefWidth(70);
+            nEdLoadsTxt4.setPrefWidth(70);
+
+            mEdLoadsTxt1.setPromptText("[kNm]");
+            mEdLoadsTxt2.setPromptText("[kNm]");
+            mEdLoadsTxt3.setPromptText("[kNm]");
+            mEdLoadsTxt4.setPromptText("[kNm]");
+
+            nEdLoadsTxt1.setPromptText("[kN]");
+            nEdLoadsTxt2.setPromptText("[kN]");
+            nEdLoadsTxt3.setPromptText("[kN]");
+            nEdLoadsTxt4.setPromptText("[kN]");
+
             GridPane.setConstraints(loadsDesc1,1,3);
             GridPane.setConstraints(loadsDesc2,2,3);
             GridPane.setConstraints(loadsDesc3,3,3);
@@ -121,6 +141,13 @@ public class Controller {
     }
 
     private void loadsInit() {
+        mEdLoadsTxt.setPrefWidth(70);
+        nEdLoadsTxt.setPrefWidth(70);
+        vEdLoadsTxt.setPrefWidth(70);
+
+        mEdLoadsTxt.setPromptText("[kNm]");
+        nEdLoadsTxt.setPromptText("[kN]");
+        vEdLoadsTxt.setPromptText("[kN]");
 
         GridPane.setConstraints(mEdLoads, 0, 3);
         GridPane.setConstraints(mEdLoadsTxt, 1, 3);

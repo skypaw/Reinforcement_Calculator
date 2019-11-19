@@ -1,5 +1,6 @@
 package pl.pawz.zelbet.Diagnostic;
 
+import pl.pawz.zelbet.ULS.ShearingBendRods;
 import pl.pawz.zelbet.ULS.ShearingStirrups;
 
 public class DiagnosticShearing {
@@ -14,7 +15,8 @@ public class DiagnosticShearing {
     private double aSw1;
     private double aSw2;
     private double sMin;
-    private double nS;
+    private double nS1;
+    private double nS2;
     private double fiS1;
     private double fiS2;
     private double fYd;
@@ -27,11 +29,13 @@ public class DiagnosticShearing {
     private double vRdC;
     private float vEd;
     private double s2;
+    private double s1;
     private float cotAlpha;
     private float sinAlpha;
+    private double vRdS;
 
 
-    public DiagnosticShearing(double dDimension, float bDimension, float fCk, double fCd, float nEd, double aC, double aSl, double nS, double fiS1, double fiS2, double fYd, double fYk, double vEdRed, float vEd, double s2) {
+    public DiagnosticShearing(double dDimension, float bDimension, float fCk, double fCd, float nEd, double aC, double aSl, double nS1, double nS2, double fiS1, double fiS2, double fYd, double fYk, double vEdRed, float vEd, double s2, double s1) {
         this.dDimension = dDimension;
         this.bDimension = bDimension;
         this.fCk = fCk;
@@ -39,7 +43,8 @@ public class DiagnosticShearing {
         this.nEd = nEd;
         this.aC = aC;
         this.aSl = aSl;
-        this.nS = nS;
+        this.nS1 = nS1;
+        this.nS2 = nS2;
         this.fiS2 = fiS2;
         this.fiS1 = fiS1;
         this.fYd = fYd;
@@ -47,6 +52,7 @@ public class DiagnosticShearing {
         this.vEdRed = vEdRed;
         this.vEd = vEd;
         this.s2 = s2;
+        this.s1 = s1;
 
         this.z = 0.9 * dDimension;
 
@@ -56,8 +62,26 @@ public class DiagnosticShearing {
         this.cotAlpha = 0.5f;
 
 
-        ShearingStirrups shearingBasic = new ShearingStirrups(dDimension, bDimension, fCk, fCd, nEd, aC, aSl, nS, fiS1, fYd, fYk, vEdRed, vEd);
+        ShearingStirrups shearingBasic = new ShearingStirrups(dDimension, bDimension, fCk, fCd, nEd, aC, aSl, nS1, fiS1, fYd, fYk, vEdRed, vEd); //Todo ns1 - to check if it is ok, the same bellow
         shearingBasic.vRdCValue();
 
+        ShearingBendRods shearingBend = new ShearingBendRods(dDimension,bDimension,fCk,fCd,nEd,aC,aSl,nS1,fiS1,fiS2,fYd,fYk,vEdRed,vEd,s2);
+        shearingBend.vRdMax();
+
     }
+
+    private void vRdS(){
+        aSw1 = nS1*Math.PI*Math.pow(fiS1/2,2);
+        double vRdS1 = aSw1/s1*z*fYd*cotTheta;
+        double vRdS2 = aSw2/s2*z*fYd*(cotTheta+cotAlpha)*sinAlpha;
+
+        vRdS = Math.min(vRdS1+vRdS2,2*vRdS1);
+    }
+
+    public double resultsShearingDiagnostic(){
+        vRdS();
+        return Math.max(Math.min(vRdS,vRdMax),vRdC);
+    }
+
+
 }
