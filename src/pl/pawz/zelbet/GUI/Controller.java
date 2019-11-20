@@ -77,6 +77,7 @@ public class Controller {
         loadsInit();
         concreteInit();
         checkBoxConcrete.setSelected(true);
+        choiceBoxConcrete.setValue("C30/37");
         choiceBoxConcrete.getItems().addAll("C12/15", "C16/20", "C20/25", "C25/30", "C30/37", "C35/45", "C40/50", "C45/55", "C50/60", "C55/67", "C60/75", "C70/85", "C80/95", "C90/105", "C100/115");
 
 
@@ -185,6 +186,7 @@ public class Controller {
         if (checkBoxConcrete.isSelected()) {
 
             concreteInit();
+            choiceBoxConcrete.setValue("C30/37");
 
         } else {
 
