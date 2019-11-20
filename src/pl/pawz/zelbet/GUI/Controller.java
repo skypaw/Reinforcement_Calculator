@@ -1,10 +1,10 @@
 package pl.pawz.zelbet.GUI;
 
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 
 public class Controller {
 
@@ -25,6 +25,16 @@ public class Controller {
     @FXML
     GridPane gridLoads = new GridPane();
 
+    @FXML
+    CheckBox checkBoxConcrete = new CheckBox();
+    @FXML
+    GridPane gridDimensions = new GridPane();
+    @FXML
+    ChoiceBox choiceBoxConcrete = new ChoiceBox();
+
+    @FXML
+    VBox vBoxCenter = new VBox();
+
     private Label aSw2Rod = new Label("A_sw2");
     private Label nSw2Rod = new Label("n_sw2");
     private TextField aSw2RodTxt = new TextField();
@@ -42,7 +52,7 @@ public class Controller {
 
     private Label loadsDesc1 = new Label("M_ed_max");
     private Label loadsDesc2 = new Label("M_ed_min");
-    private Label loadsDesc3= new Label("N_ed_max");
+    private Label loadsDesc3 = new Label("N_ed_max");
     private Label loadsDesc4 = new Label("N_ed_min");
 
     private Label nEdLoads1 = new Label("N_ed");
@@ -57,12 +67,19 @@ public class Controller {
     private TextField nEdLoadsTxt3 = new TextField();
     private TextField nEdLoadsTxt4 = new TextField();
 
+    private TextField concreteTxt = new TextField();
+
 
     public void initialize() {
         checkBoxResults1.setSelected(true);
         checkBoxResults2.setSelected(true);
         checkBoxResults3.setSelected(true);
         loadsInit();
+        concreteInit();
+        checkBoxConcrete.setSelected(true);
+        choiceBoxConcrete.setValue("C30/37");
+        choiceBoxConcrete.getItems().addAll("C12/15", "C16/20", "C20/25", "C25/30", "C30/37", "C35/45", "C40/50", "C45/55", "C50/60", "C55/67", "C60/75", "C70/85", "C80/95", "C90/105", "C100/115");
+
 
     }
 
@@ -109,10 +126,10 @@ public class Controller {
             nEdLoadsTxt3.setPromptText("[kN]");
             nEdLoadsTxt4.setPromptText("[kN]");
 
-            GridPane.setConstraints(loadsDesc1,1,3);
-            GridPane.setConstraints(loadsDesc2,2,3);
-            GridPane.setConstraints(loadsDesc3,3,3);
-            GridPane.setConstraints(loadsDesc4,4,3);
+            GridPane.setConstraints(loadsDesc1, 1, 3);
+            GridPane.setConstraints(loadsDesc2, 2, 3);
+            GridPane.setConstraints(loadsDesc3, 3, 3);
+            GridPane.setConstraints(loadsDesc4, 4, 3);
 
             GridPane.setConstraints(mEdLoads1, 0, 4);
             GridPane.setConstraints(mEdLoadsTxt1, 1, 4);
@@ -130,7 +147,7 @@ public class Controller {
             GridPane.setConstraints(vEdLoadsTxt, 1, 6);
 
             gridLoads.getChildren().removeAll(mEdLoads, mEdLoadsTxt, nEdLoads, nEdLoadsTxt, vEdLoads, vEdLoadsTxt);
-            gridLoads.getChildren().addAll(mEdLoads1, loadsDesc1, loadsDesc2, loadsDesc3,loadsDesc4, mEdLoadsTxt1, mEdLoadsTxt2,
+            gridLoads.getChildren().addAll(mEdLoads1, loadsDesc1, loadsDesc2, loadsDesc3, loadsDesc4, mEdLoadsTxt1, mEdLoadsTxt2,
                     mEdLoadsTxt3, mEdLoadsTxt4, nEdLoads1, nEdLoadsTxt1, nEdLoadsTxt2,
                     nEdLoadsTxt3, nEdLoadsTxt4, vEdLoads, vEdLoadsTxt);
 
@@ -158,10 +175,36 @@ public class Controller {
         GridPane.setConstraints(nEdLoads, 4, 3);
         GridPane.setConstraints(nEdLoadsTxt, 5, 3);
 
-        gridLoads.getChildren().removeAll(mEdLoads1, loadsDesc1, loadsDesc2, loadsDesc3,loadsDesc4, mEdLoadsTxt1,
+        gridLoads.getChildren().removeAll(mEdLoads1, loadsDesc1, loadsDesc2, loadsDesc3, loadsDesc4, mEdLoadsTxt1,
                 mEdLoadsTxt2, mEdLoadsTxt3, mEdLoadsTxt4, nEdLoads1, nEdLoadsTxt1, nEdLoadsTxt2,
                 nEdLoadsTxt3, nEdLoadsTxt4, vEdLoads, vEdLoadsTxt);
 
         gridLoads.getChildren().addAll(mEdLoads, mEdLoadsTxt, nEdLoads, nEdLoadsTxt, vEdLoads, vEdLoadsTxt);
+    }
+
+    public void changingConcrete() {
+        if (checkBoxConcrete.isSelected()) {
+
+            concreteInit();
+            choiceBoxConcrete.setValue("C30/37");
+
+        } else {
+
+            concreteTxt.setPrefWidth(70);
+            concreteTxt.setPromptText("[MPa]");
+            GridPane.setConstraints(concreteTxt, 3, 0);
+            gridDimensions.getChildren().remove(choiceBoxConcrete);
+            gridDimensions.getChildren().add(concreteTxt);
+        }
+
+    }
+
+    private void concreteInit() {
+        choiceBoxConcrete.setPrefWidth(70);
+
+
+        GridPane.setConstraints(choiceBoxConcrete, 3, 0);
+        gridDimensions.getChildren().remove(concreteTxt);
+        gridDimensions.getChildren().add(choiceBoxConcrete);
     }
 }
