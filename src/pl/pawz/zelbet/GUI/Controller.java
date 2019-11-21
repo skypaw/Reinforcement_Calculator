@@ -42,7 +42,7 @@ public class Controller {
     private TextField nSw2RodTxt = new TextField();
     private TextField nSw2RodSTxt = new TextField();
 
-    private Label mEdLoads = new Label("M_ed");
+    private Label mEdLoads = new Label("M_e");
     private Label nEdLoads = new Label("N_ed");
     private Label vEdLoads = new Label("V_ed");
     private TextField mEdLoadsTxt = new TextField();
