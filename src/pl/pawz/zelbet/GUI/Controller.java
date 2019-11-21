@@ -37,8 +37,10 @@ public class Controller {
 
     private Label aSw2Rod = new Label("A_sw2");
     private Label nSw2Rod = new Label("n_sw2");
+    private Label nSw2RodS = new Label("s_sw2");
     private TextField aSw2RodTxt = new TextField();
     private TextField nSw2RodTxt = new TextField();
+    private TextField nSw2RodSTxt = new TextField();
 
     private Label mEdLoads = new Label("M_ed");
     private Label nEdLoads = new Label("N_ed");
@@ -86,8 +88,10 @@ public class Controller {
     public void checkBoxRod() {
         aSw2RodTxt.setPrefWidth(70);
         nSw2RodTxt.setPrefWidth(40);
+        nSw2RodSTxt.setPrefWidth(40);
         aSw2RodTxt.setPromptText("[mm]");
         nSw2RodTxt.setPromptText("[szt]");
+        nSw2RodSTxt.setPromptText("[m]");
 
         if (checkBoxRods.isSelected()) {
             GridPane.setConstraints(aSw2Rod, 0, 3);
@@ -96,10 +100,13 @@ public class Controller {
             GridPane.setConstraints(nSw2Rod, 2, 3);
             GridPane.setConstraints(nSw2RodTxt, 3, 3);
 
-            gridPaneRods.getChildren().addAll(aSw2Rod, nSw2Rod, aSw2RodTxt, nSw2RodTxt);
+            GridPane.setConstraints(nSw2RodS, 4, 3);
+            GridPane.setConstraints(nSw2RodSTxt, 5, 3);
+
+            gridPaneRods.getChildren().addAll(aSw2Rod, nSw2Rod, aSw2RodTxt, nSw2RodTxt,nSw2RodS,nSw2RodSTxt);
         } else {
 
-            gridPaneRods.getChildren().removeAll(aSw2Rod, nSw2Rod, aSw2RodTxt, nSw2RodTxt);
+            gridPaneRods.getChildren().removeAll(aSw2Rod, nSw2Rod, aSw2RodTxt, nSw2RodTxt,nSw2RodS,nSw2RodSTxt);
         }
     }
 
