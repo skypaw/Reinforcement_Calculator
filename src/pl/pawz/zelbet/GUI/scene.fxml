@@ -37,35 +37,40 @@
                            GridPane.columnSpan="2"/>
                     <Label text="Stan Graniczny Nośności" GridPane.columnIndex="0" GridPane.rowIndex="1"
                            GridPane.columnSpan="2"/>
-                    <CheckBox text="Kombinacje obciążeń" GridPane.columnIndex="6" GridPane.rowIndex="3"
+                    <CheckBox text="Kombinacje obciążeń" GridPane.columnIndex="0" GridPane.rowIndex="6"
                               fx:id="checkBoxLoads" onAction="#fourLoads"/>
                 </GridPane>
 
-                <Label text="Geometria przekroju i Materiały" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+
 
                 <GridPane hgap="5" vgap="5" GridPane.columnIndex="0" GridPane.rowIndex="2" fx:id="gridDimensions">
                     <padding>
                         <Insets top="5" right="5" bottom="5" left="5"/>
                     </padding>
 
-                    <Label text="b" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
-                    <TextField GridPane.columnIndex="1" GridPane.rowIndex="0" promptText="[cm]" prefWidth="70"/>
+                    <Label text="Geometria przekroju" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="2"/>
+                    <Label text="Materiały" GridPane.columnIndex="3" GridPane.rowIndex="0" GridPane.columnSpan="2"/>
 
-                    <Label text="h" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                    <Pane GridPane.columnIndex="2" prefWidth="50"/>
+
+                    <Label text="b" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
                     <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" promptText="[cm]" prefWidth="70"/>
 
-                    <Label text="Klasa Betonu" GridPane.columnIndex="2" GridPane.rowIndex="0"/>
+                    <Label text="h" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                    <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" promptText="[cm]" prefWidth="70"/>
 
-                    <CheckBox text="Lista betonów" GridPane.columnIndex="4" GridPane.rowIndex="0"
+                    <Label text="Klasa Betonu" GridPane.columnIndex="3" GridPane.rowIndex="1"/>
+
+                    <CheckBox text="Lista betonów" GridPane.columnIndex="5" GridPane.rowIndex="1"
                               fx:id="checkBoxConcrete" onAction="#changingConcrete"/>
 
-                    <Label text="f_yk" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
-                    <TextField GridPane.columnIndex="3" GridPane.rowIndex="1" promptText="[MPa]" prefWidth="70"/>
+                    <Label text="f_yk" GridPane.columnIndex="3" GridPane.rowIndex="2"/>
+                    <TextField GridPane.columnIndex="4" GridPane.rowIndex="2" promptText="[MPa]" prefWidth="70"/>
                 </GridPane>
 
                 <Label text="Zbrojenie podłużne" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
 
-                <GridPane hgap="10" vgap="5" GridPane.columnIndex="0" GridPane.rowIndex="4">
+                <GridPane hgap="10" vgap="5" GridPane.columnIndex="0" GridPane.rowIndex="4" fx:id="gridPaneSGN">
                     <padding>
                         <Insets top="5" right="5" bottom="5" left="5"/>
                     </padding>
@@ -83,17 +88,20 @@
                     <TextField GridPane.columnIndex="3" GridPane.rowIndex="1" promptText="[mm]" prefWidth="70"/>
                 </GridPane>
 
-                <Label text="Zbrojenie poprzeczne" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
+                <Label text="Ścinanie - Zbrojenie poprzeczne" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
 
-                <GridPane hgap="10" vgap="5" GridPane.columnIndex="0" GridPane.rowIndex="6" fx:id="gridPaneRods">
+                <GridPane hgap="10" vgap="5" GridPane.columnIndex="0" GridPane.rowIndex="6" fx:id="gridPaneShearing">
                     <padding>
                         <Insets top="5" right="5" bottom="5" left="5"/>
                     </padding>
 
-                    <Label text="V_ed,red" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
-                    <TextField GridPane.columnIndex="1" GridPane.rowIndex="0" promptText="[wartość]" prefWidth="40"/>
+                    <Label text="V_ed" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                    <TextField GridPane.columnIndex="1" GridPane.rowIndex="0" promptText="[kNm]" prefWidth="70"/>
 
-                    <CheckBox text="Pręty odgięte" GridPane.columnIndex="2" GridPane.rowIndex="0" fx:id="checkBoxRods"
+                    <Label text="V_ed,red" GridPane.columnIndex="2" GridPane.rowIndex="0"/>
+                    <TextField GridPane.columnIndex="3" GridPane.rowIndex="0" promptText="[kNm]" prefWidth="70"/>
+
+                    <CheckBox text="Pręty odgięte" GridPane.columnIndex="4" GridPane.rowIndex="0" fx:id="checkBoxRods"
                               onAction="#checkBoxRod"/>
 
                     <Label text="ctg Theta" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
@@ -116,7 +124,7 @@
                 <Label text="Stan Graniczny Użytkowalności" GridPane.columnIndex="0" GridPane.rowIndex="7"/>
 
 
-                <GridPane hgap="5" vgap="5" GridPane.columnIndex="0" GridPane.rowIndex="8">
+                <GridPane hgap="5" vgap="5" GridPane.columnIndex="0" GridPane.rowIndex="8" fx:id="gridPaneSGU">
                     <padding>
                         <Insets top="5" right="5" bottom="5" left="5"/>
                     </padding>
@@ -190,10 +198,10 @@
                     </padding>
 
                     <CheckBox text="Zbrojenie podłużne" GridPane.columnIndex="0" GridPane.rowIndex="0"
-                              fx:id="checkBoxResults1"/>
+                              fx:id="checkBoxResults1" onAction="#bottomButtonsController"/>
                     <CheckBox text="Zbrojenie poprzeczne" GridPane.columnIndex="1" GridPane.rowIndex="0"
-                              fx:id="checkBoxResults2"/>
-                    <CheckBox text="SGU" GridPane.columnIndex="2" GridPane.rowIndex="0" fx:id="checkBoxResults3"/>
+                              fx:id="checkBoxResults2" onAction="#bottomButtonsController"/>
+                    <CheckBox text="SGU" GridPane.columnIndex="2" GridPane.rowIndex="0" fx:id="checkBoxResults3" onAction="#bottomButtonsController"/>
 
                     <Button text="Obliczenia" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
 

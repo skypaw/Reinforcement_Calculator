@@ -1,6 +1,5 @@
 package pl.pawz.zelbet.GUI;
 
-import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
@@ -8,10 +7,15 @@ import javafx.scene.layout.VBox;
 
 public class Controller {
 
+
     @FXML
     CheckBox checkBoxRods = new CheckBox();
     @FXML
-    GridPane gridPaneRods = new GridPane();
+    GridPane gridPaneShearing = new GridPane();
+    @FXML
+    GridPane gridPaneSGU = new GridPane();
+    @FXML
+    GridPane gridPaneSGN = new GridPane();
 
     @FXML
     CheckBox checkBoxResults1 = new CheckBox();
@@ -42,22 +46,22 @@ public class Controller {
     private TextField nSw2RodTxt = new TextField();
     private TextField nSw2RodSTxt = new TextField();
 
-    private Label mEdLoads = new Label("M_e");
-    private Label nEdLoads = new Label("N_ed");
-    private Label vEdLoads = new Label("V_ed");
+    private Label mEdLoads = new Label("M_Ed");
+    private Label nEdLoads = new Label("N_Ed");
+    private Label vEdLoads = new Label("V_Ed");
     private TextField mEdLoadsTxt = new TextField();
     private TextField nEdLoadsTxt = new TextField();
     private TextField vEdLoadsTxt = new TextField();
 
 
-    private Label mEdLoads1 = new Label("M_ed");
+    private Label mEdLoads1 = new Label("M_Ed");
 
-    private Label loadsDesc1 = new Label("M_ed_max");
-    private Label loadsDesc2 = new Label("M_ed_min");
-    private Label loadsDesc3 = new Label("N_ed_max");
-    private Label loadsDesc4 = new Label("N_ed_min");
+    private Label loadsDesc1 = new Label("M_Ed_max");
+    private Label loadsDesc2 = new Label("M_Ed_min");
+    private Label loadsDesc3 = new Label("N_Ed_max");
+    private Label loadsDesc4 = new Label("N_Ed_min");
 
-    private Label nEdLoads1 = new Label("N_ed");
+    private Label nEdLoads1 = new Label("N_Ed");
 
 
     private TextField mEdLoadsTxt1 = new TextField();
@@ -87,7 +91,7 @@ public class Controller {
 
     public void checkBoxRod() {
         aSw2RodTxt.setPrefWidth(70);
-        nSw2RodTxt.setPrefWidth(40);
+        nSw2RodTxt.setPrefWidth(70);
         nSw2RodSTxt.setPrefWidth(40);
         aSw2RodTxt.setPromptText("[mm]");
         nSw2RodTxt.setPromptText("[szt]");
@@ -103,10 +107,10 @@ public class Controller {
             GridPane.setConstraints(nSw2RodS, 4, 3);
             GridPane.setConstraints(nSw2RodSTxt, 5, 3);
 
-            gridPaneRods.getChildren().addAll(aSw2Rod, nSw2Rod, aSw2RodTxt, nSw2RodTxt,nSw2RodS,nSw2RodSTxt);
+            gridPaneShearing.getChildren().addAll(aSw2Rod, nSw2Rod, aSw2RodTxt, nSw2RodTxt,nSw2RodS,nSw2RodSTxt);
         } else {
 
-            gridPaneRods.getChildren().removeAll(aSw2Rod, nSw2Rod, aSw2RodTxt, nSw2RodTxt,nSw2RodS,nSw2RodSTxt);
+            gridPaneShearing.getChildren().removeAll(aSw2Rod, nSw2Rod, aSw2RodTxt, nSw2RodTxt,nSw2RodS,nSw2RodSTxt);
         }
     }
 
@@ -150,13 +154,11 @@ public class Controller {
             GridPane.setConstraints(nEdLoadsTxt3, 3, 5);
             GridPane.setConstraints(nEdLoadsTxt4, 4, 5);
 
-            GridPane.setConstraints(vEdLoads, 0, 6);
-            GridPane.setConstraints(vEdLoadsTxt, 1, 6);
 
-            gridLoads.getChildren().removeAll(mEdLoads, mEdLoadsTxt, nEdLoads, nEdLoadsTxt, vEdLoads, vEdLoadsTxt);
+            gridLoads.getChildren().removeAll(mEdLoads, mEdLoadsTxt, nEdLoads, nEdLoadsTxt);
             gridLoads.getChildren().addAll(mEdLoads1, loadsDesc1, loadsDesc2, loadsDesc3, loadsDesc4, mEdLoadsTxt1, mEdLoadsTxt2,
                     mEdLoadsTxt3, mEdLoadsTxt4, nEdLoads1, nEdLoadsTxt1, nEdLoadsTxt2,
-                    nEdLoadsTxt3, nEdLoadsTxt4, vEdLoads, vEdLoadsTxt);
+                    nEdLoadsTxt3, nEdLoadsTxt4);
 
 
         } else {
@@ -176,17 +178,14 @@ public class Controller {
         GridPane.setConstraints(mEdLoads, 0, 3);
         GridPane.setConstraints(mEdLoadsTxt, 1, 3);
 
-        GridPane.setConstraints(vEdLoads, 2, 3);
-        GridPane.setConstraints(vEdLoadsTxt, 3, 3);
-
-        GridPane.setConstraints(nEdLoads, 4, 3);
-        GridPane.setConstraints(nEdLoadsTxt, 5, 3);
+        GridPane.setConstraints(nEdLoads, 0, 4);
+        GridPane.setConstraints(nEdLoadsTxt, 1, 4);
 
         gridLoads.getChildren().removeAll(mEdLoads1, loadsDesc1, loadsDesc2, loadsDesc3, loadsDesc4, mEdLoadsTxt1,
                 mEdLoadsTxt2, mEdLoadsTxt3, mEdLoadsTxt4, nEdLoads1, nEdLoadsTxt1, nEdLoadsTxt2,
-                nEdLoadsTxt3, nEdLoadsTxt4, vEdLoads, vEdLoadsTxt);
+                nEdLoadsTxt3, nEdLoadsTxt4);
 
-        gridLoads.getChildren().addAll(mEdLoads, mEdLoadsTxt, nEdLoads, nEdLoadsTxt, vEdLoads, vEdLoadsTxt);
+        gridLoads.getChildren().addAll(mEdLoads, mEdLoadsTxt, nEdLoads, nEdLoadsTxt);
     }
 
     public void changingConcrete() {
@@ -199,7 +198,7 @@ public class Controller {
 
             concreteTxt.setPrefWidth(70);
             concreteTxt.setPromptText("[MPa]");
-            GridPane.setConstraints(concreteTxt, 3, 0);
+            GridPane.setConstraints(concreteTxt, 4, 1);
             gridDimensions.getChildren().remove(choiceBoxConcrete);
             gridDimensions.getChildren().add(concreteTxt);
         }
@@ -210,8 +209,29 @@ public class Controller {
         choiceBoxConcrete.setPrefWidth(70);
 
 
-        GridPane.setConstraints(choiceBoxConcrete, 3, 0);
+        GridPane.setConstraints(choiceBoxConcrete, 4, 1);
         gridDimensions.getChildren().remove(concreteTxt);
         gridDimensions.getChildren().add(choiceBoxConcrete);
+    }
+
+    public void bottomButtonsController(){
+        if (checkBoxResults1.isSelected()){
+            gridPaneSGN.setDisable(false);
+        }else {
+            gridPaneSGN.setDisable(true);
+        }
+
+        if (checkBoxResults2.isSelected()){
+            gridPaneShearing.setDisable(false);
+        }else {
+            gridPaneShearing.setDisable(true);
+        }
+
+        if (checkBoxResults3.isSelected()){
+            gridPaneSGU.setDisable(false);
+        }else {
+            gridPaneSGU.setDisable(true);
+        }
+
     }
 }
