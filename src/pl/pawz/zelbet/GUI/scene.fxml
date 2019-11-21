@@ -37,7 +37,8 @@
                            GridPane.columnSpan="2"/>
                     <Label text="Stan Graniczny Nośności" GridPane.columnIndex="0" GridPane.rowIndex="1"
                            GridPane.columnSpan="2"/>
-
+                    <CheckBox text="Kombinacje obciążeń" GridPane.columnIndex="6" GridPane.rowIndex="3"
+                              fx:id="checkBoxLoads" onAction="#fourLoads"/>
                 </GridPane>
 
                 <Label text="Geometria przekroju i Materiały" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
@@ -159,6 +160,12 @@
 
                     <Label text="Cnom" GridPane.columnIndex="2" GridPane.rowIndex="4"/>
                     <TextField GridPane.columnIndex="3" GridPane.rowIndex="4" promptText="[mm]" prefWidth="70"/>
+
+                    <Label text="l_eff" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
+                    <TextField GridPane.columnIndex="1" GridPane.rowIndex="5" promptText="[m]" prefWidth="70"/>
+
+                    <Label text="Alpha_M" GridPane.columnIndex="2" GridPane.rowIndex="5"/>
+                    <TextField GridPane.columnIndex="3" GridPane.rowIndex="5" promptText="[-]" prefWidth="70"/>
                 </GridPane>
 
                 <Label text="Dodatkowe opcje" GridPane.columnIndex="0" GridPane.rowIndex="9"/>
@@ -171,8 +178,7 @@
 
                     <CheckBox text="Efekty II rzędu" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
                     <CheckBox text="Diganostyka" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
-                    <CheckBox text="Kombinacje obciążeń" GridPane.columnIndex="0" GridPane.rowIndex="2"
-                              fx:id="checkBoxLoads" onAction="#fourLoads"/>
+
 
                 </GridPane>
 
