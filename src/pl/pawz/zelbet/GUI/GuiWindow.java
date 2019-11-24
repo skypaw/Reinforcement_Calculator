@@ -7,6 +7,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.stage.Stage;
 
+import java.util.Arrays;
+
 public class GuiWindow extends Application {
 
     public static void main(String[] args) {
@@ -26,7 +28,6 @@ public class GuiWindow extends Application {
         primaryStage.setTitle("Reinforcement Calculator");
         primaryStage.setScene(new Scene(scrollPane));
         primaryStage.show();
-
     }
 
 }

@@ -34,7 +34,7 @@
                     </padding>
 
                     <Label text="Przekrój Prostokątny" GridPane.columnIndex="0" GridPane.rowIndex="0"
-                           GridPane.columnSpan="2"/>
+                           GridPane.columnSpan="2" fx:id="titleLabel"/>
                     <Label text="Stan Graniczny Nośności" GridPane.columnIndex="0" GridPane.rowIndex="1"
                            GridPane.columnSpan="2"/>
                     <CheckBox text="Kombinacje obciążeń" GridPane.columnIndex="0" GridPane.rowIndex="6"
@@ -42,22 +42,24 @@
                 </GridPane>
 
 
-
                 <GridPane hgap="5" vgap="5" GridPane.columnIndex="0" GridPane.rowIndex="2" fx:id="gridDimensions">
                     <padding>
                         <Insets top="5" right="5" bottom="5" left="5"/>
                     </padding>
 
-                    <Label text="Geometria przekroju" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="2"/>
+                    <Label text="Geometria przekroju" GridPane.columnIndex="0" GridPane.rowIndex="0"
+                           GridPane.columnSpan="2"/>
                     <Label text="Materiały" GridPane.columnIndex="3" GridPane.rowIndex="0" GridPane.columnSpan="2"/>
 
                     <Pane GridPane.columnIndex="2" prefWidth="50"/>
 
                     <Label text="b" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
-                    <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" promptText="[cm]" prefWidth="70"/>
+                    <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" promptText="[cm]" prefWidth="70"
+                               fx:id="test1" onKeyReleased="#test1"/>
 
                     <Label text="h" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
-                    <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" promptText="[cm]" prefWidth="70"/>
+                    <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" promptText="[cm]" prefWidth="70"
+                               fx:id="geometryHeight"/>
 
                     <Label text="Klasa Betonu" GridPane.columnIndex="3" GridPane.rowIndex="1"/>
 
@@ -65,7 +67,8 @@
                               fx:id="checkBoxConcrete" onAction="#changingConcrete"/>
 
                     <Label text="f_yk" GridPane.columnIndex="3" GridPane.rowIndex="2"/>
-                    <TextField GridPane.columnIndex="4" GridPane.rowIndex="2" promptText="[MPa]" prefWidth="70"/>
+                    <TextField GridPane.columnIndex="4" GridPane.rowIndex="2" promptText="[MPa]" prefWidth="70"
+                               fx:id="steelFYk"/>
                 </GridPane>
 
                 <Label text="Zbrojenie podłużne" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
@@ -76,16 +79,20 @@
                     </padding>
 
                     <Label text="A_s1" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
-                    <TextField GridPane.columnIndex="1" GridPane.rowIndex="0" promptText="[mm]" prefWidth="70"/>
+                    <TextField GridPane.columnIndex="1" GridPane.rowIndex="0" promptText="[mm]" prefWidth="70"
+                               fx:id="aS1"/>
 
                     <Label text="A_s2" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
-                    <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" promptText="[mm]" prefWidth="70"/>
+                    <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" promptText="[mm]" prefWidth="70"
+                               fx:id="aS2"/>
 
                     <Label text="a_1" GridPane.columnIndex="2" GridPane.rowIndex="0"/>
-                    <TextField GridPane.columnIndex="3" GridPane.rowIndex="0" promptText="[mm]" prefWidth="70"/>
+                    <TextField GridPane.columnIndex="3" GridPane.rowIndex="0" promptText="[mm]" prefWidth="70"
+                               fx:id="a1"/>
 
                     <Label text="a_2" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
-                    <TextField GridPane.columnIndex="3" GridPane.rowIndex="1" promptText="[mm]" prefWidth="70"/>
+                    <TextField GridPane.columnIndex="3" GridPane.rowIndex="1" promptText="[mm]" prefWidth="70"
+                               fx:id="a2"/>
                 </GridPane>
 
                 <Label text="Ścinanie - Zbrojenie poprzeczne" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
@@ -96,26 +103,32 @@
                     </padding>
 
                     <Label text="V_ed" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
-                    <TextField GridPane.columnIndex="1" GridPane.rowIndex="0" promptText="[kNm]" prefWidth="70"/>
+                    <TextField GridPane.columnIndex="1" GridPane.rowIndex="0" promptText="[kNm]" prefWidth="70"
+                               fx:id="vEd"/>
 
                     <Label text="V_ed,red" GridPane.columnIndex="2" GridPane.rowIndex="0"/>
-                    <TextField GridPane.columnIndex="3" GridPane.rowIndex="0" promptText="[kNm]" prefWidth="70"/>
+                    <TextField GridPane.columnIndex="3" GridPane.rowIndex="0" promptText="[kNm]" prefWidth="70"
+                               fx:id="vEdRed"/>
 
                     <CheckBox text="Pręty odgięte" GridPane.columnIndex="4" GridPane.rowIndex="0" fx:id="checkBoxRods"
                               onAction="#checkBoxRod"/>
 
                     <Label text="ctg Theta" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
-                    <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" promptText="[wartość]" prefWidth="40"/>
+                    <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" promptText="[wartość]" prefWidth="40"
+                               fx:id="ctgTheta"/>
 
                     <Label text="Kąt Alpha" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
-                    <TextField GridPane.columnIndex="3" GridPane.rowIndex="1" promptText="[°]" prefWidth="40"/>
+                    <TextField GridPane.columnIndex="3" GridPane.rowIndex="1" promptText="[°]" prefWidth="40"
+                               fx:id="alpha"/>
 
                     <Label text="A_sw1" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
-                    <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" promptText="[mm]" prefWidth="70"/>
+                    <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" promptText="[mm]" prefWidth="70"
+                               fx:id="aSw1"/>
 
 
                     <Label text="n_sw1" GridPane.columnIndex="2" GridPane.rowIndex="2"/>
-                    <TextField GridPane.columnIndex="3" GridPane.rowIndex="2" promptText="[szt]" prefWidth="40"/>
+                    <TextField GridPane.columnIndex="3" GridPane.rowIndex="2" promptText="[szt]" prefWidth="40"
+                               fx:id="nSw1"/>
 
 
                 </GridPane>
@@ -131,13 +144,14 @@
 
 
                     <Label text="M_Ek" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
-                    <TextField GridPane.columnIndex="1" GridPane.rowIndex="0" promptText="[kNm]" prefWidth="70"/>
+                    <TextField GridPane.columnIndex="1" GridPane.rowIndex="0" promptText="[kNm]" prefWidth="70"
+                               fx:id="mEk"/>
 
                     <Label text="M_ek,lt" GridPane.columnIndex="2" GridPane.rowIndex="0"/>
-                    <TextField GridPane.columnIndex="3" GridPane.rowIndex="0" promptText="[kNm]" prefWidth="70"/>
+                    <TextField GridPane.columnIndex="3" GridPane.rowIndex="0" promptText="[kNm]" prefWidth="70" fx:id="mEkLt"/>
 
                     <Label text="Obciążenie" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
-                    <ChoiceBox GridPane.columnIndex="1" GridPane.rowIndex="1">
+                    <ChoiceBox GridPane.columnIndex="1" GridPane.rowIndex="1" fx:id="choiceBoxLoads">
                         <items>
                             <FXCollections fx:factory="observableArrayList">
                                 <String fx:value="Obciążenie doraźne"/>
@@ -149,13 +163,13 @@
 
 
                     <Label text="t0" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
-                    <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" promptText="[dni]" prefWidth="70"/>
+                    <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" promptText="[dni]" prefWidth="70" fx:id="tZero"/>
 
                     <Label text="RH" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
-                    <TextField GridPane.columnIndex="1" GridPane.rowIndex="4" promptText="[%]" prefWidth="70"/>
+                    <TextField GridPane.columnIndex="1" GridPane.rowIndex="4" promptText="[%]" prefWidth="70" fx:id="rH"/>
 
                     <Label text="Klasa Cementu" GridPane.columnIndex="2" GridPane.rowIndex="3"/>
-                    <ChoiceBox GridPane.columnIndex="3" GridPane.rowIndex="3">
+                    <ChoiceBox GridPane.columnIndex="3" GridPane.rowIndex="3" fx:id="choiceBoxCementClass">
                         <items>
                             <FXCollections fx:factory="observableArrayList">
                                 <String fx:value="Klasa S"/>
@@ -167,13 +181,13 @@
                     </ChoiceBox>
 
                     <Label text="Cnom" GridPane.columnIndex="2" GridPane.rowIndex="4"/>
-                    <TextField GridPane.columnIndex="3" GridPane.rowIndex="4" promptText="[mm]" prefWidth="70"/>
+                    <TextField GridPane.columnIndex="3" GridPane.rowIndex="4" promptText="[mm]" prefWidth="70" fx:id="cNom"/>
 
                     <Label text="l_eff" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
-                    <TextField GridPane.columnIndex="1" GridPane.rowIndex="5" promptText="[m]" prefWidth="70"/>
+                    <TextField GridPane.columnIndex="1" GridPane.rowIndex="5" promptText="[m]" prefWidth="70" fx:id="lEff"/>
 
                     <Label text="Alpha_M" GridPane.columnIndex="2" GridPane.rowIndex="5"/>
-                    <TextField GridPane.columnIndex="3" GridPane.rowIndex="5" promptText="[-]" prefWidth="70"/>
+                    <TextField GridPane.columnIndex="3" GridPane.rowIndex="5" promptText="[-]" prefWidth="70" fx:id="alphaM"/>
                 </GridPane>
 
                 <Label text="Dodatkowe opcje" GridPane.columnIndex="0" GridPane.rowIndex="9"/>
@@ -201,9 +215,10 @@
                               fx:id="checkBoxResults1" onAction="#bottomButtonsController"/>
                     <CheckBox text="Zbrojenie poprzeczne" GridPane.columnIndex="1" GridPane.rowIndex="0"
                               fx:id="checkBoxResults2" onAction="#bottomButtonsController"/>
-                    <CheckBox text="SGU" GridPane.columnIndex="2" GridPane.rowIndex="0" fx:id="checkBoxResults3" onAction="#bottomButtonsController"/>
+                    <CheckBox text="SGU" GridPane.columnIndex="2" GridPane.rowIndex="0" fx:id="checkBoxResults3"
+                              onAction="#bottomButtonsController"/>
 
-                    <Button text="Obliczenia" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+                    <Button text="Obliczenia" GridPane.columnIndex="1" GridPane.rowIndex="4" onAction="#calculations"/>
 
                 </GridPane>
             </GridPane>

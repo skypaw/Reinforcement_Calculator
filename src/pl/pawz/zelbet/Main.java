@@ -1,6 +1,9 @@
 package pl.pawz.zelbet;
 
+import javafx.stage.Stage;
 import pl.pawz.zelbet.Diagnostic.DiagnosticCompression;
+import pl.pawz.zelbet.GUI.Controller;
+import pl.pawz.zelbet.GUI.GuiWindow;
 import pl.pawz.zelbet.ULS.BendingBeamT;
 
 import java.util.Arrays;
@@ -48,6 +51,9 @@ public class Main {
         BendingBeamT bending = new BendingBeamT(mEd,fCd,epsilonCu3,lambdaConcrete,etaConcrete,fYd,E_S,bW,bEff,hF,a2,dValue);
         double[] ress = bending.resultsBendingT();
         System.out.println(Arrays.toString(ress));
+
+
+
     }
 
 }
