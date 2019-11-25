@@ -5,6 +5,11 @@ import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import org.junit.FixMethodOrder;
+import pl.pawz.zelbet.BasicValues;
+import pl.pawz.zelbet.ULS.BendingBeamRectangle;
+import pl.pawz.zelbet.ULS.BendingBeamT;
+
+import java.util.Arrays;
 
 public class Controller {
 
@@ -363,32 +368,84 @@ public class Controller {
     }
 
 
-    //Functionality, calculations and returning correct values
+    //Functionality, calculations and returning correct value
+    private static float getDataFromTextField(TextField specificTextField, String variable) {
+        try {
 
-
-    private double fCk(){
-        if (checkBoxConcrete.isSelected()){
-            double[] concreteList = {12,16,20,25,30,25,40,45,50,55,60,70,80,90,100};
-            return concreteList[choiceBoxConcrete.getSelectionModel().getSelectedIndex()];
-        }else{
-            try {
-
-                double value = Double.parseDouble(concreteTxt.getText().replaceAll(",","."));
-                if(value>=0) {return value;}
-                else{
-                    AlertBox.display("Błąd","Wartość nie może być ujemna");
-                    return 0;
-                }
-            }catch (NumberFormatException e){
-                AlertBox.display("Błąd","Błąd przy podawaniu danych.");
+            float value = Float.parseFloat(specificTextField.getText().replaceAll(",", "."));
+            if (value >= 0) {
+                return value;
+            } else {
+                AlertBox.display("Błąd", "Wartość powinna być liczbą dodatnią");
                 return 0;
             }
+        } catch (NumberFormatException e) {
+            AlertBox.display("Błąd", "Wartość " + variable + " powinna być liczbą dodatnią");
+            return 0;
+        }
+    }
+
+    private double fCk() {
+        if (checkBoxConcrete.isSelected()) {
+            double[] concreteList = {12, 16, 20, 25, 30, 25, 40, 45, 50, 55, 60, 70, 80, 90, 100};
+            return concreteList[choiceBoxConcrete.getSelectionModel().getSelectedIndex()];
+        } else {
+            return getDataFromTextField(concreteTxt, "f_Ck");
+        }
+    }
+
+    private double fYk() {
+        return getDataFromTextField(steelFYk, "f_Yk");
+    }
+
+    private float[] dimension() {
+        float b = getDataFromTextField(test1, "b");
+        float h = getDataFromTextField(geometryHeight, "h");
+        return new float[]{h, b};
+    }
+
+    private float[] longitudinalReinforcement(){
+        float aS1Value = getDataFromTextField(aS1, "a_S1");
+        float aS2Value = getDataFromTextField(aS2,"a_S2");
+        float a1Value = getDataFromTextField(a1,"a_1");
+        float a2Value = getDataFromTextField(a2, "a_2");
+        return new float[]{aS1Value,aS2Value,a1Value,a2Value};
+    }
+
+    private float[] forcesValues(){
+        if(checkBoxLoads.isSelected()){
+            float mEd1 = getDataFromTextField(mEdLoadsTxt1, "M_Ed1");
+            float mEd2 = getDataFromTextField(mEdLoadsTxt2, "M_Ed2");
+            float mEd3 = getDataFromTextField(mEdLoadsTxt3, "M_Ed3");
+            float mEd4 = getDataFromTextField(mEdLoadsTxt4, "M_Ed4");
+
+            float nEd1 = getDataFromTextField(nEdLoadsTxt1, "N_Ed1");
+            float nEd2 = getDataFromTextField(nEdLoadsTxt2, "N_Ed2");
+            float nEd3 = getDataFromTextField(nEdLoadsTxt3, "N_Ed3");
+            float nEd4 = getDataFromTextField(nEdLoadsTxt4, "N_Ed4");
+
+            return new float[]{mEd1,mEd2,mEd3,mEd4,nEd1,nEd2,nEd3,nEd4};
+        }else {
+            float mEd = getDataFromTextField(mEdLoadsTxt, "M_Ed");
+            float nEd = getDataFromTextField(nEdLoadsTxt, "N_Ed");
+            return new float[]{mEd,nEd};
         }
     }
 
 
     public void calculations() {
-        System.out.println(fCk());
+        if(checkBoxResults1.isSelected() && !checkBoxLoads.isSelected()){
+            if(forcesValues()[1] == 0) {
+                BendingBeamRectangle beam = new BendingBeamRectangle(forcesValues()[0], fCk(), fYk(), dimension()[0], dimension()[1],longitudinalReinforcement()[2], longitudinalReinforcement()[3]);
+                double[] ress = beam.resultsBendingBeamRectangle();
+                System.out.println(Arrays.toString(ress));
+            }else {
+                System.out.println("cokolwiekv2");
+            }
+        }else{
+            System.out.println("cokoliwek");
+        }
+
     }
 
 

@@ -1,4 +1,5 @@
 package pl.pawz.zelbet.ULS;
+import pl.pawz.zelbet.BasicValues;
 
 public class BendingBeamRectangle {
 
@@ -14,18 +15,19 @@ public class BendingBeamRectangle {
     private double d;
 
 
-    public BendingBeamRectangle(float mEd, double fCd, double epsilonCu3, double lambdaConcrete, double etaConcrete, double fYd, int E_S, float b, float a2, double d) {
+    public BendingBeamRectangle(float mEd, double fCk, double fYk, float h, float b, float a1, float a2) {
         //constructor
         this.mEd = mEd;
-        this.fCd = fCd;
-        this.epsilonCu3 = epsilonCu3;
-        this.lambdaConcrete = lambdaConcrete;
-        this.etaConcrete = etaConcrete;
-        this.fYd = fYd;
-        this.E_S = E_S;
+        this.fCd = BasicValues.fCdValue(fCk);
+        this.fYd = BasicValues.fYdValue(fYk);
         this.b = b;
         this.a2 = a2;
-        this.d = d;
+
+        this.d = BasicValues.dValue(h,a1);
+        this.E_S = BasicValues.steelE();
+        this.epsilonCu3 = BasicValues.epsilonCu3Value(fCk);
+        this.lambdaConcrete = BasicValues.lambdaConcreteValue(fCk);
+        this.etaConcrete = BasicValues.etaConcreteValue(fCk);
     }
 
     double xiLimVar() {
@@ -48,8 +50,6 @@ public class BendingBeamRectangle {
         double zeta = (1 + Math.sqrt(1 - 2 * aZeroVar()) )/ 2;
         double aS1 = mEd / (fYd * zeta * d);
         double aS2 = 0;
-        System.out.println(aS1);
-        System.out.println(aS2);
         return new double[]{aS1, aS2};
     }
 
