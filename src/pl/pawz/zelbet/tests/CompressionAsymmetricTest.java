@@ -7,12 +7,21 @@ import static org.junit.Assert.assertEquals;
 
 
 public class CompressionAsymmetricTest {
+    double fCk = 30;
+    double fYk = 500;
+    float h = 0.6f;
+    float b = 0.3f;
+    float a1 = 0.05f;
+    float a2 = 0.05f;
 
     private static final double DELTA = 1e-6;
 
     @Test
     public void test5and10() {
-        CompressionAsymmetricReinforcement res = new CompressionAsymmetricReinforcement(0.005f, 0.01f, 0.0035, 0.00175, 21.43, 434.78, 1, 0.8, 0.55, 0.3f, 0.6f, 0.05f, 0.05f, 200000, 0.339273, 0.030843, 0.131996, 0.3, 1.332083);
+        float mEd = 0.01f;
+        float nEd = 0.005f;
+
+        CompressionAsymmetricReinforcement res = new CompressionAsymmetricReinforcement(nEd, mEd, fCk, fYk, b, h, a1, a2);
         double result1 = res.resultsCompressionAsymmetricReinforcement()[0];
         System.out.println(result1);
         double result2 = res.resultsCompressionAsymmetricReinforcement()[1];
@@ -24,19 +33,25 @@ public class CompressionAsymmetricTest {
 
     @Test
     public void test100and100() {
-        CompressionAsymmetricReinforcement res = new CompressionAsymmetricReinforcement(0.1f, 0.1f, 0.0035, 0.00175, 21.43, 434.78, 1, 0.8, 0.55, 0.3f, 0.6f, 0.05f, 0.05f, 200000, 0.339273, 0.030843, 0.131996, 0.3, 1.332083);
+        float mEd = 0.1f;
+        float nEd = 0.1f;
+
+        CompressionAsymmetricReinforcement res = new CompressionAsymmetricReinforcement(nEd, mEd, fCk, fYk, b, h, a1, a2);
         double result1 = res.resultsCompressionAsymmetricReinforcement()[0];
         System.out.println(result1);
         double result2 = res.resultsCompressionAsymmetricReinforcement()[1];
         System.out.println(result2);
 
         assertEquals(3.102643 * Math.pow(10, -4), result1, DELTA);
-        assertEquals(1.8* Math.pow(10, -4), result2, DELTA);
+        assertEquals(1.8 * Math.pow(10, -4), result2, DELTA);
     }
 
     @Test
     public void test1000and500() {
-        CompressionAsymmetricReinforcement res = new CompressionAsymmetricReinforcement(1f, 0.5f, 0.0035, 0.00175, 21.43, 434.78, 1, 0.8, 0.55, 0.3f, 0.6f, 0.05f, 0.05f, 200000, 0.339273, 0.030843, 0.131996, 0.3, 1.332083);
+        float mEd = 0.5f;
+        float nEd = 1f;
+
+        CompressionAsymmetricReinforcement res = new CompressionAsymmetricReinforcement(nEd, mEd, fCk, fYk, b, h, a1, a2);
         double result1 = res.resultsCompressionAsymmetricReinforcement()[0];
         System.out.println(result1);
         double result2 = res.resultsCompressionAsymmetricReinforcement()[1];
@@ -48,19 +63,25 @@ public class CompressionAsymmetricTest {
 
     @Test
     public void test1000and750() {
-        CompressionAsymmetricReinforcement res = new CompressionAsymmetricReinforcement(1f, 0.75f, 0.0035, 0.00175, 21.43, 434.78, 1, 0.8, 0.55, 0.3f, 0.6f, 0.05f, 0.05f, 200000, 0.339273, 0.030843, 0.131996, 0.3, 1.332083);
+        float mEd = 0.75f;
+        float nEd = 1f;
+
+        CompressionAsymmetricReinforcement res = new CompressionAsymmetricReinforcement(nEd, mEd, fCk, fYk, b, h, a1, a2);
         double result1 = res.resultsCompressionAsymmetricReinforcement()[0];
         System.out.println(result1);
         double result2 = res.resultsCompressionAsymmetricReinforcement()[1];
         System.out.println(result2);
 
-        assertEquals(29.87916* Math.pow(10, -4), result1, DELTA);
+        assertEquals(29.87916 * Math.pow(10, -4), result1, DELTA);
         assertEquals(12.74813 * Math.pow(10, -4), result2, DELTA);
     }
 
     @Test
     public void test3500and500() {
-        CompressionAsymmetricReinforcement res = new CompressionAsymmetricReinforcement(3.5f, 0.5f, 0.0035, 0.00175, 21.43, 434.78, 1, 0.8, 0.55, 0.3f, 0.6f, 0.05f, 0.05f, 200000, 0.339273, 0.030843, 0.131996, 0.3, 1.332083);
+        float mEd = 0.5f;
+        float nEd = 3.5f;
+
+        CompressionAsymmetricReinforcement res = new CompressionAsymmetricReinforcement(nEd, mEd, fCk, fYk, b, h, a1, a2);
         double result1 = res.resultsCompressionAsymmetricReinforcement()[0];
         System.out.println(result1);
         double result2 = res.resultsCompressionAsymmetricReinforcement()[1];
@@ -72,7 +93,10 @@ public class CompressionAsymmetricTest {
 
     @Test
     public void test3500and350() {
-        CompressionAsymmetricReinforcement res = new CompressionAsymmetricReinforcement(3.5f, 0.35f, 0.0035, 0.00175, 21.43, 434.78, 1, 0.8, 0.55, 0.3f, 0.6f, 0.05f, 0.05f, 200000, 0.339273, 0.030843, 0.131996, 0.3, 1.332083);
+        float mEd = 0.350f;
+        float nEd = 3.5f;
+
+        CompressionAsymmetricReinforcement res = new CompressionAsymmetricReinforcement(nEd, mEd, fCk, fYk, b, h, a1, a2);
         double result1 = res.resultsCompressionAsymmetricReinforcement()[0];
         System.out.println(result1);
         double result2 = res.resultsCompressionAsymmetricReinforcement()[1];
@@ -84,7 +108,10 @@ public class CompressionAsymmetricTest {
 
     @Test
     public void test5000and300() {
-        CompressionAsymmetricReinforcement res = new CompressionAsymmetricReinforcement(5f, 0.3f, 0.0035, 0.00175, 21.43, 434.78, 1, 0.8, 0.55, 0.3f, 0.6f, 0.05f, 0.05f, 200000, 0.339273, 0.030843, 0.131996, 0.3, 1.332083);
+        float mEd = 0.3f;
+        float nEd = 5f;
+
+        CompressionAsymmetricReinforcement res = new CompressionAsymmetricReinforcement(nEd, mEd, fCk, fYk, b, h, a1, a2);
         double result1 = res.resultsCompressionAsymmetricReinforcement()[0];
         System.out.println(result1);
         double result2 = res.resultsCompressionAsymmetricReinforcement()[1];
@@ -96,7 +123,10 @@ public class CompressionAsymmetricTest {
 
     @Test
     public void test5000and250() {
-        CompressionAsymmetricReinforcement res = new CompressionAsymmetricReinforcement(5f, 0.25f, 0.0035, 0.00175, 21.43, 434.78, 1, 0.8, 0.55, 0.3f, 0.6f, 0.05f, 0.05f, 200000, 0.339273, 0.030843, 0.131996, 0.3, 1.332083);
+        float mEd = 0.25f;
+        float nEd = 5f;
+
+        CompressionAsymmetricReinforcement res = new CompressionAsymmetricReinforcement(nEd, mEd, fCk, fYk, b, h, a1, a2);
         double result1 = res.resultsCompressionAsymmetricReinforcement()[0];
         System.out.println(result1);
         double result2 = res.resultsCompressionAsymmetricReinforcement()[1];
@@ -108,7 +138,10 @@ public class CompressionAsymmetricTest {
 
     @Test
     public void test5000and225() {
-        CompressionAsymmetricReinforcement res = new CompressionAsymmetricReinforcement(5f, 0.225f, 0.0035, 0.00175, 21.43, 434.78, 1, 0.8, 0.55, 0.3f, 0.6f, 0.05f, 0.05f, 200000, 0.339273, 0.030843, 0.131996, 0.3, 1.332083);
+        float mEd = 0.225f;
+        float nEd = 5f;
+
+        CompressionAsymmetricReinforcement res = new CompressionAsymmetricReinforcement(nEd, mEd, fCk, fYk, b, h, a1, a2);
         double result1 = res.resultsCompressionAsymmetricReinforcement()[0];
         System.out.println(result1);
         double result2 = res.resultsCompressionAsymmetricReinforcement()[1];
@@ -120,7 +153,10 @@ public class CompressionAsymmetricTest {
 
     @Test
     public void test5000and100() {
-        CompressionAsymmetricReinforcement res = new CompressionAsymmetricReinforcement(5f, 0.1f, 0.0035, 0.00175, 21.43, 434.78, 1, 0.8, 0.55, 0.3f, 0.6f, 0.05f, 0.05f, 200000, 0.339273, 0.030843, 0.131996, 0.3, 1.332083);
+        float mEd = 0.1f;
+        float nEd = 5f;
+
+        CompressionAsymmetricReinforcement res = new CompressionAsymmetricReinforcement(nEd, mEd, fCk, fYk, b, h, a1, a2);
         double result1 = res.resultsCompressionAsymmetricReinforcement()[0];
         System.out.println(result1);
         double result2 = res.resultsCompressionAsymmetricReinforcement()[1];
@@ -132,7 +168,10 @@ public class CompressionAsymmetricTest {
 
     @Test
     public void test5000and25() {
-        CompressionAsymmetricReinforcement res = new CompressionAsymmetricReinforcement(5f, 0.025f, 0.0035, 0.00175, 21.43, 434.78, 1, 0.8, 0.55, 0.3f, 0.6f, 0.05f, 0.05f, 200000, 0.339273, 0.030843, 0.131996, 0.3, 1.332083);
+        float mEd = 0.025f;
+        float nEd = 5f;
+
+        CompressionAsymmetricReinforcement res = new CompressionAsymmetricReinforcement(nEd, mEd, fCk, fYk, b, h, a1, a2);
         double result1 = res.resultsCompressionAsymmetricReinforcement()[0];
         System.out.println(result1);
         double result2 = res.resultsCompressionAsymmetricReinforcement()[1];
@@ -144,7 +183,10 @@ public class CompressionAsymmetricTest {
 
     @Test
     public void test5000and0() {
-        CompressionAsymmetricReinforcement res = new CompressionAsymmetricReinforcement(5f, 0.0001f, 0.0035, 0.00175, 21.43, 434.78, 1, 0.8, 0.55, 0.3f, 0.6f, 0.05f, 0.05f, 200000, 0.339273, 0.030843, 0.131996, 0.3, 1.332083);
+        float mEd = 0.001f;
+        float nEd = 5f;
+
+        CompressionAsymmetricReinforcement res = new CompressionAsymmetricReinforcement(nEd, mEd, fCk, fYk, b, h, a1, a2);
         double result1 = res.resultsCompressionAsymmetricReinforcement()[0];
         System.out.println(result1);
         double result2 = res.resultsCompressionAsymmetricReinforcement()[1];

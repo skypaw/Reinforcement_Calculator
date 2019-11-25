@@ -1,12 +1,12 @@
 package pl.pawz.zelbet.ULS;
 
+import pl.pawz.zelbet.BasicValues;
 import pl.pawz.zelbet.BasicValuesPillars;
 import pl.pawz.zelbet.PolynomialSolver;
 
 public class CompressionSymmetricReinforcement {
 
     private float nEd;
-    private float mEd;
     private double epsilonCu3;
     private double epsilonC3;
     private double fCd;
@@ -31,35 +31,30 @@ public class CompressionSymmetricReinforcement {
     private double sigmaS2;
 
 
-    public CompressionSymmetricReinforcement(float nEd, float mEd, double epsilonCu3, double epsilonC3, double fCd, double fYd,
-                                             double etaConcrete, double lambdaConcrete, double dDimension, float bDimension,
-                                             float hDimension, float a1, float a2, int E_S, double xLim, double xMinusMinYd,
-                                             double xMinYd, double x0, double xMaxYd) {
+    public CompressionSymmetricReinforcement(float nEd, float mEd, double fCk, double fYk, float bDimension,
+                                             float hDimension, float a1, float a2) {
         this.nEd = nEd;
-        this.mEd = mEd;
-        this.epsilonCu3 = epsilonCu3;
-        this.epsilonC3 = epsilonC3;
-        this.fCd = fCd;
-        this.fYd = fYd;
-        this.etaConcrete = etaConcrete;
-        this.lambdaConcrete = lambdaConcrete;
-        this.dDimension = dDimension;
+        this.epsilonCu3 = BasicValues.epsilonCu3Value(fCk);
+        this.epsilonC3 = BasicValues.epsilonC3Value(fCk);
+        this.fCd = BasicValues.fCdValue(fCk);
+        this.fYd = BasicValues.fYdValue(fYk);
+        this.etaConcrete = BasicValues.etaConcreteValue(fCk);
+        this.lambdaConcrete = BasicValues.lambdaConcreteValue(fCk);
+        this.dDimension = BasicValues.dValue(hDimension, a1);
         this.bDimension = bDimension;
         this.hDimension = hDimension;
         this.a1 = a1;
         this.a2 = a2;
-        this.E_S = E_S;
-        this.xLim = xLim;
-        this.xMinusMinYd = xMinusMinYd;
-        this.xMinYd = xMinYd;
-        this.x0 = x0;
-        this.xMaxYd = xMaxYd;
+        this.E_S = BasicValues.steelE();
+        this.xLim = BasicValuesPillars.xLimVar(epsilonCu3, hDimension, a1, fYd, E_S);
+        this.xMinusMinYd = BasicValuesPillars.xMinMinusYdVar(epsilonCu3, a2, fYd, E_S);
+        this.xMinYd = BasicValuesPillars.xMinYdVar(epsilonCu3, a2, fYd, E_S);
+        this.x0 = BasicValuesPillars.x0Var(epsilonCu3, epsilonC3, hDimension);
+        this.xMaxYd = BasicValuesPillars.xYdMaxVar(epsilonCu3, epsilonC3, fYd, E_S, hDimension, a2);
 
 
-        BasicValuesPillars eccentricity = new BasicValuesPillars(hDimension, a1, a2, epsilonCu3, epsilonC3, fYd, E_S, mEd, nEd);
-
-        this.eS1 = eccentricity.eccentricityCompression()[0];
-        this.eS2 = eccentricity.eccentricityCompression()[1];
+        this.eS1 = BasicValuesPillars.eccentricityCompression(mEd, nEd, hDimension, a1, a2)[0];
+        this.eS2 = BasicValuesPillars.eccentricityCompression(mEd, nEd, hDimension, a1, a2)[1];
 
 
     }
@@ -110,11 +105,11 @@ public class CompressionSymmetricReinforcement {
         double cVar = 2 * ((nEd * (fYd * eS2 + epsilonC3 * E_S * eS1)) / (lambdaConcrete * etaConcrete * fCd * bDimension) + epsilonC3 * E_S * Math.pow(dDimension, 2) + fYd * a2 * x0);
         double dVar = (-2 * nEd) / (lambdaConcrete * etaConcrete * fCd * bDimension) * (epsilonC3 * E_S * dDimension * eS1 + fYd * x0 * eS2);
 
-        xVar =  PolynomialSolver.solver(aVar, bVar, cVar, dVar, hDimension);
+        xVar = PolynomialSolver.solver(aVar, bVar, cVar, dVar, hDimension);
     }
 
     private void xSmallerThanH() {
-        sigmaS1= epsilonCu3 * (dDimension - xVar) / xVar * E_S; //sigmaS1
+        sigmaS1 = epsilonCu3 * (dDimension - xVar) / xVar * E_S; //sigmaS1
     }
 
     private void xGreaterThanHbyLambda() {
@@ -124,11 +119,11 @@ public class CompressionSymmetricReinforcement {
     }
 
     private void xSmallerThanHbyLambda() {
-        sigmaS1 =  epsilonC3 * (dDimension - xVar) / (xVar - x0) * E_S;
+        sigmaS1 = epsilonC3 * (dDimension - xVar) / (xVar - x0) * E_S;
     }
 
     private void xBelongsToHbyLambdaAndXYdMax() {
-        sigmaS1 =  epsilonC3 * (dDimension - xVar) / (xVar - x0) * E_S;
+        sigmaS1 = epsilonC3 * (dDimension - xVar) / (xVar - x0) * E_S;
     }
 
     private void xDoNotBelongsToHbyLambdaAndXYdMax() {
@@ -140,7 +135,7 @@ public class CompressionSymmetricReinforcement {
     }
 
     private void xGreaterOrEqualHByLambda() {
-        xVar =  hDimension / lambdaConcrete; //x
+        xVar = hDimension / lambdaConcrete; //x
     }
 
     public double[] resultsCompressionSymmetricReinforcement() {

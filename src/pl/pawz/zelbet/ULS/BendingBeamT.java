@@ -6,11 +6,8 @@ public class BendingBeamT {
 
     private float mEd;
     private double fCd;
-    private double epsilonCu3;
     private double etaConcrete;
-    private double lambdaConcrete;
     private double fYd;
-    private int E_S;
     private float bW;
     private float bEff;
     private float hF;
@@ -26,11 +23,7 @@ public class BendingBeamT {
         this.fCd = BasicValues.fCdValue(fCk);
         this.fYd = BasicValues.fYdValue(fYk);
 
-        this.epsilonCu3 = BasicValues.epsilonCu3Value(fCk);
-        this.lambdaConcrete = BasicValues.lambdaConcreteValue(fCk);
         this.etaConcrete = BasicValues.etaConcreteValue(fCk);
-
-        this.E_S = BasicValues.steelE();
 
         this.bW = bW;
         this.bEff = bEff;

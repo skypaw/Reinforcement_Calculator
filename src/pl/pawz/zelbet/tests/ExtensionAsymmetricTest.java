@@ -11,16 +11,22 @@ public class ExtensionAsymmetricTest {
     private float mEd;
     private double aS1;
     private double aS2;
+    private float h = 0.6f;
+    private float b = 0.3f;
+    private float a1 = 0.05f;
+    private float a2 = 0.05f;
+    private float fCk = 30;
+    private float fYk = 500;
 
     private static final double DELTA = 1e-6;
 
     @Test
     public void test500and0() {
-        nEd = 0.500f;
-        mEd = 0;
+        nEd = 0.5f;
+        mEd = 0.001f;
 
 
-        ExtensionAsymmetricReinforcement res = new ExtensionAsymmetricReinforcement(nEd, mEd, 0.0035, 0.00175, 21.43, 434.78, 1, 0.8, 0.55, 0.3f, 0.6f, 0.05f, 0.05f, 200000, 0.030843, 0.339273, 0.131966);
+        ExtensionAsymmetricReinforcement res = new ExtensionAsymmetricReinforcement(nEd, mEd, fCk, fYk, b, h, a1, a2);
         double result1 = res.resultsExtensionAsymmetric()[0];
         System.out.println(result1);
         double result2 = res.resultsExtensionAsymmetric()[1];
@@ -38,7 +44,7 @@ public class ExtensionAsymmetricTest {
         mEd = 0.01f;
 
 
-        ExtensionAsymmetricReinforcement res = new ExtensionAsymmetricReinforcement(nEd, mEd, 0.0035, 0.00175, 21.43, 434.78, 1, 0.8, 0.55, 0.3f, 0.6f, 0.05f, 0.05f, 200000, 0.030843, 0.339273, 0.131966);
+        ExtensionAsymmetricReinforcement res = new ExtensionAsymmetricReinforcement(nEd, mEd, fCk, fYk, b, h, a1, a2);
         double result1 = res.resultsExtensionAsymmetric()[0];
         System.out.println(result1);
         double result2 = res.resultsExtensionAsymmetric()[1];
@@ -56,7 +62,7 @@ public class ExtensionAsymmetricTest {
         mEd = 0.075f;
 
 
-        ExtensionAsymmetricReinforcement res = new ExtensionAsymmetricReinforcement(nEd, mEd, 0.0035, 0.00175, 21.43, 434.78, 1, 0.8, 0.55, 0.3f, 0.6f, 0.05f, 0.05f, 200000, 0.030843, 0.339273, 0.131966);
+        ExtensionAsymmetricReinforcement res = new ExtensionAsymmetricReinforcement(nEd, mEd, fCk, fYk, b, h, a1, a2);
         double result1 = res.resultsExtensionAsymmetric()[0];
         System.out.println(result1);
         double result2 = res.resultsExtensionAsymmetric()[1];
@@ -74,7 +80,7 @@ public class ExtensionAsymmetricTest {
         mEd = 0.1f;
 
 
-        ExtensionAsymmetricReinforcement res = new ExtensionAsymmetricReinforcement(nEd, mEd, 0.0035, 0.00175, 21.43, 434.78, 1, 0.8, 0.55, 0.3f, 0.6f, 0.05f, 0.05f, 200000, 0.030843, 0.339273, 0.131966);
+        ExtensionAsymmetricReinforcement res = new ExtensionAsymmetricReinforcement(nEd, mEd, fCk, fYk, b, h, a1, a2);
         double result1 = res.resultsExtensionAsymmetric()[0];
         System.out.println(result1);
         double result2 = res.resultsExtensionAsymmetric()[1];
@@ -92,7 +98,7 @@ public class ExtensionAsymmetricTest {
         mEd = 0.2f;
 
 
-        ExtensionAsymmetricReinforcement res = new ExtensionAsymmetricReinforcement(nEd, mEd, 0.0035, 0.00175, 21.43, 434.78, 1, 0.8, 0.55, 0.3f, 0.6f, 0.05f, 0.05f, 200000, 0.030843, 0.339273, 0.131966);
+        ExtensionAsymmetricReinforcement res = new ExtensionAsymmetricReinforcement(nEd, mEd, fCk, fYk, b, h, a1, a2);
         double result1 = res.resultsExtensionAsymmetric()[0];
         System.out.println(result1);
         double result2 = res.resultsExtensionAsymmetric()[1];
@@ -110,7 +116,7 @@ public class ExtensionAsymmetricTest {
         mEd = 0.65f;
 
 
-        ExtensionAsymmetricReinforcement res = new ExtensionAsymmetricReinforcement(nEd, mEd, 0.0035, 0.00175, 21.43, 434.78, 1, 0.8, 0.55, 0.3f, 0.6f, 0.05f, 0.05f, 200000, 0.030843, 0.339273, 0.131966);
+        ExtensionAsymmetricReinforcement res = new ExtensionAsymmetricReinforcement(nEd, mEd, fCk, fYk, b, h, a1, a2);
         double result1 = res.resultsExtensionAsymmetric()[0];
         System.out.println(result1);
         double result2 = res.resultsExtensionAsymmetric()[1];
@@ -128,7 +134,7 @@ public class ExtensionAsymmetricTest {
         mEd = 1.0f;
 
 
-        ExtensionAsymmetricReinforcement res = new ExtensionAsymmetricReinforcement(nEd, mEd, 0.0035, 0.00175, 21.43, 434.78, 1, 0.8, 0.55, 0.3f, 0.6f, 0.05f, 0.05f, 200000, 0.030843, 0.339273, 0.131966);
+        ExtensionAsymmetricReinforcement res = new ExtensionAsymmetricReinforcement(nEd, mEd, fCk, fYk, b, h, a1, a2);
         double result1 = res.resultsExtensionAsymmetric()[0];
         System.out.println(result1);
         double result2 = res.resultsExtensionAsymmetric()[1];
@@ -146,7 +152,7 @@ public class ExtensionAsymmetricTest {
         mEd = 1.5f;
 
 
-        ExtensionAsymmetricReinforcement res = new ExtensionAsymmetricReinforcement(nEd, mEd, 0.0035, 0.00175, 21.43, 434.78, 1, 0.8, 0.55, 0.3f, 0.6f, 0.05f, 0.05f, 200000, 0.030843, 0.339273, 0.131966);
+        ExtensionAsymmetricReinforcement res = new ExtensionAsymmetricReinforcement(nEd, mEd, fCk, fYk, b, h, a1, a2);
         double result1 = res.resultsExtensionAsymmetric()[0];
         System.out.println(result1);
         double result2 = res.resultsExtensionAsymmetric()[1];

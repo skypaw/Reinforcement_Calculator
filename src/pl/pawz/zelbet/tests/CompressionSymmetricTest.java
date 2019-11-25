@@ -8,11 +8,22 @@ import static org.junit.Assert.assertEquals;
 
 public class CompressionSymmetricTest {
 
+    double fCk = 30;
+    double fYk = 500;
+    float h = 0.6f;
+    float b = 0.3f;
+    float a1 = 0.05f;
+    float a2 = 0.05f;
+
+
     private static final double DELTA = 1e-6;
 
     @Test
     public void test5and10() {
-        CompressionSymmetricReinforcement res = new CompressionSymmetricReinforcement(0.005f, 0.01f, 0.0035, 0.00175, 21.43, 434.78, 1, 0.8, 0.55, 0.3f, 0.6f, 0.05f, 0.05f, 200000, 0.339273, 0.030843, 0.131996, 0.3, 1.332083);
+        float mEd = 0.01f;
+        float nEd = 0.005f;
+
+        CompressionSymmetricReinforcement res = new CompressionSymmetricReinforcement(nEd, mEd, fCk, fYk, b, h, a1, a2);
         double result1 = res.resultsCompressionSymmetricReinforcement()[0];
         System.out.println(result1);
         double result2 = res.resultsCompressionSymmetricReinforcement()[1];
@@ -23,7 +34,10 @@ public class CompressionSymmetricTest {
 
     @Test
     public void test100and100() {
-        CompressionSymmetricReinforcement res = new CompressionSymmetricReinforcement(0.1f, 0.1f, 0.0035, 0.00175, 21.43, 434.78, 1, 0.8, 0.55, 0.3f, 0.6f, 0.05f, 0.05f, 200000, 0.339273, 0.030843, 0.131996, 0.3, 1.332083);
+        float mEd = 0.1f;
+        float nEd = 0.1f;
+
+        CompressionSymmetricReinforcement res = new CompressionSymmetricReinforcement(nEd, mEd, fCk, fYk, b, h, a1, a2);
         double result1 = res.resultsCompressionSymmetricReinforcement()[0];
         System.out.println(result1);
         double result2 = res.resultsCompressionSymmetricReinforcement()[1];
@@ -34,7 +48,10 @@ public class CompressionSymmetricTest {
 
     @Test
     public void test1000and500() {
-        CompressionSymmetricReinforcement res = new CompressionSymmetricReinforcement(1f, 0.5f, 0.0035, 0.00175, 21.43, 434.78, 1, 0.8, 0.55, 0.3f, 0.6f, 0.05f, 0.05f, 200000, 0.339273, 0.030843, 0.131996, 0.3, 1.332083);
+        float mEd = 0.5f;
+        float nEd = 1f;
+
+        CompressionSymmetricReinforcement res = new CompressionSymmetricReinforcement(nEd, mEd, fCk, fYk, b, h, a1, a2);
         double result1 = res.resultsCompressionSymmetricReinforcement()[0];
         System.out.println(result1);
         double result2 = res.resultsCompressionSymmetricReinforcement()[1];
@@ -45,7 +62,10 @@ public class CompressionSymmetricTest {
 
     @Test
     public void test1000and750() {
-        CompressionSymmetricReinforcement res = new CompressionSymmetricReinforcement(1f, 0.75f, 0.0035, 0.00175, 21.43, 434.78, 1, 0.8, 0.55, 0.3f, 0.6f, 0.05f, 0.05f, 200000, 0.339273, 0.030843, 0.131996, 0.3, 1.332083);
+        float mEd = 0.75f;
+        float nEd = 1f;
+
+        CompressionSymmetricReinforcement res = new CompressionSymmetricReinforcement(nEd, mEd, fCk, fYk, b, h, a1, a2);
         double result1 = res.resultsCompressionSymmetricReinforcement()[0];
         System.out.println(result1);
         double result2 = res.resultsCompressionSymmetricReinforcement()[1];
@@ -56,7 +76,10 @@ public class CompressionSymmetricTest {
 
     @Test
     public void test3500and500() {
-        CompressionSymmetricReinforcement res = new CompressionSymmetricReinforcement(3.5f, 0.5f, 0.0035, 0.00175, 21.43, 434.78, 1, 0.8, 0.55, 0.3f, 0.6f, 0.05f, 0.05f, 200000, 0.339273, 0.030843, 0.131996, 0.3, 1.332083);
+        float mEd = 0.5f;
+        float nEd = 3.5f;
+
+        CompressionSymmetricReinforcement res = new CompressionSymmetricReinforcement(nEd, mEd, fCk, fYk, b, h, a1, a2);
         double result1 = res.resultsCompressionSymmetricReinforcement()[0];
         System.out.println(result1);
         double result2 = res.resultsCompressionSymmetricReinforcement()[1];
@@ -67,7 +90,10 @@ public class CompressionSymmetricTest {
 
     @Test
     public void test3500and350() {
-        CompressionSymmetricReinforcement res = new CompressionSymmetricReinforcement(3.5f, 0.35f, 0.0035, 0.00175, 21.43, 434.78, 1, 0.8, 0.55, 0.3f, 0.6f, 0.05f, 0.05f, 200000, 0.339273, 0.030843, 0.131996, 0.3, 1.332083);
+        float mEd = 0.35f;
+        float nEd = 3.5f;
+
+        CompressionSymmetricReinforcement res = new CompressionSymmetricReinforcement(nEd, mEd, fCk, fYk, b, h, a1, a2);
         double result1 = res.resultsCompressionSymmetricReinforcement()[0];
         System.out.println(result1);
         double result2 = res.resultsCompressionSymmetricReinforcement()[1];
@@ -78,7 +104,10 @@ public class CompressionSymmetricTest {
 
     @Test
     public void test5000and300() {
-        CompressionSymmetricReinforcement res = new CompressionSymmetricReinforcement(5f, 0.3f, 0.0035, 0.00175, 21.43, 434.78, 1, 0.8, 0.55, 0.3f, 0.6f, 0.05f, 0.05f, 200000, 0.339273, 0.030843, 0.131996, 0.3, 1.332083);
+        float mEd = 0.3f;
+        float nEd = 5f;
+
+        CompressionSymmetricReinforcement res = new CompressionSymmetricReinforcement(nEd, mEd, fCk, fYk, b, h, a1, a2);
         double result1 = res.resultsCompressionSymmetricReinforcement()[0];
         System.out.println(result1);
         double result2 = res.resultsCompressionSymmetricReinforcement()[1];
@@ -89,7 +118,10 @@ public class CompressionSymmetricTest {
 
     @Test
     public void test5000and250() {
-        CompressionSymmetricReinforcement res = new CompressionSymmetricReinforcement(5f, 0.25f, 0.0035, 0.00175, 21.43, 434.78, 1, 0.8, 0.55, 0.3f, 0.6f, 0.05f, 0.05f, 200000, 0.339273, 0.030843, 0.131996, 0.3, 1.332083);
+        float mEd = 0.25f;
+        float nEd = 5f;
+
+        CompressionSymmetricReinforcement res = new CompressionSymmetricReinforcement(nEd, mEd, fCk, fYk, b, h, a1, a2);
         double result1 = res.resultsCompressionSymmetricReinforcement()[0];
         System.out.println(result1);
         double result2 = res.resultsCompressionSymmetricReinforcement()[1];
@@ -100,7 +132,10 @@ public class CompressionSymmetricTest {
 
     @Test
     public void test5000and225() {
-        CompressionSymmetricReinforcement res = new CompressionSymmetricReinforcement(5f, 0.225f, 0.0035, 0.00175, 21.43, 434.78, 1, 0.8, 0.55, 0.3f, 0.6f, 0.05f, 0.05f, 200000, 0.339273, 0.030843, 0.131996, 0.3, 1.332083);
+        float mEd = 0.225f;
+        float nEd = 5f;
+
+        CompressionSymmetricReinforcement res = new CompressionSymmetricReinforcement(nEd, mEd, fCk, fYk, b, h, a1, a2);
         double result1 = res.resultsCompressionSymmetricReinforcement()[0];
         System.out.println(result1);
         double result2 = res.resultsCompressionSymmetricReinforcement()[1];
@@ -111,7 +146,10 @@ public class CompressionSymmetricTest {
 
     @Test
     public void test5000and100() {
-        CompressionSymmetricReinforcement res = new CompressionSymmetricReinforcement(5f, 0.1f, 0.0035, 0.00175, 21.43, 434.78, 1, 0.8, 0.55, 0.3f, 0.6f, 0.05f, 0.05f, 200000, 0.339273, 0.030843, 0.131996, 0.3, 1.332083);
+        float mEd = 0.1f;
+        float nEd = 5f;
+
+        CompressionSymmetricReinforcement res = new CompressionSymmetricReinforcement(nEd, mEd, fCk, fYk, b, h, a1, a2);
         double result1 = res.resultsCompressionSymmetricReinforcement()[0];
         System.out.println(result1);
         double result2 = res.resultsCompressionSymmetricReinforcement()[1];
@@ -122,7 +160,10 @@ public class CompressionSymmetricTest {
 
     @Test
     public void test5000and25() {
-        CompressionSymmetricReinforcement res = new CompressionSymmetricReinforcement(5f, 0.025f, 0.0035, 0.00175, 21.43, 434.78, 1, 0.8, 0.55, 0.3f, 0.6f, 0.05f, 0.05f, 200000, 0.339273, 0.030843, 0.131996, 0.3, 1.332083);
+        float mEd = 0.025f;
+        float nEd = 5f;
+
+        CompressionSymmetricReinforcement res = new CompressionSymmetricReinforcement(nEd, mEd, fCk, fYk, b, h, a1, a2);
         double result1 = res.resultsCompressionSymmetricReinforcement()[0];
         System.out.println(result1);
         double result2 = res.resultsCompressionSymmetricReinforcement()[1];
@@ -133,7 +174,10 @@ public class CompressionSymmetricTest {
 
     @Test
     public void test5000and0() {
-        CompressionSymmetricReinforcement res = new CompressionSymmetricReinforcement(5f, 0.001f, 0.0035, 0.00175, 21.43, 434.78, 1, 0.8, 0.55, 0.3f, 0.6f, 0.05f, 0.05f, 200000, 0.339273, 0.030843, 0.131996, 0.3, 1.332083);
+        float mEd = 0.001f;
+        float nEd = 5f;
+
+        CompressionSymmetricReinforcement res = new CompressionSymmetricReinforcement(nEd, mEd, fCk, fYk, b, h, a1, a2);
         double result1 = res.resultsCompressionSymmetricReinforcement()[0];
         System.out.println(result1);
         double result2 = res.resultsCompressionSymmetricReinforcement()[1];

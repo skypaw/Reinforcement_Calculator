@@ -1,5 +1,6 @@
 package pl.pawz.zelbet.ULS;
 
+import pl.pawz.zelbet.BasicValues;
 import pl.pawz.zelbet.BasicValuesPillars;
 import pl.pawz.zelbet.PolynomialSolver;
 
@@ -7,7 +8,6 @@ public class CompressionAsymmetricReinforcement {
 
 
     private float nEd;
-    private float mEd;
     private double epsilonCu3;
     private double epsilonC3;
     private double fCd;
@@ -27,45 +27,37 @@ public class CompressionAsymmetricReinforcement {
     private double xMaxYd;
     private double eS1;
     private double eS2;
-    private double sigmaS1;
     private double sigmaS2;
     private double aS1;
     private double aS2;
     private double aS2Min;
     private double aS1Min;
     private double xVar;
-    private double f1;
-    private double f2;
 
-    public CompressionAsymmetricReinforcement(float nEd, float mEd, double epsilonCu3, double epsilonC3, double fCd, double fYd,
-                                              double etaConcrete, double lambdaConcrete, double dDimension, float bDimension,
-                                              float hDimension, float a1, float a2, int E_S, double xLim, double xMinusMinYd,
-                                              double xMinYd, double x0, double xMaxYd) {
+    public CompressionAsymmetricReinforcement(float nEd, float mEd, double fCk, double fYk, float bDimension,
+                                              float hDimension, float a1, float a2) {
         this.nEd = nEd;
-        this.mEd = mEd;
-        this.epsilonCu3 = epsilonCu3;
-        this.epsilonC3 = epsilonC3;
-        this.fCd = fCd;
-        this.fYd = fYd;
-        this.etaConcrete = etaConcrete;
-        this.lambdaConcrete = lambdaConcrete;
-        this.dDimension = dDimension;
+        this.epsilonCu3 = BasicValues.epsilonCu3Value(fCk);
+        this.epsilonC3 = BasicValues.epsilonC3Value(fCk);
+        this.fCd = BasicValues.fCdValue(fCk);
+        this.fYd = BasicValues.fYdValue(fYk);
+        this.etaConcrete = BasicValues.etaConcreteValue(fCk);
+        this.lambdaConcrete = BasicValues.lambdaConcreteValue(fCk);
+        this.dDimension = BasicValues.dValue(hDimension, a1);
         this.bDimension = bDimension;
         this.hDimension = hDimension;
         this.a1 = a1;
         this.a2 = a2;
-        this.E_S = E_S;
-        this.xLim = xLim;
-        this.xMinusMinYd = xMinusMinYd;
-        this.xMinYd = xMinYd;
-        this.x0 = x0;
-        this.xMaxYd = xMaxYd;
+        this.E_S = BasicValues.steelE();
+        this.xLim = BasicValuesPillars.xLimVar(epsilonCu3,hDimension,a1,fYd,E_S);
+        this.xMinusMinYd = BasicValuesPillars.xMinMinusYdVar(epsilonCu3,a2,fYd,E_S);
+        this.xMinYd = BasicValuesPillars.xMinYdVar(epsilonCu3,a2,fYd,E_S);
+        this.x0 = BasicValuesPillars.x0Var(epsilonCu3,epsilonC3,hDimension);
+        this.xMaxYd = BasicValuesPillars.xYdMaxVar(epsilonCu3,epsilonC3,fYd,E_S,hDimension,a2);
 
 
-        BasicValuesPillars eccentricity = new BasicValuesPillars(hDimension, a1, a2, epsilonCu3, epsilonC3, fYd, E_S, mEd, nEd);
-
-        this.eS1 = eccentricity.eccentricityCompression()[0];
-        this.eS2 = eccentricity.eccentricityCompression()[1];
+        this.eS1 = BasicValuesPillars.eccentricityCompression(mEd,nEd,hDimension,a1,a2)[0];
+        this.eS2 = BasicValuesPillars.eccentricityCompression(mEd,nEd,hDimension,a1,a2)[1];
 
         //min reinforcement according to EC 1992;
 
@@ -180,6 +172,7 @@ public class CompressionAsymmetricReinforcement {
                     if (xVar > hDimension / lambdaConcrete) {
                         double f1 = xGreaterThanHByLambda()[0];
                         double f2 = xGreaterThanHByLambda()[1];
+                        double sigmaS1;
                         if (f2 - f1 > 0) {
                             f2MinusF1GreaterThan0();
                             sigmaS1 = Math.min(epsilonC3 * (dDimension - xVar) / (xVar - x0) * E_S, fYd);
