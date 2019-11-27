@@ -1,17 +1,26 @@
-package pl.pawz.zelbet.GUI;
+package pl.pawz.zelbet.GUI.CrossSectionRectangle;
 
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import org.junit.FixMethodOrder;
 import pl.pawz.zelbet.BasicValues;
-import pl.pawz.zelbet.ULS.BendingBeamRectangle;
-import pl.pawz.zelbet.ULS.BendingBeamT;
+import pl.pawz.zelbet.GUI.AlertBox;
+import pl.pawz.zelbet.ULS.*;
 
 import java.util.Arrays;
+import java.util.HashMap;
 
 public class Controller {
+
+
+    @FXML
+    Label res1 = new Label();
+    @FXML
+    Label res2 = new Label();
 
 
     // Static text fields to read data from. Used in method "calculations"
@@ -152,13 +161,13 @@ public class Controller {
     //basic values for variables
 
     //static Values
-    double bValue = 0;
-    double hValue = 0;
+    float bValue = 0;
+    float hValue = 0;
     double fYk = 0;
     double aS1Value = 0;
     double aS2Value = 0;
-    double a1Value = 0;
-    double a2Value = 0;
+    float a1Value = 0;
+    float a2Value = 0;
     double vEdValue = 0;
     double vEdRedValue = 0;
     double ctgThetaValue = 0;
@@ -175,9 +184,9 @@ public class Controller {
 
     //values which depends on check box
 
-    double concreteValue = 0;
-    double mEdValue = 0;
-    double nEdValue = 0;
+    double fCk = 0;
+    float mEdValue = 0;
+    float nEdValue = 0;
     double mEd1Value = 0;
     double mEd2Value = 0;
     double mEd3Value = 0;
@@ -192,11 +201,11 @@ public class Controller {
 
     private double testString1;
 
-
     public void initialize() {
         checkBoxResults1.setSelected(true);
         checkBoxResults2.setSelected(true);
         checkBoxResults3.setSelected(true);
+        checkBoxResults3.setTooltip(new Tooltip("Stan Graniczny Użytkowalności nie jest liczony dla przekrojów z siłą podłużną"));
         loadsInit();
         concreteInit();
         checkBoxConcrete.setSelected(true);
@@ -206,6 +215,7 @@ public class Controller {
 
         GridPane.setConstraints(test2, 8, 8);
         gridPaneShearing.getChildren().add(test2);
+
 
     }
 
@@ -380,69 +390,88 @@ public class Controller {
                 return 0;
             }
         } catch (NumberFormatException e) {
+
             AlertBox.display("Błąd", "Wartość " + variable + " powinna być liczbą dodatnią");
             return 0;
         }
     }
 
-    private double fCk() {
-        if (checkBoxConcrete.isSelected()) {
-            double[] concreteList = {12, 16, 20, 25, 30, 25, 40, 45, 50, 55, 60, 70, 80, 90, 100};
-            return concreteList[choiceBoxConcrete.getSelectionModel().getSelectedIndex()];
-        } else {
-            return getDataFromTextField(concreteTxt, "f_Ck");
+    private static float getDataFromTextFieldForces(TextField specificTextField, String variable) {
+        try {
+            return Float.parseFloat(specificTextField.getText().replaceAll(",", "."));
+
+        } catch (NumberFormatException e) {
+            AlertBox.display("Błąd", "Wartość " + variable + " powinna być liczbą");
+            return 0;
+
         }
     }
 
-    private double fYk() {
-        return getDataFromTextField(steelFYk, "f_Yk");
+    private void fCk() {
+        if (checkBoxConcrete.isSelected()) {
+            double[] concreteList = {12, 16, 20, 25, 30, 25, 40, 45, 50, 55, 60, 70, 80, 90, 100};
+            fCk = concreteList[choiceBoxConcrete.getSelectionModel().getSelectedIndex()];
+        } else {
+            fCk = getDataFromTextField(concreteTxt, "f_Ck");
+        }
     }
 
-    private float[] dimension() {
-        float b = getDataFromTextField(test1, "b");
-        float h = getDataFromTextField(geometryHeight, "h");
-        return new float[]{h, b};
+    private void fYk() {
+        fYk = getDataFromTextField(steelFYk, "f_Yk");
     }
 
-    private float[] longitudinalReinforcement(){
-        float aS1Value = getDataFromTextField(aS1, "a_S1");
-        float aS2Value = getDataFromTextField(aS2,"a_S2");
-        float a1Value = getDataFromTextField(a1,"a_1");
-        float a2Value = getDataFromTextField(a2, "a_2");
-        return new float[]{aS1Value,aS2Value,a1Value,a2Value};
+    private void dimension() {
+        bValue = (float) (getDataFromTextField(test1, "b")*Math.pow(10,-2));
+        hValue = (float) (getDataFromTextField(geometryHeight, "h")*Math.pow(10,-2));
     }
 
-    private float[] forcesValues(){
-        if(checkBoxLoads.isSelected()){
-            float mEd1 = getDataFromTextField(mEdLoadsTxt1, "M_Ed1");
-            float mEd2 = getDataFromTextField(mEdLoadsTxt2, "M_Ed2");
-            float mEd3 = getDataFromTextField(mEdLoadsTxt3, "M_Ed3");
-            float mEd4 = getDataFromTextField(mEdLoadsTxt4, "M_Ed4");
+    private void longitudinalReinforcement() {
+        aS1Value = getDataFromTextField(aS1, "a_S1")*Math.pow(10,-4);
+        aS2Value = getDataFromTextField(aS2, "a_S2")*Math.pow(10,-4);
+        a1Value = (float) (getDataFromTextField(a1, "a_1")*Math.pow(10,-3));
+        a2Value = (float)(getDataFromTextField(a2, "a_2")*Math.pow(10,-3));
 
-            float nEd1 = getDataFromTextField(nEdLoadsTxt1, "N_Ed1");
-            float nEd2 = getDataFromTextField(nEdLoadsTxt2, "N_Ed2");
-            float nEd3 = getDataFromTextField(nEdLoadsTxt3, "N_Ed3");
-            float nEd4 = getDataFromTextField(nEdLoadsTxt4, "N_Ed4");
+    }
 
-            return new float[]{mEd1,mEd2,mEd3,mEd4,nEd1,nEd2,nEd3,nEd4};
-        }else {
-            float mEd = getDataFromTextField(mEdLoadsTxt, "M_Ed");
-            float nEd = getDataFromTextField(nEdLoadsTxt, "N_Ed");
-            return new float[]{mEd,nEd};
+    private void forcesValues() {
+        if (checkBoxLoads.isSelected()) {
+            mEd1Value = getDataFromTextFieldForces(mEdLoadsTxt1, "M_Ed1")*Math.pow(10,-3);
+            mEd2Value = getDataFromTextFieldForces(mEdLoadsTxt2, "M_Ed2")*Math.pow(10,-3);
+            mEd3Value = getDataFromTextFieldForces(mEdLoadsTxt3, "M_Ed3")*Math.pow(10,-3);
+            mEd4Value = getDataFromTextFieldForces(mEdLoadsTxt4, "M_Ed4")*Math.pow(10,-3);
+
+            nEd1Value = getDataFromTextFieldForces(nEdLoadsTxt1, "N_Ed1")*Math.pow(10,-3);
+            nEd2Value = getDataFromTextFieldForces(nEdLoadsTxt2, "N_Ed2")*Math.pow(10,-3);
+            nEd3Value = getDataFromTextFieldForces(nEdLoadsTxt3, "N_Ed3")*Math.pow(10,-3);
+            nEd4Value = getDataFromTextFieldForces(nEdLoadsTxt4, "N_Ed4")*Math.pow(10,-3);
+
+        } else {
+            mEdValue = (float) (getDataFromTextFieldForces(mEdLoadsTxt, "M_Ed")*Math.pow(10,-3));
+            nEdValue = (float) (getDataFromTextFieldForces(nEdLoadsTxt, "N_Ed")*Math.pow(10,-3));
+
         }
     }
 
 
     public void calculations() {
-        if(checkBoxResults1.isSelected() && !checkBoxLoads.isSelected()){
-            if(forcesValues()[1] == 0) {
-                BendingBeamRectangle beam = new BendingBeamRectangle(forcesValues()[0], fCk(), fYk(), dimension()[0], dimension()[1],longitudinalReinforcement()[2], longitudinalReinforcement()[3]);
+        fCk();
+        fYk();
+        dimension();
+        forcesValues();
+        longitudinalReinforcement();
+
+        if (checkBoxResults1.isSelected() && !checkBoxLoads.isSelected()) {
+            if (nEdValue == 0) {
+                BendingBeamRectangle beam = new BendingBeamRectangle(mEdValue, fCk, fYk, hValue, bValue, a1Value, a2Value);
                 double[] ress = beam.resultsBendingBeamRectangle();
                 System.out.println(Arrays.toString(ress));
-            }else {
-                System.out.println("cokolwiekv2");
+
+                res1.setText(String.valueOf(ress[0]));
+                res2.setText(String.valueOf(ress[1]));
+            } else {
+                System.out.println("cokolwiek1");
             }
-        }else{
+        } else {
             System.out.println("cokoliwek");
         }
 

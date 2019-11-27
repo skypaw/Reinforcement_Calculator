@@ -6,8 +6,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.stage.Stage;
+import pl.pawz.zelbet.GUI.Menu.Controller;
 
-import java.util.Arrays;
 
 public class GuiWindow extends Application {
 
@@ -18,7 +18,8 @@ public class GuiWindow extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        Parent root = FXMLLoader.load(getClass().getResource("scene.fxml"));
+
+        Parent root = FXMLLoader.load(getClass().getResource("Menu/scene.fxml"));
 
         ScrollPane scrollPane = new ScrollPane();
         scrollPane.setContent(root);
