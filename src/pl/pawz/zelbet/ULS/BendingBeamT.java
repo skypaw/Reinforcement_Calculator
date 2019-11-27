@@ -1,14 +1,13 @@
 package pl.pawz.zelbet.ULS;
 
+import pl.pawz.zelbet.BasicValues;
+
 public class BendingBeamT {
 
     private float mEd;
     private double fCd;
-    private double epsilonCu3;
     private double etaConcrete;
-    private double lambdaConcrete;
     private double fYd;
-    private int E_S;
     private float bW;
     private float bEff;
     private float hF;
@@ -19,21 +18,21 @@ public class BendingBeamT {
     private double xiLim;
 
 
-    public BendingBeamT(float mEd, double fCd, double epsilonCu3, double lambdaConcrete, double etaConcrete, double fYd, int E_S, float bW, float bEff, float hF, float a2, double d) {
+    public BendingBeamT(float mEd, double fCk, double fYk, float bW, float bEff, float h, float hF, float a1, float a2) {
         this.mEd = mEd;
-        this.fCd = fCd;
-        this.epsilonCu3 = epsilonCu3;
-        this.lambdaConcrete = lambdaConcrete;
-        this.etaConcrete = etaConcrete;
-        this.fYd = fYd;
-        this.E_S = E_S;
+        this.fCd = BasicValues.fCdValue(fCk);
+        this.fYd = BasicValues.fYdValue(fYk);
+
+        this.etaConcrete = BasicValues.etaConcreteValue(fCk);
+
         this.bW = bW;
         this.bEff = bEff;
         this.hF = hF;
         this.a2 = a2;
-        this.d = d;
+        this.d = BasicValues.dValue(h, a1);
 
-        BendingBeamRectangle rectangle = new BendingBeamRectangle(mEd, fCd, epsilonCu3, lambdaConcrete, etaConcrete, fYd, E_S, bEff, a2, d);
+
+        BendingBeamRectangle rectangle = new BendingBeamRectangle(mEd, fCk, fYk, h, bEff, a1, a2);
         this.resultsSeeminglyT = rectangle.resultsBendingBeamRectangle();
         this.aZeroLim = rectangle.aZeroLimVar();
         this.xiLim = rectangle.xiLimVar();

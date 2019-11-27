@@ -1,11 +1,11 @@
 package pl.pawz.zelbet.Diagnostic;
 
+import pl.pawz.zelbet.BasicValues;
 import pl.pawz.zelbet.BasicValuesPillars;
 import pl.pawz.zelbet.PolynomialSolver;
 
 public class DiagnosticCompression {
     private float nEd;
-    private float mEd;
     private double epsilonCu3;
     private double epsilonC3;
     private double fCd;
@@ -33,51 +33,42 @@ public class DiagnosticCompression {
     private double sigmaS2;
 
 
-    public DiagnosticCompression(float nEd, float mEd, double epsilonCu3, double epsilonC3, double fCd, double fYd,
-                                 double etaConcrete, double lambdaConcrete, double dDimension, float bDimension,
-                                 float hDimension, float a1, float a2, int E_S, double xLim, double xMinusMinYd,
-                                 double xMinYd, double x0, double xMaxYd, double aS1, double aS2) {
+    public DiagnosticCompression(float nEd, float mEd, double fCk, double fYk,
+                                 float bDimension, float hDimension, float a1, float a2, double aS1, double aS2) {
         this.nEd = nEd;
-        this.mEd = mEd;
-        this.epsilonCu3 = epsilonCu3;
-        this.epsilonC3 = epsilonC3;
-        this.fCd = fCd;
-        this.fYd = fYd;
-        this.etaConcrete = etaConcrete;
-        this.lambdaConcrete = lambdaConcrete;
-        this.dDimension = dDimension;
+        this.fCd = BasicValues.fCdValue(fCk);
+        this.epsilonCu3 = BasicValues.epsilonCu3Value(fCk);
+        this.epsilonC3 = BasicValues.epsilonC3Value(fCk);
+        this.lambdaConcrete = BasicValues.lambdaConcreteValue(fCk);
+        this.etaConcrete = BasicValues.etaConcreteValue(fCk);
+        this.fYd = BasicValues.fYdValue(fYk);
+        this.E_S = BasicValues.steelE();
+        this.dDimension = BasicValues.dValue(hDimension,a1);
         this.bDimension = bDimension;
         this.hDimension = hDimension;
         this.a1 = a1;
         this.a2 = a2;
-        this.E_S = E_S;
-        this.xLim = xLim;
-        this.xMinusMinYd = xMinusMinYd;
-        this.xMinYd = xMinYd;
-        this.x0 = x0;
-        this.xMaxYd = xMaxYd;
+
+        this.xLim = BasicValuesPillars.xLimVar(epsilonCu3,hDimension,a1,fYd,E_S);
+        this.xMinusMinYd =BasicValuesPillars.xMinMinusYdVar(epsilonCu3,a2,fYd,E_S);
+        this.xMinYd = BasicValuesPillars.xMinYdVar(epsilonCu3,a2,fYd,E_S);
+        this.x0 = BasicValuesPillars.x0Var(epsilonCu3,epsilonC3,hDimension);
+        this.xMaxYd = BasicValuesPillars.xYdMaxVar(epsilonCu3,epsilonC3,fYd,E_S,hDimension,a2);
         this.aS1 = aS1;
         this.aS2 = aS2;
 
-
-        BasicValuesPillars eccentricity = new BasicValuesPillars(hDimension, a1, a2, epsilonCu3, epsilonC3, fYd, E_S, mEd, nEd);
-
+        e = BasicValuesPillars.eccentricityCompression(mEd,nEd,hDimension,a1,a2)[2];
 
         double eMin = (epsilonC3 * E_S * (aS2 * (0.5 * hDimension - a2) - aS1 * (0.5 * hDimension - a1))) / (etaConcrete * fCd * bDimension * hDimension + epsilonC3 * E_S * (aS1 + aS2));
-        e = eccentricity.eccentricityCompression()[2];
 
         if (e < eMin) {
-            double aS1Prim = aS2;
-            double aS2Prim = aS1;
-            this.aS1 = aS1Prim;
-            this.aS2 = aS2Prim;
+            this.aS1 = aS2;
+            this.aS2 = aS1;
         }
 
 
-        eS1 = eccentricity.eccentricityCompression()[0];
-        eS2 = eccentricity.eccentricityCompression()[1];
-
-
+        eS1 = BasicValuesPillars.eccentricityCompression(mEd,nEd,hDimension,a1,a2)[0];
+        eS2 = BasicValuesPillars.eccentricityCompression(mEd,nEd,hDimension,a1,a2)[1];
     }
 
     private void xVar() {

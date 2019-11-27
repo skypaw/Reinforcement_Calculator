@@ -9,21 +9,10 @@
 <?import javafx.geometry.Insets?>
 
 <?import javafx.collections.FXCollections?>
-
-<BorderPane prefHeight="800" prefWidth="900" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml"
-            fx:controller="pl.pawz.zelbet.GUI.Controller">
-
-    <left>
-        <VBox prefWidth="150">
-            <padding>
-                <Insets top="10" right="10" bottom="10" left="10"/>
-            </padding>
-            <Button text="Przekrój Prostokątny" prefWidth="130"/>
-            <Button text="Przekrój Teowy" prefWidth="130"/>
-        </VBox>
-    </left>
-
-
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="pl.pawz.zelbet.GUI.CrossSectionT.ControllerT"
+            prefHeight="400.0" prefWidth="600.0">
     <center>
         <VBox fx:id="vBoxCenter">
             <GridPane hgap="5" vgap="10">
@@ -33,8 +22,8 @@
                         <Insets top="5" right="5" bottom="5" left="5"/>
                     </padding>
 
-                    <Label text="Przekrój Prostokątny" GridPane.columnIndex="0" GridPane.rowIndex="0"
-                           GridPane.columnSpan="2" fx:id="titleLabel"/>
+                    <Label text="Przekrój Teowy" GridPane.columnIndex="0" GridPane.rowIndex="0"
+                           GridPane.columnSpan="2"/>
                     <Label text="Stan Graniczny Nośności" GridPane.columnIndex="0" GridPane.rowIndex="1"
                            GridPane.columnSpan="2"/>
                     <CheckBox text="Kombinacje obciążeń" GridPane.columnIndex="0" GridPane.rowIndex="6"
@@ -148,7 +137,8 @@
                                fx:id="mEk"/>
 
                     <Label text="M_ek,lt" GridPane.columnIndex="2" GridPane.rowIndex="0"/>
-                    <TextField GridPane.columnIndex="3" GridPane.rowIndex="0" promptText="[kNm]" prefWidth="70" fx:id="mEkLt"/>
+                    <TextField GridPane.columnIndex="3" GridPane.rowIndex="0" promptText="[kNm]" prefWidth="70"
+                               fx:id="mEkLt"/>
 
                     <Label text="Obciążenie" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
                     <ChoiceBox GridPane.columnIndex="1" GridPane.rowIndex="1" fx:id="choiceBoxLoads">
@@ -163,10 +153,12 @@
 
 
                     <Label text="t0" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
-                    <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" promptText="[dni]" prefWidth="70" fx:id="tZero"/>
+                    <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" promptText="[dni]" prefWidth="70"
+                               fx:id="tZero"/>
 
                     <Label text="RH" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
-                    <TextField GridPane.columnIndex="1" GridPane.rowIndex="4" promptText="[%]" prefWidth="70" fx:id="rH"/>
+                    <TextField GridPane.columnIndex="1" GridPane.rowIndex="4" promptText="[%]" prefWidth="70"
+                               fx:id="rH"/>
 
                     <Label text="Klasa Cementu" GridPane.columnIndex="2" GridPane.rowIndex="3"/>
                     <ChoiceBox GridPane.columnIndex="3" GridPane.rowIndex="3" fx:id="choiceBoxCementClass">
@@ -181,13 +173,16 @@
                     </ChoiceBox>
 
                     <Label text="Cnom" GridPane.columnIndex="2" GridPane.rowIndex="4"/>
-                    <TextField GridPane.columnIndex="3" GridPane.rowIndex="4" promptText="[mm]" prefWidth="70" fx:id="cNom"/>
+                    <TextField GridPane.columnIndex="3" GridPane.rowIndex="4" promptText="[mm]" prefWidth="70"
+                               fx:id="cNom"/>
 
                     <Label text="l_eff" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
-                    <TextField GridPane.columnIndex="1" GridPane.rowIndex="5" promptText="[m]" prefWidth="70" fx:id="lEff"/>
+                    <TextField GridPane.columnIndex="1" GridPane.rowIndex="5" promptText="[m]" prefWidth="70"
+                               fx:id="lEff"/>
 
                     <Label text="Alpha_M" GridPane.columnIndex="2" GridPane.rowIndex="5"/>
-                    <TextField GridPane.columnIndex="3" GridPane.rowIndex="5" promptText="[-]" prefWidth="70" fx:id="alphaM"/>
+                    <TextField GridPane.columnIndex="3" GridPane.rowIndex="5" promptText="[-]" prefWidth="70"
+                               fx:id="alphaM"/>
                 </GridPane>
 
                 <Label text="Dodatkowe opcje" GridPane.columnIndex="0" GridPane.rowIndex="9"/>
@@ -221,10 +216,28 @@
                     <Button text="Obliczenia" GridPane.columnIndex="1" GridPane.rowIndex="4" onAction="#calculations"/>
 
                 </GridPane>
+
+
+
+                <GridPane hgap="10" vgap="5" GridPane.columnIndex="2" GridPane.rowIndex="0">
+
+                    <Label text="Obliczeniowe" prefWidth="80" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+                    <Label text="Zastosowane" GridPane.columnIndex="3" GridPane.rowIndex="0"/>
+                    <Label text="Liczba Prętów" GridPane.columnIndex="5" GridPane.rowIndex="0"/>
+
+
+                    <Label text="As_1" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                    <Label text="0" GridPane.columnIndex="1" GridPane.rowIndex="1" fx:id="res1"/>
+                    <Label text="0" GridPane.columnIndex="3" GridPane.rowIndex="1" fx:id="res1true"/>
+                    <Label text="0" GridPane.columnIndex="5" GridPane.rowIndex="1" fx:id="resRods1"/>
+
+                    <Label text="As_2" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                    <Label text="0" GridPane.columnIndex="1" GridPane.rowIndex="2" fx:id="res2"/>
+                    <Label text="0" GridPane.columnIndex="3" GridPane.rowIndex="2" fx:id="res2true"/>
+                    <Label text="0" GridPane.columnIndex="5" GridPane.rowIndex="2" fx:id="resRods2"/>
+                </GridPane>
             </GridPane>
 
         </VBox>
     </center>
-
 </BorderPane>
-

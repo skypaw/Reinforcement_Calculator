@@ -1,5 +1,6 @@
 package pl.pawz.zelbet.Diagnostic;
 
+import pl.pawz.zelbet.BasicValues;
 import pl.pawz.zelbet.BasicValuesPillars;
 
 public class DiagnosticBendingBeamAndT {
@@ -11,9 +12,7 @@ public class DiagnosticBendingBeamAndT {
     private int E_S;
     private float bW;
     private float bEff;
-    private float h;
     private float hF;
-    private float a1;
     private float a2;
     private double d;
     private double aS1;
@@ -22,27 +21,24 @@ public class DiagnosticBendingBeamAndT {
     private double xMinYd;
     private double xMinMinusYd;
 
-    public DiagnosticBendingBeamAndT(double fCd, double epsilonCu3, double lambdaConcrete, double etaConcrete, double fYd, int E_S, float bW, float bEff, float h, float hF, float a1, float a2, double d, double aS1, double aS2) {
-        this.fCd = fCd;
-        this.epsilonCu3 = epsilonCu3;
-        this.lambdaConcrete = lambdaConcrete;
-        this.etaConcrete = etaConcrete;
-        this.fYd = fYd;
-        this.E_S = E_S;
+    public DiagnosticBendingBeamAndT(double fCk,  double fYk, float bW, float bEff, float h, float hF, float a1, float a2, double aS1, double aS2) {
+        this.fCd = BasicValues.fCdValue(fCk);
+        this.epsilonCu3 = BasicValues.epsilonCu3Value(fCk);
+        this.lambdaConcrete = BasicValues.lambdaConcreteValue(fCk);
+        this.etaConcrete = BasicValues.etaConcreteValue(fCk);
+        this.fYd = BasicValues.fYdValue(fYk);
+        this.E_S = BasicValues.steelE();
         this.bW = bW;
         this.bEff = bEff;
-        this.h = h;
         this.hF = hF;
-        this.a1 = a1;
         this.a2 = a2;
-        this.d = d;
+        this.d = BasicValues.dValue(h,a1);
         this.aS1 = aS1;
         this.aS2 = aS2;
 
-        BasicValuesPillars limitValues = new BasicValuesPillars(h, a1, a2, epsilonCu3, 0, fYd, E_S, 0, 0);
-        this.xLim = limitValues.xLimVar();
-        this.xMinYd = limitValues.xMinYdVar();
-        this.xMinMinusYd = limitValues.xMinMinusYdVar();
+        this.xLim = BasicValuesPillars.xLimVar(epsilonCu3,h,a1,fYd,E_S);
+        this.xMinYd = BasicValuesPillars.xMinYdVar(epsilonCu3,a2,fYd,E_S);
+        this.xMinMinusYd = BasicValuesPillars.xMinMinusYdVar(epsilonCu3,a2,fYd,E_S);
     }
 
     private double xVar() {

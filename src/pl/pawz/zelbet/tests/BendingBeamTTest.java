@@ -8,16 +8,15 @@ import static org.junit.Assert.assertEquals;
 public class BendingBeamTTest {
 
 
-    private float fCd = 17.857f;
-    private double epsilonCu3 = 0.0035;
-    private double lambdaConcrete = 0.8;
-    private double etaConcrete = 1;
-    private double fYd = 434.7826;
-    private int E_S = 200000;
+    private float fCk = 25;
+
+    private double fYk = 500;
+
     private float bEff = 0.9f;
     private float bW = 0.30f;
+    private float a1 = 0.05f;
     private float a2 = 0.05f;
-    private double dDimension = 0.55;
+    private float h = 0.6f;
     private float hF = 0.12f;
 
 
@@ -28,7 +27,7 @@ public class BendingBeamTTest {
 
         float mEd = 0.05f;
 
-        BendingBeamT res = new BendingBeamT(mEd, fCd, epsilonCu3, lambdaConcrete, etaConcrete, fYd, E_S, bW, bEff, hF, a2, dDimension);
+        BendingBeamT res = new BendingBeamT(mEd, fCk, fYk, bW, bEff, h, hF, a1, a2);
         double result1 = res.resultsBendingT()[0];
         System.out.println(result1);
         double result2 = res.resultsBendingT()[1];
@@ -43,7 +42,7 @@ public class BendingBeamTTest {
 
         float mEd = 0.1f;
 
-        BendingBeamT res = new BendingBeamT(mEd, fCd, epsilonCu3, lambdaConcrete, etaConcrete, fYd, E_S, bW, bEff, hF, a2, dDimension);
+        BendingBeamT res = new BendingBeamT(mEd, fCk, fYk, bW, bEff, h, hF, a1, a2);
         double result1 = res.resultsBendingT()[0];
         System.out.println(result1);
         double result2 = res.resultsBendingT()[1];
@@ -58,7 +57,7 @@ public class BendingBeamTTest {
 
         float mEd = 0.2f;
 
-        BendingBeamT res = new BendingBeamT(mEd, fCd, epsilonCu3, lambdaConcrete, etaConcrete, fYd, E_S, bW, bEff, hF, a2, dDimension);
+        BendingBeamT res = new BendingBeamT(mEd, fCk, fYk, bW, bEff, h, hF, a1, a2);
         double result1 = res.resultsBendingT()[0];
         System.out.println(result1);
         double result2 = res.resultsBendingT()[1];
@@ -73,7 +72,7 @@ public class BendingBeamTTest {
 
         float mEd = 0.3f;
 
-        BendingBeamT res = new BendingBeamT(mEd, fCd, epsilonCu3, lambdaConcrete, etaConcrete, fYd, E_S, bW, bEff, hF, a2, dDimension);
+        BendingBeamT res = new BendingBeamT(mEd, fCk, fYk, bW, bEff, h, hF, a1, a2);
         double result1 = res.resultsBendingT()[0];
         System.out.println(result1);
         double result2 = res.resultsBendingT()[1];
@@ -88,7 +87,7 @@ public class BendingBeamTTest {
 
         float mEd = 0.4f;
 
-        BendingBeamT res = new BendingBeamT(mEd, fCd, epsilonCu3, lambdaConcrete, etaConcrete, fYd, E_S, bW, bEff, hF, a2, dDimension);
+        BendingBeamT res = new BendingBeamT(mEd, fCk, fYk, bW, bEff, h, hF, a1, a2);
         double result1 = res.resultsBendingT()[0];
         System.out.println(result1);
         double result2 = res.resultsBendingT()[1];
@@ -103,7 +102,7 @@ public class BendingBeamTTest {
 
         float mEd = 0.5f;
 
-        BendingBeamT res = new BendingBeamT(mEd, fCd, epsilonCu3, lambdaConcrete, etaConcrete, fYd, E_S, bW, bEff, hF, a2, dDimension);
+        BendingBeamT res = new BendingBeamT(mEd, fCk, fYk, bW, bEff, h, hF, a1, a2);
         double result1 = res.resultsBendingT()[0];
         System.out.println(result1);
         double result2 = res.resultsBendingT()[1];
@@ -118,7 +117,7 @@ public class BendingBeamTTest {
 
         float mEd = 0.6f;
 
-        BendingBeamT res = new BendingBeamT(mEd, fCd, epsilonCu3, lambdaConcrete, etaConcrete, fYd, E_S, bW, bEff, hF, a2, dDimension);
+        BendingBeamT res = new BendingBeamT(mEd, fCk, fYk, bW, bEff, h, hF, a1, a2);
         double result1 = res.resultsBendingT()[0];
         System.out.println(result1);
         double result2 = res.resultsBendingT()[1];
@@ -133,7 +132,7 @@ public class BendingBeamTTest {
 
         float mEd = 0.7f;
 
-        BendingBeamT res = new BendingBeamT(mEd, fCd, epsilonCu3, lambdaConcrete, etaConcrete, fYd, E_S, bW, bEff, hF, a2, dDimension);
+        BendingBeamT res = new BendingBeamT(mEd, fCk, fYk, bW, bEff, h, hF, a1, a2);
         double result1 = res.resultsBendingT()[0];
         System.out.println(result1);
         double result2 = res.resultsBendingT()[1];
@@ -148,7 +147,7 @@ public class BendingBeamTTest {
 
         float mEd = 0.8f;
 
-        BendingBeamT res = new BendingBeamT(mEd, fCd, epsilonCu3, lambdaConcrete, etaConcrete, fYd, E_S, bW, bEff, hF, a2, dDimension);
+        BendingBeamT res = new BendingBeamT(mEd, fCk, fYk, bW, bEff, h, hF, a1, a2);
         double result1 = res.resultsBendingT()[0];
         System.out.println(result1);
         double result2 = res.resultsBendingT()[1];
@@ -163,7 +162,7 @@ public class BendingBeamTTest {
 
         float mEd = 0.9f;
 
-        BendingBeamT res = new BendingBeamT(mEd, fCd, epsilonCu3, lambdaConcrete, etaConcrete, fYd, E_S, bW, bEff, hF, a2, dDimension);
+        BendingBeamT res = new BendingBeamT(mEd, fCk, fYk, bW, bEff, h, hF, a1, a2);
         double result1 = res.resultsBendingT()[0];
         System.out.println(result1);
         double result2 = res.resultsBendingT()[1];
@@ -178,7 +177,7 @@ public class BendingBeamTTest {
 
         float mEd = 0.945f;
 
-        BendingBeamT res = new BendingBeamT(mEd, fCd, epsilonCu3, lambdaConcrete, etaConcrete, fYd, E_S, bW, bEff, hF, a2, dDimension);
+        BendingBeamT res = new BendingBeamT(mEd, fCk, fYk, bW, bEff, h, hF, a1, a2);
         double result1 = res.resultsBendingT()[0];
         System.out.println(result1);
         double result2 = res.resultsBendingT()[1];
@@ -193,7 +192,7 @@ public class BendingBeamTTest {
 
         float mEd = 0.950f;
 
-        BendingBeamT res = new BendingBeamT(mEd, fCd, epsilonCu3, lambdaConcrete, etaConcrete, fYd, E_S, bW, bEff, hF, a2, dDimension);
+        BendingBeamT res = new BendingBeamT(mEd, fCk, fYk, bW, bEff, h, hF, a1, a2);
         double result1 = res.resultsBendingT()[0];
         System.out.println(result1);
         double result2 = res.resultsBendingT()[1];
@@ -208,7 +207,7 @@ public class BendingBeamTTest {
 
         float mEd = 1.0f;
 
-        BendingBeamT res = new BendingBeamT(mEd, fCd, epsilonCu3, lambdaConcrete, etaConcrete, fYd, E_S, bW, bEff, hF, a2, dDimension);
+        BendingBeamT res = new BendingBeamT(mEd, fCk, fYk, bW, bEff, h, hF, a1, a2);
         double result1 = res.resultsBendingT()[0];
         System.out.println(result1);
         double result2 = res.resultsBendingT()[1];
@@ -223,7 +222,7 @@ public class BendingBeamTTest {
 
         float mEd = 1.1f;
 
-        BendingBeamT res = new BendingBeamT(mEd, fCd, epsilonCu3, lambdaConcrete, etaConcrete, fYd, E_S, bW, bEff, hF, a2, dDimension);
+        BendingBeamT res = new BendingBeamT(mEd, fCk, fYk, bW, bEff, h, hF, a1, a2);
         double result1 = res.resultsBendingT()[0];
         System.out.println(result1);
         double result2 = res.resultsBendingT()[1];
@@ -238,7 +237,7 @@ public class BendingBeamTTest {
 
         float mEd = 1.2f;
 
-        BendingBeamT res = new BendingBeamT(mEd, fCd, epsilonCu3, lambdaConcrete, etaConcrete, fYd, E_S, bW, bEff, hF, a2, dDimension);
+        BendingBeamT res = new BendingBeamT(mEd, fCk, fYk, bW, bEff, h, hF, a1, a2);
         double result1 = res.resultsBendingT()[0];
         System.out.println(result1);
         double result2 = res.resultsBendingT()[1];
@@ -253,7 +252,7 @@ public class BendingBeamTTest {
 
         float mEd = 1.3f;
 
-        BendingBeamT res = new BendingBeamT(mEd, fCd, epsilonCu3, lambdaConcrete, etaConcrete, fYd, E_S, bW, bEff, hF, a2, dDimension);
+        BendingBeamT res = new BendingBeamT(mEd, fCk, fYk, bW, bEff, h, hF, a1, a2);
         double result1 = res.resultsBendingT()[0];
         System.out.println(result1);
         double result2 = res.resultsBendingT()[1];
@@ -268,7 +267,7 @@ public class BendingBeamTTest {
 
         float mEd = 1.4f;
 
-        BendingBeamT res = new BendingBeamT(mEd, fCd, epsilonCu3, lambdaConcrete, etaConcrete, fYd, E_S, bW, bEff, hF, a2, dDimension);
+        BendingBeamT res = new BendingBeamT(mEd, fCk, fYk, bW, bEff, h, hF, a1, a2);
         double result1 = res.resultsBendingT()[0];
         System.out.println(result1);
         double result2 = res.resultsBendingT()[1];
@@ -283,7 +282,7 @@ public class BendingBeamTTest {
 
         float mEd = 1.5f;
 
-        BendingBeamT res = new BendingBeamT(mEd, fCd, epsilonCu3, lambdaConcrete, etaConcrete, fYd, E_S, bW, bEff, hF, a2, dDimension);
+        BendingBeamT res = new BendingBeamT(mEd, fCk, fYk, bW, bEff, h, hF, a1, a2);
         double result1 = res.resultsBendingT()[0];
         System.out.println(result1);
         double result2 = res.resultsBendingT()[1];
@@ -298,7 +297,7 @@ public class BendingBeamTTest {
 
         float mEd = 1.6f;
 
-        BendingBeamT res = new BendingBeamT(mEd, fCd, epsilonCu3, lambdaConcrete, etaConcrete, fYd, E_S, bW, bEff, hF, a2, dDimension);
+        BendingBeamT res = new BendingBeamT(mEd, fCk, fYk, bW, bEff, h, hF, a1, a2);
         double result1 = res.resultsBendingT()[0];
         System.out.println(result1);
         double result2 = res.resultsBendingT()[1];

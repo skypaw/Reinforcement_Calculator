@@ -7,15 +7,12 @@ import static org.junit.Assert.assertEquals;
 
 public class BendingBeamRectangleTest {
 
-    private float fCd = 17.857f;
-    private double epsilonCu3 = 0.0035;
-    private double lambdaConcrete = 0.8;
-    private double etaConcrete = 1;
-    private double fYd = 434.7826;
-    private int E_S = 200000;
-    private float bDimension = 0.30f;
+    private double fCk = 25f;
+    private double fYk = 500;
+    private float hDimension = 0.6f;
+    private float bDimension = 0.3f;
+    private float a1 = 0.05f;
     private float a2 = 0.05f;
-    private double dDimension = 0.55f;
 
 
     private static final double DELTA = 1e-6;
@@ -25,7 +22,7 @@ public class BendingBeamRectangleTest {
 
         float mEd = 0.05f;
 
-        BendingBeamRectangle res = new BendingBeamRectangle(mEd, fCd, epsilonCu3, lambdaConcrete, etaConcrete, fYd, E_S, bDimension, a2, dDimension);
+        BendingBeamRectangle res = new BendingBeamRectangle(mEd, fCk, fYk, hDimension, bDimension, a1, a2);
         double result1 = res.resultsBendingBeamRectangle()[0];
         System.out.println(result1);
         double result2 = res.resultsBendingBeamRectangle()[1];
@@ -40,7 +37,7 @@ public class BendingBeamRectangleTest {
 
         float mEd = 0.1f;
 
-        BendingBeamRectangle res = new BendingBeamRectangle(mEd, fCd, epsilonCu3, lambdaConcrete, etaConcrete, fYd, E_S, bDimension, a2, dDimension);
+        BendingBeamRectangle res = new BendingBeamRectangle(mEd, fCk, fYk, hDimension, bDimension, a1, a2);
         double result1 = res.resultsBendingBeamRectangle()[0];
         System.out.println(result1);
         double result2 = res.resultsBendingBeamRectangle()[1];
@@ -56,7 +53,7 @@ public class BendingBeamRectangleTest {
 
         float mEd = 0.2f;
 
-        BendingBeamRectangle res = new BendingBeamRectangle(mEd, fCd, epsilonCu3, lambdaConcrete, etaConcrete, fYd, E_S, bDimension, a2, dDimension);
+        BendingBeamRectangle res = new BendingBeamRectangle(mEd, fCk, fYk, hDimension, bDimension, a1, a2);
         double result1 = res.resultsBendingBeamRectangle()[0];
         System.out.println(result1);
         double result2 = res.resultsBendingBeamRectangle()[1];
@@ -71,7 +68,7 @@ public class BendingBeamRectangleTest {
 
         float mEd = 0.305f;
 
-        BendingBeamRectangle res = new BendingBeamRectangle(mEd, fCd, epsilonCu3, lambdaConcrete, etaConcrete, fYd, E_S, bDimension, a2, dDimension);
+        BendingBeamRectangle res = new BendingBeamRectangle(mEd, fCk, fYk, hDimension, bDimension, a1, a2);
         double result1 = res.resultsBendingBeamRectangle()[0];
         System.out.println(result1);
         double result2 = res.resultsBendingBeamRectangle()[1];
@@ -86,7 +83,7 @@ public class BendingBeamRectangleTest {
 
         float mEd = 0.455f;
 
-        BendingBeamRectangle res = new BendingBeamRectangle(mEd, fCd, epsilonCu3, lambdaConcrete, etaConcrete, fYd, E_S, bDimension, a2, dDimension);
+        BendingBeamRectangle res = new BendingBeamRectangle(mEd, fCk, fYk, hDimension, bDimension, a1, a2);
         double result1 = res.resultsBendingBeamRectangle()[0];
         System.out.println(result1);
         double result2 = res.resultsBendingBeamRectangle()[1];
@@ -101,7 +98,7 @@ public class BendingBeamRectangleTest {
 
         float mEd = 0.6f;
 
-        BendingBeamRectangle res = new BendingBeamRectangle(mEd, fCd, epsilonCu3, lambdaConcrete, etaConcrete, fYd, E_S, bDimension, a2, dDimension);
+        BendingBeamRectangle res = new BendingBeamRectangle(mEd, fCk, fYk, hDimension, bDimension, a1, a2);
         double result1 = res.resultsBendingBeamRectangle()[0];
         System.out.println(result1);
         double result2 = res.resultsBendingBeamRectangle()[1];
@@ -116,7 +113,7 @@ public class BendingBeamRectangleTest {
 
         float mEd = 0.735f;
 
-        BendingBeamRectangle res = new BendingBeamRectangle(mEd, fCd, epsilonCu3, lambdaConcrete, etaConcrete, fYd, E_S, bDimension, a2, dDimension);
+        BendingBeamRectangle res = new BendingBeamRectangle(mEd, fCk, fYk, hDimension, bDimension, a1, a2);
         double result1 = res.resultsBendingBeamRectangle()[0];
         System.out.println(result1);
         double result2 = res.resultsBendingBeamRectangle()[1];
@@ -131,7 +128,7 @@ public class BendingBeamRectangleTest {
 
         float mEd = 0.890f;
 
-        BendingBeamRectangle res = new BendingBeamRectangle(mEd, fCd, epsilonCu3, lambdaConcrete, etaConcrete, fYd, E_S, bDimension, a2, dDimension);
+        BendingBeamRectangle res = new BendingBeamRectangle(mEd, fCk, fYk, hDimension, bDimension, a1, a2);
         double result1 = res.resultsBendingBeamRectangle()[0];
         System.out.println(result1);
         double result2 = res.resultsBendingBeamRectangle()[1];
@@ -146,7 +143,7 @@ public class BendingBeamRectangleTest {
 
         float mEd = 0.955f;
 
-        BendingBeamRectangle res = new BendingBeamRectangle(mEd, fCd, epsilonCu3, lambdaConcrete, etaConcrete, fYd, E_S, bDimension, a2, dDimension);
+        BendingBeamRectangle res = new BendingBeamRectangle(mEd, fCk, fYk, hDimension, bDimension, a1, a2);
         double result1 = res.resultsBendingBeamRectangle()[0];
         System.out.println(result1);
         double result2 = res.resultsBendingBeamRectangle()[1];

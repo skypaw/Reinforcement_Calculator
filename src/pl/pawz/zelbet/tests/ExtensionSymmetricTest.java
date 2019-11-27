@@ -11,6 +11,13 @@ public class ExtensionSymmetricTest {
     private float mEd;
     private double aS1;
     private double aS2;
+    private float h = 0.6f;
+    private float b = 0.3f;
+    private float a1 = 0.05f;
+    private float a2 = 0.05f;
+    private double fCk = 30;
+    private double fYk = 500;
+
 
     private static final double DELTA = 1e-6;
 
@@ -19,8 +26,7 @@ public class ExtensionSymmetricTest {
         nEd = 0.500f;
         mEd = 0;
 
-
-        ExtensionSymmetricReinforcement res = new ExtensionSymmetricReinforcement(nEd, mEd, 0.0035, 0.00175, 21.43, 434.78, 1, 0.8, 0.55, 0.3f, 0.6f, 0.05f, 0.05f, 200000, 0.030843);
+        ExtensionSymmetricReinforcement res = new ExtensionSymmetricReinforcement(nEd, mEd, fCk, fYk, b, h, a1, a2);
         double result1 = res.resultsExtensionSymmetric()[0];
         System.out.println(result1);
         double result2 = res.resultsExtensionSymmetric()[1];
@@ -38,7 +44,7 @@ public class ExtensionSymmetricTest {
         mEd = 0.01f;
 
 
-        ExtensionSymmetricReinforcement res = new ExtensionSymmetricReinforcement(nEd, mEd, 0.0035, 0.00175, 21.43, 434.78, 1, 0.8, 0.55, 0.3f, 0.6f, 0.05f, 0.05f, 200000, 0.030843);
+        ExtensionSymmetricReinforcement res = new ExtensionSymmetricReinforcement(nEd, mEd, fCk, fYk, b, h, a1, a2);
         double result1 = res.resultsExtensionSymmetric()[0];
         System.out.println(result1);
         double result2 = res.resultsExtensionSymmetric()[1];
@@ -56,7 +62,7 @@ public class ExtensionSymmetricTest {
         mEd = 0.075f;
 
 
-        ExtensionSymmetricReinforcement res = new ExtensionSymmetricReinforcement(nEd, mEd, 0.0035, 0.00175, 21.43, 434.78, 1, 0.8, 0.55, 0.3f, 0.6f, 0.05f, 0.05f, 200000, 0.030843);
+        ExtensionSymmetricReinforcement res = new ExtensionSymmetricReinforcement(nEd, mEd, fCk, fYk, b, h, a1, a2);
         double result1 = res.resultsExtensionSymmetric()[0];
         System.out.println(result1);
         double result2 = res.resultsExtensionSymmetric()[1];
@@ -74,7 +80,7 @@ public class ExtensionSymmetricTest {
         mEd = 0.1f;
 
 
-        ExtensionSymmetricReinforcement res = new ExtensionSymmetricReinforcement(nEd, mEd, 0.0035, 0.00175, 21.43, 434.78, 1, 0.8, 0.55, 0.3f, 0.6f, 0.05f, 0.05f, 200000, 0.030843);
+        ExtensionSymmetricReinforcement res = new ExtensionSymmetricReinforcement(nEd, mEd, fCk, fYk, b, h, a1, a2);
         double result1 = res.resultsExtensionSymmetric()[0];
         System.out.println(result1);
         double result2 = res.resultsExtensionSymmetric()[1];
@@ -92,7 +98,7 @@ public class ExtensionSymmetricTest {
         mEd = 0.2f;
 
 
-        ExtensionSymmetricReinforcement res = new ExtensionSymmetricReinforcement(nEd, mEd, 0.0035, 0.00175, 21.43, 434.78, 1, 0.8, 0.55, 0.3f, 0.6f, 0.05f, 0.05f, 200000, 0.030843);
+        ExtensionSymmetricReinforcement res = new ExtensionSymmetricReinforcement(nEd, mEd, fCk, fYk, b, h, a1, a2);
         double result1 = res.resultsExtensionSymmetric()[0];
         System.out.println(result1);
         double result2 = res.resultsExtensionSymmetric()[1];
@@ -110,7 +116,7 @@ public class ExtensionSymmetricTest {
         mEd = 0.65f;
 
 
-        ExtensionSymmetricReinforcement res = new ExtensionSymmetricReinforcement(nEd, mEd, 0.0035, 0.00175, 21.43, 434.78, 1, 0.8, 0.55, 0.3f, 0.6f, 0.05f, 0.05f, 200000, 0.030843);
+        ExtensionSymmetricReinforcement res = new ExtensionSymmetricReinforcement(nEd, mEd, fCk, fYk, b, h, a1, a2);
         double result1 = res.resultsExtensionSymmetric()[0];
         System.out.println(result1);
         double result2 = res.resultsExtensionSymmetric()[1];
@@ -128,7 +134,7 @@ public class ExtensionSymmetricTest {
         mEd = 1.0f;
 
 
-        ExtensionSymmetricReinforcement res = new ExtensionSymmetricReinforcement(nEd, mEd, 0.0035, 0.00175, 21.43, 434.78, 1, 0.8, 0.55, 0.3f, 0.6f, 0.05f, 0.05f, 200000, 0.030843);
+        ExtensionSymmetricReinforcement res = new ExtensionSymmetricReinforcement(nEd, mEd, fCk, fYk, b, h, a1, a2);
         double result1 = res.resultsExtensionSymmetric()[0];
         System.out.println(result1);
         double result2 = res.resultsExtensionSymmetric()[1];
@@ -146,7 +152,7 @@ public class ExtensionSymmetricTest {
         mEd = 1.5f;
 
 
-        ExtensionSymmetricReinforcement res = new ExtensionSymmetricReinforcement(nEd, mEd, 0.0035, 0.00175, 21.43, 434.78, 1, 0.8, 0.55, 0.3f, 0.6f, 0.05f, 0.05f, 200000, 0.030843);
+        ExtensionSymmetricReinforcement res = new ExtensionSymmetricReinforcement(nEd, mEd, fCk, fYk, b, h, a1, a2);
         double result1 = res.resultsExtensionSymmetric()[0];
         System.out.println(result1);
         double result2 = res.resultsExtensionSymmetric()[1];
