@@ -1,5 +1,6 @@
 package pl.pawz.zelbet;
 
+import pl.pawz.zelbet.Diagnostic.DiagnosticExtension;
 import pl.pawz.zelbet.ULS.BendingBeamT;
 import pl.pawz.zelbet.ULS.ShearingBendRods;
 import pl.pawz.zelbet.ULS.ShearingStirrups;
@@ -22,23 +23,29 @@ public class Main {
         float bEff = 0.8f;
         float hF = 0.15f;
 
-        float mEd = 0.50f;
 
-        float nEd = 0.9f;
 
-        float vEd = 0.258f;
-        double vEdRed = 0.215f;
-        double aSl = 0;
+        float vEd = 0.3984f;
+        double vEdRed = 0.332f;
+        double aSl = 0.001;
         double nS1 = 2;
-        double nS2 = 0;
+        double nS2 = 2;
         double fiS1 = 0.006;
         double fiS2 = 0.012;
         float cotTheta = 2;
 
 
-        ShearingBendRods res = new ShearingBendRods(h,a1,b,fCk,nEd,aSl,nS1,nS2,fiS1,fiS2,fYk,vEdRed,vEd,0,cotTheta);
-        double result1 = res.resultShearingStirrups();
+        float nEd = 0.5f;
+        float mEd = 0.0001f;
+
+        double aS1 = 5.750034 * Math.pow(10, -4);
+        double aS2 = aS1;
+
+        DiagnosticExtension res = new DiagnosticExtension(nEd, mEd, fCk, fYk, b, h, a1, a2, aS1, aS2);
+        double result1 = res.resultsDiagnosticExtension()[0];
         System.out.println(result1);
+        double result2 = res.resultsDiagnosticExtension()[1];
+        System.out.println(result2);
 
     }
 

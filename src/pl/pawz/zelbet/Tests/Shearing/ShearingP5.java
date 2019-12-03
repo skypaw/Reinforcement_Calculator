@@ -1,11 +1,11 @@
-package pl.pawz.zelbet.tests.shearingstirrups;
+package pl.pawz.zelbet.Tests.Shearing;
 
 import org.junit.Test;
 import pl.pawz.zelbet.ULS.ShearingStirrups;
 
 import static org.junit.Assert.assertEquals;
 
-public class ShearingP3 {
+public class ShearingP5 {
 
 
     private float fCk = 30;
@@ -16,15 +16,16 @@ public class ShearingP3 {
     private float h = 0.6f;
 
     private float cotTheta = 2f;
-    private float aSl = 0.0035f;
+    private float aSl = 0.001f;
     private float nS = 2;
     private double fiS = 6 * Math.pow(10, -3);
 
 
-    float nEd = 0.00f;
+    float nEd = 0.9f;
 
 
     private static final double DELTA = 1e-3;
+
 
     @Test
     public void value() {
@@ -39,17 +40,16 @@ public class ShearingP3 {
         double valueVRdMax = res.getVRdMax();
         System.out.println(valueVRdMax);
 
-        assertEquals(0.133133 ,valueVRdC, 1e-5);
+        assertEquals(0.195494 ,valueVRdC, 1e-5);
         assertEquals(0.672069 ,valueVRdMax, 1e-5);
 
     }
 
-
     @Test
-    public void test146() {
+    public void test147() {
 
-        float vEd = 0.1464f;
-        float vEdRed = 0.122f;
+        float vEd = 0.147072f;
+        float vEdRed = 0.12256f;
 
 
         ShearingStirrups res = new ShearingStirrups(h, b, a1, fCk, fYk, nEd, vEd, vEdRed, aSl, nS, fiS, cotTheta);
@@ -60,10 +60,10 @@ public class ShearingP3 {
     }
 
     @Test
-    public void test159() {
+    public void test148() {
 
-        float vEd = 0.1596f;
-        float vEdRed = 0.133f;
+        float vEd = 0.148f;
+        float vEdRed = 0.123333f;
 
 
         ShearingStirrups res = new ShearingStirrups(h, b, a1, fCk, fYk, nEd, vEd, vEdRed, aSl, nS, fiS, cotTheta);
@@ -74,17 +74,59 @@ public class ShearingP3 {
     }
 
     @Test
-    public void test161() {
+    public void test232() {
 
-        float vEd = 0.161357f;
-        float vEdRed = 0.134464f;
+        float vEd = 0.232247f;
+        float vEdRed = 0.193539f;
 
 
         ShearingStirrups res = new ShearingStirrups(h, b, a1, fCk, fYk, nEd, vEd, vEdRed, aSl, nS, fiS, cotTheta);
         double result1 = res.resultShearingStirrups();
         System.out.println(result1);
 
-        assertEquals(0.181, result1, DELTA);
+        assertEquals(0.215, result1, DELTA);
+    }
+
+    @Test
+    public void test234() {
+
+        float vEd = 0.234593f;
+        float vEdRed = 0.195494f;
+
+
+        ShearingStirrups res = new ShearingStirrups(h, b, a1, fCk, fYk, nEd, vEd, vEdRed, aSl, nS, fiS, cotTheta);
+        double result1 = res.resultShearingStirrups();
+        System.out.println(result1);
+
+        assertEquals(0.215, result1, DELTA);
+    }
+
+    @Test
+    public void test236() {
+
+        float vEd = 0.236939f;
+        float vEdRed = 0.197449f;
+
+
+        ShearingStirrups res = new ShearingStirrups(h, b, a1, fCk, fYk, nEd, vEd, vEdRed, aSl, nS, fiS, cotTheta);
+        double result1 = res.resultShearingStirrups();
+        System.out.println(result1);
+
+        assertEquals(0.123, result1, DELTA);
+    }
+
+    @Test
+    public void test246() {
+
+        float vEd = 0.246f;
+        float vEdRed = 0.205f;
+
+
+        ShearingStirrups res = new ShearingStirrups(h, b, a1, fCk, fYk, nEd, vEd, vEdRed, aSl, nS, fiS, cotTheta);
+        double result1 = res.resultShearingStirrups();
+        System.out.println(result1);
+
+        assertEquals(0.119, result1, DELTA);
     }
 
     @Test

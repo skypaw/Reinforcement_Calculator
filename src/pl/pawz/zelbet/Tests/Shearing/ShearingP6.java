@@ -1,4 +1,4 @@
-package pl.pawz.zelbet.tests.shearingstirrups;
+package pl.pawz.zelbet.Tests.Shearing;
 
 import org.junit.Test;
 import pl.pawz.zelbet.ULS.ShearingBendRods;
@@ -36,7 +36,7 @@ public class ShearingP6 {
         float vEdRed = 0.052f;
 
 
-        ShearingBendRods res = new ShearingBendRods(h,a1,b,fCk,nEd,aSl,nS1,nS2,fiS1,fiS2,fYk,vEdRed,vEd,0.55,cotTheta);
+        ShearingBendRods res = new ShearingBendRods(h,a1,b,fCk,nEd,aSl,nS1,nS2,fiS1,fiS2,fYk,vEdRed,vEd,0.55,cotTheta,45);
         double valueVRdC = res.getVRdC();
         System.out.println(valueVRdC);
         double valueVRdMax = res.getVRdMax();
@@ -54,7 +54,7 @@ public class ShearingP6 {
         float vEdRed = 0.12256f;
 
 
-        ShearingBendRods res = new ShearingBendRods(h,a1,b,fCk,nEd,aSl,nS1,nS2,fiS1,fiS2,fYk,vEdRed,vEd,0.55,cotTheta);
+        ShearingBendRods res = new ShearingBendRods(h,a1,b,fCk,nEd,aSl,nS1,nS2,fiS1,fiS2,fYk,vEdRed,vEd,0.55,cotTheta,45);
         double result1 = res.resultShearingStirrups();
         System.out.println(result1);
 
@@ -68,7 +68,7 @@ public class ShearingP6 {
         float vEdRed = 0.163f;
 
 
-        ShearingBendRods res = new ShearingBendRods(h,a1,b,fCk,nEd,aSl,nS1,nS2,fiS1,fiS2,fYk,vEdRed,vEd,0.55,cotTheta);
+        ShearingBendRods res = new ShearingBendRods(h,a1,b,fCk,nEd,aSl,nS1,nS2,fiS1,fiS2,fYk,vEdRed,vEd,0.55,cotTheta,45);
         double result1 = res.resultShearingStirrups();
         System.out.println(result1);
 
@@ -82,7 +82,7 @@ public class ShearingP6 {
         float vEdRed = 0.176f;
 
 
-        ShearingBendRods res = new ShearingBendRods(h,a1,b,fCk,nEd,aSl,nS1,nS2,fiS1,fiS2,fYk,vEdRed,vEd,0.55,cotTheta);
+        ShearingBendRods res = new ShearingBendRods(h,a1,b,fCk,nEd,aSl,nS1,nS2,fiS1,fiS2,fYk,vEdRed,vEd,0.55,cotTheta,45);
         double result1 = res.resultShearingStirrups();
         System.out.println(result1);
 
@@ -96,7 +96,7 @@ public class ShearingP6 {
         float vEdRed = 0.202f;
 
 
-        ShearingBendRods res = new ShearingBendRods(h,a1,b,fCk,nEd,aSl,nS1,nS2,fiS1,fiS2,fYk,vEdRed,vEd,0.55,cotTheta);
+        ShearingBendRods res = new ShearingBendRods(h,a1,b,fCk,nEd,aSl,nS1,nS2,fiS1,fiS2,fYk,vEdRed,vEd,0.55,cotTheta,45);
         double result1 = res.resultShearingStirrups();
         System.out.println(result1);
 
@@ -110,7 +110,7 @@ public class ShearingP6 {
         float vEdRed = 0.215f;
 
 
-        ShearingBendRods res = new ShearingBendRods(h,a1,b,fCk,nEd,aSl,nS1,nS2,fiS1,fiS2,fYk,vEdRed,vEd,0.55,cotTheta);
+        ShearingBendRods res = new ShearingBendRods(h,a1,b,fCk,nEd,aSl,nS1,nS2,fiS1,fiS2,fYk,vEdRed,vEd,0.55,cotTheta,45);
         double result1 = res.resultShearingStirrups();
         System.out.println(result1);
 
@@ -124,7 +124,7 @@ public class ShearingP6 {
         float vEdRed = 0.228f;
 
 
-        ShearingBendRods res = new ShearingBendRods(h,a1,b,fCk,nEd,aSl,nS1,nS2,fiS1,fiS2,fYk,vEdRed,vEd,0.55,cotTheta);
+        ShearingBendRods res = new ShearingBendRods(h,a1,b,fCk,nEd,aSl,nS1,nS2,fiS1,fiS2,fYk,vEdRed,vEd,0.55,cotTheta,45);
         double result1 = res.resultShearingStirrups();
         System.out.println(result1);
 
@@ -140,7 +140,7 @@ public class ShearingP6 {
         float vEdRed = 0.254f;
 
 
-        ShearingBendRods res = new ShearingBendRods(h,a1,b,fCk,nEd,aSl,nS1,nS2,fiS1,fiS2,fYk,vEdRed,vEd,0.55,cotTheta);
+        ShearingBendRods res = new ShearingBendRods(h,a1,b,fCk,nEd,aSl,nS1,nS2,fiS1,fiS2,fYk,vEdRed,vEd,0.55,cotTheta,45);
         double result1 = res.resultShearingStirrups();
         System.out.println(result1);
 
@@ -154,7 +154,7 @@ public class ShearingP6 {
         float vEdRed = 0.293f;
 
 
-        ShearingBendRods res = new ShearingBendRods(h,a1,b,fCk,nEd,aSl,nS1,nS2,fiS1,fiS2,fYk,vEdRed,vEd,0.55,cotTheta);
+        ShearingBendRods res = new ShearingBendRods(h,a1,b,fCk,nEd,aSl,nS1,nS2,fiS1,fiS2,fYk,vEdRed,vEd,0.55,cotTheta,45);
         double result1 = res.resultShearingStirrups();
         System.out.println(result1);
 
@@ -168,7 +168,7 @@ public class ShearingP6 {
         float vEdRed = 0.332f;
 
 
-        ShearingBendRods res = new ShearingBendRods(h,a1,b,fCk,nEd,aSl,nS1,nS2,fiS1,fiS2,fYk,vEdRed,vEd,0.55,cotTheta);
+        ShearingBendRods res = new ShearingBendRods(h,a1,b,fCk,nEd,aSl,nS1,nS2,fiS1,fiS2,fYk,vEdRed,vEd,0.55,cotTheta,45);
         double result1 = res.resultShearingStirrups();
         System.out.println(result1);
 
@@ -182,7 +182,7 @@ public class ShearingP6 {
         float vEdRed = 0.371f;
 
 
-        ShearingBendRods res = new ShearingBendRods(h,a1,b,fCk,nEd,aSl,nS1,nS2,fiS1,fiS2,fYk,vEdRed,vEd,0.55,cotTheta);
+        ShearingBendRods res = new ShearingBendRods(h,a1,b,fCk,nEd,aSl,nS1,nS2,fiS1,fiS2,fYk,vEdRed,vEd,0.55,cotTheta,45);
         double result1 = res.resultShearingStirrups();
         System.out.println(result1);
 
@@ -196,7 +196,7 @@ public class ShearingP6 {
         float vEdRed = 0.423f;
 
 
-        ShearingBendRods res = new ShearingBendRods(h,a1,b,fCk,nEd,aSl,nS1,nS2,fiS1,fiS2,fYk,vEdRed,vEd,0.55,cotTheta);
+        ShearingBendRods res = new ShearingBendRods(h,a1,b,fCk,nEd,aSl,nS1,nS2,fiS1,fiS2,fYk,vEdRed,vEd,0.55,cotTheta,45);
         double result1 = res.resultShearingStirrups();
         System.out.println(result1);
 
@@ -210,7 +210,7 @@ public class ShearingP6 {
         float vEdRed = 0.462f;
 
 
-        ShearingBendRods res = new ShearingBendRods(h,a1,b,fCk,nEd,aSl,nS1,nS2,fiS1,fiS2,fYk,vEdRed,vEd,0.55,cotTheta);
+        ShearingBendRods res = new ShearingBendRods(h,a1,b,fCk,nEd,aSl,nS1,nS2,fiS1,fiS2,fYk,vEdRed,vEd,0.55,cotTheta,45);
         double result1 = res.resultShearingStirrups();
         System.out.println(result1);
 
@@ -224,7 +224,7 @@ public class ShearingP6 {
         float vEdRed = 0.501f;
 
 
-        ShearingBendRods res = new ShearingBendRods(h,a1,b,fCk,nEd,aSl,nS1,nS2,fiS1,fiS2,fYk,vEdRed,vEd,0.55,cotTheta);
+        ShearingBendRods res = new ShearingBendRods(h,a1,b,fCk,nEd,aSl,nS1,nS2,fiS1,fiS2,fYk,vEdRed,vEd,0.55,cotTheta,45);
         double result1 = res.resultShearingStirrups();
         System.out.println(result1);
 
@@ -238,7 +238,7 @@ public class ShearingP6 {
         float vEdRed = 0.553f;
 
 
-        ShearingBendRods res = new ShearingBendRods(h,a1,b,fCk,nEd,aSl,nS1,nS2,fiS1,fiS2,fYk,vEdRed,vEd,0.55,cotTheta);
+        ShearingBendRods res = new ShearingBendRods(h,a1,b,fCk,nEd,aSl,nS1,nS2,fiS1,fiS2,fYk,vEdRed,vEd,0.55,cotTheta,45);
         double result1 = res.resultShearingStirrups();
         System.out.println(result1);
 
@@ -252,7 +252,7 @@ public class ShearingP6 {
         float vEdRed = 0.579f;
 
 
-        ShearingBendRods res = new ShearingBendRods(h,a1,b,fCk,nEd,aSl,nS1,nS2,fiS1,fiS2,fYk,vEdRed,vEd,0.55,cotTheta);
+        ShearingBendRods res = new ShearingBendRods(h,a1,b,fCk,nEd,aSl,nS1,nS2,fiS1,fiS2,fYk,vEdRed,vEd,0.55,cotTheta,45);
         double result1 = res.resultShearingStirrups();
         System.out.println(result1);
 
@@ -266,7 +266,7 @@ public class ShearingP6 {
         float vEdRed = 0.631f;
 
 
-        ShearingBendRods res = new ShearingBendRods(h,a1,b,fCk,nEd,aSl,nS1,nS2,fiS1,fiS2,fYk,vEdRed,vEd,0.55,cotTheta);
+        ShearingBendRods res = new ShearingBendRods(h,a1,b,fCk,nEd,aSl,nS1,nS2,fiS1,fiS2,fYk,vEdRed,vEd,0.55,cotTheta,45);
         double result1 = res.resultShearingStirrups();
         System.out.println(result1);
 
@@ -280,7 +280,7 @@ public class ShearingP6 {
         float vEdRed = 0.657f;
 
 
-        ShearingBendRods res = new ShearingBendRods(h,a1,b,fCk,nEd,aSl,nS1,nS2,fiS1,fiS2,fYk,vEdRed,vEd,0.55,cotTheta);
+        ShearingBendRods res = new ShearingBendRods(h,a1,b,fCk,nEd,aSl,nS1,nS2,fiS1,fiS2,fYk,vEdRed,vEd,0.55,cotTheta,45);
         double result1 = res.resultShearingStirrups();
         System.out.println(result1);
 
@@ -294,7 +294,7 @@ public class ShearingP6 {
         float vEdRed = 0.670f;
 
 
-        ShearingBendRods res = new ShearingBendRods(h,a1,b,fCk,nEd,aSl,nS1,nS2,fiS1,fiS2,fYk,vEdRed,vEd,0.55,cotTheta);
+        ShearingBendRods res = new ShearingBendRods(h,a1,b,fCk,nEd,aSl,nS1,nS2,fiS1,fiS2,fYk,vEdRed,vEd,0.55,cotTheta,45);
         double result1 = res.resultShearingStirrups();
         System.out.println(result1);
 
@@ -308,7 +308,7 @@ public class ShearingP6 {
         float vEdRed = 0.6725f;
 
 
-        ShearingBendRods res = new ShearingBendRods(h,a1,b,fCk,nEd,aSl,nS1,nS2,fiS1,fiS2,fYk,vEdRed,vEd,0.55,cotTheta);
+        ShearingBendRods res = new ShearingBendRods(h,a1,b,fCk,nEd,aSl,nS1,nS2,fiS1,fiS2,fYk,vEdRed,vEd,0.55,cotTheta,45);
         double result1 = res.resultShearingStirrups();
         System.out.println(result1);
 

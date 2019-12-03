@@ -32,7 +32,7 @@ public class ShearingBendRods {
     private double sinAlpha;
 
 
-    public ShearingBendRods(float hDimension, float a1, float bDimension, float fCk, float nEd, double aSl, double nS1, double nS2, double fiS1, double fiS2, double fYk, double vEdRed, float vEd, double s2, float cotTheta) {
+    public ShearingBendRods(float hDimension, float a1, float bDimension, float fCk, float nEd, double aSl, double nS1, double nS2, double fiS1, double fiS2, double fYk, double vEdRed, float vEd, double s2, float cotTheta, double alphaAngleDegree) {
         this.dDimension = BasicValues.dValue(hDimension,a1);
         this.bDimension = bDimension;
         this.fCk = fCk;
@@ -55,8 +55,10 @@ public class ShearingBendRods {
         this.cotTheta = cotTheta; // TODO change this value  - simplify the code  -> connect both shearing to use the same functions in some cases!
         this.tanTheta = 1/cotTheta;
 
-        this.sinAlpha = Math.sin(Math.PI/4); //todo data from GUI
-        double cosAlpha = Math.cos(Math.PI/4);
+        double alphaAngleRadian = alphaAngleDegree*(Math.PI/180);
+
+        this.sinAlpha = Math.sin(alphaAngleRadian); //todo data from GUI
+        double cosAlpha = Math.cos(alphaAngleRadian);
         double tanAlpha = sinAlpha/cosAlpha;
         this.cotAlpha = 1/tanAlpha;
 
@@ -85,9 +87,10 @@ public class ShearingBendRods {
     }
 
     private void vEdRedGreaterThanVRdCAndVEdSmallerThanVRdMax() {
-        s2 = Math.max(s2, 0.6 * dDimension * (1 + cotAlpha));
+        s2 = Math.min(s2, 0.6 * dDimension * (1 + cotAlpha));
 
         double vRdS2 = aSw2 / s2 * z * fYd * (cotTheta + cotAlpha) * sinAlpha;
+
         double vEdS1 = Math.max(vEdRed - vRdS2, 0.5 * vEdRed);
 
 

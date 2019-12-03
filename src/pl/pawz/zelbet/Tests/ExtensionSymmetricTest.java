@@ -1,4 +1,4 @@
-package pl.pawz.zelbet.tests;
+package pl.pawz.zelbet.Tests;
 
 import org.junit.Test;
 import pl.pawz.zelbet.ULS.ExtensionSymmetricReinforcement;
