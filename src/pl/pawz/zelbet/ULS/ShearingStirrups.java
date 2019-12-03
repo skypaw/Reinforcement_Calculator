@@ -27,32 +27,33 @@ public class ShearingStirrups {
     private float vEd;
 
 
-    public ShearingStirrups(double dDimension, float bDimension, float fCk, double fCd, float nEd, double aC, double aSl, double nS, double fiS, double fYd, double fYk, double vEdRed, float vEd) {
-        this.dDimension = dDimension;
+    public ShearingStirrups(float hDimension, float bDimension, float a1, float fCk, double fYk, float nEd, float vEd, double vEdRed, double aSl, double nS, double fiS, float cotTheta) {
+        this.dDimension = BasicValues.dValue(hDimension, a1);
         this.bDimension = bDimension;
         this.fCk = fCk;
-        this.fCd = fCd;
+        this.fCd = BasicValues.fCdValue(fCk);
         this.nEd = nEd;
-        this.aC = aC;
+        this.aC = hDimension * bDimension;
         this.aSl = aSl;
         this.nS = nS;
         this.fiS = fiS;
-        this.fYd = fYd;
+        this.fYd = BasicValues.fYdValue(fYk);
         this.fYk = fYk;
         this.vEdRed = vEdRed;
         this.vEd = vEd;
 
         this.z = 0.9 * dDimension;
 
-        this.cotTheta = 2; // TODO ask
-        this.tanTheta = 0.5f;
+        this.cotTheta = cotTheta;
+        this.tanTheta = 1 / cotTheta;
+
     }
 
 
     public void vRdCValue() {
-        double kValue = 1 + Math.sqrt(200 / dDimension);
+        double kValue = Math.min(1 + Math.sqrt(200 / (dDimension * Math.pow(10, 3))), 2);
         double nuMin = 0.035 * Math.pow(kValue, 1.5) * Math.pow(fCk, 0.5);
-        double rhoL = Math.min(aSl / (bDimension * dDimension), 0.02);
+        double rhoL = Math.min((aSl * Math.pow(10, 4)) / (bDimension * dDimension * Math.pow(10, 4)), 0.02);
         double cRdC = 0.18 / BasicValues.gammaCConcrete();
         double sigmaCp = Math.min(nEd / aC, 0.2 * fCd);
 
@@ -79,11 +80,11 @@ public class ShearingStirrups {
     }
 
     private void vEdRedSmallerThanVRdC() {
-        sDimension = Math.min(Math.min(0.75 * dDimension, aSw / (0.08 * bDimension) * fYk / Math.sqrt(fCk)), sMin);
+        sDimension = Math.max(Math.min(0.75 * dDimension, aSw / (0.08 * bDimension) * fYk / Math.sqrt(fCk)), sMin);
     }
 
     private void vEdRedGreaterThanVRdCAndVEdSmallerThanVRdMax() {
-        sDimension = Math.min(Math.min(Math.min(0.75 * dDimension, aSw / (0.08 * bDimension) * fYk / Math.sqrt(fCk)), aSw / vEdRed * z * fYd * cotTheta), sMin);
+        sDimension = Math.max(Math.min(Math.min(0.75 * dDimension, aSw / (0.08 * bDimension) * fYk / Math.sqrt(fCk)), aSw / vEdRed * z * fYd * cotTheta), sMin);
     }
 
     private void vEdGreaterThanVRdMax() {
@@ -91,6 +92,9 @@ public class ShearingStirrups {
     }
 
     public double resultShearingStirrups() {
+        vRdCValue();
+        vRdMax();
+
         if (vEdRed <= vRdC) {
             vEdRedSmallerThanVRdC();
         } else if (vEdRed > vRdC && vEd <= vRdMax) {

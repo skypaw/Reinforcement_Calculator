@@ -71,7 +71,7 @@ public class ControllerT {
     //for four loads basic option
 
     private TextField mEdLoadsTxt = new TextField();
-    private TextField nEdLoadsTxt = new TextField();
+
     //for four loads extended
 
 
@@ -79,10 +79,7 @@ public class ControllerT {
     private TextField mEdLoadsTxt2 = new TextField();
     private TextField mEdLoadsTxt3 = new TextField();
     private TextField mEdLoadsTxt4 = new TextField();
-    private TextField nEdLoadsTxt1 = new TextField();
-    private TextField nEdLoadsTxt2 = new TextField();
-    private TextField nEdLoadsTxt3 = new TextField();
-    private TextField nEdLoadsTxt4 = new TextField();
+
 
 
     //for bend rods
@@ -98,10 +95,10 @@ public class ControllerT {
 
     //basic version of four loads
     private Label mEdLoads = new Label("M_Ed");
-    private Label nEdLoads = new Label("N_Ed");
+
 
     //extended version of four loads
-    private Label nEdLoads1 = new Label("N_Ed");
+
     private Label mEdLoads1 = new Label("M_Ed");
     private Label loadsDesc1 = new Label("M_Ed_max");
     private Label loadsDesc2 = new Label("M_Ed_min");
@@ -187,15 +184,12 @@ public class ControllerT {
 
     double fCk = 0;
     float mEdValue = 0;
-    float nEdValue = 0;
+
     double mEd1Value = 0;
     double mEd2Value = 0;
     double mEd3Value = 0;
     double mEd4Value = 0;
-    double nEd1Value = 0;
-    double nEd2Value = 0;
-    double nEd3Value = 0;
-    double nEd4Value = 0;
+
     double aSw2Value = 0;
     double nSw2Value = 0;
 
@@ -245,76 +239,16 @@ public class ControllerT {
         }
     }
 
-    public void fourLoads() {
-        if (checkBoxLoads.isSelected()) {
-
-            mEdLoadsTxt1.setPrefWidth(70);
-            mEdLoadsTxt2.setPrefWidth(70);
-            mEdLoadsTxt3.setPrefWidth(70);
-            mEdLoadsTxt4.setPrefWidth(70);
-
-            nEdLoadsTxt1.setPrefWidth(70);
-            nEdLoadsTxt2.setPrefWidth(70);
-            nEdLoadsTxt3.setPrefWidth(70);
-            nEdLoadsTxt4.setPrefWidth(70);
-
-            mEdLoadsTxt1.setPromptText("[kNm]");
-            mEdLoadsTxt2.setPromptText("[kNm]");
-            mEdLoadsTxt3.setPromptText("[kNm]");
-            mEdLoadsTxt4.setPromptText("[kNm]");
-
-            nEdLoadsTxt1.setPromptText("[kN]");
-            nEdLoadsTxt2.setPromptText("[kN]");
-            nEdLoadsTxt3.setPromptText("[kN]");
-            nEdLoadsTxt4.setPromptText("[kN]");
-
-            GridPane.setConstraints(loadsDesc1, 1, 3);
-            GridPane.setConstraints(loadsDesc2, 2, 3);
-            GridPane.setConstraints(loadsDesc3, 3, 3);
-            GridPane.setConstraints(loadsDesc4, 4, 3);
-
-            GridPane.setConstraints(mEdLoads1, 0, 4);
-            GridPane.setConstraints(mEdLoadsTxt1, 1, 4);
-            GridPane.setConstraints(mEdLoadsTxt2, 2, 4);
-            GridPane.setConstraints(mEdLoadsTxt3, 3, 4);
-            GridPane.setConstraints(mEdLoadsTxt4, 4, 4);
-
-            GridPane.setConstraints(nEdLoads1, 0, 5);
-            GridPane.setConstraints(nEdLoadsTxt1, 1, 5);
-            GridPane.setConstraints(nEdLoadsTxt2, 2, 5);
-            GridPane.setConstraints(nEdLoadsTxt3, 3, 5);
-            GridPane.setConstraints(nEdLoadsTxt4, 4, 5);
-
-
-            gridLoads.getChildren().removeAll(mEdLoads, mEdLoadsTxt, nEdLoads, nEdLoadsTxt);
-            gridLoads.getChildren().addAll(mEdLoads1, loadsDesc1, loadsDesc2, loadsDesc3, loadsDesc4, mEdLoadsTxt1, mEdLoadsTxt2,
-                    mEdLoadsTxt3, mEdLoadsTxt4, nEdLoads1, nEdLoadsTxt1, nEdLoadsTxt2,
-                    nEdLoadsTxt3, nEdLoadsTxt4);
-
-
-        } else {
-            loadsInit();
-        }
-    }
 
     private void loadsInit() {
         mEdLoadsTxt.setPrefWidth(70);
-        nEdLoadsTxt.setPrefWidth(70);
 
         mEdLoadsTxt.setPromptText("[kNm]");
-        nEdLoadsTxt.setPromptText("[kN]");
 
         GridPane.setConstraints(mEdLoads, 0, 3);
         GridPane.setConstraints(mEdLoadsTxt, 1, 3);
 
-        GridPane.setConstraints(nEdLoads, 0, 4);
-        GridPane.setConstraints(nEdLoadsTxt, 1, 4);
-
-        gridLoads.getChildren().removeAll(mEdLoads1, loadsDesc1, loadsDesc2, loadsDesc3, loadsDesc4, mEdLoadsTxt1,
-                mEdLoadsTxt2, mEdLoadsTxt3, mEdLoadsTxt4, nEdLoads1, nEdLoadsTxt1, nEdLoadsTxt2,
-                nEdLoadsTxt3, nEdLoadsTxt4);
-
-        gridLoads.getChildren().addAll(mEdLoads, mEdLoadsTxt, nEdLoads, nEdLoadsTxt);
+        gridLoads.getChildren().addAll(mEdLoads, mEdLoadsTxt);
     }
 
     public void changingConcrete() {
@@ -441,14 +375,11 @@ public class ControllerT {
             mEd3Value = getDataFromTextFieldForces(mEdLoadsTxt3, "M_Ed3") * Math.pow(10, -3);
             mEd4Value = getDataFromTextFieldForces(mEdLoadsTxt4, "M_Ed4") * Math.pow(10, -3);
 
-            nEd1Value = getDataFromTextFieldForces(nEdLoadsTxt1, "N_Ed1") * Math.pow(10, -3);
-            nEd2Value = getDataFromTextFieldForces(nEdLoadsTxt2, "N_Ed2") * Math.pow(10, -3);
-            nEd3Value = getDataFromTextFieldForces(nEdLoadsTxt3, "N_Ed3") * Math.pow(10, -3);
-            nEd4Value = getDataFromTextFieldForces(nEdLoadsTxt4, "N_Ed4") * Math.pow(10, -3);
+
 
         } else {
             mEdValue = (float) (getDataFromTextFieldForces(mEdLoadsTxt, "M_Ed") * Math.pow(10, -3));
-            nEdValue = (float) (getDataFromTextFieldForces(nEdLoadsTxt, "N_Ed") * Math.pow(10, -3));
+
 
         }
     }
@@ -462,16 +393,14 @@ public class ControllerT {
         longitudinalReinforcement();
 
         if (checkBoxResults1.isSelected() && !checkBoxLoads.isSelected()) {
-            if (nEdValue == 0) {
+
                 BendingBeamRectangle beam = new BendingBeamRectangle(mEdValue, fCk, fYk, hValue, bValue, a1Value, a2Value);
                 double[] ress = beam.resultsBendingBeamRectangle();
                 System.out.println(Arrays.toString(ress));
 
                 res1.setText(String.valueOf(ress[0]));
                 res2.setText(String.valueOf(ress[1]));
-            } else {
-                System.out.println("cokolwiek1");
-            }
+
         } else {
             System.out.println("ciekawe czy to wszystyko działa poprawnie");
         }
@@ -507,15 +436,12 @@ public class ControllerT {
 
         concreteValue = Double.parseDouble(concreteTxt.getText());
         mEdValue = Double.parseDouble(mEdLoadsTxt.getText());
-        nEdValue = Double.parseDouble(nEdLoadsTxt.getText());
+
         mEd1Value = Double.parseDouble(mEdLoadsTxt1.getText());
         mEd2Value = Double.parseDouble(mEdLoadsTxt2.getText());
         mEd3Value = Double.parseDouble(mEdLoadsTxt3.getText());
         mEd4Value = Double.parseDouble(mEdLoadsTxt4.getText());
-        nEd1Value = Double.parseDouble(nEdLoadsTxt1.getText());
-        nEd2Value = Double.parseDouble(nEdLoadsTxt2.getText());
-        nEd3Value = Double.parseDouble(nEdLoadsTxt3.getText());
-        nEd4Value = Double.parseDouble(nEdLoadsTxt4.getText());
+
         aSw2Value = Double.parseDouble(aSw2RodTxt.getText());
         nSw2Value = Double.parseDouble(nSw2RodTxt.getText());
     }*/

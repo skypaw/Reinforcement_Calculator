@@ -28,7 +28,7 @@ public class CrossSectionCharacteristics {
         this.aS1 = aS1;
         this.aS2 = aS2;
         this.alphaEOrEEff = alphaEOrEEff;
-        this.d = BasicValues.dValue(h,a1);
+        this.d = BasicValues.dValue(h, a1);
     }
 
     private double[] concreteCrossSection() {
@@ -41,21 +41,20 @@ public class CrossSectionCharacteristics {
         return new double[]{aC, sCC, xC, iC};
     }
 
-    private double[] phaseI(){
-        double aI = (bEff-b)*hF+(bEffT-b)*hFT*+b*h+alphaEOrEEff*aS2+alphaEOrEEff*aS1;
-        double sCI = (bEff-b)*Math.pow(hF,2)/2+(bEffT-b)*hFT*(h-hFT/2)+b*Math.pow(h,2)/2+alphaEOrEEff*aS2*a2+alphaEOrEEff*aS1*d;
-        double xI = sCI/aI;
-        double sI = aS1*(d-xI)-aS2*(xI-a2);
-        double iI = b*Math.pow(h,3)/12+b*h*Math.pow(h/2-xI,2)+(bEff-b)*Math.pow(hF,3)/12+(bEff-b)*hF*Math.pow(xI-hF/2,2)+(bEffT-b)*Math.pow(hFT,3)/12+(bEffT-b)*hFT*Math.pow(h-xI-hFT/2,2);
-        double iI2 = iI+alphaEOrEEff*aS2*Math.pow(xI-a2,2)+alphaEOrEEff*aS1*Math.pow(h-xI-a1,2);
+    private double[] phaseI() {
+        double aI = (bEff - b) * hF + (bEffT - b) * hFT * +b * h + alphaEOrEEff * aS2 + alphaEOrEEff * aS1;
+        double sCI = (bEff - b) * Math.pow(hF, 2) / 2 + (bEffT - b) * hFT * (h - hFT / 2) + b * Math.pow(h, 2) / 2 + alphaEOrEEff * aS2 * a2 + alphaEOrEEff * aS1 * d;
+        double xI = sCI / aI;
+        double sI = aS1 * (d - xI) - aS2 * (xI - a2);
+        double iI = b * Math.pow(h, 3) / 12 + b * h * Math.pow(h / 2 - xI, 2) + (bEff - b) * Math.pow(hF, 3) / 12 + (bEff - b) * hF * Math.pow(xI - hF / 2, 2) + (bEffT - b) * Math.pow(hFT, 3) / 12 + (bEffT - b) * hFT * Math.pow(h - xI - hFT / 2, 2);
+        double iI2 = iI + alphaEOrEEff * aS2 * Math.pow(xI - a2, 2) + alphaEOrEEff * aS1 * Math.pow(h - xI - a1, 2);
 
-        return new double[]{aI,sCI,xI,sI,iI,iI2};
+        return new double[]{aI, sCI, xI, sI, iI, iI2};
     }
 
-    private double[] phaseII1(){
+    private double[] phaseII1() {
         return new double[]{};
     }
-
 
 
 }

@@ -29,7 +29,7 @@ public class ShearingBendRods {
     private float sinAlpha;
 
 
-    public ShearingBendRods(double dDimension, float bDimension, float fCk, double fCd, float nEd, double aC, double aSl, double nS, double fiS1, double fiS2, double fYd, double fYk, double vEdRed, float vEd, double s2) {
+    public ShearingBendRods(float hDimension, float a1, double dDimension, float bDimension, float fCk, double fCd, float nEd, double aC, double aSl, double nS, double fiS1, double fiS2, double fYd, double fYk, double vEdRed, float vEd, double s2) {
         this.dDimension = dDimension;
         this.bDimension = bDimension;
         this.fCk = fCk;
@@ -54,7 +54,7 @@ public class ShearingBendRods {
         this.cotAlpha = 0.5f;
 
 
-        ShearingStirrups shearingBasic = new ShearingStirrups(dDimension, bDimension, fCk, fCd, nEd, aC, aSl, nS, fiS1, fYd, fYk, vEdRed, vEd);
+        ShearingStirrups shearingBasic = new ShearingStirrups(hDimension, bDimension, a1, fCk, fYk, nEd, vEd, vEdRed, aSl, nS, fiS1, cotTheta);
         shearingBasic.vRdCValue();
 
     }
@@ -63,9 +63,9 @@ public class ShearingBendRods {
         int alphaCw = 1;
         double nu1 = 0.6 * (1 - fCk / 250); //from 6.6N EC2
 
-        double deltaV = alphaCw*bDimension*z*nu1*fCd*cotTheta*cotAlpha/((1+Math.pow(cotTheta,2))*(2*cotTheta+cotAlpha));
+        double deltaV = alphaCw * bDimension * z * nu1 * fCd * cotTheta * cotAlpha / ((1 + Math.pow(cotTheta, 2)) * (2 * cotTheta + cotAlpha));
 
-        vRdMax = (alphaCw * bDimension * z * nu1 * fCd) / (cotTheta + tanTheta)+deltaV;
+        vRdMax = (alphaCw * bDimension * z * nu1 * fCd) / (cotTheta + tanTheta) + deltaV;
 
         aSw1 = nS * Math.PI * Math.pow(fiS1 / 2, 2);
         aSw2 = nS * Math.PI * Math.pow(fiS2 / 2, 2);
