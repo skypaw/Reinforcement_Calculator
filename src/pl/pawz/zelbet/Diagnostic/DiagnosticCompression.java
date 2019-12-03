@@ -104,7 +104,7 @@ public class DiagnosticCompression {
         double bVar = -2 * (fYd * aS1 * eS1 - epsilonCu3 * E_S * aS2 * eS2) / (Math.pow(lambdaConcrete, 2) * etaConcrete * fCd * bDimension);
         double cVar = -2 * epsilonCu3 * E_S * aS2 * eS2 * a2 / (Math.pow(lambdaConcrete, 2) * etaConcrete * fCd * bDimension);
 
-        x = PolynomialSolver.solver(1, aVar, bVar, cVar, hDimension);
+        x = PolynomialSolver.solver(1, aVar, bVar, cVar, 0);
     }
 
     private void xSmallerThanXMinMinusYd() {
