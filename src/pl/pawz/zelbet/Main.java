@@ -1,6 +1,7 @@
 package pl.pawz.zelbet;
 
 import pl.pawz.zelbet.ULS.BendingBeamT;
+import pl.pawz.zelbet.ULS.ShearingBendRods;
 import pl.pawz.zelbet.ULS.ShearingStirrups;
 
 import java.util.Arrays;
@@ -23,18 +24,21 @@ public class Main {
 
         float mEd = 0.50f;
 
-        float nEd = 0;
-        float vEd = 0.0624f;
-        double vEdRed = 0.052f;
+        float nEd = 0.9f;
+
+        float vEd = 0.258f;
+        double vEdRed = 0.215f;
         double aSl = 0;
-        double nS = 2;
+        double nS1 = 2;
+        double nS2 = 0;
         double fiS1 = 0.006;
+        double fiS2 = 0.012;
         float cotTheta = 2;
 
 
-        ShearingStirrups shearingBasic = new ShearingStirrups(h, b,a1,fCk,fYk,nEd,vEd,vEdRed,aSl,nS,fiS1,cotTheta);
-        double res = shearingBasic.resultShearingStirrups();
-        System.out.println(res);
+        ShearingBendRods res = new ShearingBendRods(h,a1,b,fCk,nEd,aSl,nS1,nS2,fiS1,fiS2,fYk,vEdRed,vEd,0,cotTheta);
+        double result1 = res.resultShearingStirrups();
+        System.out.println(result1);
 
     }
 

@@ -3,6 +3,8 @@ package pl.pawz.zelbet.ULS;
 import com.sun.deploy.config.VerboseDefaultConfig;
 import pl.pawz.zelbet.BasicValues;
 
+import java.util.Map;
+
 public class ShearingStirrups {
     private double dDimension;
     private double bDimension;
@@ -50,7 +52,7 @@ public class ShearingStirrups {
     }
 
 
-    public void vRdCValue() {
+    public double vRdCValue() {
         double kValue = Math.min(1 + Math.sqrt(200 / (dDimension * Math.pow(10, 3))), 2);
         double nuMin = 0.035 * Math.pow(kValue, 1.5) * Math.pow(fCk, 0.5);
         double rhoL = Math.min((aSl * Math.pow(10, 4)) / (bDimension * dDimension * Math.pow(10, 4)), 0.02);
@@ -62,6 +64,7 @@ public class ShearingStirrups {
         double vRdC1 = (cRdC * kValue * Math.pow(100 * rhoL * fCk, 1.0 / 3.0) + k1 * sigmaCp) * bDimension * dDimension;
         double vRdC2 = (nuMin + k1 * sigmaCp) * bDimension * dDimension;
         vRdC = Math.max(vRdC1, vRdC2);
+        return vRdC;
     }
 
     /*
