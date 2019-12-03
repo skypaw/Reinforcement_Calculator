@@ -11,7 +11,10 @@
 <?import javafx.collections.FXCollections?>
 
 <BorderPane prefHeight="800" prefWidth="1100" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml"
-            fx:controller="pl.pawz.zelbet.GUI.CrossSectionRectangle.Controller">
+            fx:controller="pl.pawz.zelbet.GUI.Controller">
+    <left>
+        <Button text="Przekrój Teowy"/>
+    </left>
 
     <center>
         <VBox fx:id="vBoxCenter">

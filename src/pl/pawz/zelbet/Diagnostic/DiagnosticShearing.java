@@ -35,7 +35,7 @@ public class DiagnosticShearing {
     private double vRdS;
 
 
-    public DiagnosticShearing(double dDimension, float bDimension, float fCk, double fCd, float nEd, double aC, double aSl, double nS1, double nS2, double fiS1, double fiS2, double fYd, double fYk, double vEdRed, float vEd, double s2, double s1) {
+    public DiagnosticShearing(float hDimension, double dDimension, float a1, float bDimension, float fCk, double fCd, float nEd, double aC, double aSl, double nS1, double nS2, double fiS1, double fiS2, double fYd, double fYk, double vEdRed, float vEd, double s2, double s1) {
         this.dDimension = dDimension;
         this.bDimension = bDimension;
         this.fCk = fCk;
@@ -62,25 +62,25 @@ public class DiagnosticShearing {
         this.cotAlpha = 0.5f;
 
 
-        ShearingStirrups shearingBasic = new ShearingStirrups(dDimension, bDimension, fCk, fCd, nEd, aC, aSl, nS1, fiS1, fYd, fYk, vEdRed, vEd); //Todo ns1 - to check if it is ok, the same bellow
+        ShearingStirrups shearingBasic = new ShearingStirrups(hDimension, bDimension, a1, fCk, fYk, nEd, vEd, vEdRed, aSl, nS1, fiS1, cotTheta); //Todo ns1 - to check if it is ok, the same bellow
         shearingBasic.vRdCValue();
 
-        ShearingBendRods shearingBend = new ShearingBendRods(dDimension,bDimension,fCk,fCd,nEd,aC,aSl,nS1,fiS1,fiS2,fYd,fYk,vEdRed,vEd,s2);
+        ShearingBendRods shearingBend = new ShearingBendRods(hDimension, a1, dDimension, bDimension, fCk, fCd, nEd, aC, aSl, nS1, fiS1, fiS2, fYd, fYk, vEdRed, vEd, s2);
         shearingBend.vRdMax();
 
     }
 
-    private void vRdS(){
-        aSw1 = nS1*Math.PI*Math.pow(fiS1/2,2);
-        double vRdS1 = aSw1/s1*z*fYd*cotTheta;
-        double vRdS2 = aSw2/s2*z*fYd*(cotTheta+cotAlpha)*sinAlpha;
+    private void vRdS() {
+        aSw1 = nS1 * Math.PI * Math.pow(fiS1 / 2, 2);
+        double vRdS1 = aSw1 / s1 * z * fYd * cotTheta;
+        double vRdS2 = aSw2 / s2 * z * fYd * (cotTheta + cotAlpha) * sinAlpha;
 
-        vRdS = Math.min(vRdS1+vRdS2,2*vRdS1);
+        vRdS = Math.min(vRdS1 + vRdS2, 2 * vRdS1);
     }
 
-    public double resultsShearingDiagnostic(){
+    public double resultsShearingDiagnostic() {
         vRdS();
-        return Math.max(Math.min(vRdS,vRdMax),vRdC);
+        return Math.max(Math.min(vRdS, vRdMax), vRdC);
     }
 
 

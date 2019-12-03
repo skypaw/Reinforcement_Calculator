@@ -1,18 +1,15 @@
-package pl.pawz.zelbet.GUI.CrossSectionRectangle;
+package pl.pawz.zelbet.GUI;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import org.junit.FixMethodOrder;
-import pl.pawz.zelbet.BasicValues;
-import pl.pawz.zelbet.GUI.AlertBox;
 import pl.pawz.zelbet.ULS.*;
 
+import java.io.IOException;
 import java.util.Arrays;
-import java.util.HashMap;
 
 public class Controller {
 
@@ -201,7 +198,8 @@ public class Controller {
 
     private double testString1;
 
-    public void initialize() {
+    public void initialize(){
+
         checkBoxResults1.setSelected(true);
         checkBoxResults2.setSelected(true);
         checkBoxResults3.setSelected(true);

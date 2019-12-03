@@ -12,7 +12,7 @@
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="pl.pawz.zelbet.GUI.CrossSectionT.ControllerT"
-            prefHeight="400.0" prefWidth="600.0">
+            prefHeight="800.0" prefWidth="1100.0">
     <center>
         <VBox fx:id="vBoxCenter">
             <GridPane hgap="5" vgap="10">
@@ -26,8 +26,6 @@
                            GridPane.columnSpan="2"/>
                     <Label text="Stan Graniczny Nośności" GridPane.columnIndex="0" GridPane.rowIndex="1"
                            GridPane.columnSpan="2"/>
-                    <CheckBox text="Kombinacje obciążeń" GridPane.columnIndex="0" GridPane.rowIndex="6"
-                              fx:id="checkBoxLoads" onAction="#fourLoads"/>
                 </GridPane>
 
 
@@ -38,25 +36,33 @@
 
                     <Label text="Geometria przekroju" GridPane.columnIndex="0" GridPane.rowIndex="0"
                            GridPane.columnSpan="2"/>
-                    <Label text="Materiały" GridPane.columnIndex="3" GridPane.rowIndex="0" GridPane.columnSpan="2"/>
+                    <Label text="Materiały" GridPane.columnIndex="4" GridPane.rowIndex="0" GridPane.columnSpan="2"/>
 
-                    <Pane GridPane.columnIndex="2" prefWidth="50"/>
+                    <Pane GridPane.columnIndex="5" prefWidth="50"/>
 
-                    <Label text="b" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                    <Label text="b_W" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
                     <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" promptText="[cm]" prefWidth="70"
                                fx:id="test1" onKeyReleased="#test1"/>
 
-                    <Label text="h" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                    <Label text="b_Eff" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
                     <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" promptText="[cm]" prefWidth="70"
+                               fx:id="test1Eff" onKeyReleased="#test1"/>
+
+                    <Label text="h" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
+                    <TextField GridPane.columnIndex="3" GridPane.rowIndex="1" promptText="[cm]" prefWidth="70"
                                fx:id="geometryHeight"/>
 
-                    <Label text="Klasa Betonu" GridPane.columnIndex="3" GridPane.rowIndex="1"/>
+                    <Label text="h_F" GridPane.columnIndex="2" GridPane.rowIndex="2"/>
+                    <TextField GridPane.columnIndex="3" GridPane.rowIndex="2" promptText="[cm]" prefWidth="70"
+                               fx:id="geometryHeightF"/>
 
-                    <CheckBox text="Lista betonów" GridPane.columnIndex="5" GridPane.rowIndex="1"
+                    <Label text="Klasa Betonu" GridPane.columnIndex="4" GridPane.rowIndex="1"/>
+
+                    <CheckBox text="Lista betonów" GridPane.columnIndex="6" GridPane.rowIndex="1"
                               fx:id="checkBoxConcrete" onAction="#changingConcrete"/>
 
-                    <Label text="f_yk" GridPane.columnIndex="3" GridPane.rowIndex="2"/>
-                    <TextField GridPane.columnIndex="4" GridPane.rowIndex="2" promptText="[MPa]" prefWidth="70"
+                    <Label text="f_yk" GridPane.columnIndex="4" GridPane.rowIndex="2"/>
+                    <TextField GridPane.columnIndex="5" GridPane.rowIndex="2" promptText="[MPa]" prefWidth="70"
                                fx:id="steelFYk"/>
                 </GridPane>
 
