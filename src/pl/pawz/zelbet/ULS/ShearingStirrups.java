@@ -49,6 +49,9 @@ public class ShearingStirrups {
         this.cotTheta = cotTheta;
         this.tanTheta = 1 / cotTheta;
 
+        vRdCValue();
+        vRdMax();
+
     }
 
 
@@ -95,8 +98,6 @@ public class ShearingStirrups {
     }
 
     public double resultShearingStirrups() {
-        vRdCValue();
-        vRdMax();
 
         if (vEdRed <= vRdC) {
             vEdRedSmallerThanVRdC();
@@ -107,5 +108,13 @@ public class ShearingStirrups {
         }
 
         return sDimension;
+    }
+
+    public double getVRdMax(){
+        return vRdMax;
+    }
+
+    public double getVRdC(){
+        return vRdC;
     }
 }

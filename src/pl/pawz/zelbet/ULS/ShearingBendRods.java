@@ -63,6 +63,7 @@ public class ShearingBendRods {
 
         ShearingStirrups shearingBasic = new ShearingStirrups(hDimension, bDimension, a1, fCk, fYk, nEd, vEd, vEdRed, aSl, nS1, fiS1, cotTheta);
         vRdC = shearingBasic.vRdCValue();
+        vRdMax();
 
     }
 
@@ -98,7 +99,7 @@ public class ShearingBendRods {
     }
 
     public double resultShearingStirrups() {
-        vRdMax();
+
 
         if (vEdRed <= vRdC) {
             vEdRedSmallerThanVRdC();
@@ -109,5 +110,13 @@ public class ShearingBendRods {
         }
 
         return sDimension;
+    }
+
+    public double getVRdMax(){
+        return vRdMax;
+    }
+
+    public double getVRdC(){
+        return vRdC;
     }
 }

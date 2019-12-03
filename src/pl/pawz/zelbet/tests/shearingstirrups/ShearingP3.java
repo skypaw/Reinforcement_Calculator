@@ -26,6 +26,24 @@ public class ShearingP3 {
 
     private static final double DELTA = 1e-3;
 
+    @Test
+    public void value() {
+
+        float vEd = 0.0624f;
+        float vEdRed = 0.052f;
+
+
+        ShearingStirrups res = new ShearingStirrups(h,b,a1,fCk,fYk,nEd,vEd,vEdRed,aSl,nS,fiS,cotTheta);
+        double valueVRdC = res.getVRdC();
+        System.out.println(valueVRdC);
+        double valueVRdMax = res.getVRdMax();
+        System.out.println(valueVRdMax);
+
+        assertEquals(0.133133 ,valueVRdC, 1e-5);
+        assertEquals(0.672069 ,valueVRdMax, 1e-5);
+
+    }
+
 
     @Test
     public void test146() {

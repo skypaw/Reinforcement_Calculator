@@ -2,7 +2,6 @@ package pl.pawz.zelbet.tests.shearingstirrups;
 
 import org.junit.Test;
 import pl.pawz.zelbet.ULS.ShearingBendRods;
-import pl.pawz.zelbet.ULS.ShearingStirrups;
 
 import static org.junit.Assert.assertEquals;
 
@@ -30,6 +29,23 @@ public class ShearingP6 {
 
     private static final double DELTA = 1e-3;
 
+    @Test
+    public void value() {
+
+        float vEd = 0.0624f;
+        float vEdRed = 0.052f;
+
+
+        ShearingBendRods res = new ShearingBendRods(h,a1,b,fCk,nEd,aSl,nS1,nS2,fiS1,fiS2,fYk,vEdRed,vEd,0.55,cotTheta);
+        double valueVRdC = res.getVRdC();
+        System.out.println(valueVRdC);
+        double valueVRdMax = res.getVRdMax();
+        System.out.println(valueVRdMax);
+
+        assertEquals(0.123798 ,valueVRdC, 1e-5);
+        assertEquals(0.806482 ,valueVRdMax, 1e-5);
+
+    }
 
     @Test
     public void test147() {
