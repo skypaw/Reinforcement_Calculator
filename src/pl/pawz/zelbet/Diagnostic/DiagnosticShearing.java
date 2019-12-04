@@ -65,7 +65,7 @@ public class DiagnosticShearing {
         ShearingStirrups shearingBasic = new ShearingStirrups(hDimension, bDimension, a1, fCk, fYk, nEd, vEd, vEdRed, aSl, nS1, fiS1, cotTheta); //Todo ns1 - to check if it is ok, the same bellow
         shearingBasic.vRdCValue();
 
-        ShearingBendRods shearingBend = new ShearingBendRods(hDimension, a1, dDimension, bDimension, fCk, fCd, nEd, aC, aSl, nS1, fiS1, fiS2, fYd, fYk, vEdRed, vEd, s2);
+        ShearingBendRods shearingBend = new ShearingBendRods(hDimension, a1,  bDimension,  fCk,  nEd, aSl, nS1, nS2, fiS1,  fiS2, fYk,  vEdRed,  vEd,  s2,  cotTheta,45);
         shearingBend.vRdMax();
 
     }

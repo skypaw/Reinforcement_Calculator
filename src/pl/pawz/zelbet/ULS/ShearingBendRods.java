@@ -1,5 +1,7 @@
 package pl.pawz.zelbet.ULS;
 
+import pl.pawz.zelbet.BasicValues;
+
 public class ShearingBendRods {
     private double dDimension;
     private double bDimension;
@@ -12,7 +14,8 @@ public class ShearingBendRods {
     private double aSw1;
     private double aSw2;
     private double sMin;
-    private double nS;
+    private double nS1;
+    private double nS2;
     private double fiS1;
     private double fiS2;
     private double fYd;
@@ -20,27 +23,28 @@ public class ShearingBendRods {
     private double sDimension;
     private double vEdRed;
     private double z;
-    private float cotTheta;
-    private float tanTheta;
+    private double cotTheta;
+    private double tanTheta;
     private double vRdC;
     private float vEd;
     private double s2;
-    private float cotAlpha;
-    private float sinAlpha;
+    private double cotAlpha;
+    private double sinAlpha;
 
 
-    public ShearingBendRods(float hDimension, float a1, double dDimension, float bDimension, float fCk, double fCd, float nEd, double aC, double aSl, double nS, double fiS1, double fiS2, double fYd, double fYk, double vEdRed, float vEd, double s2) {
-        this.dDimension = dDimension;
+    public ShearingBendRods(float hDimension, float a1, float bDimension, float fCk, float nEd, double aSl, double nS1, double nS2, double fiS1, double fiS2, double fYk, double vEdRed, float vEd, double s2, float cotTheta, double alphaAngleDegree) {
+        this.dDimension = BasicValues.dValue(hDimension,a1);
         this.bDimension = bDimension;
         this.fCk = fCk;
-        this.fCd = fCd;
+        this.fCd = BasicValues.fCdValue(fCk);
         this.nEd = nEd;
-        this.aC = aC;
+        this.aC = bDimension*hDimension;
         this.aSl = aSl;
-        this.nS = nS;
+        this.nS1= nS1;
+        this.nS2= nS2;
         this.fiS2 = fiS2;
         this.fiS1 = fiS1;
-        this.fYd = fYd;
+        this.fYd = BasicValues.fYdValue(fYk);
         this.fYk = fYk;
         this.vEdRed = vEdRed;
         this.vEd = vEd;
@@ -48,14 +52,20 @@ public class ShearingBendRods {
 
         this.z = 0.9 * dDimension;
 
-        this.cotTheta = 2; // TODO change this value  - simplify the code  -> connect both shearing to use the same functions in some cases!
-        this.tanTheta = 0.5f;
-        this.sinAlpha = 0.5f;
-        this.cotAlpha = 0.5f;
+        this.cotTheta = cotTheta; // TODO change this value  - simplify the code  -> connect both shearing to use the same functions in some cases!
+        this.tanTheta = 1/cotTheta;
+
+        double alphaAngleRadian = alphaAngleDegree*(Math.PI/180);
+
+        this.sinAlpha = Math.sin(alphaAngleRadian); //todo data from GUI
+        double cosAlpha = Math.cos(alphaAngleRadian);
+        double tanAlpha = sinAlpha/cosAlpha;
+        this.cotAlpha = 1/tanAlpha;
 
 
-        ShearingStirrups shearingBasic = new ShearingStirrups(hDimension, bDimension, a1, fCk, fYk, nEd, vEd, vEdRed, aSl, nS, fiS1, cotTheta);
-        shearingBasic.vRdCValue();
+        ShearingStirrups shearingBasic = new ShearingStirrups(hDimension, bDimension, a1, fCk, fYk, nEd, vEd, vEdRed, aSl, nS1, fiS1, cotTheta);
+        vRdC = shearingBasic.vRdCValue();
+        vRdMax();
 
     }
 
@@ -67,23 +77,24 @@ public class ShearingBendRods {
 
         vRdMax = (alphaCw * bDimension * z * nu1 * fCd) / (cotTheta + tanTheta) + deltaV;
 
-        aSw1 = nS * Math.PI * Math.pow(fiS1 / 2, 2);
-        aSw2 = nS * Math.PI * Math.pow(fiS2 / 2, 2);
+        aSw1 = nS1 * Math.PI * Math.pow(fiS1 / 2, 2);
+        aSw2 = nS2 * Math.PI * Math.pow(fiS2 / 2, 2);
         sMin = 2 * aSw1 * fYd / (bDimension * alphaCw * nu1 * fCd);
     }
 
     private void vEdRedSmallerThanVRdC() {
-        sDimension = Math.min(Math.min(0.75 * dDimension, aSw1 / (0.08 * bDimension) * fYk / Math.sqrt(fCk)), sMin);
+        sDimension = Math.max(Math.min(0.75 * dDimension, aSw1 / (0.08 * bDimension) * fYk / Math.sqrt(fCk)), sMin);
     }
 
     private void vEdRedGreaterThanVRdCAndVEdSmallerThanVRdMax() {
-        s2 = Math.max(s2, 0.6 * dDimension * (1 + cotAlpha));
+        s2 = Math.min(s2, 0.6 * dDimension * (1 + cotAlpha));
 
         double vRdS2 = aSw2 / s2 * z * fYd * (cotTheta + cotAlpha) * sinAlpha;
+
         double vEdS1 = Math.max(vEdRed - vRdS2, 0.5 * vEdRed);
 
 
-        sDimension = Math.min(Math.min(Math.min(0.75 * dDimension, aSw1 / (0.08 * bDimension) * fYk / Math.sqrt(fCk)), aSw1 / vEdS1 * z * fYd * cotTheta), sMin);
+        sDimension = Math.max(Math.min(Math.min(0.75 * dDimension, aSw1 / (0.08 * bDimension) * fYk / Math.sqrt(fCk)), aSw1 / vEdS1 * z * fYd * cotTheta), sMin);
     }
 
     private void vEdGreaterThanVRdMax() {
@@ -91,7 +102,7 @@ public class ShearingBendRods {
     }
 
     public double resultShearingStirrups() {
-        vRdMax();
+
 
         if (vEdRed <= vRdC) {
             vEdRedSmallerThanVRdC();
@@ -102,5 +113,13 @@ public class ShearingBendRods {
         }
 
         return sDimension;
+    }
+
+    public double getVRdMax(){
+        return vRdMax;
+    }
+
+    public double getVRdC(){
+        return vRdC;
     }
 }
