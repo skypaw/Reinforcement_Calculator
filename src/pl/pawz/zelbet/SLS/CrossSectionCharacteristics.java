@@ -1,6 +1,7 @@
 package pl.pawz.zelbet.SLS;
 
 import pl.pawz.zelbet.BasicValues;
+import pl.pawz.zelbet.PolynomialSolverSGU;
 
 public class CrossSectionCharacteristics {
     private float b;
@@ -49,10 +50,23 @@ public class CrossSectionCharacteristics {
         double iI = b * Math.pow(h, 3) / 12 + b * h * Math.pow(h / 2 - xI, 2) + (bEff - b) * Math.pow(hF, 3) / 12 + (bEff - b) * hF * Math.pow(xI - hF / 2, 2) + (bEffT - b) * Math.pow(hFT, 3) / 12 + (bEffT - b) * hFT * Math.pow(h - xI - hFT / 2, 2);
         double iI2 = iI + alphaEOrEEff * aS2 * Math.pow(xI - a2, 2) + alphaEOrEEff * aS1 * Math.pow(h - xI - a1, 2);
 
-        return new double[]{aI, sCI, xI, sI, iI, iI2};
+        return new double[]{aI, sCI, xI, sI, iI2};
     }
 
     private double[] phaseII1() {
+        double aVar = 0.5 * bEff;
+        double bVar = alphaEOrEEff * (aS1 + aS2);
+        double cVar = alphaEOrEEff * (aS2 * a2 + aS1 * d);
+
+        double xII = PolynomialSolverSGU.solver(aVar, bVar, cVar, 0);
+        double sII = aS1 * (d - xII) - aS2 * (xII - a2);
+        double iII = (bEff * Math.pow(xII, 3)) / 12 + bEff * xII * Math.pow(xII / 2, 2) + alphaEOrEEff * aS2 * Math.pow(xII - a2, 2) + alphaEOrEEff * aS1 * Math.pow(h - xII - a1, 2);
+
+        return new double[]{xII, sII, iII};
+    }
+
+    private double[] phaseII2(){
+
         return new double[]{};
     }
 
