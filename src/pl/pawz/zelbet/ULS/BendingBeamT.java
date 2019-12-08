@@ -22,7 +22,6 @@ public class BendingBeamT {
         this.mEd = mEd;
         this.fCd = BasicValues.fCdValue(fCk);
         this.fYd = BasicValues.fYdValue(fYk);
-
         this.etaConcrete = BasicValues.etaConcreteValue(fCk);
 
         this.bW = bW;
