@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.transform.Shear;
 import pl.pawz.zelbet.ULS.*;
 
 import java.io.IOException;
@@ -194,26 +195,22 @@ public class Controller {
     double nEd4Value = 0;
     double aSw2Value = 0;
     double nSw2Value = 0;
+    float nSw2RodSValue = 0;
 
 
     private double testString1;
 
-    public void initialize(){
+    public void initialize() {
 
         checkBoxResults1.setSelected(true);
         checkBoxResults2.setSelected(true);
-        checkBoxResults3.setSelected(true);
+        checkBoxResults3.setSelected(false);
         checkBoxResults3.setTooltip(new Tooltip("Stan Graniczny Użytkowalności nie jest liczony dla przekrojów z siłą podłużną"));
         loadsInit();
         concreteInit();
         checkBoxConcrete.setSelected(true);
         choiceBoxConcrete.setValue("C30/37");
         choiceBoxConcrete.getItems().addAll("C12/15", "C16/20", "C20/25", "C25/30", "C30/37", "C35/45", "C40/50", "C45/55", "C50/60", "C55/67", "C60/75", "C70/85", "C80/95", "C90/105", "C100/115");
-
-
-        GridPane.setConstraints(test2, 8, 8);
-        gridPaneShearing.getChildren().add(test2);
-
 
     }
 
@@ -361,20 +358,6 @@ public class Controller {
 
     }
 
-    public void test1() {
-        String testString = test1.getText();
-
-        if (testString.isEmpty() || testString.equals("-0") || testString.equals("-")) {
-            testString = "0";
-        }
-
-        testString = testString.replaceAll(",", ".");
-        double testString1 = Double.valueOf(testString);
-        System.out.println(testString1);
-        test2.setText(Double.toString(testString1));
-
-    }
-
 
     //Functionality, calculations and returning correct value
     private static float getDataFromTextField(TextField specificTextField, String variable) {
@@ -419,58 +402,119 @@ public class Controller {
     }
 
     private void dimension() {
-        bValue = (float) (getDataFromTextField(test1, "b")*Math.pow(10,-2));
-        hValue = (float) (getDataFromTextField(geometryHeight, "h")*Math.pow(10,-2));
+        bValue = (float) (getDataFromTextField(test1, "b") * Math.pow(10, -2));
+        hValue = (float) (getDataFromTextField(geometryHeight, "h") * Math.pow(10, -2));
     }
 
     private void longitudinalReinforcement() {
-        aS1Value = getDataFromTextField(aS1, "a_S1")*Math.pow(10,-4);
-        aS2Value = getDataFromTextField(aS2, "a_S2")*Math.pow(10,-4);
-        a1Value = (float) (getDataFromTextField(a1, "a_1")*Math.pow(10,-3));
-        a2Value = (float)(getDataFromTextField(a2, "a_2")*Math.pow(10,-3));
+        aS1Value = getDataFromTextField(aS1, "a_S1") * Math.pow(10, -4);
+        aS2Value = getDataFromTextField(aS2, "a_S2") * Math.pow(10, -4);
+        a1Value = (float) (getDataFromTextField(a1, "a_1") * Math.pow(10, -3));
+        a2Value = (float) (getDataFromTextField(a2, "a_2") * Math.pow(10, -3));
+    }
 
+    private void shearingValues() {
+        vEdValue = getDataFromTextField(vEd, "V_Ed") * Math.pow(10, -3);
+        vEdRedValue = getDataFromTextField(vEdRed, "V_EdRed") * Math.pow(10, -3);
+        ctgThetaValue = getDataFromTextField(ctgTheta, "ctg_theta");
+        alphaValue = getDataFromTextField(alpha, "alpha");
+
+        aSw1Value = getDataFromTextField(aSw1, "a_Sw1") * Math.pow(10, -4);
+        nSw1Value = getDataFromTextField(nSw1, "n_sw1");
+
+        if (checkBoxRods.isSelected()){
+            aSw2Value = getDataFromTextField(aSw2RodTxt, "a_Sw2") * Math.pow(10, -4);
+            nSw2Value = getDataFromTextField(nSw2RodTxt, "n_sw2");
+            nSw2RodSValue = getDataFromTextField(nSw2RodSTxt, "s_sw2");
+        }
     }
 
     private void forcesValues() {
         if (checkBoxLoads.isSelected()) {
-            mEd1Value = getDataFromTextFieldForces(mEdLoadsTxt1, "M_Ed1")*Math.pow(10,-3);
-            mEd2Value = getDataFromTextFieldForces(mEdLoadsTxt2, "M_Ed2")*Math.pow(10,-3);
-            mEd3Value = getDataFromTextFieldForces(mEdLoadsTxt3, "M_Ed3")*Math.pow(10,-3);
-            mEd4Value = getDataFromTextFieldForces(mEdLoadsTxt4, "M_Ed4")*Math.pow(10,-3);
+            mEd1Value = getDataFromTextFieldForces(mEdLoadsTxt1, "M_Ed1") * Math.pow(10, -3);
+            mEd2Value = getDataFromTextFieldForces(mEdLoadsTxt2, "M_Ed2") * Math.pow(10, -3);
+            mEd3Value = getDataFromTextFieldForces(mEdLoadsTxt3, "M_Ed3") * Math.pow(10, -3);
+            mEd4Value = getDataFromTextFieldForces(mEdLoadsTxt4, "M_Ed4") * Math.pow(10, -3);
 
-            nEd1Value = getDataFromTextFieldForces(nEdLoadsTxt1, "N_Ed1")*Math.pow(10,-3);
-            nEd2Value = getDataFromTextFieldForces(nEdLoadsTxt2, "N_Ed2")*Math.pow(10,-3);
-            nEd3Value = getDataFromTextFieldForces(nEdLoadsTxt3, "N_Ed3")*Math.pow(10,-3);
-            nEd4Value = getDataFromTextFieldForces(nEdLoadsTxt4, "N_Ed4")*Math.pow(10,-3);
+            nEd1Value = getDataFromTextFieldForces(nEdLoadsTxt1, "N_Ed1") * Math.pow(10, -3);
+            nEd2Value = getDataFromTextFieldForces(nEdLoadsTxt2, "N_Ed2") * Math.pow(10, -3);
+            nEd3Value = getDataFromTextFieldForces(nEdLoadsTxt3, "N_Ed3") * Math.pow(10, -3);
+            nEd4Value = getDataFromTextFieldForces(nEdLoadsTxt4, "N_Ed4") * Math.pow(10, -3);
 
         } else {
-            mEdValue = (float) (getDataFromTextFieldForces(mEdLoadsTxt, "M_Ed")*Math.pow(10,-3));
-            nEdValue = (float) (getDataFromTextFieldForces(nEdLoadsTxt, "N_Ed")*Math.pow(10,-3));
+            mEdValue = (float) (getDataFromTextFieldForces(mEdLoadsTxt, "M_Ed") * Math.pow(10, -3));
+            nEdValue = (float) (getDataFromTextFieldForces(nEdLoadsTxt, "N_Ed") * Math.pow(10, -3));
 
         }
     }
 
+    public void setDefaults(){
+        geometryHeight.setText(String.valueOf(60));
+        test1.setText(String.valueOf(30));
+        steelFYk.setText(String.valueOf(500));
+        aS1.setText(String.valueOf(16));
+        aS2.setText(String.valueOf(16));
+        a1.setText(String.valueOf(50));
+        a2.setText(String.valueOf(50));
+
+        ctgTheta.setText(String.valueOf(2));
+        alpha.setText(String.valueOf(45));
+        aSw1.setText(String.valueOf(8));
+        nSw1.setText(String.valueOf(2));
+
+        tZero.setText(String.valueOf(28));
+    }
 
     public void calculations() {
         fCk();
         fYk();
         dimension();
-        forcesValues();
-        longitudinalReinforcement();
+
 
         if (checkBoxResults1.isSelected() && !checkBoxLoads.isSelected()) {
+            forcesValues();
+            longitudinalReinforcement();
+
             if (nEdValue == 0) {
                 BendingBeamRectangle beam = new BendingBeamRectangle(mEdValue, fCk, fYk, hValue, bValue, a1Value, a2Value);
                 double[] ress = beam.resultsBendingBeamRectangle();
                 System.out.println(Arrays.toString(ress));
 
-                res1.setText(String.valueOf(ress[0]));
-                res2.setText(String.valueOf(ress[1]));
+                res1.setText(String.valueOf(ress[0]*Math.pow(10,4)));
+                res2.setText(String.valueOf(ress[1]*Math.pow(10,4)));
             } else {
-                System.out.println("cokolwiek1");
+                if (nEdValue > 0) {
+                    CompressionSymmetricReinforcement beam1 = new CompressionSymmetricReinforcement(nEdValue, mEdValue, fCk, fYk, bValue, hValue, a1Value, a2Value);
+                    double[] results1 = beam1.resultsCompressionSymmetricReinforcement();
+                    res1.setText(String.valueOf(results1[0]*Math.pow(10,4)));
+                    res2.setText(String.valueOf(results1[1]*Math.pow(10,4)));
+
+
+                    CompressionAsymmetricReinforcement beam2 = new CompressionAsymmetricReinforcement(nEdValue, mEdValue, fCk, fYk, bValue, hValue, a1Value, a2Value);
+                    double[] results2 = beam2.resultsCompressionAsymmetricReinforcement();
+
+                } else {
+                    ExtensionSymmetricReinforcement beam1 = new ExtensionSymmetricReinforcement(-nEdValue, mEdValue, fCk, fYk, bValue, hValue, a1Value, a2Value);
+                    double[] results1 = beam1.resultsExtensionSymmetric();
+                    res1.setText(String.valueOf(results1[0]*Math.pow(10,4)));
+                    res2.setText(String.valueOf(results1[1]*Math.pow(10,4)));
+
+                }
             }
-        } else {
-            System.out.println("cokoliwek");
+        }
+        if (checkBoxResults2.isSelected()){
+            shearingValues();
+            if (checkBoxRods.isSelected()){
+                ShearingBendRods shearing = new ShearingBendRods(hValue,a1Value,bValue,fCk,nEdValue,aS1Value,nSw1Value,nSw2Value,aSw1Value,aS2Value,fYk,vEdRedValue,vEdValue,nSw2RodSValue,ctgThetaValue,alphaValue);
+                double res = shearing.resultShearingStirrups();
+                System.out.println(res);
+
+            }else {
+                ShearingStirrups shearing = new ShearingStirrups(hValue,bValue,a1Value,fCk,fYk,nEdValue, vEdValue,vEdRedValue,aS1Value,nSw1Value,aSw1Value,ctgThetaValue); //TODO ASL ISN'T just a dimension! cm^2, not mm
+                double res = shearing.resultShearingStirrups();
+                System.out.println(res);
+
+            }
         }
 
     }

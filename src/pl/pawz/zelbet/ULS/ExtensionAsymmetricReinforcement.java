@@ -124,5 +124,4 @@ public class ExtensionAsymmetricReinforcement {
         return new double[]{aS1, aS2};
     }
 
-
 }
