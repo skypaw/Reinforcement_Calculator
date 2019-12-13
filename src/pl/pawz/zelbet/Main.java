@@ -15,14 +15,18 @@ public class Main {
         float fCk = 25f;
         float fYk = 500f;
 
+
         float b = 0.4f;
         float a1 = 0.053f;
         float a2 = 0.053f;
-
         float h = 0.6f;
-        float bW = 0.2f;
-        float bEff = 0.8f;
-        float hF = 0.15f;
+
+        float a1Beam = 0.051f;
+        float fCkBeam = 30f;
+        float hBeam = 0.4f;
+        float bW = 0.25f;
+        float bEff = 1.6f;
+        float hF = 0.10f;
 
 
 
@@ -37,6 +41,16 @@ public class Main {
 
         float nEd = 0.2114f;
         float mEd = 0.29114f;
+
+        float mEdBeam = 0.10439f;
+
+        BendingBeamT resultsBending = new BendingBeamT(mEdBeam,fCkBeam,fYk,bW,bEff,hBeam,hF,a1Beam,a2);
+        System.out.println(Arrays.toString(resultsBending.resultsBendingT()));
+
+        CompressionSymmetricReinforcement results = new CompressionSymmetricReinforcement(nEd,mEd,fCk,fYk,b,h,a1,a2);
+        System.out.println(Arrays.toString(results.resultsCompressionSymmetricReinforcement()));
+
+        System.out.println( 32.3432423);
 
     }
 

@@ -5,7 +5,7 @@ import pl.pawz.zelbet.BasicValues;
 public class ShearingBendRods {
     private double dDimension;
     private double bDimension;
-    private float fCk;
+    private double fCk;
     private double fCd;
     private float nEd;
     private double aC;
@@ -26,13 +26,13 @@ public class ShearingBendRods {
     private double cotTheta;
     private double tanTheta;
     private double vRdC;
-    private float vEd;
+    private double vEd;
     private double s2;
     private double cotAlpha;
     private double sinAlpha;
 
 
-    public ShearingBendRods(float hDimension, float a1, float bDimension, float fCk, float nEd, double aSl, double nS1, double nS2, double fiS1, double fiS2, double fYk, double vEdRed, float vEd, double s2, float cotTheta, double alphaAngleDegree) {
+    public ShearingBendRods(float hDimension, float a1, float bDimension, double fCk, float nEd, double aSl, double nS1, double nS2, double fiS1, double fiS2, double fYk, double vEdRed, double vEd, double s2, double cotTheta, double alphaAngleDegree) {
         this.dDimension = BasicValues.dValue(hDimension,a1);
         this.bDimension = bDimension;
         this.fCk = fCk;

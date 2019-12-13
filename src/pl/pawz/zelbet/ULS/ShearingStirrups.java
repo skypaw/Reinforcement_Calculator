@@ -8,7 +8,7 @@ import java.util.Map;
 public class ShearingStirrups {
     private double dDimension;
     private double bDimension;
-    private float fCk;
+    private double fCk;
     private double fCd;
     private float nEd;
     private double aC;
@@ -23,13 +23,13 @@ public class ShearingStirrups {
     private double sDimension;
     private double vEdRed;
     private double z;
-    private float cotTheta;
-    private float tanTheta;
+    private double cotTheta;
+    private double tanTheta;
     private double vRdC;
-    private float vEd;
+    private double vEd;
 
 
-    public ShearingStirrups(float hDimension, float bDimension, float a1, float fCk, double fYk, float nEd, float vEd, double vEdRed, double aSl, double nS, double fiS, float cotTheta) {
+    public ShearingStirrups(float hDimension, float bDimension, float a1, double fCk, double fYk, float nEd, double vEd, double vEdRed, double aSl, double nS, double fiS, double cotTheta) {
         this.dDimension = BasicValues.dValue(hDimension, a1);
         this.bDimension = bDimension;
         this.fCk = fCk;
