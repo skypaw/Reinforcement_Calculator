@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.collections.FXCollections?>
+
+
+<FlowPane fx:controller="pl.pawz.zelbet.GUI.Controller"  xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml">
+        <ScrollPane fx:id="scrollCalculations">
+            <VBox>
+                <GridPane hgap="3" vgap="5">
+
+                    <GridPane hgap="10" vgap="5" GridPane.columnIndex="0" GridPane.rowIndex="0"
+                              fx:id="gridLoads">
+                        <padding>
+                            <Insets top="5" right="5" bottom="5" left="5"/>
+                        </padding>
+
+                        <Label text="Stan Graniczny Nośności" GridPane.columnIndex="0" GridPane.rowIndex="1"
+                               GridPane.columnSpan="2"/>
+                        <CheckBox text="Kombinacje obciążeń" GridPane.columnIndex="0" GridPane.rowIndex="6"
+                                  fx:id="checkBoxLoads" onAction="#fourLoads"/>
+                    </GridPane>
+
+
+                    <GridPane hgap="5" vgap="5" GridPane.columnIndex="0" GridPane.rowIndex="2"
+                              fx:id="gridDimensions">
+                        <padding>
+                            <Insets top="5" right="5" bottom="5" left="5"/>
+                        </padding>
+
+                        <Label text="Geometria przekroju" GridPane.columnIndex="0" GridPane.rowIndex="0"
+                               GridPane.columnSpan="2"/>
+                        <Label text="Materiały" GridPane.columnIndex="3" GridPane.rowIndex="0"
+                               GridPane.columnSpan="2"/>
+
+                        <Pane GridPane.columnIndex="2" prefWidth="50"/>
+
+                        <ChoiceBox fx:id="choiceBoxDimensions" GridPane.columnIndex="0" GridPane.rowIndex="1"
+                                   GridPane.columnSpan="2" onAction="#dimensionsChoice">
+                            <items>
+                                <FXCollections fx:factory="observableArrayList">
+                                    <String fx:value="Przekrój Prostokątny"/>
+                                    <String fx:value="Przekrój Teowy"/>
+                                </FXCollections>
+                            </items>
+                        </ChoiceBox>
+
+
+                        <Label text="h" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                        <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" promptText="[cm]"
+                                   prefWidth="70"
+                                   fx:id="geometryHeight"/>
+
+                        <Label text="b" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+                        <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" promptText="[cm]"
+                                   prefWidth="70"
+                                   fx:id="test1"/>
+
+                        <Label text="Klasa Betonu" GridPane.columnIndex="3" GridPane.rowIndex="1"/>
+
+                        <CheckBox text="Lista betonów" GridPane.columnIndex="5" GridPane.rowIndex="1"
+                                  fx:id="checkBoxConcrete" onAction="#changingConcrete"/>
+
+                        <Label text="f_yk" GridPane.columnIndex="3" GridPane.rowIndex="2"/>
+                        <TextField GridPane.columnIndex="4" GridPane.rowIndex="2" promptText="[MPa]"
+                                   prefWidth="70"
+                                   fx:id="steelFYk"/>
+                    </GridPane>
+
+                    <Label text="Zbrojenie podłużne" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+
+                    <GridPane hgap="10" vgap="5" GridPane.columnIndex="0" GridPane.rowIndex="4"
+                              fx:id="gridPaneSGN">
+                        <padding>
+                            <Insets top="5" right="5" bottom="5" left="5"/>
+                        </padding>
+
+                        <Label text="Fi_s1" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                        <TextField GridPane.columnIndex="1" GridPane.rowIndex="0" promptText="[mm]"
+                                   prefWidth="70"
+                                   fx:id="aS1"/>
+
+                        <Label text="Fi_s2" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                        <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" promptText="[mm]"
+                                   prefWidth="70"
+                                   fx:id="aS2"/>
+
+                        <Label text="a_1" GridPane.columnIndex="2" GridPane.rowIndex="0"/>
+                        <TextField GridPane.columnIndex="3" GridPane.rowIndex="0" promptText="[mm]"
+                                   prefWidth="70"
+                                   fx:id="a1"/>
+
+                        <Label text="a_2" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
+                        <TextField GridPane.columnIndex="3" GridPane.rowIndex="1" promptText="[mm]"
+                                   prefWidth="70"
+                                   fx:id="a2"/>
+
+                        <Label text="n_1" GridPane.columnIndex="4" GridPane.rowIndex="0"/>
+                        <TextField GridPane.columnIndex="5" GridPane.rowIndex="0" promptText="[szt]"
+                                   prefWidth="70"
+                                   fx:id="n1"/>
+
+                        <Label text="n_2" GridPane.columnIndex="4" GridPane.rowIndex="1"/>
+                        <TextField GridPane.columnIndex="5" GridPane.rowIndex="1" promptText="[szt]"
+                                   prefWidth="70"
+                                   fx:id="n2"/>
+                    </GridPane>
+
+                    <Label text="Ścinanie - Zbrojenie poprzeczne" GridPane.columnIndex="0"
+                           GridPane.rowIndex="5"/>
+
+
+                    <GridPane hgap="5" vgap="5" GridPane.columnIndex="0" GridPane.rowIndex="6"
+                              fx:id="gridPaneShearing">
+                        <padding>
+                            <Insets top="5" right="5" bottom="5" left="5"/>
+                        </padding>
+
+                        <Label text="V_ed" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                        <TextField GridPane.columnIndex="1" GridPane.rowIndex="0" promptText="[kNm]"
+                                   prefWidth="70"
+                                   fx:id="vEd" onKeyReleased="#vEdRedText"/>
+
+                        <Label text="V_ed,red" GridPane.columnIndex="2" GridPane.rowIndex="0"/>
+                        <TextField GridPane.columnIndex="3" GridPane.rowIndex="0" promptText="[kNm]"
+                                   prefWidth="70"
+                                   fx:id="vEdRed"/>
+
+                        <CheckBox text="Pręty odgięte" GridPane.columnIndex="4" GridPane.rowIndex="0"
+                                  fx:id="checkBoxRods" GridPane.columnSpan="2"
+                                  onAction="#checkBoxRod"/>
+
+                        <Label text="ctg Theta" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                        <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" promptText="[wartość]"
+                                   prefWidth="40"
+                                   fx:id="ctgTheta"/>
+
+                        <Label text="Kąt Alpha" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
+                        <TextField GridPane.columnIndex="3" GridPane.rowIndex="1" promptText="[°]"
+                                   prefWidth="40"
+                                   fx:id="alpha"/>
+
+                        <Label text="A_Sl" GridPane.columnIndex="4" GridPane.rowIndex="1"/>
+                        <TextField GridPane.columnIndex="5" GridPane.rowIndex="1" promptText="[cm^2]"
+                                   prefWidth="40"
+                                   fx:id="aSlTxt"/>
+
+                        <Label text="A_sw1" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                        <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" promptText="[mm]"
+                                   prefWidth="70"
+                                   fx:id="aSw1"/>
+
+
+                        <Label text="n_sw1" GridPane.columnIndex="2" GridPane.rowIndex="2"/>
+                        <TextField GridPane.columnIndex="3" GridPane.rowIndex="2" promptText="[szt]"
+                                   prefWidth="40"
+                                   fx:id="nSw1"/>
+
+                        <Label text="s_1" GridPane.columnIndex="4" GridPane.rowIndex="2"/>
+                        <TextField GridPane.columnIndex="5" GridPane.rowIndex="2" promptText="[cm]"
+                                   prefWidth="40"
+                                   fx:id="s1"/>
+                    </GridPane>
+
+
+                    <Label text="Stan Graniczny Użytkowalności" GridPane.columnIndex="0" GridPane.rowIndex="7"/>
+
+
+                    <GridPane hgap="5" vgap="5" GridPane.columnIndex="0" GridPane.rowIndex="8"
+                              fx:id="gridPaneSGU"
+                              disable="true">
+                        <padding>
+                            <Insets top="5" right="5" bottom="5" left="5"/>
+                        </padding>
+
+
+                        <Label text="M_Ek" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                        <TextField GridPane.columnIndex="1" GridPane.rowIndex="0" promptText="[kNm]"
+                                   prefWidth="70"
+                                   fx:id="mEk"/>
+
+                        <Label text="M_ek,lt" GridPane.columnIndex="2" GridPane.rowIndex="0"/>
+                        <TextField GridPane.columnIndex="3" GridPane.rowIndex="0" promptText="[kNm]"
+                                   prefWidth="70"
+                                   fx:id="mEkLt"/>
+
+                        <Label text="Obciążenie" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                        <ChoiceBox GridPane.columnIndex="1" GridPane.rowIndex="1" fx:id="choiceBoxLoads">
+                            <items>
+                                <FXCollections fx:factory="observableArrayList">
+                                    <String fx:value="Obciążenie doraźne"/>
+                                    <String fx:value="Obciążenie długotrwałe"/>
+                                </FXCollections>
+                            </items>
+                        </ChoiceBox>
+
+
+                        <Label text="t0" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+                        <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" promptText="[dni]"
+                                   prefWidth="70"
+                                   fx:id="tZero"/>
+
+                        <Label text="RH" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+                        <TextField GridPane.columnIndex="1" GridPane.rowIndex="4" promptText="[%]"
+                                   prefWidth="70"
+                                   fx:id="rH"/>
+
+                        <Label text="Klasa Cementu" GridPane.columnIndex="2" GridPane.rowIndex="3"/>
+                        <ChoiceBox GridPane.columnIndex="3" GridPane.rowIndex="3" fx:id="choiceBoxCementClass">
+                            <items>
+                                <FXCollections fx:factory="observableArrayList">
+                                    <String fx:value="Klasa S"/>
+                                    <String fx:value="Klasa N"/>
+                                    <String fx:value="Klasa R"/>
+
+                                </FXCollections>
+                            </items>
+                        </ChoiceBox>
+
+                        <Label text="Cnom" GridPane.columnIndex="2" GridPane.rowIndex="4"/>
+                        <TextField GridPane.columnIndex="3" GridPane.rowIndex="4" promptText="[mm]"
+                                   prefWidth="70"
+                                   fx:id="cNom"/>
+
+                        <Label text="l_eff" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
+                        <TextField GridPane.columnIndex="1" GridPane.rowIndex="5" promptText="[m]"
+                                   prefWidth="70"
+                                   fx:id="lEff"/>
+
+                        <Label text="Alpha_M" GridPane.columnIndex="2" GridPane.rowIndex="5"/>
+                        <TextField GridPane.columnIndex="3" GridPane.rowIndex="5" promptText="[-]"
+                                   prefWidth="70"
+                                   fx:id="alphaM"/>
+                    </GridPane>
+
+                    <Label text="Dodatkowe opcje" GridPane.columnIndex="0" GridPane.rowIndex="9"/>
+
+
+                    <GridPane hgap="5" vgap="5" GridPane.columnIndex="0" GridPane.rowIndex="10">
+                        <padding>
+                            <Insets top="5" right="5" bottom="5" left="5"/>
+                        </padding>
+
+                        <CheckBox text="Efekty II rzędu" GridPane.columnIndex="0" GridPane.rowIndex="0"
+                                  disable="true"/>
+
+
+                    </GridPane>
+
+                    <Label text="Obliczenia" GridPane.columnIndex="0" GridPane.rowIndex="13"/>
+
+                    <GridPane hgap="5" vgap="5" GridPane.columnIndex="0" GridPane.rowIndex="14">
+                        <padding>
+                            <Insets top="5" right="5" bottom="5" left="5"/>
+                        </padding>
+
+
+                        <CheckBox text="SGU" GridPane.columnIndex="0" GridPane.rowIndex="0"
+                                  fx:id="checkBoxResults3"
+                                  onAction="#bottomButtonsController"/>
+
+                        <Button text="Wartości podstawowe" GridPane.columnIndex="0" GridPane.rowIndex="4"
+                                onAction="#setDefaults"/>
+
+                        <Button text="Obliczenia" GridPane.columnIndex="1" GridPane.rowIndex="4"
+                                onAction="#calculations"/>
+
+                    </GridPane>
+
+
+                    <GridPane GridPane.columnIndex="1" GridPane.rowIndex="0">
+                        <Pane prefWidth="75"/>
+                    </GridPane>
+
+
+                    <GridPane hgap="10" vgap="5" GridPane.columnIndex="2" GridPane.rowIndex="0">
+
+                        <Label text="Obliczeniowe" prefWidth="80" GridPane.columnIndex="1"
+                               GridPane.rowIndex="0"/>
+                        <Label text="Zastosowane" GridPane.columnIndex="3" GridPane.rowIndex="0"/>
+                        <Label text="Liczba Prętów" GridPane.columnIndex="5" GridPane.rowIndex="0"/>
+
+
+                        <Label text="As_1" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                        <Label text="0" GridPane.columnIndex="1" GridPane.rowIndex="1" fx:id="res1"/>
+                        <Label text="0" GridPane.columnIndex="3" GridPane.rowIndex="1" fx:id="res1true"/>
+                        <Label text="0" GridPane.columnIndex="5" GridPane.rowIndex="1" fx:id="resRods1"/>
+
+                        <Label text="As_2" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                        <Label text="0" GridPane.columnIndex="1" GridPane.rowIndex="2" fx:id="res2"/>
+                        <Label text="0" GridPane.columnIndex="3" GridPane.rowIndex="2" fx:id="res2true"/>
+                        <Label text="0" GridPane.columnIndex="5" GridPane.rowIndex="2" fx:id="resRods2"/>
+
+
+                        <Label text="ścinanie - s" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+                        <Label text="0" GridPane.columnIndex="1" GridPane.rowIndex="3" fx:id="sRods"/>
+                    </GridPane>
+                </GridPane>
+
+            </VBox>
+        </ScrollPane>
+
+</FlowPane>

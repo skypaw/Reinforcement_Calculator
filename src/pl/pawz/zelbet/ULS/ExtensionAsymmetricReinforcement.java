@@ -39,13 +39,12 @@ public class ExtensionAsymmetricReinforcement {
         this.a2 = a2;
         this.E_S = BasicValues.steelE();
         double xLim = BasicValuesPillars.xLimVar(epsilonCu3, hDimension, a1, fYd, E_S);
-        this.xMinusMinYd = BasicValuesPillars.xMinMinusYdVar(epsilonCu3,a2,fYd,E_S);
-        this.xMinYd = BasicValuesPillars.xMinYdVar(epsilonCu3,a2,fYd,E_S);
+        this.xMinusMinYd = BasicValuesPillars.xMinMinusYdVar(epsilonCu3, a2, fYd, E_S);
+        this.xMinYd = BasicValuesPillars.xMinYdVar(epsilonCu3, a2, fYd, E_S);
 
 
-
-        this.eS1 = BasicValuesPillars.eccentricityExtension(mEd,nEd,hDimension,a1,a2)[0];
-        this.eS2 = BasicValuesPillars.eccentricityExtension(mEd,nEd,hDimension,a1,a2)[1];
+        this.eS1 = BasicValuesPillars.eccentricityExtension(mEd, nEd, hDimension, a1, a2)[0];
+        this.eS2 = BasicValuesPillars.eccentricityExtension(mEd, nEd, hDimension, a1, a2)[1];
 
         xVar = xLim;
         sigmaS2 = Math.min(epsilonCu3 * (xVar - a2) / xVar * E_S, fYd);

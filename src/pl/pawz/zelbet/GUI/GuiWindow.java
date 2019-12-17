@@ -17,14 +17,9 @@ public class GuiWindow extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        Parent root = FXMLLoader.load(getClass().getResource("scene.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("MainTabs.fxml"));
 
-        ScrollPane scrollPane = new ScrollPane();
-        scrollPane.setContent(root);
-        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
-        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
-
-        Scene sceneRectangle = new Scene(scrollPane);
+        Scene sceneRectangle = new Scene(root);
 
         primaryStage.setTitle("Reinforcement Calculator");
         primaryStage.setScene(sceneRectangle);
