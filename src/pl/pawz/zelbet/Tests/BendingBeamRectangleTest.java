@@ -16,7 +16,6 @@ public class BendingBeamRectangleTest {
 
 
     private static final double DELTA = 1e-6;
-
     @Test
     public void test50() {
 
@@ -50,7 +49,6 @@ public class BendingBeamRectangleTest {
 
     @Test
     public void test200() {
-
         float mEd = 0.2f;
 
         BendingBeamRectangle res = new BendingBeamRectangle(mEd, fCk, fYk, hDimension, bDimension, a1, a2);
@@ -137,6 +135,8 @@ public class BendingBeamRectangleTest {
         assertEquals(46.67261 * Math.pow(10, -4), result1, DELTA);
         assertEquals(13.23 * Math.pow(10, -4), result2, DELTA);
     }
+
+
 
     @Test
     public void test955() {

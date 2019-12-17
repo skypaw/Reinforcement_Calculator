@@ -54,11 +54,8 @@ public class CrossSectionCharacteristics {
     }
 
     private double[] phaseII1() {
-        double aVar = 0.5 * bEff;
-        double bVar = alphaEOrEEff * (aS1 + aS2);
-        double cVar = alphaEOrEEff * (aS2 * a2 + aS1 * d);
 
-        double xII = PolynomialSolverSGU.solver(aVar, bVar, cVar, 0);
+        double xII = PolynomialSolverSGU.solverPhaseII1(bEff,a2,aS1,aS2,alphaEOrEEff,d);
         double sII = aS1 * (d - xII) - aS2 * (xII - a2);
         double iII = (bEff * Math.pow(xII, 3)) / 12 + bEff * xII * Math.pow(xII / 2, 2) + alphaEOrEEff * aS2 * Math.pow(xII - a2, 2) + alphaEOrEEff * aS1 * Math.pow(h - xII - a1, 2);
 
@@ -66,11 +63,9 @@ public class CrossSectionCharacteristics {
     }
 
     private double[] phaseII2() {
-        double aVar = 0.5 * b;
-        double bVar = h * (bEff - b) + alphaEOrEEff * (aS1 + aS2);
-        double cVar = 0.5 * Math.pow(hF, 2) * (bEff - b) - alphaEOrEEff * (aS2 * a2 + aS1 * d);
 
-        double xII = PolynomialSolverSGU.solver(aVar, bVar, cVar, 0);
+
+        double xII = PolynomialSolverSGU.solverPhaseII2(b,bEff,hF,a2,aS1,aS2,alphaEOrEEff,d);
         double sII = aS1 * (d - xII) - aS2 * (xII - a2);
         double iII = b * Math.pow(xII, 3) / 12 + b * xII * Math.pow(xII / 2, 2) + (bEff - b) * Math.pow(hF, 3) / 12 + (bEff - b) * hF * Math.pow(xII - hF / 2, 2) + alphaEOrEEff * aS2 * Math.pow(xII - a2, 2) + alphaEOrEEff * aS1 * Math.pow(h - xII - a1, 2);
 
@@ -78,12 +73,13 @@ public class CrossSectionCharacteristics {
     }
 
     private double[] phaseII3() {
-        double xII = PolynomialSolverSGU.solverPhaseII3(b, bEff, bEffT, h, hF, hFT, a1, a2, aS1, aS2, alphaEOrEEff, d);
+        double xII = PolynomialSolverSGU.solverPhaseII3(b, bEff, bEffT, h, hF, hFT, a2, aS1, aS2, alphaEOrEEff, d);
         double sII = aS1 * (d - xII) - aS2 * (xII - a2);
         double iII1 = b * Math.pow(xII, 3) / 12 + b * xII * Math.pow(xII / 2, 2) + (bEff - b) * Math.pow(hF, 3) / 12 + (bEff - b) * hF * Math.pow(xII - hF / 2, 2) + (bEffT - b) * Math.pow(xII - h + hFT, 3) / 12;
         double iII2 = iII1 + (bEffT - b) * (xII - h + hFT) * Math.pow((xII - h + hFT) / 2, 2) + alphaEOrEEff * aS2 * Math.pow(xII - a2, 2) + alphaEOrEEff * aS1 * Math.pow(h - xII - a1, 2);
 
         return new double[] {xII, sII, iII2};
     }
+
 
 }
