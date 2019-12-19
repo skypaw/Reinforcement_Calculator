@@ -1,9 +1,18 @@
 package pl.pawz.zelbet.GUI;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+
+import pl.pawz.zelbet.Diagnostic.DiagnosticBendingBeamAndT;
+import pl.pawz.zelbet.Diagnostic.DiagnosticCompression;
+import pl.pawz.zelbet.Diagnostic.DiagnosticExtension;
+import pl.pawz.zelbet.Diagnostic.DiagnosticShearing;
 import pl.pawz.zelbet.ULS.*;
 
 import java.util.Arrays;
@@ -177,6 +186,20 @@ public class SubController {
     @FXML
     TextField test1 = new TextField();
 
+
+    //Diagnostic values
+
+
+    @FXML
+    TextField n1;
+
+    @FXML
+    TextField n2;
+
+    @FXML
+    TextField s1;
+
+
     private Label test2 = new Label();
 
 
@@ -226,10 +249,20 @@ public class SubController {
     private float hFValue = 0;
     private float hFTValue = 0;
 
+    //diagnostic values
+
+    private float n1Value = 0;
+    private float n2Value = 0;
+    private float s1Value = 0;
+
+
+    private Scene mainScene;
+
 
     public void initialize() {
         scrollCalculations.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
         choiceBoxDimensions.setValue("Przekrój Prostokątny");
+
 
         checkBoxResults3.setSelected(false);
         checkBoxResults3.setTooltip(new Tooltip("Stan Graniczny Użytkowalności nie jest liczony dla przekrojów z siłą podłużną"));
@@ -478,10 +511,10 @@ public class SubController {
         bValue = (float) (getDataFromTextField(test1, "b") * Math.pow(10, -2));
         hValue = (float) (getDataFromTextField(geometryHeight, "h") * Math.pow(10, -2));
         if (choiceBoxDimensions.getValue().toString().equals("Przekrój Teowy")) {
-            bFValue =(float) (getDataFromTextField(bFDimension, "b_f") * Math.pow(10, -2));
-            bFTValue =(float) (getDataFromTextField(bFTDimension, "b_f,t") * Math.pow(10, -2));
-            hFValue =(float) (getDataFromTextField(hFDimension, "h_f") * Math.pow(10, -2));
-            hFTValue =(float) (getDataFromTextField(hFTDimension, "h_f,t") * Math.pow(10, -2));
+            bFValue = (float) (getDataFromTextField(bFDimension, "b_f") * Math.pow(10, -2));
+            bFTValue = (float) (getDataFromTextField(bFTDimension, "b_f,t") * Math.pow(10, -2));
+            hFValue = (float) (getDataFromTextField(hFDimension, "h_f") * Math.pow(10, -2));
+            hFTValue = (float) (getDataFromTextField(hFTDimension, "h_f,t") * Math.pow(10, -2));
         }
 
     }
@@ -512,6 +545,7 @@ public class SubController {
 
     private void forcesValues() {
         if (checkBoxLoads.isSelected()) {
+
             mEd1Value = (float) (getDataFromTextFieldForces(mEdLoadsTxt1, "M_Ed1") * Math.pow(10, -3));
             mEd2Value = (float) (getDataFromTextFieldForces(mEdLoadsTxt2, "M_Ed2") * Math.pow(10, -3));
             mEd3Value = (float) (getDataFromTextFieldForces(mEdLoadsTxt3, "M_Ed3") * Math.pow(10, -3));
@@ -559,9 +593,11 @@ public class SubController {
     private double roundTwoDigit(double toRound) {
         return Math.round(toRound * 100.00) / 100D;
     }
+
     private double roundThreeDigitShearing(double toRound) {
         return Math.round(toRound * 1000.00) / 1000D;
     }
+
     private double roundThreeDigitShearingReal(double toRound) {
         return Math.floor(toRound * 100.00) / 100D;
     }
@@ -633,7 +669,7 @@ public class SubController {
 
                 }
             }
-        } else if(choiceBoxDimensions.getValue().toString().equals("Przekrój Prostokątny")) {
+        } else if (choiceBoxDimensions.getValue().toString().equals("Przekrój Prostokątny")) {
             System.out.println(nEd1Value); //todo add extension!
             System.out.println(mEd1Value);
 
@@ -694,8 +730,147 @@ public class SubController {
         //tBeam
 
 
-        if (choiceBoxDimensions.getValue().toString().equals("Przekrój Teowy")){
-            BendingBeamT beam = new BendingBeamT(mEdValue, fCk, fYk,bValue ,2*bFValue+bValue,hValue, hFValue, a1Value, a2Value);
+        if (choiceBoxDimensions.getValue().toString().equals("Przekrój Teowy")) {
+            BendingBeamT beam = new BendingBeamT(mEdValue, fCk, fYk, bValue, 2 * bFValue + bValue, hValue, hFValue, a1Value, a2Value);
+            double[] ress = beam.resultsBendingT();
+            System.out.println(Arrays.toString(ress));
+
+            res1.setText(String.valueOf(roundTwoDigit(ress[0] * Math.pow(10, 4))));
+            res2.setText(String.valueOf(roundTwoDigit(ress[1] * Math.pow(10, 4))));
+
+            double resRods1Value = reinforcementRods(ress[0], aS1Value);
+            double resRods2Value = reinforcementRods(ress[1], aS2Value);
+
+            resRods1.setText(String.valueOf(resRods1Value));
+            resRods2.setText(String.valueOf(resRods2Value));
+
+            res1true.setText(String.valueOf(roundTwoDigit(Math.pow(aS1Value * 0.5, 2) * Math.PI * resRods1Value * Math.pow(10, 4))));
+            res2true.setText(String.valueOf(roundTwoDigit(Math.pow(aS2Value * 0.5, 2) * Math.PI * resRods2Value * Math.pow(10, 4))));
+        }
+
+    }
+
+    private void diagnosticValues() {
+
+        n1Value = (float) (getDataFromTextFieldForces(n1, "n_1"));
+        n2Value = (float) (getDataFromTextFieldForces(n2, "n_2"));
+        s1Value = (float) (getDataFromTextFieldForces(s1, "s_1"));
+    }
+
+
+
+    public void diagnostic() {
+        //        ObservableList<Tab> tabs = tabPane.getTabs();
+//        Tab tab1 = tabs.get(0);
+//        Tab tab2 = tabs.get(1);
+//
+//        Tab selectedItem = tabPane.getSelectionModel().getSelectedItem();
+
+
+        Scene scene = GlobalStatic.getScene();
+        // Scene scene = tabPane1.getScene();
+
+        Scene scene1 = checkBoxRods.getScene();
+        mainScene.lookup("#tab");
+
+        System.out.println();
+        fCk();
+        fYk();
+        dimension();
+        forcesValues();
+        longitudinalReinforcement();
+        diagnosticValues();
+
+
+        double aS1ValueDiagnostic = Math.pow(aS1Value * 0.5, 2) * Math.PI * n1Value;
+        double aS2ValueDiagnostic = Math.pow(aS2Value * 0.5, 2) * Math.PI * n2Value;
+
+
+        if (!checkBoxLoads.isSelected() && choiceBoxDimensions.getValue().toString().equals("Przekrój Prostokątny")) {
+            if (nEdValue == 0) {
+                DiagnosticBendingBeamAndT beam = new DiagnosticBendingBeamAndT(fCk, fYk, bValue, 2 * bFValue + bValue, hValue, hFValue, a1Value, a2Value, aS1ValueDiagnostic, aS2ValueDiagnostic);
+                double ress = beam.resultDiagnostic();
+                System.out.println(ress);
+
+                res1.setText(String.valueOf(roundTwoDigit(ress * Math.pow(10, 3))));
+                res1true.setText(String.valueOf(mEdValue * Math.pow(10, 3)));
+
+                res2.setText(String.valueOf(0));
+                res2true.setText(String.valueOf(0));
+
+
+            } else {
+                if (nEdValue > 0) {
+                    DiagnosticCompression beam1 = new DiagnosticCompression(nEdValue, mEdValue, fCk, fYk, bValue, hValue, a1Value, a2Value, aS1ValueDiagnostic, aS2ValueDiagnostic);
+                    double[] results1 = beam1.resultsDiagnosticCompression();
+                    res1.setText(String.valueOf(results1[0] * Math.pow(10, 3)));
+                    res2.setText(String.valueOf(results1[1] * Math.pow(10, 3)));
+
+                    res1true.setText(String.valueOf(mEdValue * Math.pow(10, 3)));
+                    res2true.setText(String.valueOf(nEdValue * Math.pow(10, 3)));
+
+                } else {
+                    DiagnosticExtension beam1 = new DiagnosticExtension(-nEdValue, mEdValue, fCk, fYk, bValue, hValue, a1Value, a2Value, aS1ValueDiagnostic, aS2ValueDiagnostic);
+                    double[] results1 = beam1.resultsDiagnosticExtension();
+                    res1.setText(String.valueOf(results1[0] * Math.pow(10, 3)));
+                    res2.setText(String.valueOf(results1[1] * Math.pow(10, 3)));
+
+                    res1true.setText(String.valueOf(mEdValue * Math.pow(10, 3)));
+                    res2true.setText(String.valueOf(nEdValue * Math.pow(10, 3)));
+
+                }
+            }
+        } else if (choiceBoxDimensions.getValue().toString().equals("Przekrój Prostokątny")) {
+            System.out.println(nEd1Value); //todo add extension!
+            System.out.println(mEd1Value);
+
+            CompressionSymmetricReinforcement beam1 = new CompressionSymmetricReinforcement(nEd1Value, mEd1Value, fCk, fYk, bValue, hValue, a1Value, a2Value);
+            double[] results1 = beam1.resultsCompressionSymmetricReinforcement();
+            System.out.println(Arrays.toString(results1));
+
+            CompressionSymmetricReinforcement beam2 = new CompressionSymmetricReinforcement(nEd2Value, mEd2Value, fCk, fYk, bValue, hValue, a1Value, a2Value);
+            double[] results2 = beam2.resultsCompressionSymmetricReinforcement();
+            System.out.println(Arrays.toString(results2));
+
+            CompressionSymmetricReinforcement beam3 = new CompressionSymmetricReinforcement(nEd3Value, mEd3Value, fCk, fYk, bValue, hValue, a1Value, a2Value);
+            double[] results3 = beam3.resultsCompressionSymmetricReinforcement();
+            System.out.println(Arrays.toString(results3));
+
+            CompressionSymmetricReinforcement beam4 = new CompressionSymmetricReinforcement(nEd4Value, mEd4Value, fCk, fYk, bValue, hValue, a1Value, a2Value);
+            double[] results4 = beam4.resultsCompressionSymmetricReinforcement();
+            System.out.println(Arrays.toString(results4));
+
+            res1.setText(String.valueOf(Math.max(Math.max(Math.max(results1[0], results2[0]), results3[0]), results4[0]) * Math.pow(10, 4)));
+            res2.setText(String.valueOf(Math.max(Math.max(Math.max(results1[1], results2[1]), results3[1]), results4[1]) * Math.pow(10, 4)));
+
+            double resRods1Value = reinforcementRods(Math.max(Math.max(Math.max(results1[0], results2[0]), results3[0]), results4[0]), aS1Value);
+            double resRods2Value = reinforcementRods(Math.max(Math.max(Math.max(results1[1], results2[1]), results3[1]), results4[1]), aS2Value);
+
+            resRods1.setText(String.valueOf(resRods1Value));
+            resRods2.setText(String.valueOf(resRods2Value));
+
+
+            res1true.setText(String.valueOf(Math.pow(aS1Value * 0.5, 2) * Math.PI * resRods1Value * Math.pow(10, 4)));
+            res2true.setText(String.valueOf(Math.pow(aS2Value * 0.5, 2) * Math.PI * resRods2Value * Math.pow(10, 4)));
+
+
+        }
+
+        //Shearing Calculations
+
+        shearingValues();
+
+        DiagnosticShearing shearing = new DiagnosticShearing(hValue, a1Value, bValue, fCk, nEdValue, aSl, nSw1Value, nSw2Value, aSw1Value, aS2Value, fYk, vEdRedValue, vEdValue, nSw2RodSValue, nSw1Value, ctgThetaValue, alphaValue);
+        double res = shearing.resultsShearingDiagnostic();
+        System.out.println(res);
+        sRods.setText(String.valueOf(roundThreeDigitShearing(res)));
+
+
+        //tBeam
+
+
+        if (choiceBoxDimensions.getValue().toString().equals("Przekrój Teowy")) {
+            BendingBeamT beam = new BendingBeamT(mEdValue, fCk, fYk, bValue, 2 * bFValue + bValue, hValue, hFValue, a1Value, a2Value);
             double[] ress = beam.resultsBendingT();
             System.out.println(Arrays.toString(ress));
 

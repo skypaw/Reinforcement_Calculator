@@ -10,9 +10,22 @@ import java.util.Arrays;
 
 public class Controller {
 
+
     @FXML
     private SubController tab1Controller;
     @FXML
     private SubController tab2Controller;
+    @FXML
+    private TabPane tabPane;
+
+
+
+    public void initialize()
+    {
+
+        GlobalStatic.setScene(tabPane.getScene());
+        System.out.println();
+        System.out.println();
+    }
 
 }
