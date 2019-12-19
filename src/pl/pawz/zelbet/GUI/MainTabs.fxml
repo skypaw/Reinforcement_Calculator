@@ -10,7 +10,7 @@
 <BorderPane prefHeight="900" prefWidth="1100" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml"
             fx:controller="pl.pawz.zelbet.GUI.Controller">
     <center>
-        <TabPane tabClosingPolicy="UNAVAILABLE">
+        <TabPane fx:id="tabPane" tabClosingPolicy="UNAVAILABLE">
             <fx:include source="CalculationsTab.fxml"/>
             <fx:include source="DiagnosticTab.fxml"/>
         </TabPane>
