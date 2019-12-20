@@ -24,7 +24,7 @@
                     <Label text="Stan Graniczny Nośności" GridPane.columnIndex="0" GridPane.rowIndex="1"
                            GridPane.columnSpan="2"/>
                     <CheckBox text="Kombinacje obciążeń" GridPane.columnIndex="0" GridPane.rowIndex="6"
-                              fx:id="checkBoxLoads" onAction="#fourLoads"/>
+                              fx:id="checkBoxLoads" onAction="#fourLoadsResults" />
                 </GridPane>
 
 
@@ -52,7 +52,7 @@
                     </ChoiceBox>
 
 
-                    <Label  text="h" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                    <Label text="h" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
                     <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" promptText="[cm]"
                                prefWidth="70"
                                fx:id="geometryHeight"/>
@@ -281,28 +281,30 @@
 
                 <GridPane hgap="10" vgap="5" GridPane.columnIndex="2" GridPane.rowIndex="0" GridPane.rowSpan="10">
 
-                    <Label text="Rd" prefWidth="80" GridPane.columnIndex="1"
-                           GridPane.rowIndex="0"/>
-                    <Label text="Ed" GridPane.columnIndex="3" GridPane.rowIndex="0"/>
+                    <GridPane hgap="10" vgap="5" fx:id="gridResults" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                        <Label text="Rd" prefWidth="80" GridPane.columnIndex="1"
+                               GridPane.rowIndex="0" fx:id="resultsRd"/>
+                        <Label text="Ed" GridPane.columnIndex="2" GridPane.rowIndex="0" fx:id="resultsEd"/>
 
 
-
-                    <Label text="M" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
-                    <Label text="0" GridPane.columnIndex="1" GridPane.rowIndex="1" fx:id="res1"/>
-                    <Label text="0" GridPane.columnIndex="3" GridPane.rowIndex="1" fx:id="res1true"/>
-
-
-                    <Label text="N" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
-                    <Label text="0" GridPane.columnIndex="1" GridPane.rowIndex="2" fx:id="res2"/>
-                    <Label text="0" GridPane.columnIndex="3" GridPane.rowIndex="2" fx:id="res2true"/>
+                        <Label text="M_rd" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                        <Label text="0" GridPane.columnIndex="1" GridPane.rowIndex="1" fx:id="res1"/>
+                        <Label text="0" GridPane.columnIndex="3" GridPane.rowIndex="1" fx:id="res1true"/>
 
 
-                    <Pane GridPane.rowIndex="3" prefHeight="50"/>
+                        <Label text="N_rd" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                        <Label text="0" GridPane.columnIndex="1" GridPane.rowIndex="2" fx:id="res2"/>
+                        <Label text="0" GridPane.columnIndex="3" GridPane.rowIndex="2" fx:id="res2true"/>
+                    </GridPane>
 
-                    <Label text="Zbrojenie poprzeczne" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
-                    <Label text="s_max" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
-                    <Label text="0.00" GridPane.columnIndex="1" GridPane.rowIndex="5" fx:id="sRods"/>
-                    <Label text="0.00" GridPane.columnIndex="2" GridPane.rowIndex="5" fx:id="sRodsReal"/>
+                    <Pane GridPane.rowIndex="1" prefHeight="50"/>
+
+                    <GridPane hgap="10" vgap="5" fx:id="gridResultsShearing" GridPane.columnIndex="0" GridPane.rowIndex="2">
+                        <Label text="Zbrojenie poprzeczne" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+                        <Label text="V" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
+                        <Label text="0.00" GridPane.columnIndex="1" GridPane.rowIndex="5" fx:id="sRods"/>
+                        <Label text="0.00" GridPane.columnIndex="2" GridPane.rowIndex="5" fx:id="sRodsReal"/>
+                    </GridPane>
                 </GridPane>
             </GridPane>
 

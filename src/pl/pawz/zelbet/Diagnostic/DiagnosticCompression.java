@@ -119,10 +119,11 @@ public class DiagnosticCompression {
     private void sigmaGreatEccentricity() {
         sigmaS1 = Math.min(epsilonCu3 * (dDimension - x) / x * E_S, fYd);
         sigmaS2 = epsilonCu3 * (x - a2) / x * E_S;
-        if (sigmaS2 > fYd) {
+
+        if (sigmaS2 >= fYd) {
             sigmaS2 = fYd;
         }
-        if (sigmaS2 < -fYd) {
+        if (sigmaS2 <= -fYd) {
             sigmaS2 = -fYd;
         }
     }
@@ -151,8 +152,11 @@ public class DiagnosticCompression {
                 } else {
                     sigmaSmallEccentricity();
                 }
+                sigmaSmallEccentricity();
+            }else{
+                sigmaGreatEccentricity();
             }
-            sigmaSmallEccentricity();
+
 
             if (x > hDimension / lambdaConcrete) {
                 x = hDimension / lambdaConcrete;

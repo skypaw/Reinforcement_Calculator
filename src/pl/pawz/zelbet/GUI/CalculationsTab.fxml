@@ -275,22 +275,35 @@
                     <Label text="Liczba Prętów" GridPane.columnIndex="5" GridPane.rowIndex="0"/>
 
 
-                    <Label text="As_1" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                    <Label text="Symetryczne As_1" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
                     <Label text="0" GridPane.columnIndex="1" GridPane.rowIndex="1" fx:id="res1"/>
                     <Label text="0" GridPane.columnIndex="3" GridPane.rowIndex="1" fx:id="res1true"/>
                     <Label text="0" GridPane.columnIndex="5" GridPane.rowIndex="1" fx:id="resRods1"/>
 
-                    <Label text="As_2" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                    <Label text="Symetryczne As_2" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
                     <Label text="0" GridPane.columnIndex="1" GridPane.rowIndex="2" fx:id="res2"/>
                     <Label text="0" GridPane.columnIndex="3" GridPane.rowIndex="2" fx:id="res2true"/>
                     <Label text="0" GridPane.columnIndex="5" GridPane.rowIndex="2" fx:id="resRods2"/>
 
                     <Pane GridPane.rowIndex="3" prefHeight="50"/>
 
-                    <Label text="Zbrojenie poprzeczne" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
-                    <Label text="s_max" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
-                    <Label text="0.00" GridPane.columnIndex="1" GridPane.rowIndex="5" fx:id="sRods"/>
-                    <Label text="0.00" GridPane.columnIndex="2" GridPane.rowIndex="5" fx:id="sRodsReal"/>
+                    <Label text="Niesymetryczne As_1" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+                    <Label text="0" GridPane.columnIndex="1" GridPane.rowIndex="4" fx:id="res1Asymmetric"/>
+                    <Label text="0" GridPane.columnIndex="3" GridPane.rowIndex="4" fx:id="res1trueAsymmetric"/>
+                    <Label text="0" GridPane.columnIndex="5" GridPane.rowIndex="4" fx:id="resRods1Asymmetric"/>
+
+                    <Label text="Niesymetryczne As_2" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
+                    <Label text="0" GridPane.columnIndex="1" GridPane.rowIndex="5" fx:id="res2Asymmetric"/>
+                    <Label text="0" GridPane.columnIndex="3" GridPane.rowIndex="5" fx:id="res2trueAsymmetric"/>
+                    <Label text="0" GridPane.columnIndex="5" GridPane.rowIndex="5" fx:id="resRods2Asymmetric"/>
+
+
+                    <Pane GridPane.rowIndex="6" prefHeight="50"/>
+
+                    <Label text="Zbrojenie poprzeczne" GridPane.columnIndex="0" GridPane.rowIndex="7"/>
+                    <Label text="s_max" GridPane.columnIndex="0" GridPane.rowIndex="8"/>
+                    <Label text="0.00" GridPane.columnIndex="1" GridPane.rowIndex="8" fx:id="sRods"/>
+                    <Label text="0.00" GridPane.columnIndex="2" GridPane.rowIndex="8" fx:id="sRodsReal"/>
 
                 </GridPane>
             </GridPane>
