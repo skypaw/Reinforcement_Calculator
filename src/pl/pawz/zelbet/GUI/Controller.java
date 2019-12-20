@@ -1,12 +1,7 @@
 package pl.pawz.zelbet.GUI;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
-import pl.pawz.zelbet.ULS.*;
-
-import java.util.Arrays;
+import javafx.scene.control.TabPane;
 
 public class Controller {
 
@@ -23,7 +18,7 @@ public class Controller {
     public void initialize()
     {
 
-        GlobalStatic.setScene(tabPane.getScene());
+        //GlobalStatic.setScene(tabPane.getScene());
         System.out.println();
         System.out.println();
     }

@@ -1,14 +1,10 @@
 package pl.pawz.zelbet.GUI;
 
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-
 import pl.pawz.zelbet.Diagnostic.DiagnosticBendingBeamAndT;
 import pl.pawz.zelbet.Diagnostic.DiagnosticCompression;
 import pl.pawz.zelbet.Diagnostic.DiagnosticExtension;
@@ -76,6 +72,20 @@ public class SubController {
     Label resRods2;
 
     @FXML
+    Label res1trueAsymmetric;
+    @FXML
+    Label res2trueAsymmetric;
+    @FXML
+    Label resRods1Asymmetric;
+    @FXML
+    Label resRods2Asymmetric;
+
+    @FXML
+    Label res1Asymmetric;
+    @FXML
+    Label res2Asymmetric;
+
+    @FXML
     Label sRods;
     @FXML
     TextField aSlTxt;
@@ -83,6 +93,10 @@ public class SubController {
     ChoiceBox choiceBoxDimensions;
     @FXML
     Label sRodsReal;
+    @FXML
+    GridPane gridResults;
+    @FXML
+    GridPane gridResultsShearing;
 
 
     //non static text fields which depends on check boxes like "four loads", or "bend rods"
@@ -139,6 +153,22 @@ public class SubController {
     private Label loadsDesc4 = new Label("N_Ed_min");
 
 
+    //extended version of four loads in diagnostic results
+    private Label mRd1Label = new Label("0");
+    private Label mRd2Label = new Label("0");
+    private Label mRd3Label = new Label("0");
+    private Label mRd4Label = new Label("0");
+    private Label nRd1Label = new Label("0");
+    private Label nRd2Label = new Label("0");
+    private Label nRd3Label = new Label("0");
+    private Label nRd4Label = new Label("0");
+
+    private Label diagnosticRes1 = new Label("M_max");
+    private Label diagnosticRes2 = new Label("M_min");
+    private Label diagnosticRes3 = new Label("N_max");
+    private Label diagnosticRes4 = new Label("N_min");
+
+
     //text field for materials could be replaced with choice box depending on check box
     private TextField concreteTxt = new TextField();
 
@@ -186,9 +216,12 @@ public class SubController {
     @FXML
     TextField test1 = new TextField();
 
-
     //Diagnostic values
 
+    @FXML
+    Label resultsEd;
+    @FXML
+    Label resultsRd;
 
     @FXML
     TextField n1;
@@ -198,10 +231,6 @@ public class SubController {
 
     @FXML
     TextField s1;
-
-
-    private Label test2 = new Label();
-
 
     //basic values for variables
 
@@ -254,6 +283,14 @@ public class SubController {
     private float n1Value = 0;
     private float n2Value = 0;
     private float s1Value = 0;
+    private float mRd1Value = 0;
+    private float mRd2Value = 0;
+    private float mRd3Value = 0;
+    private float mRd4Value = 0;
+    private float nRd1Value = 0;
+    private float nRd2Value = 0;
+    private float nRd3Value = 0;
+    private float nRd4Value = 0;
 
 
     private Scene mainScene;
@@ -327,7 +364,7 @@ public class SubController {
         nSw2RodSTxt.setPrefWidth(40);
         aSw2RodTxt.setPromptText("[mm]");
         nSw2RodTxt.setPromptText("[szt]");
-        nSw2RodSTxt.setPromptText("[m]");
+        nSw2RodSTxt.setPromptText("[cm]");
 
         if (checkBoxRods.isSelected()) {
             GridPane.setConstraints(aSw2Rod, 0, 3);
@@ -454,6 +491,40 @@ public class SubController {
 
     }
 
+    public void fourLoadsResults() {
+        gridResultsController();
+        fourLoads();
+    }
+
+    private void gridResultsController() {
+        if (checkBoxLoads.isSelected()) {
+
+
+            GridPane.setConstraints(diagnosticRes1, 1, 0);
+            GridPane.setConstraints(diagnosticRes2, 2, 0);
+            GridPane.setConstraints(diagnosticRes3, 3, 0);
+            GridPane.setConstraints(diagnosticRes4, 4, 0);
+
+            GridPane.setConstraints(mRd1Label, 1, 1);
+            GridPane.setConstraints(mRd2Label, 2, 1);
+            GridPane.setConstraints(mRd3Label, 3, 1);
+            GridPane.setConstraints(mRd4Label, 4, 1);
+
+            GridPane.setConstraints(nRd1Label, 1, 2);
+            GridPane.setConstraints(nRd2Label, 2, 2);
+            GridPane.setConstraints(nRd3Label, 3, 2);
+            GridPane.setConstraints(nRd4Label, 4, 2);
+
+            gridResults.getChildren().removeAll(res1, res1true, res2, res2true, resultsEd, resultsRd);
+
+            gridResults.getChildren().addAll(mRd1Label, mRd2Label, mRd3Label, mRd4Label, nRd1Label, nRd2Label, nRd3Label, nRd4Label, diagnosticRes1, diagnosticRes2, diagnosticRes3, diagnosticRes4);
+
+        } else {
+            gridResults.getChildren().addAll(res1, res1true, res2, res2true, resultsEd, resultsRd);
+            gridResults.getChildren().removeAll(mRd1Label, mRd2Label, mRd3Label, mRd4Label, nRd1Label, nRd2Label, nRd3Label, nRd4Label, diagnosticRes1, diagnosticRes2, diagnosticRes3, diagnosticRes4);
+        }
+    }
+
 
     //Functionality, calculations and returning correct value
     private static float getDataFromTextField(TextField specificTextField, String variable) {
@@ -539,7 +610,7 @@ public class SubController {
         if (checkBoxRods.isSelected()) {
             aSw2Value = getDataFromTextField(aSw2RodTxt, "a_Sw2") * Math.pow(10, -4);
             nSw2Value = getDataFromTextField(nSw2RodTxt, "n_sw2");
-            nSw2RodSValue = getDataFromTextField(nSw2RodSTxt, "s_sw2");
+            nSw2RodSValue = (float) (getDataFromTextField(nSw2RodSTxt, "s_sw2") * Math.pow(10, -2));
         }
     }
 
@@ -620,25 +691,36 @@ public class SubController {
                 double[] ress = beam.resultsBendingBeamRectangle();
                 System.out.println(Arrays.toString(ress));
 
-                res1.setText(String.valueOf(roundTwoDigit(ress[0] * Math.pow(10, 4))));
-                res2.setText(String.valueOf(roundTwoDigit(ress[1] * Math.pow(10, 4))));
+                res1Asymmetric.setText(String.valueOf(roundTwoDigit(ress[0] * Math.pow(10, 4))));
+                res2Asymmetric.setText(String.valueOf(roundTwoDigit(ress[1] * Math.pow(10, 4))));
 
                 double resRods1Value = reinforcementRods(ress[0], aS1Value);
                 double resRods2Value = reinforcementRods(ress[1], aS2Value);
 
-                resRods1.setText(String.valueOf(resRods1Value));
-                resRods2.setText(String.valueOf(resRods2Value));
+                resRods1Asymmetric.setText(String.valueOf(resRods1Value));
+                resRods2Asymmetric.setText(String.valueOf(resRods2Value));
 
-                res1true.setText(String.valueOf(roundTwoDigit(Math.pow(aS1Value * 0.5, 2) * Math.PI * resRods1Value * Math.pow(10, 4))));
-                res2true.setText(String.valueOf(roundTwoDigit(Math.pow(aS2Value * 0.5, 2) * Math.PI * resRods2Value * Math.pow(10, 4))));
+                res1trueAsymmetric.setText(String.valueOf(roundTwoDigit(Math.pow(aS1Value * 0.5, 2) * Math.PI * resRods1Value * Math.pow(10, 4))));
+                res2trueAsymmetric.setText(String.valueOf(roundTwoDigit(Math.pow(aS2Value * 0.5, 2) * Math.PI * resRods2Value * Math.pow(10, 4))));
+
+                res1.setText("0");
+                res2.setText("0");
+
+                resRods1.setText("0");
+                resRods2.setText("0");
+
+                res1true.setText("0");
+                res2true.setText("0");
+
 
 
             } else {
                 if (nEdValue > 0) {
                     CompressionSymmetricReinforcement beam1 = new CompressionSymmetricReinforcement(nEdValue, mEdValue, fCk, fYk, bValue, hValue, a1Value, a2Value);
                     double[] results1 = beam1.resultsCompressionSymmetricReinforcement();
-                    res1.setText(String.valueOf(results1[0] * Math.pow(10, 4)));
-                    res2.setText(String.valueOf(results1[1] * Math.pow(10, 4)));
+
+                    res1.setText(String.valueOf(roundTwoDigit(results1[0] * Math.pow(10, 4))));
+                    res2.setText(String.valueOf(roundTwoDigit(results1[1] * Math.pow(10, 4))));
 
                     double resRods1Value = reinforcementRods(results1[0], aS1Value);
                     double resRods2Value = reinforcementRods(results1[1], aS2Value);
@@ -646,17 +728,32 @@ public class SubController {
                     resRods1.setText(String.valueOf(resRods1Value));
                     resRods2.setText(String.valueOf(resRods2Value));
 
-                    res1true.setText(String.valueOf(Math.pow(aS1Value * 0.5, 2) * Math.PI * resRods1Value * Math.pow(10, 4)));
-                    res2true.setText(String.valueOf(Math.pow(aS2Value * 0.5, 2) * Math.PI * resRods2Value * Math.pow(10, 4)));
+                    res1true.setText(String.valueOf(roundTwoDigit(Math.pow(aS1Value * 0.5, 2) * Math.PI * resRods1Value * Math.pow(10, 4))));
+                    res2true.setText(String.valueOf(roundTwoDigit(Math.pow(aS2Value * 0.5, 2) * Math.PI * resRods2Value * Math.pow(10, 4))));
+
+                    //asymmetric
 
                     CompressionAsymmetricReinforcement beam2 = new CompressionAsymmetricReinforcement(nEdValue, mEdValue, fCk, fYk, bValue, hValue, a1Value, a2Value);
                     double[] results2 = beam2.resultsCompressionAsymmetricReinforcement();
 
+                    res1Asymmetric.setText(String.valueOf(roundTwoDigit(results2[0] * Math.pow(10, 4))));
+                    res2Asymmetric.setText(String.valueOf(roundTwoDigit(results2[1] * Math.pow(10, 4))));
+
+                    double resRods1ValueAsymmetric = reinforcementRods(results2[0], aS1Value);
+                    double resRods2ValueAsymmetric = reinforcementRods(results2[1], aS2Value);
+
+                    resRods1Asymmetric.setText(String.valueOf(resRods1ValueAsymmetric));
+                    resRods2Asymmetric.setText(String.valueOf(resRods2ValueAsymmetric));
+
+                    res1trueAsymmetric.setText(String.valueOf(roundTwoDigit(Math.pow(aS1Value * 0.5, 2) * Math.PI * resRods1ValueAsymmetric * Math.pow(10, 4))));
+                    res2trueAsymmetric.setText(String.valueOf(roundTwoDigit(Math.pow(aS2Value * 0.5, 2) * Math.PI * resRods2ValueAsymmetric * Math.pow(10, 4))));
+
+
                 } else {
                     ExtensionSymmetricReinforcement beam1 = new ExtensionSymmetricReinforcement(-nEdValue, mEdValue, fCk, fYk, bValue, hValue, a1Value, a2Value);
                     double[] results1 = beam1.resultsExtensionSymmetric();
-                    res1.setText(String.valueOf(results1[0] * Math.pow(10, 4)));
-                    res2.setText(String.valueOf(results1[1] * Math.pow(10, 4)));
+                    res1.setText(String.valueOf(roundTwoDigit(results1[0] * Math.pow(10, 4))));
+                    res2.setText(String.valueOf(roundTwoDigit(results1[1] * Math.pow(10, 4))));
 
                     double resRods1Value = reinforcementRods(results1[0], aS1Value);
                     double resRods2Value = reinforcementRods(results1[1], aS2Value);
@@ -664,33 +761,116 @@ public class SubController {
                     resRods1.setText(String.valueOf(resRods1Value));
                     resRods2.setText(String.valueOf(resRods2Value));
 
-                    res1true.setText(String.valueOf(Math.pow(aS1Value * 0.5, 2) * Math.PI * resRods1Value * Math.pow(10, 4)));
-                    res2true.setText(String.valueOf(Math.pow(aS2Value * 0.5, 2) * Math.PI * resRods2Value * Math.pow(10, 4)));
+                    res1true.setText(String.valueOf(roundTwoDigit(Math.pow(aS1Value * 0.5, 2) * Math.PI * resRods1Value * Math.pow(10, 4))));
+                    res2true.setText(String.valueOf(roundTwoDigit(Math.pow(aS2Value * 0.5, 2) * Math.PI * resRods2Value * Math.pow(10, 4))));
+
+                    //asymmetric
+
+                    ExtensionAsymmetricReinforcement beam2 = new ExtensionAsymmetricReinforcement(-nEdValue, mEdValue, fCk, fYk, bValue, hValue, a1Value, a2Value);
+                    double[] results2 = beam2.resultsExtensionAsymmetric();
+
+                    res1Asymmetric.setText(String.valueOf(roundTwoDigit(results2[0] * Math.pow(10, 4))));
+                    res2Asymmetric.setText(String.valueOf(roundTwoDigit(results2[1] * Math.pow(10, 4))));
+
+                    double resRods1ValueAsymmetric = reinforcementRods(results2[0], aS1Value);
+                    double resRods2ValueAsymmetric = reinforcementRods(results2[1], aS2Value);
+
+                    resRods1Asymmetric.setText(String.valueOf(resRods1ValueAsymmetric));
+                    resRods2Asymmetric.setText(String.valueOf(resRods2ValueAsymmetric));
+
+                    res1trueAsymmetric.setText(String.valueOf(roundTwoDigit(Math.pow(aS1Value * 0.5, 2) * Math.PI * resRods1ValueAsymmetric * Math.pow(10, 4))));
+                    res2trueAsymmetric.setText(String.valueOf(roundTwoDigit(Math.pow(aS2Value * 0.5, 2) * Math.PI * resRods2ValueAsymmetric * Math.pow(10, 4))));
 
                 }
             }
         } else if (choiceBoxDimensions.getValue().toString().equals("Przekrój Prostokątny")) {
-            System.out.println(nEd1Value); //todo add extension!
+            System.out.println(nEd1Value);
             System.out.println(mEd1Value);
 
-            CompressionSymmetricReinforcement beam1 = new CompressionSymmetricReinforcement(nEd1Value, mEd1Value, fCk, fYk, bValue, hValue, a1Value, a2Value);
-            double[] results1 = beam1.resultsCompressionSymmetricReinforcement();
-            System.out.println(Arrays.toString(results1));
+            double[] results1;
+            double[] results2;
+            double[] results3;
+            double[] results4;
 
-            CompressionSymmetricReinforcement beam2 = new CompressionSymmetricReinforcement(nEd2Value, mEd2Value, fCk, fYk, bValue, hValue, a1Value, a2Value);
-            double[] results2 = beam2.resultsCompressionSymmetricReinforcement();
-            System.out.println(Arrays.toString(results2));
+            double[] results1Asymmetric;
+            double[] results2Asymmetric;
+            double[] results3Asymmetric;
+            double[] results4Asymmetric;
 
-            CompressionSymmetricReinforcement beam3 = new CompressionSymmetricReinforcement(nEd3Value, mEd3Value, fCk, fYk, bValue, hValue, a1Value, a2Value);
-            double[] results3 = beam3.resultsCompressionSymmetricReinforcement();
-            System.out.println(Arrays.toString(results3));
+            if (nEd1Value > 0) {
 
-            CompressionSymmetricReinforcement beam4 = new CompressionSymmetricReinforcement(nEd4Value, mEd4Value, fCk, fYk, bValue, hValue, a1Value, a2Value);
-            double[] results4 = beam4.resultsCompressionSymmetricReinforcement();
-            System.out.println(Arrays.toString(results4));
+                CompressionSymmetricReinforcement beam1 = new CompressionSymmetricReinforcement(nEd1Value, mEd1Value, fCk, fYk, bValue, hValue, a1Value, a2Value);
+                results1 = beam1.resultsCompressionSymmetricReinforcement();
+                System.out.println(Arrays.toString(results1));
 
-            res1.setText(String.valueOf(Math.max(Math.max(Math.max(results1[0], results2[0]), results3[0]), results4[0]) * Math.pow(10, 4)));
-            res2.setText(String.valueOf(Math.max(Math.max(Math.max(results1[1], results2[1]), results3[1]), results4[1]) * Math.pow(10, 4)));
+                CompressionAsymmetricReinforcement beam1Asymmetric = new CompressionAsymmetricReinforcement(nEd1Value, mEd1Value, fCk, fYk, bValue, hValue, a1Value, a2Value);
+                results1Asymmetric = beam1Asymmetric.resultsCompressionAsymmetricReinforcement();
+
+            } else {
+                ExtensionSymmetricReinforcement beam1 = new ExtensionSymmetricReinforcement(-nEd1Value, mEd1Value, fCk, fYk, bValue, hValue, a1Value, a2Value);
+                results1 = beam1.resultsExtensionSymmetric();
+                System.out.println(Arrays.toString(results1));
+
+                ExtensionAsymmetricReinforcement beam1Asymmetric = new ExtensionAsymmetricReinforcement(-nEd1Value, mEd1Value, fCk, fYk, bValue, hValue, a1Value, a2Value);
+                results1Asymmetric = beam1Asymmetric.resultsExtensionAsymmetric();
+            }
+
+            if (nEd2Value > 0) {
+
+                CompressionSymmetricReinforcement beam2 = new CompressionSymmetricReinforcement(nEd2Value, mEd2Value, fCk, fYk, bValue, hValue, a1Value, a2Value);
+                results2 = beam2.resultsCompressionSymmetricReinforcement();
+                System.out.println(Arrays.toString(results2));
+
+                CompressionAsymmetricReinforcement beam2Asymmetric = new CompressionAsymmetricReinforcement(nEd2Value, mEd2Value, fCk, fYk, bValue, hValue, a1Value, a2Value);
+                results2Asymmetric = beam2Asymmetric.resultsCompressionAsymmetricReinforcement();
+
+            } else {
+                ExtensionSymmetricReinforcement beam2 = new ExtensionSymmetricReinforcement(-nEd2Value, mEd2Value, fCk, fYk, bValue, hValue, a1Value, a2Value);
+                results2 = beam2.resultsExtensionSymmetric();
+                System.out.println(Arrays.toString(results2));
+
+                ExtensionAsymmetricReinforcement beam2Asymmetric = new ExtensionAsymmetricReinforcement(-nEd2Value, mEd2Value, fCk, fYk, bValue, hValue, a1Value, a2Value);
+                results2Asymmetric = beam2Asymmetric.resultsExtensionAsymmetric();
+            }
+
+            if (nEd3Value > 0) {
+
+                CompressionSymmetricReinforcement beam3 = new CompressionSymmetricReinforcement(nEd3Value, mEd3Value, fCk, fYk, bValue, hValue, a1Value, a2Value);
+                results3 = beam3.resultsCompressionSymmetricReinforcement();
+                System.out.println(Arrays.toString(results3));
+
+                CompressionAsymmetricReinforcement beam3Asymmetric = new CompressionAsymmetricReinforcement(nEd3Value, mEd3Value, fCk, fYk, bValue, hValue, a1Value, a2Value);
+                results3Asymmetric = beam3Asymmetric.resultsCompressionAsymmetricReinforcement();
+
+            } else {
+                ExtensionSymmetricReinforcement beam3 = new ExtensionSymmetricReinforcement(-nEd3Value, mEd3Value, fCk, fYk, bValue, hValue, a1Value, a2Value);
+                results3 = beam3.resultsExtensionSymmetric();
+                System.out.println(Arrays.toString(results3));
+
+                ExtensionAsymmetricReinforcement beam3Asymmetric = new ExtensionAsymmetricReinforcement(-nEd3Value, mEd3Value, fCk, fYk, bValue, hValue, a1Value, a2Value);
+                results3Asymmetric = beam3Asymmetric.resultsExtensionAsymmetric();
+            }
+
+            if (nEd4Value > 0) {
+
+                CompressionSymmetricReinforcement beam4 = new CompressionSymmetricReinforcement(nEd4Value, mEd4Value, fCk, fYk, bValue, hValue, a1Value, a2Value);
+                results4 = beam4.resultsCompressionSymmetricReinforcement();
+                System.out.println(Arrays.toString(results4));
+
+                CompressionAsymmetricReinforcement beam4Asymmetric = new CompressionAsymmetricReinforcement(nEd4Value, mEd4Value, fCk, fYk, bValue, hValue, a1Value, a2Value);
+                results4Asymmetric = beam4Asymmetric.resultsCompressionAsymmetricReinforcement();
+
+            } else {
+                ExtensionSymmetricReinforcement beam4 = new ExtensionSymmetricReinforcement(-nEd4Value, mEd4Value, fCk, fYk, bValue, hValue, a1Value, a2Value);
+                results4 = beam4.resultsExtensionSymmetric();
+                System.out.println(Arrays.toString(results4));
+
+                ExtensionAsymmetricReinforcement beam4Asymmetric = new ExtensionAsymmetricReinforcement(-nEd4Value, mEd4Value, fCk, fYk, bValue, hValue, a1Value, a2Value);
+                results4Asymmetric = beam4Asymmetric.resultsExtensionAsymmetric();
+            }
+
+            res1.setText(String.valueOf(roundTwoDigit(Math.max(Math.max(Math.max(results1[0], results2[0]), results3[0]), results4[0]) * Math.pow(10, 4))));
+            res2.setText(String.valueOf(roundTwoDigit(Math.max(Math.max(Math.max(results1[1], results2[1]), results3[1]), results4[1]) * Math.pow(10, 4))));
 
             double resRods1Value = reinforcementRods(Math.max(Math.max(Math.max(results1[0], results2[0]), results3[0]), results4[0]), aS1Value);
             double resRods2Value = reinforcementRods(Math.max(Math.max(Math.max(results1[1], results2[1]), results3[1]), results4[1]), aS2Value);
@@ -699,9 +879,22 @@ public class SubController {
             resRods2.setText(String.valueOf(resRods2Value));
 
 
-            res1true.setText(String.valueOf(Math.pow(aS1Value * 0.5, 2) * Math.PI * resRods1Value * Math.pow(10, 4)));
-            res2true.setText(String.valueOf(Math.pow(aS2Value * 0.5, 2) * Math.PI * resRods2Value * Math.pow(10, 4)));
+            res1true.setText(String.valueOf(roundTwoDigit(Math.pow(aS1Value * 0.5, 2) * Math.PI * resRods1Value * Math.pow(10, 4))));
+            res2true.setText(String.valueOf(roundTwoDigit(Math.pow(aS2Value * 0.5, 2) * Math.PI * resRods2Value * Math.pow(10, 4))));
 
+            //asymmetric
+
+            res1Asymmetric.setText(String.valueOf(roundTwoDigit(Math.max(Math.max(Math.max(results1Asymmetric[0], results2Asymmetric[0]), results3Asymmetric[0]), results4Asymmetric[0]) * Math.pow(10, 4))));
+            res2Asymmetric.setText(String.valueOf(roundTwoDigit(Math.max(Math.max(Math.max(results1Asymmetric[1], results2Asymmetric[1]), results3Asymmetric[1]), results4Asymmetric[1]) * Math.pow(10, 4))));
+
+            double resRods1ValueAsymmetric = reinforcementRods(results2Asymmetric[0], aS1Value);
+            double resRods2ValueAsymmetric = reinforcementRods(results2Asymmetric[1], aS2Value);
+
+            resRods1Asymmetric.setText(String.valueOf(resRods1ValueAsymmetric));
+            resRods2Asymmetric.setText(String.valueOf(resRods2ValueAsymmetric));
+
+            res1trueAsymmetric.setText(String.valueOf(roundTwoDigit(Math.pow(aS1Value * 0.5, 2) * Math.PI * resRods1ValueAsymmetric * Math.pow(10, 4))));
+            res2trueAsymmetric.setText(String.valueOf(roundTwoDigit(Math.pow(aS2Value * 0.5, 2) * Math.PI * resRods2ValueAsymmetric * Math.pow(10, 4))));
 
         }
 
@@ -735,28 +928,36 @@ public class SubController {
             double[] ress = beam.resultsBendingT();
             System.out.println(Arrays.toString(ress));
 
-            res1.setText(String.valueOf(roundTwoDigit(ress[0] * Math.pow(10, 4))));
-            res2.setText(String.valueOf(roundTwoDigit(ress[1] * Math.pow(10, 4))));
+            res1Asymmetric.setText(String.valueOf(roundTwoDigit(ress[0] * Math.pow(10, 4))));
+            res2Asymmetric.setText(String.valueOf(roundTwoDigit(ress[1] * Math.pow(10, 4))));
 
             double resRods1Value = reinforcementRods(ress[0], aS1Value);
             double resRods2Value = reinforcementRods(ress[1], aS2Value);
 
-            resRods1.setText(String.valueOf(resRods1Value));
-            resRods2.setText(String.valueOf(resRods2Value));
+            resRods1Asymmetric.setText(String.valueOf(resRods1Value));
+            resRods2Asymmetric.setText(String.valueOf(resRods2Value));
 
-            res1true.setText(String.valueOf(roundTwoDigit(Math.pow(aS1Value * 0.5, 2) * Math.PI * resRods1Value * Math.pow(10, 4))));
-            res2true.setText(String.valueOf(roundTwoDigit(Math.pow(aS2Value * 0.5, 2) * Math.PI * resRods2Value * Math.pow(10, 4))));
+            res1trueAsymmetric.setText(String.valueOf(roundTwoDigit(Math.pow(aS1Value * 0.5, 2) * Math.PI * resRods1Value * Math.pow(10, 4))));
+            res2trueAsymmetric.setText(String.valueOf(roundTwoDigit(Math.pow(aS2Value * 0.5, 2) * Math.PI * resRods2Value * Math.pow(10, 4))));
+
+            res1.setText("0");
+            res2.setText("0");
+
+            resRods1.setText("0");
+            resRods2.setText("0");
+
+            res1true.setText("0");
+            res2true.setText("0");
         }
 
     }
 
     private void diagnosticValues() {
 
-        n1Value = (float) (getDataFromTextFieldForces(n1, "n_1"));
-        n2Value = (float) (getDataFromTextFieldForces(n2, "n_2"));
-        s1Value = (float) (getDataFromTextFieldForces(s1, "s_1"));
+        n1Value = getDataFromTextFieldForces(n1, "n_1");
+        n2Value = getDataFromTextFieldForces(n2, "n_2");
+        s1Value = (float) (getDataFromTextFieldForces(s1, "s_1") * Math.pow(10, -2));
     }
-
 
 
     public void diagnostic() {
@@ -767,11 +968,11 @@ public class SubController {
 //        Tab selectedItem = tabPane.getSelectionModel().getSelectedItem();
 
 
-        Scene scene = GlobalStatic.getScene();
+        //   Scene scene = GlobalStatic.getScene();
         // Scene scene = tabPane1.getScene();
 
-        Scene scene1 = checkBoxRods.getScene();
-        mainScene.lookup("#tab");
+        //  Scene scene1 = checkBoxRods.getScene();
+//        mainScene.lookup("#tab");
 
         System.out.println();
         fCk();
@@ -788,12 +989,12 @@ public class SubController {
 
         if (!checkBoxLoads.isSelected() && choiceBoxDimensions.getValue().toString().equals("Przekrój Prostokątny")) {
             if (nEdValue == 0) {
-                DiagnosticBendingBeamAndT beam = new DiagnosticBendingBeamAndT(fCk, fYk, bValue, 2 * bFValue + bValue, hValue, hFValue, a1Value, a2Value, aS1ValueDiagnostic, aS2ValueDiagnostic);
+                DiagnosticBendingBeamAndT beam = new DiagnosticBendingBeamAndT(fCk, fYk, bValue, bValue, hValue, 0, a1Value, a2Value, aS1ValueDiagnostic, aS2ValueDiagnostic);
                 double ress = beam.resultDiagnostic();
                 System.out.println(ress);
 
                 res1.setText(String.valueOf(roundTwoDigit(ress * Math.pow(10, 3))));
-                res1true.setText(String.valueOf(mEdValue * Math.pow(10, 3)));
+                res1true.setText(String.valueOf(roundTwoDigit(mEdValue * Math.pow(10, 3))));
 
                 res2.setText(String.valueOf(0));
                 res2true.setText(String.valueOf(0));
@@ -803,20 +1004,20 @@ public class SubController {
                 if (nEdValue > 0) {
                     DiagnosticCompression beam1 = new DiagnosticCompression(nEdValue, mEdValue, fCk, fYk, bValue, hValue, a1Value, a2Value, aS1ValueDiagnostic, aS2ValueDiagnostic);
                     double[] results1 = beam1.resultsDiagnosticCompression();
-                    res1.setText(String.valueOf(results1[0] * Math.pow(10, 3)));
-                    res2.setText(String.valueOf(results1[1] * Math.pow(10, 3)));
+                    res1.setText(String.valueOf(roundTwoDigit(results1[1] * Math.pow(10, 3))));
+                    res2.setText(String.valueOf(roundTwoDigit(results1[0] * Math.pow(10, 3))));
 
-                    res1true.setText(String.valueOf(mEdValue * Math.pow(10, 3)));
-                    res2true.setText(String.valueOf(nEdValue * Math.pow(10, 3)));
+                    res1true.setText(String.valueOf(roundTwoDigit(mEdValue * Math.pow(10, 3))));
+                    res2true.setText(String.valueOf(roundTwoDigit(nEdValue * Math.pow(10, 3))));
 
                 } else {
                     DiagnosticExtension beam1 = new DiagnosticExtension(-nEdValue, mEdValue, fCk, fYk, bValue, hValue, a1Value, a2Value, aS1ValueDiagnostic, aS2ValueDiagnostic);
                     double[] results1 = beam1.resultsDiagnosticExtension();
-                    res1.setText(String.valueOf(results1[0] * Math.pow(10, 3)));
-                    res2.setText(String.valueOf(results1[1] * Math.pow(10, 3)));
+                    res1.setText(String.valueOf(roundTwoDigit(results1[1] * Math.pow(10, 3))));
+                    res2.setText(String.valueOf(roundTwoDigit(results1[0] * Math.pow(10, 3))));
 
-                    res1true.setText(String.valueOf(mEdValue * Math.pow(10, 3)));
-                    res2true.setText(String.valueOf(nEdValue * Math.pow(10, 3)));
+                    res1true.setText(String.valueOf(roundTwoDigit(mEdValue * Math.pow(10, 3))));
+                    res2true.setText(String.valueOf(roundTwoDigit(nEdValue * Math.pow(10, 3))));
 
                 }
             }
@@ -824,34 +1025,65 @@ public class SubController {
             System.out.println(nEd1Value); //todo add extension!
             System.out.println(mEd1Value);
 
-            CompressionSymmetricReinforcement beam1 = new CompressionSymmetricReinforcement(nEd1Value, mEd1Value, fCk, fYk, bValue, hValue, a1Value, a2Value);
-            double[] results1 = beam1.resultsCompressionSymmetricReinforcement();
-            System.out.println(Arrays.toString(results1));
+            double[] results1;
+            double[] results2;
+            double[] results3;
+            double[] results4;
 
-            CompressionSymmetricReinforcement beam2 = new CompressionSymmetricReinforcement(nEd2Value, mEd2Value, fCk, fYk, bValue, hValue, a1Value, a2Value);
-            double[] results2 = beam2.resultsCompressionSymmetricReinforcement();
-            System.out.println(Arrays.toString(results2));
+            if (nEd1Value > 0) {
+                DiagnosticCompression beam1 = new DiagnosticCompression(nEd1Value, mEd1Value, fCk, fYk, bValue, hValue, a1Value, a2Value, aS1ValueDiagnostic, aS2ValueDiagnostic);
+                results1 = beam1.resultsDiagnosticCompression();
+                System.out.println(Arrays.toString(results1));
+            } else {
+                DiagnosticExtension beam1 = new DiagnosticExtension(-nEd1Value, mEd1Value, fCk, fYk, bValue, hValue, a1Value, a2Value, aS1ValueDiagnostic, aS2ValueDiagnostic);
+                results1 = beam1.resultsDiagnosticExtension();
+                System.out.println(Arrays.toString(results1));
+            }
 
-            CompressionSymmetricReinforcement beam3 = new CompressionSymmetricReinforcement(nEd3Value, mEd3Value, fCk, fYk, bValue, hValue, a1Value, a2Value);
-            double[] results3 = beam3.resultsCompressionSymmetricReinforcement();
-            System.out.println(Arrays.toString(results3));
+            if (nEd2Value > 0) {
 
-            CompressionSymmetricReinforcement beam4 = new CompressionSymmetricReinforcement(nEd4Value, mEd4Value, fCk, fYk, bValue, hValue, a1Value, a2Value);
-            double[] results4 = beam4.resultsCompressionSymmetricReinforcement();
-            System.out.println(Arrays.toString(results4));
+                DiagnosticCompression beam2 = new DiagnosticCompression(nEd2Value, mEd2Value, fCk, fYk, bValue, hValue, a1Value, a2Value, aS1ValueDiagnostic, aS2ValueDiagnostic);
+                results2 = beam2.resultsDiagnosticCompression();
+                System.out.println(Arrays.toString(results2));
+            } else {
+                DiagnosticExtension beam2 = new DiagnosticExtension(-nEd2Value, mEd2Value, fCk, fYk, bValue, hValue, a1Value, a2Value, aS1ValueDiagnostic, aS2ValueDiagnostic);
+                results2 = beam2.resultsDiagnosticExtension();
+                System.out.println(Arrays.toString(results2));
+            }
 
-            res1.setText(String.valueOf(Math.max(Math.max(Math.max(results1[0], results2[0]), results3[0]), results4[0]) * Math.pow(10, 4)));
-            res2.setText(String.valueOf(Math.max(Math.max(Math.max(results1[1], results2[1]), results3[1]), results4[1]) * Math.pow(10, 4)));
+            if (nEd3Value > 0) {
 
-            double resRods1Value = reinforcementRods(Math.max(Math.max(Math.max(results1[0], results2[0]), results3[0]), results4[0]), aS1Value);
-            double resRods2Value = reinforcementRods(Math.max(Math.max(Math.max(results1[1], results2[1]), results3[1]), results4[1]), aS2Value);
+                DiagnosticCompression beam3 = new DiagnosticCompression(nEd3Value, mEd3Value, fCk, fYk, bValue, hValue, a1Value, a2Value, aS1ValueDiagnostic, aS2ValueDiagnostic);
+                results3 = beam3.resultsDiagnosticCompression();
+                System.out.println(Arrays.toString(results3));
+            } else {
+                DiagnosticExtension beam3 = new DiagnosticExtension(-nEd3Value, mEd3Value, fCk, fYk, bValue, hValue, a1Value, a2Value, aS1ValueDiagnostic, aS2ValueDiagnostic);
+                results3 = beam3.resultsDiagnosticExtension();
+                System.out.println(Arrays.toString(results3));
+            }
 
-            resRods1.setText(String.valueOf(resRods1Value));
-            resRods2.setText(String.valueOf(resRods2Value));
+            if (nEd4Value > 0) {
+
+                DiagnosticCompression beam4 = new DiagnosticCompression(nEd4Value, mEd4Value, fCk, fYk, bValue, hValue, a1Value, a2Value, aS1ValueDiagnostic, aS2ValueDiagnostic);
+                results4 = beam4.resultsDiagnosticCompression();
+                System.out.println(Arrays.toString(results4));
+
+            } else {
+                DiagnosticExtension beam4 = new DiagnosticExtension(-nEd4Value, mEd4Value, fCk, fYk, bValue, hValue, a1Value, a2Value, aS1ValueDiagnostic, aS2ValueDiagnostic);
+                results4 = beam4.resultsDiagnosticExtension();
+                System.out.println(Arrays.toString(results4));
+            }
 
 
-            res1true.setText(String.valueOf(Math.pow(aS1Value * 0.5, 2) * Math.PI * resRods1Value * Math.pow(10, 4)));
-            res2true.setText(String.valueOf(Math.pow(aS2Value * 0.5, 2) * Math.PI * resRods2Value * Math.pow(10, 4)));
+            mRd1Label.setText(String.valueOf(roundTwoDigit(results1[1] * Math.pow(10, 3))));
+            mRd2Label.setText(String.valueOf(roundTwoDigit(results2[1] * Math.pow(10, 3))));
+            mRd3Label.setText(String.valueOf(roundTwoDigit(results3[1] * Math.pow(10, 3))));
+            mRd4Label.setText(String.valueOf(roundTwoDigit(results4[1] * Math.pow(10, 3))));
+
+            nRd1Label.setText(String.valueOf(roundTwoDigit(results1[0] * Math.pow(10, 3))));
+            nRd2Label.setText(String.valueOf(roundTwoDigit(results2[0] * Math.pow(10, 3))));
+            nRd3Label.setText(String.valueOf(roundTwoDigit(results3[0] * Math.pow(10, 3))));
+            nRd4Label.setText(String.valueOf(roundTwoDigit(results4[0] * Math.pow(10, 3))));
 
 
         }
@@ -860,31 +1092,25 @@ public class SubController {
 
         shearingValues();
 
-        DiagnosticShearing shearing = new DiagnosticShearing(hValue, a1Value, bValue, fCk, nEdValue, aSl, nSw1Value, nSw2Value, aSw1Value, aS2Value, fYk, vEdRedValue, vEdValue, nSw2RodSValue, nSw1Value, ctgThetaValue, alphaValue);
+        DiagnosticShearing shearing = new DiagnosticShearing(hValue, a1Value, bValue, fCk, nEdValue, aSl, nSw1Value, nSw2Value, aSw1Value, aS2Value, fYk, vEdRedValue, vEdValue, nSw2RodSValue, s1Value, ctgThetaValue, alphaValue);
         double res = shearing.resultsShearingDiagnostic();
         System.out.println(res);
-        sRods.setText(String.valueOf(roundThreeDigitShearing(res)));
+        sRods.setText(String.valueOf(roundThreeDigitShearing(res * Math.pow(10, 3))));
 
 
         //tBeam
 
 
         if (choiceBoxDimensions.getValue().toString().equals("Przekrój Teowy")) {
-            BendingBeamT beam = new BendingBeamT(mEdValue, fCk, fYk, bValue, 2 * bFValue + bValue, hValue, hFValue, a1Value, a2Value);
-            double[] ress = beam.resultsBendingT();
-            System.out.println(Arrays.toString(ress));
+            DiagnosticBendingBeamAndT beam = new DiagnosticBendingBeamAndT(fCk, fYk, bValue, 2 * bFValue + bValue, hValue, hFValue, a1Value, a2Value, aS1ValueDiagnostic, aS2ValueDiagnostic);
+            double ress = beam.resultDiagnostic();
+            System.out.println(ress);
 
-            res1.setText(String.valueOf(roundTwoDigit(ress[0] * Math.pow(10, 4))));
-            res2.setText(String.valueOf(roundTwoDigit(ress[1] * Math.pow(10, 4))));
+            res1.setText(String.valueOf(roundTwoDigit(ress * Math.pow(10, 3))));
+            res1true.setText(String.valueOf(roundTwoDigit(mEdValue * Math.pow(10, 3))));
 
-            double resRods1Value = reinforcementRods(ress[0], aS1Value);
-            double resRods2Value = reinforcementRods(ress[1], aS2Value);
-
-            resRods1.setText(String.valueOf(resRods1Value));
-            resRods2.setText(String.valueOf(resRods2Value));
-
-            res1true.setText(String.valueOf(roundTwoDigit(Math.pow(aS1Value * 0.5, 2) * Math.PI * resRods1Value * Math.pow(10, 4))));
-            res2true.setText(String.valueOf(roundTwoDigit(Math.pow(aS2Value * 0.5, 2) * Math.PI * resRods2Value * Math.pow(10, 4))));
+            res2.setText(String.valueOf(0));
+            res2true.setText(String.valueOf(0));
         }
 
     }
