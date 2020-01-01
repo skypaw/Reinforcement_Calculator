@@ -106,7 +106,13 @@ public class Scratch {
     }
 
     public double wK() {
-              //todo to call some functions
+        mCr();
+        sigmaS();
+        heightEff();
+        aCtEff();
+        rhoPEff();
+        epsilons();
+        sRMax();
 
         if (mEdk <= mCr) {
             return 0;

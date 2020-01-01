@@ -84,7 +84,7 @@
                         <Insets top="5" right="5" bottom="5" left="5"/>
                     </padding>
 
-                    <Label text="Fi_s1" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                    <Label text="Φ_s1" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
                     <TextField GridPane.columnIndex="1" GridPane.rowIndex="0" promptText="[mm]"
                                prefWidth="70"
                                fx:id="aS1"/>
