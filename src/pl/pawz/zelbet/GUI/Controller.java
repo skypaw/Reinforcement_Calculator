@@ -1,15 +1,18 @@
 package pl.pawz.zelbet.GUI;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Control;
+import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 
 public class Controller {
 
 
+
     @FXML
-    private SubController tab1Controller;
+    SubController tab1Controller;
     @FXML
-    private SubController tab2Controller;
+    SubController tab2Controller;
     @FXML
     private TabPane tabPane;
 
@@ -17,10 +20,13 @@ public class Controller {
 
     public void initialize()
     {
-
-        //GlobalStatic.setScene(tabPane.getScene());
-        System.out.println();
-        System.out.println();
+        tab1Controller = new SubController();
+        //System.out.println(tab1Controller.data);
     }
 
+
+    public void passData(){
+
+       // System.out.println(tab1Controller.data);
+    }
 }
