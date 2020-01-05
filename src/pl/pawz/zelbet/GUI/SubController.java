@@ -12,9 +12,11 @@ import pl.pawz.zelbet.Diagnostic.DiagnosticShearing;
 import pl.pawz.zelbet.ULS.*;
 
 import java.util.Arrays;
+import java.util.HashMap;
 
 public class SubController {
 
+    public HashMap<String, Double> data;
 
     @FXML
     Label res1 = new Label();
@@ -24,43 +26,43 @@ public class SubController {
 
     // Static text fields to read data from. Used in method "calculations"
     @FXML
-    TextField geometryHeight = new TextField();
+    TextField geometryHeight;
     @FXML
-    TextField steelFYk = new TextField();
+    TextField steelFYk;
     @FXML
-    TextField aS1 = new TextField();
+    TextField aS1;
     @FXML
-    TextField aS2 = new TextField();
+    TextField aS2;
     @FXML
-    TextField a1 = new TextField();
+    TextField a1;
     @FXML
-    TextField a2 = new TextField();
+    TextField a2;
     @FXML
-    TextField vEd = new TextField();
+    TextField vEd;
     @FXML
     TextField vEdRed;
     @FXML
-    TextField ctgTheta = new TextField();
+    TextField ctgTheta;
     @FXML
-    TextField alpha = new TextField();
+    TextField alpha;
     @FXML
-    TextField aSw1 = new TextField();
+    TextField aSw1;
     @FXML
-    TextField nSw1 = new TextField();
+    TextField nSw1;
     @FXML
-    TextField mEk = new TextField();
+    TextField mEk;
     @FXML
-    TextField mEkLt = new TextField();
+    TextField mEkLt;
     @FXML
-    TextField tZero = new TextField();
+    TextField tZero;
     @FXML
-    TextField rH = new TextField();
+    TextField rH;
     @FXML
-    TextField cNom = new TextField();
+    TextField cNom;
     @FXML
-    TextField lEff = new TextField();
+    TextField lEff;
     @FXML
-    TextField alphaM = new TextField();
+    TextField alphaM;
 
     @FXML
     Label res1true;
@@ -713,7 +715,6 @@ public class SubController {
                 res2true.setText("0");
 
 
-
             } else {
                 if (nEdValue > 0) {
                     CompressionSymmetricReinforcement beam1 = new CompressionSymmetricReinforcement(nEdValue, mEdValue, fCk, fYk, bValue, hValue, a1Value, a2Value);
@@ -949,6 +950,10 @@ public class SubController {
             res1true.setText("0");
             res2true.setText("0");
         }
+
+        data = new HashMap<>();
+
+        data.put("hValue", (double) hValue);
 
     }
 
