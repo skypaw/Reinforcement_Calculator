@@ -18,6 +18,7 @@ public class Controller {
         if (tab1Controller.data != null) {
 
             tab2Controller.geometryHeight.setText(String.valueOf(tab1Controller.data.get("hValue")));
+
         }
 
 
