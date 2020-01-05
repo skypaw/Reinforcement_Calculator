@@ -1,32 +1,27 @@
 package pl.pawz.zelbet.GUI;
 
+
 import javafx.fxml.FXML;
-import javafx.scene.control.Control;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
 
 public class Controller {
-
 
 
     @FXML
     SubController tab1Controller;
     @FXML
     SubController tab2Controller;
-    @FXML
-    private TabPane tabPane;
 
 
+    public void dataPass() {
 
-    public void initialize()
-    {
-        tab1Controller = new SubController();
-        //System.out.println(tab1Controller.data);
+
+        if (tab1Controller.data != null) {
+
+            tab2Controller.geometryHeight.setText(String.valueOf(tab1Controller.data.get("hValue")));
+        }
+
+
     }
 
 
-    public void passData(){
-
-       // System.out.println(tab1Controller.data);
-    }
 }

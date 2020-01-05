@@ -1,21 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?improt javafxc.scene.tabs.*?>
+
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+
+<TabPane tabClosingPolicy="UNAVAILABLE" prefHeight="900" prefWidth="1100"
+         xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml"
+         fx:controller="pl.pawz.zelbet.GUI.Controller">
+
+    <Tab text="Projektowanie" onSelectionChanged="#dataPass">
+        <fx:include fx:id="tab1" source="CalculationsTab.fxml"/>
+    </Tab>
+
+    <Tab text="Diagnostyka">
+        <fx:include fx:id="tab2" source="DiagnosticTab.fxml"/>
+    </Tab>
 
 
-<BorderPane prefHeight="900" prefWidth="1100" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml"
-            fx:controller="pl.pawz.zelbet.GUI.Controller">
-    <center>
-        <TabPane fx:id="tabPane" tabClosingPolicy="UNAVAILABLE">
-
-                <Tab text="Projektowanie">
-                    <fx:include fx:id="tab1Controller" source="CalculationsTab.fxml"/>
-                </Tab>
-
-                <fx:include source="DiagnosticTab.fxml"/>
-
-        </TabPane>
-    </center>
-</BorderPane>
+</TabPane>
