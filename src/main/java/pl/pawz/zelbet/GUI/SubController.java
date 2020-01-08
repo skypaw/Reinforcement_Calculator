@@ -953,7 +953,17 @@ public class SubController {
 
         data = new HashMap<>();
 
+        data.put("mEd", (double) mEdValue);
+        data.put("nEd", (double) nEdValue);
         data.put("hValue", (double) hValue);
+        data.put("bValue", (double) bValue);
+        data.put("fYk",  fYk);
+        data.put("fiS1", aS1Value);
+        data.put("fiS2", aS2Value);
+        data.put("a1", (double) a1Value);
+        data.put("a2", (double) a2Value);
+        data.put("ns1", (double) 0);
+        data.put("ns2", (double) 0);
 
     }
 
