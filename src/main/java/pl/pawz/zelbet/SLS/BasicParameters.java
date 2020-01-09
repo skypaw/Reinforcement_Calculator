@@ -35,6 +35,9 @@ public class BasicParameters {
     double xII;
     double sII;
 
+    double mCr;
+    double fCtm;
+
     public BasicParameters(double eCm, double eS, float b, float h, float hF, float hFT, float bEff, float bEffT, float a1, float a2, double aS1, double aS2, double fCk, double rH, double tZero, char cement, char longOrShort) {
         this.eCm = eCm;
         this.eS = eS;
@@ -72,7 +75,19 @@ public class BasicParameters {
         this.sII = cross.phaseII()[1];
         this.iII = cross.phaseII()[2];
 
+        if (fCk <= 50) {
+            this.fCtm = 0.3 * Math.cbrt(Math.pow(fCk, 2));
+        } else {
+            this.fCtm = 2.21 * Math.log(1 + 0.1 * (fCk + 8));
+        }
 
+        mCr();
+
+    }
+
+
+    private void mCr() {
+        mCr = fCtm * iC / (h - xC);
     }
 
     void crossSection() {

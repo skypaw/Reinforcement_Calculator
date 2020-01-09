@@ -12,4 +12,12 @@ public class Deflection {
 
 
     }
+
+    private void resultsShort(){
+
+    }
+
+    private void resultsLong(){
+
+    }
 }
