@@ -80,12 +80,12 @@
                     <Insets top="5" right="5" bottom="5" left="5"/>
                 </padding>
 
-                <Label text="Fi_s1" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                <Label text="Φ_s1" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
                 <TextField GridPane.columnIndex="1" GridPane.rowIndex="0" promptText="[mm]"
                            prefWidth="70"
                            fx:id="aS1"/>
 
-                <Label text="Fi_s2" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                <Label text="Φ_s2" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
                 <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" promptText="[mm]"
                            prefWidth="70"
                            fx:id="aS2"/>
@@ -135,12 +135,12 @@
                           fx:id="checkBoxRods" GridPane.columnSpan="2"
                           onAction="#checkBoxRod"/>
 
-                <Label text="ctg Theta" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                <Label text="ctgθ" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
                 <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" promptText="[wartość]"
                            prefWidth="40"
                            fx:id="ctgTheta"/>
 
-                <Label text="Kąt Alpha" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
+                <Label text="Kąt α" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
                 <TextField GridPane.columnIndex="3" GridPane.rowIndex="1" promptText="[°]"
                            prefWidth="40"
                            fx:id="alpha"/>
@@ -232,7 +232,7 @@
                            prefWidth="70"
                            fx:id="lEff"/>
 
-                <Label text="Alpha_M" GridPane.columnIndex="2" GridPane.rowIndex="5"/>
+                <Label text="α_M" GridPane.columnIndex="2" GridPane.rowIndex="5"/>
                 <TextField GridPane.columnIndex="3" GridPane.rowIndex="5" promptText="[-]"
                            prefWidth="70"
                            fx:id="alphaM"/>
@@ -270,6 +270,9 @@
                 <Button text="Diagnotyka" GridPane.columnIndex="1" GridPane.rowIndex="4"
                         onAction="#diagnostic"/>
 
+                <Button text="Zapisz wyniki" GridPane.columnIndex="2" GridPane.rowIndex="4"
+                        onAction="#toPdf" disable="true" fx:id="toPdfButton"/>
+
             </GridPane>
 
 
@@ -304,6 +307,21 @@
                     <Label text="0.00" GridPane.columnIndex="1" GridPane.rowIndex="5" fx:id="sRods"/>
                     <Label text="0.00" GridPane.columnIndex="2" GridPane.rowIndex="5" fx:id="sRodsReal"/>
                 </GridPane>
+
+                <Pane GridPane.rowIndex="9" prefHeight="100"/>
+
+                <Label text="Stan Graniczny Użytkowalności" GridPane.columnIndex="0" GridPane.rowIndex="10"/>
+                <Label text="w" GridPane.columnIndex="0" GridPane.rowIndex="11"/>
+                <Label text="0.00" GridPane.columnIndex="1" GridPane.rowIndex="11"/>
+                <Label text="0.00" GridPane.columnIndex="2" GridPane.rowIndex="11"/>
+
+                <Label text="f(M)" GridPane.columnIndex="0" GridPane.rowIndex="12"/>
+                <Label text="0.00" GridPane.columnIndex="1" GridPane.rowIndex="12"/>
+                <Label text="0.00" GridPane.columnIndex="2" GridPane.rowIndex="12"/>
+
+                <Label text="f(M)+f(cs)" GridPane.columnIndex="0" GridPane.rowIndex="13"/>
+                <Label text="0.00" GridPane.columnIndex="1" GridPane.rowIndex="13"/>
+                <Label text="0.00" GridPane.columnIndex="2" GridPane.rowIndex="13"/>
             </GridPane>
         </GridPane>
 

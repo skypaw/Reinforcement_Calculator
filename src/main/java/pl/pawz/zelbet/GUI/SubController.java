@@ -24,6 +24,9 @@ public class SubController {
     @FXML
     Label res2 = new Label();
 
+    @FXML
+    Button toPdfButton;
+
 
     // Static text fields to read data from. Used in method "calculations"
     @FXML
@@ -136,9 +139,9 @@ public class SubController {
     private Label aSw2Rod = new Label("A_sw2");
     private Label nSw2Rod = new Label("n_sw2");
     private Label nSw2RodS = new Label("s_sw2");
-    private TextField aSw2RodTxt = new TextField();
-    private TextField nSw2RodTxt = new TextField();
-    private TextField nSw2RodSTxt = new TextField();
+    TextField aSw2RodTxt = new TextField();
+    TextField nSw2RodTxt = new TextField();
+    TextField nSw2RodSTxt = new TextField();
 
 
     //Labels to name the text fields
@@ -295,6 +298,11 @@ public class SubController {
     private float nRd3Value = 0;
     private float nRd4Value = 0;
 
+
+    double resRods1Value;
+    double resRods2Value;
+    double resRods1ValueAsymmetric;
+    double resRods2ValueAsymmetric;
 
     private Scene mainScene;
 
@@ -697,14 +705,14 @@ public class SubController {
                 res1Asymmetric.setText(String.valueOf(roundTwoDigit(ress[0] * Math.pow(10, 4))));
                 res2Asymmetric.setText(String.valueOf(roundTwoDigit(ress[1] * Math.pow(10, 4))));
 
-                double resRods1Value = reinforcementRods(ress[0], aS1Value);
-                double resRods2Value = reinforcementRods(ress[1], aS2Value);
+                resRods1ValueAsymmetric = reinforcementRods(ress[0], aS1Value);
+                resRods2ValueAsymmetric = reinforcementRods(ress[1], aS2Value);
 
-                resRods1Asymmetric.setText(String.valueOf(resRods1Value));
-                resRods2Asymmetric.setText(String.valueOf(resRods2Value));
+                resRods1Asymmetric.setText(String.valueOf(resRods1ValueAsymmetric));
+                resRods2Asymmetric.setText(String.valueOf(resRods2ValueAsymmetric));
 
-                res1trueAsymmetric.setText(String.valueOf(roundTwoDigit(Math.pow(aS1Value * 0.5, 2) * Math.PI * resRods1Value * Math.pow(10, 4))));
-                res2trueAsymmetric.setText(String.valueOf(roundTwoDigit(Math.pow(aS2Value * 0.5, 2) * Math.PI * resRods2Value * Math.pow(10, 4))));
+                res1trueAsymmetric.setText(String.valueOf(roundTwoDigit(Math.pow(aS1Value * 0.5, 2) * Math.PI * resRods1ValueAsymmetric * Math.pow(10, 4))));
+                res2trueAsymmetric.setText(String.valueOf(roundTwoDigit(Math.pow(aS2Value * 0.5, 2) * Math.PI * resRods2ValueAsymmetric * Math.pow(10, 4))));
 
                 res1.setText("0");
                 res2.setText("0");
@@ -724,8 +732,8 @@ public class SubController {
                     res1.setText(String.valueOf(roundTwoDigit(results1[0] * Math.pow(10, 4))));
                     res2.setText(String.valueOf(roundTwoDigit(results1[1] * Math.pow(10, 4))));
 
-                    double resRods1Value = reinforcementRods(results1[0], aS1Value);
-                    double resRods2Value = reinforcementRods(results1[1], aS2Value);
+                    resRods1Value = reinforcementRods(results1[0], aS1Value);
+                    resRods2Value = reinforcementRods(results1[1], aS2Value);
 
                     resRods1.setText(String.valueOf(resRods1Value));
                     resRods2.setText(String.valueOf(resRods2Value));
@@ -741,8 +749,8 @@ public class SubController {
                     res1Asymmetric.setText(String.valueOf(roundTwoDigit(results2[0] * Math.pow(10, 4))));
                     res2Asymmetric.setText(String.valueOf(roundTwoDigit(results2[1] * Math.pow(10, 4))));
 
-                    double resRods1ValueAsymmetric = reinforcementRods(results2[0], aS1Value);
-                    double resRods2ValueAsymmetric = reinforcementRods(results2[1], aS2Value);
+                    resRods1ValueAsymmetric = reinforcementRods(results2[0], aS1Value);
+                    resRods2ValueAsymmetric = reinforcementRods(results2[1], aS2Value);
 
                     resRods1Asymmetric.setText(String.valueOf(resRods1ValueAsymmetric));
                     resRods2Asymmetric.setText(String.valueOf(resRods2ValueAsymmetric));
@@ -757,8 +765,8 @@ public class SubController {
                     res1.setText(String.valueOf(roundTwoDigit(results1[0] * Math.pow(10, 4))));
                     res2.setText(String.valueOf(roundTwoDigit(results1[1] * Math.pow(10, 4))));
 
-                    double resRods1Value = reinforcementRods(results1[0], aS1Value);
-                    double resRods2Value = reinforcementRods(results1[1], aS2Value);
+                    resRods1Value = reinforcementRods(results1[0], aS1Value);
+                    resRods2Value = reinforcementRods(results1[1], aS2Value);
 
                     resRods1.setText(String.valueOf(resRods1Value));
                     resRods2.setText(String.valueOf(resRods2Value));
@@ -774,8 +782,8 @@ public class SubController {
                     res1Asymmetric.setText(String.valueOf(roundTwoDigit(results2[0] * Math.pow(10, 4))));
                     res2Asymmetric.setText(String.valueOf(roundTwoDigit(results2[1] * Math.pow(10, 4))));
 
-                    double resRods1ValueAsymmetric = reinforcementRods(results2[0], aS1Value);
-                    double resRods2ValueAsymmetric = reinforcementRods(results2[1], aS2Value);
+                    resRods1ValueAsymmetric = reinforcementRods(results2[0], aS1Value);
+                    resRods2ValueAsymmetric = reinforcementRods(results2[1], aS2Value);
 
                     resRods1Asymmetric.setText(String.valueOf(resRods1ValueAsymmetric));
                     resRods2Asymmetric.setText(String.valueOf(resRods2ValueAsymmetric));
@@ -874,8 +882,8 @@ public class SubController {
             res1.setText(String.valueOf(roundTwoDigit(Math.max(Math.max(Math.max(results1[0], results2[0]), results3[0]), results4[0]) * Math.pow(10, 4))));
             res2.setText(String.valueOf(roundTwoDigit(Math.max(Math.max(Math.max(results1[1], results2[1]), results3[1]), results4[1]) * Math.pow(10, 4))));
 
-            double resRods1Value = reinforcementRods(Math.max(Math.max(Math.max(results1[0], results2[0]), results3[0]), results4[0]), aS1Value);
-            double resRods2Value = reinforcementRods(Math.max(Math.max(Math.max(results1[1], results2[1]), results3[1]), results4[1]), aS2Value);
+            resRods1Value = reinforcementRods(Math.max(Math.max(Math.max(results1[0], results2[0]), results3[0]), results4[0]), aS1Value);
+            resRods2Value = reinforcementRods(Math.max(Math.max(Math.max(results1[1], results2[1]), results3[1]), results4[1]), aS2Value);
 
             resRods1.setText(String.valueOf(resRods1Value));
             resRods2.setText(String.valueOf(resRods2Value));
@@ -889,8 +897,8 @@ public class SubController {
             res1Asymmetric.setText(String.valueOf(roundTwoDigit(Math.max(Math.max(Math.max(results1Asymmetric[0], results2Asymmetric[0]), results3Asymmetric[0]), results4Asymmetric[0]) * Math.pow(10, 4))));
             res2Asymmetric.setText(String.valueOf(roundTwoDigit(Math.max(Math.max(Math.max(results1Asymmetric[1], results2Asymmetric[1]), results3Asymmetric[1]), results4Asymmetric[1]) * Math.pow(10, 4))));
 
-            double resRods1ValueAsymmetric = reinforcementRods(results2Asymmetric[0], aS1Value);
-            double resRods2ValueAsymmetric = reinforcementRods(results2Asymmetric[1], aS2Value);
+            resRods1ValueAsymmetric = reinforcementRods(results2Asymmetric[0], aS1Value);
+            resRods2ValueAsymmetric = reinforcementRods(results2Asymmetric[1], aS2Value);
 
             resRods1Asymmetric.setText(String.valueOf(resRods1ValueAsymmetric));
             resRods2Asymmetric.setText(String.valueOf(resRods2ValueAsymmetric));
@@ -933,8 +941,8 @@ public class SubController {
             res1Asymmetric.setText(String.valueOf(roundTwoDigit(ress[0] * Math.pow(10, 4))));
             res2Asymmetric.setText(String.valueOf(roundTwoDigit(ress[1] * Math.pow(10, 4))));
 
-            double resRods1Value = reinforcementRods(ress[0], aS1Value);
-            double resRods2Value = reinforcementRods(ress[1], aS2Value);
+            resRods1ValueAsymmetric = reinforcementRods(ress[0], aS1Value);
+            resRods2ValueAsymmetric = reinforcementRods(ress[1], aS2Value);
 
             resRods1Asymmetric.setText(String.valueOf(resRods1Value));
             resRods2Asymmetric.setText(String.valueOf(resRods2Value));
@@ -954,17 +962,28 @@ public class SubController {
 
         data = new HashMap<>();
 
-        data.put("mEd",roundTwoDigit (mEdValue*1000));
-        data.put("nEd", roundTwoDigit (nEdValue*1000));
-        data.put("hValue", roundTwoDigit ( hValue*100));
-        data.put("bValue",roundTwoDigit ( bValue*100));
-        data.put("fYk", roundTwoDigit (fYk));
-        data.put("fiS1", roundTwoDigit (aS1Value*1000));
-        data.put("fiS2", roundTwoDigit (aS2Value*1000));
-        data.put("a1", roundTwoDigit ( a1Value*1000));
-        data.put("a2", roundTwoDigit ( a2Value*1000));
-        data.put("ns1", roundTwoDigit ( 0));
-        data.put("ns2", roundTwoDigit ( 0));
+        data.put("mEd", roundTwoDigit(mEdValue * 1000));
+        data.put("nEd", roundTwoDigit(nEdValue * 1000));
+        data.put("hValue", roundTwoDigit(hValue * 100));
+        data.put("bValue", roundTwoDigit(bValue * 100));
+        data.put("fYk", roundTwoDigit(fYk));
+        data.put("fiS1", roundTwoDigit(aS1Value * 1000));
+        data.put("fiS2", roundTwoDigit(aS2Value * 1000));
+        data.put("a1", roundTwoDigit(a1Value * 1000));
+        data.put("a2", roundTwoDigit(a2Value * 1000));
+        data.put("ns1", resRods1ValueAsymmetric);
+        data.put("ns2", resRods2ValueAsymmetric);
+
+        data.put("vEd", roundTwoDigit(vEdValue * 1000));
+        data.put("vEdRed", roundTwoDigit(vEdRedValue * 1000));
+        data.put("ctg", roundTwoDigit(ctgThetaValue));
+        data.put("alpha", roundTwoDigit(alphaValue));
+        data.put("aSl", roundTwoDigit(aSl));
+        data.put("aSw1", roundTwoDigit(aSw1Value));
+        data.put("aSw2", roundTwoDigit(aSw2Value));
+        data.put("nSw1", roundTwoDigit(nSw1Value));
+        data.put("nSw2", roundTwoDigit(nSw2Value));
+        data.put("sSw2", roundTwoDigit(nSw2RodSValue));
 
 
         if (checkBoxResults3.isSelected()) {
@@ -981,9 +1000,11 @@ public class SubController {
             int eSValue = 20;
             char loadLong = 'L';
 
-            Scratch res = new Scratch(cNomValue, fiSt, aS1Value, n1Value, fCk, rHValue, tZeroValue, cementChar, bValue, (float)bEff, (float)bEffT, (float)hValue, (float)hFValue,(float) hFTValue, (float)a1Value, (float)a2Value, (float)aS1Value,(float) aS2Value,(float) mEdkValue, (float)mEdKLtValue, (float)eCmValue, alphaChar, (float)fCtmValue, eSValue, loadLong);
+            Scratch res = new Scratch(cNomValue, fiSt, aS1Value, n1Value, fCk, rHValue, tZeroValue, cementChar, bValue, (float) bEff, (float) bEffT, (float) hValue, (float) hFValue, (float) hFTValue, (float) a1Value, (float) a2Value, (float) aS1Value, (float) aS2Value, (float) mEdkValue, (float) mEdKLtValue, (float) eCmValue, alphaChar, (float) fCtmValue, eSValue, loadLong);
             System.out.println(res.wK());
         }
+
+        toPdfButton.setDisable(false);
 
     }
 
@@ -996,18 +1017,6 @@ public class SubController {
 
 
     public void diagnostic() {
-        //        ObservableList<Tab> tabs = tabPane.getTabs();
-//        Tab tab1 = tabs.get(0);
-//        Tab tab2 = tabs.get(1);
-//
-//        Tab selectedItem = tabPane.getSelectionModel().getSelectedItem();
-
-
-        //   Scene scene = GlobalStatic.getScene();
-        // Scene scene = tabPane1.getScene();
-
-        //  Scene scene1 = checkBoxRods.getScene();
-//        mainScene.lookup("#tab");
 
         System.out.println();
         fCk();
@@ -1148,5 +1157,10 @@ public class SubController {
             res2true.setText(String.valueOf(0));
         }
 
+        toPdfButton.setDisable(false);
+    }
+
+    public void toPdf(){
+        System.out.println("toPDF");
     }
 }

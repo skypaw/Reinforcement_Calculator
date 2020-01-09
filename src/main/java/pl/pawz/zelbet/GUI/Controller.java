@@ -29,6 +29,16 @@ public class Controller {
             tab2Controller.a2.setText(String.valueOf(tab1Controller.data.get("a2")));
             tab2Controller.n1.setText(String.valueOf(tab1Controller.data.get("ns1")));
             tab2Controller.n2.setText(String.valueOf(tab1Controller.data.get("ns2")));
+            tab2Controller.vEd.setText(String.valueOf(tab1Controller.data.get("vEd")));
+            tab2Controller.vEdRed.setText(String.valueOf(tab1Controller.data.get("vEdRed")));
+            tab2Controller.ctgTheta.setText(String.valueOf(tab1Controller.data.get("ctg")));
+            tab2Controller.alpha.setText(String.valueOf(tab1Controller.data.get("alpha")));
+            tab2Controller.aSlTxt.setText(String.valueOf(tab1Controller.data.get("aSl")));
+            tab2Controller.aSw1.setText(String.valueOf(tab1Controller.data.get("aSw1")));
+            tab2Controller.aSw2RodTxt.setText(String.valueOf(tab1Controller.data.get("aSw2")));
+            tab2Controller.nSw1.setText(String.valueOf(tab1Controller.data.get("nSw1")));
+            tab2Controller.nSw2RodTxt.setText(String.valueOf(tab1Controller.data.get("nSw2")));
+            tab2Controller.nSw2RodSTxt.setText(String.valueOf(tab1Controller.data.get("sSw2")));
 
 
         }
