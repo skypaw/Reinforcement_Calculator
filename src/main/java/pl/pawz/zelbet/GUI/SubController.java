@@ -9,6 +9,7 @@ import pl.pawz.zelbet.Diagnostic.DiagnosticBendingBeamAndT;
 import pl.pawz.zelbet.Diagnostic.DiagnosticCompression;
 import pl.pawz.zelbet.Diagnostic.DiagnosticExtension;
 import pl.pawz.zelbet.Diagnostic.DiagnosticShearing;
+import pl.pawz.zelbet.SLS.Scratch;
 import pl.pawz.zelbet.ULS.*;
 
 import java.util.Arrays;
@@ -106,8 +107,8 @@ public class SubController {
 
     //for four loads basic option
 
-    private TextField mEdLoadsTxt = new TextField();
-    private TextField nEdLoadsTxt = new TextField();
+    TextField mEdLoadsTxt = new TextField();
+    TextField nEdLoadsTxt = new TextField();
     //for four loads extended
 
 
@@ -953,17 +954,36 @@ public class SubController {
 
         data = new HashMap<>();
 
-        data.put("mEd", (double) mEdValue);
-        data.put("nEd", (double) nEdValue);
-        data.put("hValue", (double) hValue);
-        data.put("bValue", (double) bValue);
-        data.put("fYk",  fYk);
-        data.put("fiS1", aS1Value);
-        data.put("fiS2", aS2Value);
-        data.put("a1", (double) a1Value);
-        data.put("a2", (double) a2Value);
-        data.put("ns1", (double) 0);
-        data.put("ns2", (double) 0);
+        data.put("mEd",roundTwoDigit (mEdValue*1000));
+        data.put("nEd", roundTwoDigit (nEdValue*1000));
+        data.put("hValue", roundTwoDigit ( hValue*100));
+        data.put("bValue",roundTwoDigit ( bValue*100));
+        data.put("fYk", roundTwoDigit (fYk));
+        data.put("fiS1", roundTwoDigit (aS1Value*1000));
+        data.put("fiS2", roundTwoDigit (aS2Value*1000));
+        data.put("a1", roundTwoDigit ( a1Value*1000));
+        data.put("a2", roundTwoDigit ( a2Value*1000));
+        data.put("ns1", roundTwoDigit ( 0));
+        data.put("ns2", roundTwoDigit ( 0));
+
+
+        if (checkBoxResults3.isSelected()) {
+            double bEff = bFValue * 2 + bValue;
+            double bEffT = bFTValue * 2 + bValue;
+
+            float fiSt = 0.008f;
+            char cementChar = 'N';
+            double mEdkValue = 200;
+            double mEdKLtValue = 200;
+            double eCmValue = 200;
+            char alphaChar = 'A'; //todo change
+            double fCtmValue = 20;
+            int eSValue = 20;
+            char loadLong = 'L';
+
+            Scratch res = new Scratch(cNomValue, fiSt, aS1Value, n1Value, fCk, rHValue, tZeroValue, cementChar, bValue, (float)bEff, (float)bEffT, (float)hValue, (float)hFValue,(float) hFTValue, (float)a1Value, (float)a2Value, (float)aS1Value,(float) aS2Value,(float) mEdkValue, (float)mEdKLtValue, (float)eCmValue, alphaChar, (float)fCtmValue, eSValue, loadLong);
+            System.out.println(res.wK());
+        }
 
     }
 

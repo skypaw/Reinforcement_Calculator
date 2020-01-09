@@ -17,6 +17,9 @@ public class Controller {
 
         if (tab1Controller.data != null) {
 
+            tab2Controller.mEdLoadsTxt.setText(String.valueOf(tab1Controller.data.get("mEd")));
+            tab2Controller.nEdLoadsTxt.setText(String.valueOf(tab1Controller.data.get("nEd")));
+
             tab2Controller.geometryHeight.setText(String.valueOf(tab1Controller.data.get("hValue")));
             tab2Controller.test1.setText(String.valueOf(tab1Controller.data.get("bValue")));
             tab2Controller.steelFYk.setText(String.valueOf(tab1Controller.data.get("fYk")));

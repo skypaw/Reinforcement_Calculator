@@ -32,7 +32,7 @@ public class CrossSectionCharacteristics {
         this.d = BasicValues.dValue(h, a1);
     }
 
-    private double[] concreteCrossSection() {
+    double[] concreteCrossSection() {
         double aC = (bEff - b) * hF + (bEffT - b) * hFT + b * h;
         double sCC = (bEff - b) * Math.pow(hF, 2) / 2 + (bEffT - b) * hFT * (h - hFT / 2) + b * Math.pow(h, 2);
         double xC = sCC / aC;
@@ -42,7 +42,7 @@ public class CrossSectionCharacteristics {
         return new double[]{aC, sCC, xC, iC};
     }
 
-    private double[] phaseI() {
+    double[] phaseI() {
         double aI = (bEff - b) * hF + (bEffT - b) * hFT * +b * h + alphaEOrEEff * aS2 + alphaEOrEEff * aS1;
         double sCI = (bEff - b) * Math.pow(hF, 2) / 2 + (bEffT - b) * hFT * (h - hFT / 2) + b * Math.pow(h, 2) / 2 + alphaEOrEEff * aS2 * a2 + alphaEOrEEff * aS1 * d;
         double xI = sCI / aI;
@@ -55,7 +55,7 @@ public class CrossSectionCharacteristics {
 
     private double[] phaseII1() {
 
-        double xII = PolynomialSolverSGU.solverPhaseII1(bEff,a2,aS1,aS2,alphaEOrEEff,d);
+        double xII = PolynomialSolverSGU.solverPhaseII1(bEff, a2, aS1, aS2, alphaEOrEEff, d);
         double sII = aS1 * (d - xII) - aS2 * (xII - a2);
         double iII = (bEff * Math.pow(xII, 3)) / 12 + bEff * xII * Math.pow(xII / 2, 2) + alphaEOrEEff * aS2 * Math.pow(xII - a2, 2) + alphaEOrEEff * aS1 * Math.pow(h - xII - a1, 2);
 
@@ -65,7 +65,7 @@ public class CrossSectionCharacteristics {
     private double[] phaseII2() {
 
 
-        double xII = PolynomialSolverSGU.solverPhaseII2(b,bEff,hF,a2,aS1,aS2,alphaEOrEEff,d);
+        double xII = PolynomialSolverSGU.solverPhaseII2(b, bEff, hF, a2, aS1, aS2, alphaEOrEEff, d);
         double sII = aS1 * (d - xII) - aS2 * (xII - a2);
         double iII = b * Math.pow(xII, 3) / 12 + b * xII * Math.pow(xII / 2, 2) + (bEff - b) * Math.pow(hF, 3) / 12 + (bEff - b) * hF * Math.pow(xII - hF / 2, 2) + alphaEOrEEff * aS2 * Math.pow(xII - a2, 2) + alphaEOrEEff * aS1 * Math.pow(h - xII - a1, 2);
 
@@ -78,8 +78,16 @@ public class CrossSectionCharacteristics {
         double iII1 = b * Math.pow(xII, 3) / 12 + b * xII * Math.pow(xII / 2, 2) + (bEff - b) * Math.pow(hF, 3) / 12 + (bEff - b) * hF * Math.pow(xII - hF / 2, 2) + (bEffT - b) * Math.pow(xII - h + hFT, 3) / 12;
         double iII2 = iII1 + (bEffT - b) * (xII - h + hFT) * Math.pow((xII - h + hFT) / 2, 2) + alphaEOrEEff * aS2 * Math.pow(xII - a2, 2) + alphaEOrEEff * aS1 * Math.pow(h - xII - a1, 2);
 
-        return new double[] {xII, sII, iII2};
+        return new double[]{xII, sII, iII2};
     }
 
-
+    public double[] phaseII(){
+        if (phaseII1()[0]<= hF){
+            return phaseII1();
+        }else if (phaseII2()[0]<(h-hFT) && phaseII2()[0]>= hF){
+            return phaseII2();
+        }else {
+            return phaseII3();
+        }
+    }
 }

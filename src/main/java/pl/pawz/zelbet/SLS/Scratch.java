@@ -1,28 +1,24 @@
 package pl.pawz.zelbet.SLS;
 
+import pl.pawz.zelbet.BasicValues;
+
 public class Scratch {
     private float mEdk;
     private float mEdkLt;
-    private float eCm;
-    private float alphaE;
-    private float eCEff;
+    private double alphaEOrEEff;
     private float fCtm;
     private int eS;
     private double mCr;
     private double sigmaS;
-    private boolean loadLong;
+    private char loadLong;
     private double iC;
     private float h;
     private double xC;
-    private double alphaEff;
-    private double iIIEff;
     private double d;
-    private double xIIEff;
-    private double iII;
-    private double xII;
+    private double iIIorIIIEff;
+    private double xIIorXIIEff;
     private double hCEff;
     private double hFT;
-    private double aCtEff;
     private double bEffT;
     private float b;
     private double rhoPEff;
@@ -35,16 +31,46 @@ public class Scratch {
     private double fiS1;
     private double nS1;
 
-    public Scratch(float mEdK, float mEdKLt, float eCm, float alphaE, float eCEff, float fCtm, int eS, boolean loadLong) {
+
+    public Scratch(double cNom, double fiSt, double fiS1, double nS1, double fCk, double rH, double tZero, char cement, float b, float bEff, float bEffT, float h, float hF, float hFT, float a1, float a2, float aS1, float aS2, float mEdK, float mEdKLt, float eCm, char alphaChar, float fCtm, int eS, char loadLong) {
+        this.b = b;
+        this.bEffT = bEffT;
+        this.h = h;
+        this.hFT = hFT;
+        this.aS1 = aS1;
+        this.cNom = cNom;
+        this.fiSt = fiSt;
+        this.fiS1 = fiS1;
+        this.nS1 = nS1;
+
+        this.d = BasicValues.dValue(h, a1);
+
         this.mEdk = mEdK;
         this.mEdkLt = mEdKLt;
-        this.eCm = eCm;
-        this.alphaE = alphaE;
-        this.eCEff = eCEff;
+
         this.fCtm = fCtm;
         this.eS = eS;
         this.loadLong = loadLong;
 
+        BasicParameters basic = new BasicParameters(eCm, eS, b, h, hF, bEff, hFT, bEffT, fCk, rH, tZero, cement, loadLong);
+        basic.eCEff();
+        double eCEff = basic.eCEff;
+
+
+        if (alphaChar == 'L') {
+            this.alphaEOrEEff = eS / eCm;
+        } else {
+            this.alphaEOrEEff = eS / eCEff;
+        }
+
+
+        CrossSectionCharacteristics cSC = new CrossSectionCharacteristics(b, bEff, bEffT, h, hF, hFT, a1, a2, aS1, aS2, this.alphaEOrEEff);
+
+        this.xC = cSC.concreteCrossSection()[2];
+        this.iC = cSC.concreteCrossSection()[3];
+
+        this.xIIorXIIEff = cSC.phaseII()[0];
+        this.iIIorIIIEff = cSC.phaseII()[2];
 
     }
 
@@ -53,22 +79,22 @@ public class Scratch {
     }
 
     private void sigmaS() {
-        if (loadLong = true) {
-            sigmaS = alphaEff * (mEdkLt / iIIEff) * (d - xIIEff);
+        if (loadLong == 'L') {
+            sigmaS = alphaEOrEEff * (mEdkLt / iIIorIIIEff) * (d - xIIorXIIEff);
         } else {
-            sigmaS = alphaE * (mEdk / iII) * (d - xII);
+            sigmaS = alphaEOrEEff * (mEdk / iIIorIIIEff) * (d - xIIorXIIEff);
         }
     }
 
     private void heightEff() {
-        hCEff = Math.min((h - xII) / 3, 2.5 * (h - d));
+        hCEff = Math.min((h - xIIorXIIEff) / 3, 2.5 * (h - d));
     }
 
     private void aCtEff() {
         if (hCEff <= hFT) {
-            aCtEff = bEffT * hCEff;
+            aCEff = bEffT * hCEff;
         } else {
-            aCtEff = (bEffT - b) * hFT + b * hCEff;
+            aCEff = (bEffT - b) * hFT + b * hCEff;
         }
     }
 
@@ -80,13 +106,13 @@ public class Scratch {
         float kT;
         double fCtEff = fCtm;
 
-        if (loadLong = true) {
+        if (loadLong == 'L') {
             kT = 0.4f;
         } else {
             kT = 0.6f;
         }
 
-        epsilons = Math.max((sigmaS - kT * (fCtEff / rhoPEff) * (1 + alphaE * rhoPEff)) / eS, 0.6 * sigmaS / eS);
+        epsilons = Math.max((sigmaS - kT * (fCtEff / rhoPEff) * (1 + alphaEOrEEff * rhoPEff)) / eS, 0.6 * sigmaS / eS);
     }
 
     private void sRMax() {
@@ -101,7 +127,7 @@ public class Scratch {
         if (a <= 5 * (c + fiS1 / 2)) {
             sRMax = k3 * c + k1 * k2 * k4 * fiS1 / rhoPEff;
         } else {
-            sRMax = 1.3 * (h - xII);
+            sRMax = 1.3 * (h - xIIorXIIEff);
         }
     }
 

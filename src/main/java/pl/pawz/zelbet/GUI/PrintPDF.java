@@ -40,7 +40,7 @@ public class PrintPDF {
 
         contentStream.beginText();
         contentStream.setFont(PDType1Font.HELVETICA, 11);
-        contentStream.setLeading(11.0f);
+        contentStream.setLeading(12.0f);
         contentStream.moveTextPositionByAmount(50, 740);
 
         contentStream.drawString("Nazwa zadania: " + namePdf);
@@ -65,7 +65,7 @@ public class PrintPDF {
 
         //data section
 
-        contentStream.newLine();
+
         contentStream.newLine();
         contentStream.newLine();
         contentStream.newLine();
@@ -97,9 +97,11 @@ public class PrintPDF {
 
         tableForces.addHeaderRow(headerRowForces);
 
+
         contentStream.newLine();
         contentStream.newLine();
         contentStream.newLine();
+
         contentStream.newLine();
         contentStream.drawString("M_Ed: " + mEd + " kNm");
         contentStream.newLine();

@@ -14,16 +14,16 @@ public class ConcreteCalculations {
     double hZero;
 
 
-    public ConcreteCalculations(double fCk, double rH, double tZeroT, char alpha, double hZero) {
+    public ConcreteCalculations(double fCk, double rH, double tZeroT, char cement, double hZero) {
         this.fCm = fCk + 8;
         this.rH = rH;
         this.tZeroT = tZeroT;
-        this.hZero = hZero;
+        this.hZero = hZero*1000;
 
 
-        if (alpha == 'S') {
+        if (cement == 'S') {
             this.alpha = -1;
-        } else if (alpha == 'N') {
+        } else if (cement == 'N') {
             this.alpha = 0;
         } else {
             this.alpha = 1;
