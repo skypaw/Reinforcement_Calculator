@@ -64,7 +64,6 @@ public class CrossSectionCharacteristics {
 
     private double[] phaseII2() {
 
-
         double xII = PolynomialSolverSGU.solverPhaseII2(b, bEff, hF, a2, aS1, aS2, alphaEOrEEff, d);
         double sII = aS1 * (d - xII) - aS2 * (xII - a2);
         double iII = b * Math.pow(xII, 3) / 12 + b * xII * Math.pow(xII / 2, 2) + (bEff - b) * Math.pow(hF, 3) / 12 + (bEff - b) * hF * Math.pow(xII - hF / 2, 2) + alphaEOrEEff * aS2 * Math.pow(xII - a2, 2) + alphaEOrEEff * aS1 * Math.pow(h - xII - a1, 2);

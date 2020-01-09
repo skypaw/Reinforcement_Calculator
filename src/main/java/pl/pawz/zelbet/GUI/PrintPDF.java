@@ -1,24 +1,23 @@
 package pl.pawz.zelbet.GUI;
 
-import java.io.IOException;
-
 import be.quodlibet.boxable.BaseTable;
 import be.quodlibet.boxable.Cell;
-import be.quodlibet.boxable.HorizontalAlignment;
 import be.quodlibet.boxable.Row;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
 
+import java.io.IOException;
+
 public class PrintPDF {
 
-    public static void main(String args[]) throws IOException {
+    public static void print(String name, double fYk) throws IOException {
 
-        String namePdf = "zadanie testowe";
+        String namePdf = name;
         String concrete = "C25/30";
         String cement = "N";
-        String fyk = "500";
+        Double fyk = fYk;
         String rH = "50";
         String days = "28";
         String mEd = "28";
@@ -131,7 +130,7 @@ public class PrintPDF {
         tableRes.draw();
 
 
-        document.save("G:/dev/inzynierka/results/my_doc.pdf");
+        document.save("D:/dev/inzynierka/results/" + name + ".pdf");
         System.out.println("PDF created");
         document.close();
 
