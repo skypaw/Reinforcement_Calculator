@@ -32,7 +32,7 @@ public class Scratch {
     private double nS1;
 
 
-    public Scratch(double cNom, double fiSt, double fiS1, double nS1, double fCk, double rH, double tZero, char cement, float b, float bEff, float bEffT, float h, float hF, float hFT, float a1, float a2, float aS1, float aS2, float mEdK, float mEdKLt, float eCm, char alphaChar, float fCtm, int eS, char loadLong) {
+    public Scratch(double cNom, double fiSt, double fiS1, double nS1, double fCk, double rH, double tZero, char cement, float b, float bEff, float bEffT, float h, float hF, float hFT, float a1, float a2, double aS1, double aS2, float mEdK, float mEdKLt, float eCm, char alphaChar, float fCtm, int eS, char loadLong) {
         this.b = b;
         this.bEffT = bEffT;
         this.h = h;
@@ -52,25 +52,8 @@ public class Scratch {
         this.eS = eS;
         this.loadLong = loadLong;
 
-        BasicParameters basic = new BasicParameters(eCm, eS, b, h, hF, bEff, hFT, bEffT, fCk, rH, tZero, cement, loadLong);
-        basic.eCEff();
-        double eCEff = basic.eCEff;
+        BasicParameters basic = new BasicParameters(eCm, eS, b, h, hF,hFT, bEff,  bEffT,a1,a2,aS1,aS2, fCk, rH, tZero, cement, loadLong);
 
-
-        if (alphaChar == 'L') {
-            this.alphaEOrEEff = eS / eCm;
-        } else {
-            this.alphaEOrEEff = eS / eCEff;
-        }
-
-
-        CrossSectionCharacteristics cSC = new CrossSectionCharacteristics(b, bEff, bEffT, h, hF, hFT, a1, a2, aS1, aS2, this.alphaEOrEEff);
-
-        this.xC = cSC.concreteCrossSection()[2];
-        this.iC = cSC.concreteCrossSection()[3];
-
-        this.xIIorXIIEff = cSC.phaseII()[0];
-        this.iIIorIIIEff = cSC.phaseII()[2];
 
     }
 
