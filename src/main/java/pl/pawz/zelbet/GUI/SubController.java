@@ -12,6 +12,7 @@ import pl.pawz.zelbet.Diagnostic.DiagnosticShearing;
 import pl.pawz.zelbet.SLS.Scratch;
 import pl.pawz.zelbet.ULS.*;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
 
@@ -1000,7 +1001,7 @@ public class SubController {
             int eSValue = 20;
             char loadLong = 'L';
 
-            Scratch res = new Scratch(cNomValue, fiSt, aS1Value, n1Value, fCk, rHValue, tZeroValue, cementChar, bValue, (float) bEff, (float) bEffT, (float) hValue, (float) hFValue, (float) hFTValue, (float) a1Value, (float) a2Value, (float) aS1Value, (float) aS2Value, (float) mEdkValue, (float) mEdKLtValue, (float) eCmValue, alphaChar, (float) fCtmValue, eSValue, loadLong);
+            Scratch res = new Scratch(cNomValue, fiSt, aS1Value, n1Value, fCk, rHValue, tZeroValue, cementChar, bValue, (float) bEff, (float) bEffT, (float) hValue, (float) hFValue, (float) hFTValue, (float) a1Value, (float) a2Value, (float) aS1Value, (float) aS2Value, (float) mEdkValue, (float) mEdKLtValue, (float) eCmValue, alphaChar, eSValue, loadLong);
             System.out.println(res.wK());
         }
 
@@ -1160,7 +1161,14 @@ public class SubController {
         toPdfButton.setDisable(false);
     }
 
-    public void toPdf(){
+    public void toPdf() throws IOException {
         System.out.println("toPDF");
+
+        NamePDF stringPdf = new NamePDF();
+
+        String fileName = stringPdf.display();
+        PrintPDF.print(fileName, fYk);
+
+
     }
 }

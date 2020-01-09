@@ -3,36 +3,39 @@ package pl.pawz.zelbet.SLS;
 import pl.pawz.zelbet.BasicValues;
 
 public class Scratch {
-    private float mEdk;
-    private float mEdkLt;
-    private double alphaEOrEEff;
-    private float fCtm;
-    private int eS;
-    private double mCr;
-    private double sigmaS;
-    private char loadLong;
-    private double iC;
-    private float h;
-    private double xC;
-    private double d;
-    private double iIIorIIIEff;
-    private double xIIorXIIEff;
-    private double hCEff;
-    private double hFT;
-    private double bEffT;
-    private float b;
-    private double rhoPEff;
-    private double aS1;
-    private double aCEff;
-    private double epsilons;
-    private double sRMax;
-    private double cNom;
-    private double fiSt;
-    private double fiS1;
-    private double nS1;
+    float b;
+    float bEffT;
+    float h;
+    float hFT;
+    double aS1;
+    double cNom;
+    double fiSt;
+    double fiS1;
+    double nS1;
+    double d;
+    double mEdk;
+    double mEdkLt;
+    double fCtm;
+    int eS;
+    char loadLong;
+
+    double mCr;
+    double sigmaS;
+    double hCEff;
+    double aCEff;
+    double rhoPEff;
+    double epsilons;
+    double sRMax;
+
+    double alphaEOrEEff;
+    double xC;
+    double xIIorXIIEff;
+    double iIIorIIIEff;
+    double iC;
 
 
-    public Scratch(double cNom, double fiSt, double fiS1, double nS1, double fCk, double rH, double tZero, char cement, float b, float bEff, float bEffT, float h, float hF, float hFT, float a1, float a2, float aS1, float aS2, float mEdK, float mEdKLt, float eCm, char alphaChar, float fCtm, int eS, char loadLong) {
+
+    public Scratch(double cNom, double fiSt, double fiS1, double nS1, double fCk, double rH, double tZero, char cement, float b, float bEff, float bEffT, float h, float hF, float hFT, float a1, float a2, double aS1, double aS2, float mEdK, float mEdKLt, float eCm, char alphaChar, int eS, char loadLong) {
         this.b = b;
         this.bEffT = bEffT;
         this.h = h;
@@ -48,29 +51,21 @@ public class Scratch {
         this.mEdk = mEdK;
         this.mEdkLt = mEdKLt;
 
-        this.fCtm = fCtm;
+        if (fCk <= 50) {
+            this.fCtm = 0.3 * Math.cbrt(Math.pow(fCk, 2));
+        } else {
+            this.fCtm = 2.21 * Math.log(1 + 0.1 * (fCk + 8));
+        }
+
         this.eS = eS;
         this.loadLong = loadLong;
 
-        BasicParameters basic = new BasicParameters(eCm, eS, b, h, hF, bEff, hFT, bEffT, fCk, rH, tZero, cement, loadLong);
-        basic.eCEff();
-        double eCEff = basic.eCEff;
-
-
-        if (alphaChar == 'L') {
-            this.alphaEOrEEff = eS / eCm;
-        } else {
-            this.alphaEOrEEff = eS / eCEff;
-        }
-
-
-        CrossSectionCharacteristics cSC = new CrossSectionCharacteristics(b, bEff, bEffT, h, hF, hFT, a1, a2, aS1, aS2, this.alphaEOrEEff);
-
-        this.xC = cSC.concreteCrossSection()[2];
-        this.iC = cSC.concreteCrossSection()[3];
-
-        this.xIIorXIIEff = cSC.phaseII()[0];
-        this.iIIorIIIEff = cSC.phaseII()[2];
+        BasicParameters basic = new BasicParameters(eCm, eS, b, h, hF, hFT, bEff, bEffT, a1, a2, aS1, aS2, fCk, rH, tZero, cement, loadLong);
+        this.alphaEOrEEff = basic.alphaE;
+        this.iC = basic.iC;
+        this.xC = basic.xC;
+        this.iIIorIIIEff = basic.iII;
+        this.xIIorXIIEff = basic.xII;
 
     }
 

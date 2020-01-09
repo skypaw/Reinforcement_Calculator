@@ -10,16 +10,15 @@ public class Deformation {
     private float alphaDs1;
     private float alphaDs2;
 
-    public Deformation(float eCm, float eS, float b, float h, float hF, float bEff, float hFT, float bEffT, float tZero, char longOrShort, float fCm, float fCk, float rH, char cement) {
+    public Deformation(float eCm, float eS, float b, float h, float hF,float hFT, float bEff,  float bEffT,float a1, float a2, double aS1, double aS2, float tZero, char longOrShort, float fCm, float fCk, float rH, char cement) {
         this.fCm = fCm;
         this.fCk = fCk;
         this.rH = rH;
         this.cement = cement;
 
 
-        BasicParameters basic = new BasicParameters(eCm, eS, b, h, hF, bEff, hFT, bEffT, fCk, rH, tZero, cement, longOrShort);
-        basic.hZero();
-        this.h0 = basic.getHZero();
+        BasicParameters basic = new BasicParameters(eCm, eS, b, h, hF,hFT, bEff,  bEffT,a1,a2,aS1,aS2, fCk, rH, tZero, cement, longOrShort);
+
     }
 
     private double deformationShrink() {
