@@ -1167,8 +1167,9 @@ public class SubController {
         NamePDF stringPdf = new NamePDF();
 
         String fileName = stringPdf.display();
-        PrintPDF.print(fileName, fYk);
-
+        if (!fileName.isEmpty()) {
+            PrintPDF.print(fileName, fYk);
+        }
 
     }
 }

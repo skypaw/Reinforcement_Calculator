@@ -55,6 +55,7 @@ public class BasicParameters {
         this.cement = cement;
         hZero();
         alphaE();
+        eCEff();
 
         ConcreteCalculations concrete = new ConcreteCalculations(fCk, rH, tZero, cement, hZero);
         this.fiCrawling = concrete.results();
@@ -113,6 +114,8 @@ public class BasicParameters {
     }
 
     void alphaE() {
+        eCEff();
+
         if (longOrShort == 'L') {
             alphaE = eS / eCm;
         } else {
