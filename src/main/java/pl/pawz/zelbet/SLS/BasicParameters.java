@@ -122,9 +122,9 @@ public class BasicParameters {
         eCEff();
 
         if (longOrShort == 'L') {
-            alphaE = eS / eCm;
-        } else {
             alphaE = eS / eCEff;
+        } else {
+            alphaE = eS / eCm;
         }
     }
 }

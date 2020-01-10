@@ -34,7 +34,7 @@ public class CrossSectionCharacteristics {
 
     double[] concreteCrossSection() {
         double aC = (bEff - b) * hF + (bEffT - b) * hFT + b * h;
-        double sCC = (bEff - b) * Math.pow(hF, 2) / 2 + (bEffT - b) * hFT * (h - hFT / 2) + b * Math.pow(h, 2);
+        double sCC = (bEff - b) * Math.pow(hF, 2) / 2 + (bEffT - b) * hFT * (h - hFT / 2) + b * Math.pow(h, 2)/2;
         double xC = sCC / aC;
         double iC = b * Math.pow(h, 3) / 12 + b * h * Math.pow(h / 2 - xC, 2) + (bEff - b) * Math.pow(hF, 3) / 12 + (bEff - b)
                 * hF * Math.pow(xC - hF / 2, 2) + (bEffT - b) * Math.pow(hFT, 3) / 12 + (bEffT - b) * hFT * Math.pow(h - xC - hFT / 2, 2);
@@ -43,7 +43,7 @@ public class CrossSectionCharacteristics {
     }
 
     double[] phaseI() {
-        double aI = (bEff - b) * hF + (bEffT - b) * hFT * +b * h + alphaEOrEEff * aS2 + alphaEOrEEff * aS1;
+        double aI = (bEff - b) * hF + (bEffT - b) * hFT + b * h + alphaEOrEEff * aS2 + alphaEOrEEff * aS1;
         double sCI = (bEff - b) * Math.pow(hF, 2) / 2 + (bEffT - b) * hFT * (h - hFT / 2) + b * Math.pow(h, 2) / 2 + alphaEOrEEff * aS2 * a2 + alphaEOrEEff * aS1 * d;
         double xI = sCI / aI;
         double sI = aS1 * (d - xI) - aS2 * (xI - a2);
@@ -80,12 +80,12 @@ public class CrossSectionCharacteristics {
         return new double[]{xII, sII, iII2};
     }
 
-    public double[] phaseII(){
-        if (phaseII1()[0]<= hF){
+    public double[] phaseII() {
+        if (phaseII1()[0] <= hF) {
             return phaseII1();
-        }else if (phaseII2()[0]<(h-hFT) && phaseII2()[0]>= hF){
+        } else if (phaseII2()[0] < (h - hFT) && phaseII2()[0] >= hF) {
             return phaseII2();
-        }else {
+        } else {
             return phaseII3();
         }
     }

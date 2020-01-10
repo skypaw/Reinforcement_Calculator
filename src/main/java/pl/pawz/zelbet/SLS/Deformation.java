@@ -10,18 +10,18 @@ public class Deformation {
     private float alphaDs1;
     private float alphaDs2;
 
-    public Deformation(float fCm, float fCk, float rH, char cement) {
+    public Deformation(double h0,float fCm, float fCk, float rH, char cement) {
         this.fCm = fCm;
         this.fCk = fCk;
         this.rH = rH;
         this.cement = cement;
+        this.h0 = h0 * Math.pow(10,2);
 
     }
 
     public double deformationShrink() {
         double epsilonCa = 2.5 * (fCk - 10) * Math.pow(10, -6);
 
-        float[] kHArray = {1, 0.85f, 0.75f, 0.7f};
 
         if (h0 <= 200) {
             kH = 1f;
@@ -34,7 +34,7 @@ public class Deformation {
         }
 
         int fCm0 = 10;
-        int rH0 = 1;
+        int rH0 = 100;
         double betaRh = 1.55 * (1 - Math.pow(rH / rH0, 3));
 
         if (cement == 'S') {

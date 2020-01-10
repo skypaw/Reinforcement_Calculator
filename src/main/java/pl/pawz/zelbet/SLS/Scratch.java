@@ -51,7 +51,6 @@ public class Scratch {
         this.mEdkLt = mEdKLt;
 
 
-
         this.eS = eS;
         this.loadLong = loadLong;
 
@@ -67,7 +66,6 @@ public class Scratch {
 
 
     }
-
 
 
     private void sigmaS() {

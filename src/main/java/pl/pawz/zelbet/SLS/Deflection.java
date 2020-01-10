@@ -20,8 +20,8 @@ public class Deflection {
     double bIIInf;
     double epsilonCs;
 
-    double iI;
-    double iII;
+    public double iI;
+    public double iII;
     double sI;
     double sII;
 
@@ -49,8 +49,10 @@ public class Deflection {
 
         this.eCm = basic.eCm;
 
+        double h0 = basic.hZero;
 
-        Deformation def = new Deformation(fCm, fCk, rH, cement);
+
+        Deformation def = new Deformation(h0,fCm, fCk, rH, cement);
         this.epsilonCs = def.deformationShrink();
 
         sigmaValue();
