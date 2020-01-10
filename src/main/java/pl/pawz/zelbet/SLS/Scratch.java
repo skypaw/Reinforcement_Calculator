@@ -34,8 +34,7 @@ public class Scratch {
     double iC;
 
 
-
-    public Scratch(double cNom, double fiSt, double fiS1, double nS1, double fCk, double rH, double tZero, char cement, float b, float bEff, float bEffT, float h, float hF, float hFT, float a1, float a2, double aS1, double aS2, float mEdK, float mEdKLt, float eCm, char alphaChar, int eS, char loadLong) {
+    public Scratch(double cNom, double fiSt, double fiS1, double nS1, double fCk, double rH, double tZero, char cement, float b, float bEff, float bEffT, float h, float hF, float hFT, float a1, float a2, double aS1, double aS2, float mEdK, float mEdKLt, char alphaChar, int eS, char loadLong) {
         this.b = b;
         this.bEffT = bEffT;
         this.h = h;
@@ -51,27 +50,23 @@ public class Scratch {
         this.mEdk = mEdK;
         this.mEdkLt = mEdKLt;
 
-        if (fCk <= 50) {
-            this.fCtm = 0.3 * Math.cbrt(Math.pow(fCk, 2));
-        } else {
-            this.fCtm = 2.21 * Math.log(1 + 0.1 * (fCk + 8));
-        }
 
         this.eS = eS;
         this.loadLong = loadLong;
 
-        BasicParameters basic = new BasicParameters(eCm, eS, b, h, hF, hFT, bEff, bEffT, a1, a2, aS1, aS2, fCk, rH, tZero, cement, loadLong);
+        BasicParameters basic = new BasicParameters(eS, b, h, hF, hFT, bEff, bEffT, a1, a2, aS1, aS2, fCk, rH, tZero, cement, loadLong);
         this.alphaEOrEEff = basic.alphaE;
         this.iC = basic.iC;
         this.xC = basic.xC;
         this.iIIorIIIEff = basic.iII;
         this.xIIorXIIEff = basic.xII;
 
+        this.mCr = basic.mCr;
+        this.fCtm = basic.fCtm;
+
+
     }
 
-    private void mCr() {
-        mCr = fCtm * iC / (h - xC);
-    }
 
     private void sigmaS() {
         if (loadLong == 'L') {
@@ -127,7 +122,6 @@ public class Scratch {
     }
 
     public double wK() {
-        mCr();
         sigmaS();
         heightEff();
         aCtEff();
