@@ -1,4 +1,4 @@
-package pl.pawz.zelbet.tests;
+package pl.pawz.zelbet.tests.ULS;
 
 import org.junit.Test;
 import pl.pawz.zelbet.ULS.BendingBeamRectangle;

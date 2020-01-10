@@ -26,19 +26,18 @@ public class Deflection {
     double sII;
 
 
-    public Deflection(float lEff, double mEkLt, double mEk, float alphaM, double mEd, float eCm, int eS, float b, float h, float hF, float hFT, float bEff, float bEffT, float a1, float a2, double aS1, double aS2, char longOrShort, float fCk, float rH, char cement, int tZero) {
+    public Deflection(float lEff, double mEkLt, double mEk, float alphaM, double mEd, int eS, float b, float h, float hF, float hFT, float bEff, float bEffT, float a1, float a2, double aS1, double aS2, char longOrShort, float fCk, float rH, char cement, int tZero) {
         this.alphaM = alphaM;
         this.mEd = mEd;
         this.mEk = mEk;
         this.mEkLt = mEkLt;
         this.lEff = lEff;
-        this.eCm = eCm;
         this.eS = eS;
 
 
         float fCm = fCk + 8;
 
-        BasicParameters basic = new BasicParameters(eCm, eS, b, h, hF, hFT, bEff, bEffT, a1, a2, aS1, aS2, fCk, rH, tZero, cement, longOrShort);
+        BasicParameters basic = new BasicParameters(eS, b, h, hF, hFT, bEff, bEffT, a1, a2, aS1, aS2, fCk, rH, tZero, cement, longOrShort);
         this.mCr = basic.mCr;
         this.eCEff = basic.eCEff;
 
@@ -48,6 +47,8 @@ public class Deflection {
         this.sI = basic.sI;
         this.sII = basic.sII;
 
+        this.eCm = basic.eCm;
+
 
         Deformation def = new Deformation(fCm, fCk, rH, cement);
         this.epsilonCs = def.deformationShrink();
@@ -55,7 +56,7 @@ public class Deflection {
         sigmaValue();
         sigmaLtValue();
         bValueLong();
-        bValueShort();
+        bValueShort(); //TODO refactor whole SLS
 
     }
 

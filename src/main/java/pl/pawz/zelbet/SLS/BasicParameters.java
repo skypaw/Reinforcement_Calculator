@@ -38,8 +38,7 @@ public class BasicParameters {
     double mCr;
     double fCtm;
 
-    public BasicParameters(double eCm, double eS, float b, float h, float hF, float hFT, float bEff, float bEffT, float a1, float a2, double aS1, double aS2, double fCk, double rH, double tZero, char cement, char longOrShort) {
-        this.eCm = eCm;
+    public BasicParameters(double eS, float b, float h, float hF, float hFT, float bEff, float bEffT, float a1, float a2, double aS1, double aS2, double fCk, double rH, double tZero, char cement, char longOrShort) {
         this.eS = eS;
         this.b = b;
         this.h = h;
@@ -49,10 +48,15 @@ public class BasicParameters {
         this.bEffT = bEffT;
         this.longOrShort = longOrShort;
 
+
         this.fCk = fCk;
         this.rH = rH;
         this.tZero = tZero;
         this.cement = cement;
+
+        double fCm = fCk + 8;
+        this.eCm = 22 * Math.pow(0.1 * fCm, 0.3) * Math.pow(10, 3); //res in GPa so, 10^3
+
         hZero();
         alphaE();
         eCEff();
@@ -81,6 +85,7 @@ public class BasicParameters {
         } else {
             this.fCtm = 2.21 * Math.log(1 + 0.1 * (fCk + 8));
         }
+
 
         mCr();
 
