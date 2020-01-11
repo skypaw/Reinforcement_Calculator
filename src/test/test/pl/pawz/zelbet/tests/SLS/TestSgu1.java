@@ -51,6 +51,9 @@ public class TestSgu1 {
         Scratch res2 = new Scratch(cNom, fiSt, fi, 6, fCk, rH, 28, 'N', bDimension, bDimension, bDimension, hDimension, 0, 0, a1, a2, as1, as2, mEk, mEkLt, 'N', eS, 'L');
         double result2 = res2.wK();
 
+        System.out.println(res1.iI);
+        System.out.println(res1.iII);
+
         System.out.println("fc = " + result1 + " cm");
         System.out.println("fc+m = " + result1a + " cm");
         System.out.println("wk = " + result2 + " mm");
@@ -95,4 +98,355 @@ public class TestSgu1 {
 
     }
 
+    @Test
+    public void testSixSixLongOne() {
+
+        float mEd = 0.25f;
+        float mEk = 0.20f;
+        float mEkLt = 0.2f;
+
+        int rods1 = 6;
+        int rods2 = 0;
+
+
+        double as1 = Math.pow(fi * 0.5, 2) * Math.PI * rods1;
+        double as2 = Math.pow(fi * 0.5, 2) * Math.PI * rods2;
+        System.out.println(as1);
+
+
+        Deflection res1 = new Deflection(lEff, mEkLt, mEk, alphaM, mEd, eS, bDimension, hDimension, 0, 0, bDimension, bDimension, a1, a2, as1, as2, 'L', fCk, rH, 'N', 28);
+        double result1 = res1.resultsLong();
+        double result1a = res1.resultsLongDeformation();
+
+        Scratch res2 = new Scratch(cNom, fiSt, fi, 6, fCk, rH, 28, 'N', bDimension, bDimension, bDimension, hDimension, 0, 0, a1, a2, as1, as2, mEk, mEkLt, 'N', eS, 'L');
+        double result2 = res2.wK();
+
+        System.out.println(res1.iI);
+        System.out.println(res1.iII);
+
+        System.out.println("fc = " + result1 + " cm");
+        System.out.println("fc+m = " + result1a + " cm");
+        System.out.println("wk = " + result2 + " mm");
+
+        assertEquals(17.27, result1, DELTA);
+        assertEquals(0.2868, result2, DELTA);
+
+    }
+
+    @Test
+    public void testSixSixLongTwo() {
+
+        float mEd = 0.25f;
+        float mEk = 0.25f;
+        float mEkLt = 0.2f;
+
+        int rods1 = 6;
+        int rods2 = 0;
+
+
+        double as1 = Math.pow(fi * 0.5, 2) * Math.PI * rods1;
+        double as2 = Math.pow(fi * 0.5, 2) * Math.PI * rods2;
+        System.out.println(as1);
+
+
+        Deflection res1 = new Deflection(lEff, mEkLt, mEk, alphaM, mEd, eS, bDimension, hDimension, 0, 0, bDimension, bDimension, a1, a2, as1, as2, 'L', fCk, rH, 'N', 28);
+        double result1 = res1.resultsLong();
+        double result1a = res1.resultsLongDeformation();
+
+        Scratch res2 = new Scratch(cNom, fiSt, fi, 6, fCk, rH, 28, 'N', bDimension, bDimension, bDimension, hDimension, 0, 0, a1, a2, as1, as2, mEk, mEkLt, 'N', eS, 'L');
+        double result2 = res2.wK();
+
+        System.out.println(res1.iI);
+        System.out.println(res1.iII);
+
+        System.out.println("fc = " + result1 + " cm");
+        System.out.println("fc+m = " + result1a + " cm");
+        System.out.println("wk = " + result2 + " mm");
+
+        assertEquals(17.27, result1, DELTA);
+        assertEquals(0.2868, result2, DELTA);
+
+    }
+
+    @Test
+    public void testSixThreeLongOne() {
+
+        float mEd = 0.25f;
+        float mEk = 0.20f;
+        float mEkLt = 0.2f;
+
+        int rods1 = 6;
+        int rods2 = 3;
+
+
+        double as1 = Math.pow(fi * 0.5, 2) * Math.PI * rods1;
+        double as2 = Math.pow(fi * 0.5, 2) * Math.PI * rods2;
+        System.out.println(as1);
+
+
+        Deflection res1 = new Deflection(lEff, mEkLt, mEk, alphaM, mEd, eS, bDimension, hDimension, 0, 0, bDimension, bDimension, a1, a2, as1, as2, 'L', fCk, rH, 'N', 28);
+        double result1 = res1.resultsLong();
+        double result1a = res1.resultsLongDeformation();
+
+        Scratch res2 = new Scratch(cNom, fiSt, fi, 6, fCk, rH, 28, 'N', bDimension, bDimension, bDimension, hDimension, 0, 0, a1, a2, as1, as2, mEk, mEkLt, 'N', eS, 'L');
+        double result2 = res2.wK();
+
+        System.out.println(res1.iI);
+        System.out.println(res1.iII);
+
+        System.out.println("fc = " + result1 + " cm");
+        System.out.println("fc+m = " + result1a + " cm");
+        System.out.println("wk = " + result2 + " mm");
+
+        assertEquals(18.45, result1, DELTA);
+        assertEquals(0.2916, result2, DELTA);
+
+    }
+
+    @Test
+    public void testSixThreeLongTwo() {
+
+        float mEd = 0.25f;
+        float mEk = 0.25f;
+        float mEkLt = 0.2f;
+
+        int rods1 = 6;
+        int rods2 = 3;
+
+
+        double as1 = Math.pow(fi * 0.5, 2) * Math.PI * rods1;
+        double as2 = Math.pow(fi * 0.5, 2) * Math.PI * rods2;
+        System.out.println(as1);
+
+
+        Deflection res1 = new Deflection(lEff, mEkLt, mEk, alphaM, mEd, eS, bDimension, hDimension, 0, 0, bDimension, bDimension, a1, a2, as1, as2, 'L', fCk, rH, 'N', 28);
+        double result1 = res1.resultsLong();
+        double result1a = res1.resultsLongDeformation();
+
+        Scratch res2 = new Scratch(cNom, fiSt, fi, 6, fCk, rH, 28, 'N', bDimension, bDimension, bDimension, hDimension, 0, 0, a1, a2, as1, as2, mEk, mEkLt, 'N', eS, 'L');
+        double result2 = res2.wK();
+
+        System.out.println(res1.iI);
+        System.out.println(res1.iII);
+
+        System.out.println("fc = " + result1 + " cm");
+        System.out.println("fc+m = " + result1a + " cm");
+        System.out.println("wk = " + result2 + " mm");
+
+        assertEquals(18.45, result1, DELTA);
+        assertEquals(0.2916, result2, DELTA);
+
+    }
+
+    @Test
+    public void testThreeSixLongOne() {
+
+        float mEd = 0.25f;
+        float mEk = 0.20f;
+        float mEkLt = 0.2f;
+
+        int rods1 = 3;
+        int rods2 = 6;
+
+
+        double as1 = Math.pow(fi * 0.5, 2) * Math.PI * rods1;
+        double as2 = Math.pow(fi * 0.5, 2) * Math.PI * rods2;
+        System.out.println(as1);
+
+
+        Deflection res1 = new Deflection(lEff, mEkLt, mEk, alphaM, mEd, eS, bDimension, hDimension, 0, 0, bDimension, bDimension, a1, a2, as1, as2, 'L', fCk, rH, 'N', 28);
+        double result1 = res1.resultsLong();
+        double result1a = res1.resultsLongDeformation();
+
+        Scratch res2 = new Scratch(cNom, fiSt, fi, 3, fCk, rH, 28, 'N', bDimension, bDimension, bDimension, hDimension, 0, 0, a1, a2, as1, as2, mEk, mEkLt, 'N', eS, 'L');
+        double result2 = res2.wK();
+
+        System.out.println(res1.iI);
+        System.out.println(res1.iII);
+
+        System.out.println("fc = " + result1 + " cm");
+        System.out.println("fc+m = " + result1a + " cm");
+        System.out.println("wk = " + result2 + " mm");
+
+        assertEquals(29.40, result1, DELTA);
+        assertEquals(0.8225, result2, DELTA);
+
+    }
+
+    @Test
+    public void testThreeSixLongTwo() {
+
+        float mEd = 0.25f;
+        float mEk = 0.25f;
+        float mEkLt = 0.2f;
+
+        int rods1 = 3;
+        int rods2 = 6;
+
+
+        double as1 = Math.pow(fi * 0.5, 2) * Math.PI * rods1;
+        double as2 = Math.pow(fi * 0.5, 2) * Math.PI * rods2;
+        System.out.println(as1);
+
+
+        Deflection res1 = new Deflection(lEff, mEkLt, mEk, alphaM, mEd, eS, bDimension, hDimension, 0, 0, bDimension, bDimension, a1, a2, as1, as2, 'L', fCk, rH, 'N', 28);
+        double result1 = res1.resultsLong();
+        double result1a = res1.resultsLongDeformation();
+
+        Scratch res2 = new Scratch(cNom, fiSt, fi, 3, fCk, rH, 28, 'N', bDimension, bDimension, bDimension, hDimension, 0, 0, a1, a2, as1, as2, mEk, mEkLt, 'N', eS, 'L');
+        double result2 = res2.wK();
+
+        System.out.println(res1.iI);
+        System.out.println(res1.iII);
+
+        System.out.println("fc = " + result1 + " cm");
+        System.out.println("fc+m = " + result1a + " cm");
+        System.out.println("wk = " + result2 + " mm");
+
+        assertEquals(29.40, result1, DELTA);
+        assertEquals(0.8225, result2, DELTA);
+
+    }
+
+    // short time load
+
+    @Test
+    public void testSixZeroShortOne() {
+
+        float mEd = 0.25f;
+        float mEk = 0.20f;
+        float mEkLt = 0.2f;
+
+        int rods1 = 6;
+        int rods2 = 0;
+
+
+        double as1 = Math.pow(fi * 0.5, 2) * Math.PI * rods1;
+        double as2 = Math.pow(fi * 0.5, 2) * Math.PI * rods2;
+        System.out.println(as1);
+
+
+        Deflection res1 = new Deflection(lEff, mEkLt, mEk, alphaM, mEd, eS, bDimension, hDimension, 0, 0, bDimension, bDimension, a1, a2, as1, as2, 'S', fCk, rH, 'N', 28);
+        double result1 = res1.resultsLong();
+        double result1a = res1.resultsLongDeformation();
+
+        Scratch res2 = new Scratch(cNom, fiSt, fi, 6, fCk, rH, 28, 'N', bDimension, bDimension, bDimension, hDimension, 0, 0, a1, a2, as1, as2, mEk, mEkLt, 'N', eS, 'S');
+        double result2 = res2.wK();
+
+        System.out.println(res1.iI);
+        System.out.println(res1.iII);
+
+        System.out.println("fc = " + result1 + " cm");
+        System.out.println("fc+m = " + result1a + " cm");
+        System.out.println("wk = " + result2 + " mm");
+
+        assertEquals(14.42, result1, DELTA);
+        assertEquals(0.2743, result2, DELTA);
+
+    }
+
+    @Test
+    public void testSixZeroShortTwo() {
+
+        float mEd = 0.25f;
+        float mEk = 0.25f;
+        float mEkLt = 0.2f;
+
+        int rods1 = 6;
+        int rods2 = 0;
+
+
+        double as1 = Math.pow(fi * 0.5, 2) * Math.PI * rods1;
+        double as2 = Math.pow(fi * 0.5, 2) * Math.PI * rods2;
+        System.out.println(as1);
+
+
+        Deflection res1 = new Deflection(lEff, mEkLt, mEk, alphaM, mEd, eS, bDimension, hDimension, 0, 0, bDimension, bDimension, a1, a2, as1, as2, 'S', fCk, rH, 'N', 28);
+        double result1 = res1.resultsLong();
+        double result1a = res1.resultsLongDeformation();
+
+        Scratch res2 = new Scratch(cNom, fiSt, fi, 6, fCk, rH, 28, 'N', bDimension, bDimension, bDimension, hDimension, 0, 0, a1, a2, as1, as2, mEk, mEkLt, 'N', eS, 'S');
+        double result2 = res2.wK();
+
+        System.out.println(res1.iI);
+        System.out.println(res1.iII);
+
+        System.out.println("fc = " + result1 + " cm");
+        System.out.println("fc+m = " + result1a + " cm");
+        System.out.println("wk = " + result2 + " mm");
+
+        assertEquals(18.37, result1, DELTA);
+        assertEquals(0.36, result2, DELTA);
+
+    }
+
+    @Test
+    public void testSixSixShortOne() {
+
+        float mEd = 0.25f;
+        float mEk = 0.20f;
+        float mEkLt = 0.2f;
+
+        int rods1 = 6;
+        int rods2 = 6;
+
+
+        double as1 = Math.pow(fi * 0.5, 2) * Math.PI * rods1;
+        double as2 = Math.pow(fi * 0.5, 2) * Math.PI * rods2;
+        System.out.println(as1);
+
+
+        Deflection res1 = new Deflection(lEff, mEkLt, mEk, alphaM, mEd, eS, bDimension, hDimension, 0, 0, bDimension, bDimension, a1, a2, as1, as2, 'S', fCk, rH, 'N', 28);
+        double result1 = res1.resultsLong();
+        double result1a = res1.resultsLongDeformation();
+
+        Scratch res2 = new Scratch(cNom, fiSt, fi, 6, fCk, rH, 28, 'N', bDimension, bDimension, bDimension, hDimension, 0, 0, a1, a2, as1, as2, mEk, mEkLt, 'N', eS, 'S');
+        double result2 = res2.wK();
+
+        System.out.println(res1.iI);
+        System.out.println(res1.iII);
+
+        System.out.println("fc = " + result1 + " cm");
+        System.out.println("fc+m = " + result1a + " cm");
+        System.out.println("wk = " + result2 + " mm");
+
+        assertEquals(13.9, result1, DELTA);
+        assertEquals(0.2723, result2, DELTA);
+
+    }
+
+    @Test
+    public void testSixSixShortTwo() {
+
+        float mEd = 0.25f;
+        float mEk = 0.25f;
+        float mEkLt = 0.2f;
+
+        int rods1 = 6;
+        int rods2 = 6;
+
+
+        double as1 = Math.pow(fi * 0.5, 2) * Math.PI * rods1;
+        double as2 = Math.pow(fi * 0.5, 2) * Math.PI * rods2;
+        System.out.println(as1);
+
+
+        Deflection res1 = new Deflection(lEff, mEkLt, mEk, alphaM, mEd, eS, bDimension, hDimension, 0, 0, bDimension, bDimension, a1, a2, as1, as2, 'S', fCk, rH, 'N', 28);
+        double result1 = res1.resultsLong();
+        double result1a = res1.resultsLongDeformation();
+
+        Scratch res2 = new Scratch(cNom, fiSt, fi, 6, fCk, rH, 28, 'N', bDimension, bDimension, bDimension, hDimension, 0, 0, a1, a2, as1, as2, mEk, mEkLt, 'N', eS, 'S');
+        double result2 = res2.wK();
+
+        System.out.println(res1.iI);
+        System.out.println(res1.iII);
+
+        System.out.println("fc = " + result1 + " cm");
+        System.out.println("fc+m = " + result1a + " cm");
+        System.out.println("wk = " + result2 + " mm");
+
+        assertEquals(14.14, result1, DELTA);
+        assertEquals(0.2731, result2, DELTA);
+
+    }
 }
