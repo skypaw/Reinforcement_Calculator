@@ -26,7 +26,7 @@ public class TestSgu1 {
     private float cNom = 0.030f;
     private float fiSt = 0.008f;
 
-    private static final double DELTA = 1e-6;
+    private static final double DELTA = 1e-4;
 
     @Test
     public void testSixZeroLongOne() {
@@ -58,8 +58,8 @@ public class TestSgu1 {
         System.out.println("fc+m = " + result1a + " cm");
         System.out.println("wk = " + result2 + " mm");
 
-        assertEquals(20.21, result1, DELTA);
-        assertEquals(0.2743, result2, DELTA);
+        assertEquals(20.21 * Math.pow(10, -3), result1, DELTA);
+        assertEquals(0.2743 * Math.pow(10, -3), result2, DELTA);
 
     }
 
@@ -93,8 +93,8 @@ public class TestSgu1 {
         System.out.println("fc+m = " + result1a + " cm");
         System.out.println("wk = " + result2 + " mm");
 
-        assertEquals(20.21, result1, DELTA);
-        assertEquals(0.2743, result2, DELTA);
+        assertEquals(20.21 * Math.pow(10, -3), result1, DELTA);
+        assertEquals(0.2743 * Math.pow(10, -3), result2, DELTA);
 
     }
 
@@ -128,8 +128,8 @@ public class TestSgu1 {
         System.out.println("fc+m = " + result1a + " cm");
         System.out.println("wk = " + result2 + " mm");
 
-        assertEquals(17.27, result1, DELTA);
-        assertEquals(0.2868, result2, DELTA);
+        assertEquals(17.27 * Math.pow(10, -3), result1, DELTA);
+        assertEquals(0.2868 * Math.pow(10, -3), result2, DELTA);
 
     }
 
@@ -163,8 +163,8 @@ public class TestSgu1 {
         System.out.println("fc+m = " + result1a + " cm");
         System.out.println("wk = " + result2 + " mm");
 
-        assertEquals(17.27, result1, DELTA);
-        assertEquals(0.2868, result2, DELTA);
+        assertEquals(17.27 * Math.pow(10, -3), result1, DELTA);
+        assertEquals(0.2868 * Math.pow(10, -3), result2, DELTA);
 
     }
 
@@ -198,8 +198,8 @@ public class TestSgu1 {
         System.out.println("fc+m = " + result1a + " cm");
         System.out.println("wk = " + result2 + " mm");
 
-        assertEquals(18.45, result1, DELTA);
-        assertEquals(0.2916, result2, DELTA);
+        assertEquals(18.45 * Math.pow(10, -3), result1, DELTA);
+        assertEquals(0.2916 * Math.pow(10, -3), result2, DELTA);
 
     }
 
@@ -233,8 +233,8 @@ public class TestSgu1 {
         System.out.println("fc+m = " + result1a + " cm");
         System.out.println("wk = " + result2 + " mm");
 
-        assertEquals(18.45, result1, DELTA);
-        assertEquals(0.2916, result2, DELTA);
+        assertEquals(18.45 * Math.pow(10, -3), result1, DELTA);
+        assertEquals(0.2916 * Math.pow(10, -3), result2, DELTA);
 
     }
 
@@ -268,8 +268,8 @@ public class TestSgu1 {
         System.out.println("fc+m = " + result1a + " cm");
         System.out.println("wk = " + result2 + " mm");
 
-        assertEquals(29.40, result1, DELTA);
-        assertEquals(0.8225, result2, DELTA);
+        assertEquals(29.40 * Math.pow(10, -3), result1, DELTA);
+        assertEquals(0.8225 * Math.pow(10, -3), result2, DELTA);
 
     }
 
@@ -303,8 +303,8 @@ public class TestSgu1 {
         System.out.println("fc+m = " + result1a + " cm");
         System.out.println("wk = " + result2 + " mm");
 
-        assertEquals(29.40, result1, DELTA);
-        assertEquals(0.8225, result2, DELTA);
+        assertEquals(29.40 * Math.pow(10, -3), result1, DELTA);
+        assertEquals(0.8225 * Math.pow(10, -3), result2, DELTA);
 
     }
 
@@ -327,8 +327,8 @@ public class TestSgu1 {
 
 
         Deflection res1 = new Deflection(lEff, mEkLt, mEk, alphaM, mEd, eS, bDimension, hDimension, 0, 0, bDimension, bDimension, a1, a2, as1, as2, 'S', fCk, rH, 'N', 28);
-        double result1 = res1.resultsLong();
-        double result1a = res1.resultsLongDeformation();
+        double result1 = res1.resultsShort();
+
 
         Scratch res2 = new Scratch(cNom, fiSt, fi, 6, fCk, rH, 28, 'N', bDimension, bDimension, bDimension, hDimension, 0, 0, a1, a2, as1, as2, mEk, mEkLt, 'N', eS, 'S');
         double result2 = res2.wK();
@@ -337,11 +337,10 @@ public class TestSgu1 {
         System.out.println(res1.iII);
 
         System.out.println("fc = " + result1 + " cm");
-        System.out.println("fc+m = " + result1a + " cm");
         System.out.println("wk = " + result2 + " mm");
 
-        assertEquals(14.42, result1, DELTA);
-        assertEquals(0.2743, result2, DELTA);
+        assertEquals(14.42 * Math.pow(10, -3), result1, DELTA);
+        assertEquals(0.2743 * Math.pow(10, -3), result2, DELTA);
 
     }
 
@@ -362,8 +361,8 @@ public class TestSgu1 {
 
 
         Deflection res1 = new Deflection(lEff, mEkLt, mEk, alphaM, mEd, eS, bDimension, hDimension, 0, 0, bDimension, bDimension, a1, a2, as1, as2, 'S', fCk, rH, 'N', 28);
-        double result1 = res1.resultsLong();
-        double result1a = res1.resultsLongDeformation();
+        double result1 = res1.resultsShort();
+
 
         Scratch res2 = new Scratch(cNom, fiSt, fi, 6, fCk, rH, 28, 'N', bDimension, bDimension, bDimension, hDimension, 0, 0, a1, a2, as1, as2, mEk, mEkLt, 'N', eS, 'S');
         double result2 = res2.wK();
@@ -372,11 +371,11 @@ public class TestSgu1 {
         System.out.println(res1.iII);
 
         System.out.println("fc = " + result1 + " cm");
-        System.out.println("fc+m = " + result1a + " cm");
+
         System.out.println("wk = " + result2 + " mm");
 
-        assertEquals(18.37, result1, DELTA);
-        assertEquals(0.36, result2, DELTA);
+        assertEquals(18.37 * Math.pow(10, -3), result1, DELTA);
+        assertEquals(0.36 * Math.pow(10, -3), result2, DELTA);
 
     }
 
@@ -397,8 +396,8 @@ public class TestSgu1 {
 
 
         Deflection res1 = new Deflection(lEff, mEkLt, mEk, alphaM, mEd, eS, bDimension, hDimension, 0, 0, bDimension, bDimension, a1, a2, as1, as2, 'S', fCk, rH, 'N', 28);
-        double result1 = res1.resultsLong();
-        double result1a = res1.resultsLongDeformation();
+        double result1 = res1.resultsShort();
+
 
         Scratch res2 = new Scratch(cNom, fiSt, fi, 6, fCk, rH, 28, 'N', bDimension, bDimension, bDimension, hDimension, 0, 0, a1, a2, as1, as2, mEk, mEkLt, 'N', eS, 'S');
         double result2 = res2.wK();
@@ -407,11 +406,10 @@ public class TestSgu1 {
         System.out.println(res1.iII);
 
         System.out.println("fc = " + result1 + " cm");
-        System.out.println("fc+m = " + result1a + " cm");
         System.out.println("wk = " + result2 + " mm");
 
-        assertEquals(13.9, result1, DELTA);
-        assertEquals(0.2723, result2, DELTA);
+        assertEquals(13.9 * Math.pow(10, -3), result1, DELTA);
+        assertEquals(0.2723 * Math.pow(10, -3), result2, DELTA);
 
     }
 
@@ -432,8 +430,8 @@ public class TestSgu1 {
 
 
         Deflection res1 = new Deflection(lEff, mEkLt, mEk, alphaM, mEd, eS, bDimension, hDimension, 0, 0, bDimension, bDimension, a1, a2, as1, as2, 'S', fCk, rH, 'N', 28);
-        double result1 = res1.resultsLong();
-        double result1a = res1.resultsLongDeformation();
+        double result1 = res1.resultsShort();
+
 
         Scratch res2 = new Scratch(cNom, fiSt, fi, 6, fCk, rH, 28, 'N', bDimension, bDimension, bDimension, hDimension, 0, 0, a1, a2, as1, as2, mEk, mEkLt, 'N', eS, 'S');
         double result2 = res2.wK();
@@ -441,12 +439,12 @@ public class TestSgu1 {
         System.out.println(res1.iI);
         System.out.println(res1.iII);
 
-        System.out.println("fc = " + result1 + " cm");
-        System.out.println("fc+m = " + result1a + " cm");
-        System.out.println("wk = " + result2 + " mm");
+        System.out.println("fc = " + result1 + " m");
 
-        assertEquals(14.14, result1, DELTA);
-        assertEquals(0.2731, result2, DELTA);
+        System.out.println("wk = " + result2 + " m");
+
+        assertEquals(17.71 * Math.pow(10, -3), result1, DELTA);
+        assertEquals(0.3572 * Math.pow(10, -3), result2, DELTA);
 
     }
 }

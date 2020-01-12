@@ -77,7 +77,7 @@ public class Deflection {
 
     private void bValueLong() {
         bIInf = eCEff * iI;
-        bIIInf = eCEff * iI;
+        bIIInf = eCEff * iII;
     }
 
 
@@ -85,7 +85,7 @@ public class Deflection {
         if (mCr > mEd) {
             return alphaM * mEk / bIZero * Math.pow(lEff, 2);
         } else {
-            return sigma * alphaM / bIIZero * Math.pow(lEff, 2) + (1 - sigma) * alphaM * mEk / bIZero * Math.pow(lEff, 2);
+            return sigma * alphaM *mEk/ bIIZero * Math.pow(lEff, 2) + (1 - sigma) * alphaM * mEk / bIZero * Math.pow(lEff, 2);
         }
     }
 
