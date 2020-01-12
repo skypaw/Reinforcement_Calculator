@@ -51,7 +51,7 @@ public class Scratch {
         this.mEdkLt = mEdKLt;
 
 
-        this.eS = eS;
+        this.eS = BasicValues.steelE();
         this.loadLong = loadLong;
 
         BasicParameters basic = new BasicParameters(eS, b, h, hF, hFT, bEff, bEffT, a1, a2, aS1, aS2, fCk, rH, tZero, cement, loadLong);
@@ -109,7 +109,7 @@ public class Scratch {
         float k1 = 0.8f;
         float k2 = 0.5f;
         float k3 = 3.4f;
-        float k4 = 0.435f;
+        float k4 = 0.425f;
 
         double c = cNom + fiSt;
         double a = Math.max((bEffT - 2 * c - fiS1) / (nS1 - 1), 2 * fiS1);

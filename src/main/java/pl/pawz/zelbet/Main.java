@@ -1,6 +1,8 @@
 package pl.pawz.zelbet;
 
 import pl.pawz.zelbet.Diagnostic.DiagnosticCompression;
+import pl.pawz.zelbet.SLS.Deflection;
+import pl.pawz.zelbet.SLS.Scratch;
 
 import java.util.Arrays;
 
@@ -9,41 +11,48 @@ public class Main {
     public static void main(String[] args) {
 
         float fCk = 30f;
-        float fYk = 500f;
-
-
-        float b = 0.3f;
+        double fYk = 500;
+        float hDimension = 0.6f;
+        float bDimension = 0.3f;
         float a1 = 0.05f;
         float a2 = 0.05f;
-        float h = 0.6f;
 
-        float a1Beam = 0.051f;
-        float fCkBeam = 30f;
-        float hBeam = 0.4f;
-        float bW = 0.25f;
-        float bEff = 1.6f;
-        float hF = 0.10f;
+        float fi = 0.016f;
+        float alphaM = 0.104f;
+        float lEff = 6f;
+
+        int eS = 200000;
+        int rH = 50;
+
+        float cNom = 0.030f;
+        float fiSt = 0.008f;
 
 
+        float mEd = 0.25f;
+        float mEk = 0.20f;
+        float mEkLt = 0.2f;
 
-        float vEd = 0.3984f;
-        double vEdRed = 0.332f;
-        double aS2 = 0.0006032;
-        double aS1 = 0.0004021;
-        double nS1 = 2;
-        double nS2 = 2;
-        double fiS1 = 0.006;
-        double fiS2 = 0.012;
-        float cotTheta = 2;
+        int rods1 = 6;
+        int rods2 = 0;
 
-        float mEd = 0.012f;
-        float nEd = 0.034f;
 
-        float mEdBeam = 0.10439f;
+        double as1 = Math.pow(fi * 0.5, 2) * Math.PI * rods1;
+        double as2 = Math.pow(fi * 0.5, 2) * Math.PI * rods2;
+        System.out.println(as1);
 
-        DiagnosticCompression test = new DiagnosticCompression(nEd,mEd,fCk,fYk,b,h,a1,a2,aS1, aS2);
-        double[] res = test.resultsDiagnosticCompression();
-        System.out.println(Arrays.toString(res));
+
+        Deflection res1 = new Deflection(lEff, mEkLt, mEk, alphaM, mEd, eS, bDimension, hDimension, 0, 0, bDimension, bDimension, a1, a2, as1, as2, 'S', fCk, rH, 'N', 28);
+        double result1 = res1.resultsShort();
+
+
+        Scratch res2 = new Scratch(cNom, fiSt, fi, 6, fCk, rH, 28, 'N', bDimension, bDimension, bDimension, hDimension, 0, 0, a1, a2, as1, as2, mEk, mEkLt, 'N', eS, 'S');
+        double result2 = res2.wK();
+
+        System.out.println(res1.iI);
+        System.out.println(res1.iII);
+
+        System.out.println("fc = " + result1 + " m");
+        System.out.println("wk = " + result2 + " m");
 
     }
 
