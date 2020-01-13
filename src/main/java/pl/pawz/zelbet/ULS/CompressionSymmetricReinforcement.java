@@ -181,6 +181,15 @@ public class CompressionSymmetricReinforcement {
         double aS1 = (nEd * eS2 + etaConcrete * fCd * bDimension * lambdaConcrete * xVar * (0.5 * lambdaConcrete * xVar - a2)) / (sigmaS1 * (dDimension - a2));
         double aS2 = (nEd * eS1 - etaConcrete * fCd * bDimension * lambdaConcrete * xVar * (dDimension - 0.5 * lambdaConcrete * xVar)) / (sigmaS2 * (dDimension - a2));
 
+        double aSMinForOneSide = Math.max(0.10 * nEd / fYd, (0.002 * bDimension * 100 * hDimension * 100) * Math.pow(10, -4)) / 2;
+
+        if (aS1<aSMinForOneSide){
+            aS1 = aSMinForOneSide;
+        }
+        if (aS2<aSMinForOneSide){
+            aS2 = aSMinForOneSide;
+        }
+
         return new double[]{aS1, aS2};
 
     }

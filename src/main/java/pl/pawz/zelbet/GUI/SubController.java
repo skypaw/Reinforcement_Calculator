@@ -1017,11 +1017,19 @@ public class SubController {
         data.put("ctg", roundTwoDigit(ctgThetaValue));
         data.put("alpha", roundTwoDigit(alphaValue));
         data.put("aSl", roundTwoDigit(aSl));
-        data.put("aSw1", roundTwoDigit(aSw1Value));
-        data.put("aSw2", roundTwoDigit(aSw2Value));
+        data.put("aSw1", roundTwoDigit(aSw1Value * 1000));
+        data.put("aSw2", roundTwoDigit(aSw2Value * 1000));
         data.put("nSw1", roundTwoDigit(nSw1Value));
         data.put("nSw2", roundTwoDigit(nSw2Value));
         data.put("sSw2", roundTwoDigit(nSw2RodSValue));
+
+        data.put("mEk", roundTwoDigit(mEkValue * 1000));
+        data.put("mEkLt", roundTwoDigit(mEkLtValue * 1000));
+        data.put("tZero", roundTwoDigit(tZeroValue));
+        data.put("rH", roundTwoDigit(rHValue));
+        data.put("cNom", roundTwoDigit(cNomValue * 1000));
+        data.put("lEff", roundTwoDigit(lEffValue));
+        data.put("alphaM", roundTwoDigit(alphaMValue));
 
 
         if (checkBoxResults3.isSelected() && nEdValue == 0) {
@@ -1134,13 +1142,13 @@ public class SubController {
 
     public void diagnostic() {
 
-        System.out.println();
         fCk();
         fYk();
         dimension();
         forcesValues();
         longitudinalReinforcement();
         diagnosticValues();
+        slsValues();
 
 
         double aS1ValueDiagnostic = Math.pow(aS1Value * 0.5, 2) * Math.PI * n1Value;
@@ -1271,6 +1279,103 @@ public class SubController {
 
             res2.setText(String.valueOf(0));
             res2true.setText(String.valueOf(0));
+        }
+
+
+        if (checkBoxResults3.isSelected() && nEdValue == 0) {
+
+
+            if (choiceBoxDimensions.getValue().toString().equals("Przekrój Prostokątny")) { //aS1Value - PROBABLY FI AS1!
+                if (loadChar == 'L') {
+                    double aS1True = Math.pow(aS1Value / 2, 2) * Math.PI * n1Value;
+                    double aS2True = Math.pow(aS2Value / 2, 2) * Math.PI * n2Value;
+
+
+                    Deflection res1 = new Deflection(lEffValue, mEkLtValue, mEkValue, alphaMValue, mEdValue, bValue, hValue, 0, 0, bValue, bValue, a1Value, a2Value, aS1True, aS2True, loadChar, fCk, rHValue, cementChar, tZeroValue);
+                    double result1 = res1.resultsLong();
+                    double result1a = res1.resultsLongDeformation();
+
+                    Scratch res2 = new Scratch(cNomValue, aSw1Value, aS1Value, resRods1ValueAsymmetric, fCk, rHValue, tZeroValue, cementChar, bValue, bValue, bValue, hValue, 0, 0, a1Value, a2Value, aS1True, aS2True, mEkValue, mEkLtValue, loadChar);
+                    double result2 = res2.wK();
+
+
+                    //res to labels
+                    String mm = " mm";
+                    String cm = " cm";
+
+                    wResTrue.setText(String.valueOf(roundThreeDigitShearing(result2 * Math.pow(10, 3))) + mm);
+                    fMResTrue.setText(String.valueOf(roundThreeDigitShearing(result1 * Math.pow(10, 2))) + cm);
+                    fMPlusCResTrue.setText(String.valueOf(roundThreeDigitShearing(result1a * Math.pow(10, 2))) + cm);
+
+
+                } else {
+                    double aS1True = Math.pow(aS1Value / 2, 2) * Math.PI * n1Value;
+                    double aS2True = Math.pow(aS2Value / 2, 2) * Math.PI * n2Value;
+
+                    Deflection res1 = new Deflection(lEffValue, mEkLtValue, mEkValue, alphaMValue, mEdValue, bValue, hValue, 0, 0, bValue, bValue, a1Value, a2Value, aS1True, aS2True, loadChar, fCk, rHValue, cementChar, tZeroValue);
+                    double result1 = res1.resultsShort();
+
+                    Scratch res2 = new Scratch(cNomValue, aSw1Value, aS1Value, resRods1ValueAsymmetric, fCk, rHValue, tZeroValue, cementChar, bValue, bValue, bValue, hValue, 0, 0, a1Value, a2Value, aS1True, aS2True, mEkValue, mEkLtValue, loadChar);
+                    double result2 = res2.wK();
+
+                    //res to labels
+                    String mm = " mm";
+                    String cm = " cm";
+
+                    wResTrue.setText(String.valueOf(roundThreeDigitShearing(result2 * Math.pow(10, 3))) + mm);
+                    fMResTrue.setText(String.valueOf(roundThreeDigitShearing(result1 * Math.pow(10, 2))) + cm);
+                    fMPlusCResTrue.setText(String.valueOf(roundThreeDigitShearing(0)) + cm);
+                }
+            } else {
+                if (loadChar == 'L') {
+                    double aS1True = Math.pow(aS1Value / 2, 2) * Math.PI * n1Value;
+                    double aS2True = Math.pow(aS2Value / 2, 2) * Math.PI * n2Value;
+
+
+                    Deflection res1 = new Deflection(lEffValue, mEkLtValue, mEkValue, alphaMValue, mEdValue, bValue, hValue, hFValue, hFTValue, bFValue, bFTValue, a1Value, a2Value, aS1True, aS2True, loadChar, fCk, rHValue, cementChar, tZeroValue);
+                    double result1 = res1.resultsLong();
+                    double result1a = res1.resultsLongDeformation();
+
+                    Scratch res2 = new Scratch(cNomValue, aSw1Value, aS1Value, resRods1ValueAsymmetric, fCk, rHValue, tZeroValue, cementChar, bValue, bFValue, bFTValue, hValue, hFValue, hFTValue, a1Value, a2Value, aS1True, aS2True, mEkValue, mEkLtValue, loadChar);
+                    double result2 = res2.wK();
+
+
+                    //res to labels
+                    String mm = " mm";
+                    String cm = " cm";
+
+                    wResTrue.setText(String.valueOf(roundThreeDigitShearing(result2 * Math.pow(10, 3))) + mm);
+                    fMResTrue.setText(String.valueOf(roundThreeDigitShearing(result1 * Math.pow(10, 2))) + cm);
+                    fMPlusCResTrue.setText(String.valueOf(roundThreeDigitShearing(result1a * Math.pow(10, 2))) + cm);
+
+
+                } else {
+                    double aS1True = Math.pow(aS1Value / 2, 2) * Math.PI * n1Value;
+                    double aS2True = Math.pow(aS2Value / 2, 2) * Math.PI * n2Value;
+
+                    Deflection res1 = new Deflection(lEffValue, mEkLtValue, mEkValue, alphaMValue, mEdValue, bValue, hValue, hFValue, hFTValue, bFValue, bFTValue, a1Value, a2Value, aS1True, aS2True, loadChar, fCk, rHValue, cementChar, tZeroValue);
+                    double result1 = res1.resultsShort();
+
+                    Scratch res2 = new Scratch(cNomValue, aSw1Value, aS1Value, resRods1ValueAsymmetric, fCk, rHValue, tZeroValue, cementChar, bValue, bFValue, bFTValue, hValue, hFValue, hFTValue, a1Value, a2Value, aS1True, aS2True, mEkValue, mEkLtValue, loadChar);
+                    double result2 = res2.wK();
+
+                    //res to labels
+
+
+                    String mm = " mm";
+                    String cm = " cm";
+
+                    wResTrue.setText(String.valueOf(roundThreeDigitShearing(result2 * Math.pow(10, 3))) + mm);
+                    fMResTrue.setText(String.valueOf(roundThreeDigitShearing(result1 * Math.pow(10, 2))) + cm);
+                    fMPlusCResTrue.setText(String.valueOf(roundThreeDigitShearing(0)) + cm);
+
+                }
+            }
+
+        } else {
+            wResTrue.setText(String.valueOf(0));
+            fMResTrue.setText(String.valueOf(0));
+            fMPlusCResTrue.setText(String.valueOf(0));
         }
 
         toPdfButton.setDisable(false);
