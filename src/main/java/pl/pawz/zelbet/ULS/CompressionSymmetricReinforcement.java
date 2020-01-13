@@ -73,7 +73,7 @@ public class CompressionSymmetricReinforcement {
         double cVar = 2 * ((nEd * (fYd * eS1 - epsilonCu3 * E_S * eS2)) / (lambdaConcrete * etaConcrete * fCd * bDimension) - epsilonCu3 * E_S * Math.pow(a2, 2));
         double dVar = (2 * nEd * epsilonCu3 * E_S * a2 * eS2) / (lambdaConcrete * etaConcrete * fCd * bDimension);
 
-        xVar = PolynomialSolver.solver(aVar, bVar, cVar, dVar, 0);
+        xVar = PolynomialSolver.solver(aVar, bVar, cVar, dVar, -100);
     }
 
     private void xGreaterThanXMinYd() {
@@ -180,6 +180,7 @@ public class CompressionSymmetricReinforcement {
 
         double aS1 = (nEd * eS2 + etaConcrete * fCd * bDimension * lambdaConcrete * xVar * (0.5 * lambdaConcrete * xVar - a2)) / (sigmaS1 * (dDimension - a2));
         double aS2 = (nEd * eS1 - etaConcrete * fCd * bDimension * lambdaConcrete * xVar * (dDimension - 0.5 * lambdaConcrete * xVar)) / (sigmaS2 * (dDimension - a2));
+
         return new double[]{aS1, aS2};
 
     }

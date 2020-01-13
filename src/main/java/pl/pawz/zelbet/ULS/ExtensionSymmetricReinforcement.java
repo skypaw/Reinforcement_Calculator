@@ -52,7 +52,7 @@ public class ExtensionSymmetricReinforcement {
         double cVar = 2 * ((nEd * (fYd * eS1 - epsilonCu3 * E_S * eS2)) / (lambdaConcrete * etaConcrete * fCd * bDimension) - epsilonCu3 * E_S * Math.pow(a2, 2));
         double dVar = 2 * nEd * epsilonCu3 * E_S * a2 * eS2 / (lambdaConcrete * etaConcrete * fCd * bDimension);
 
-        xVar = PolynomialSolver.solver(aVar, bVar, cVar, dVar, 0);
+        xVar = PolynomialSolver.solver(aVar, bVar, cVar, dVar, -100);
     }
 
     private void xSmallerThanXMinMinusYd() {

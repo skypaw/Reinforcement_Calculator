@@ -123,7 +123,7 @@ public class CompressionAsymmetricReinforcement {
         double bVar = (2 * (nEd * eS1 - mS2)) / (Math.pow(lambdaConcrete, 2) * etaConcrete * fCd * bDimension);
         double cVar = (2 * a2 * mS2) / (Math.pow(lambdaConcrete, 2) * etaConcrete * fCd * bDimension);
 
-        xVar =  PolynomialSolver.solver(1, aVar, bVar, cVar, 0);
+        xVar =  PolynomialSolver.solver(1, aVar, bVar, cVar, -100);
     }
 
     private void xGreaterThanXMinMinusYd() {
