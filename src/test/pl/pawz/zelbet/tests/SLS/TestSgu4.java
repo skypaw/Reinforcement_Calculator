@@ -15,7 +15,7 @@ public class TestSgu4 {
     private float hDimension = 0.6f;
     private float bDimension = 0.3f;
     private float hf = 0.0f;
-    private float bEff = 0.0f; // maybe 0.3, not sure
+    private float bEff = 0.00f; // maybe 0.3, not sure
     private float hft = 0.15f;
     private float bEfft = 0.5f;
 

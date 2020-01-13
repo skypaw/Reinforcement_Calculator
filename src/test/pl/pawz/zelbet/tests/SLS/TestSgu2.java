@@ -135,7 +135,7 @@ public class TestSgu2 {
         System.out.println("fc+m = " + result1a + " m");
         System.out.println("wk = " + result2 + " m");
 
-        assertEquals(17.22 * Math.pow(10, -3), result1, DELTA);
+        assertEquals(14.55 * Math.pow(10, -3), result1, DELTA);
         assertEquals(0.3230 * Math.pow(10, -3), result2, DELTA1);
 
     }
@@ -170,7 +170,7 @@ public class TestSgu2 {
         System.out.println("fc+m = " + result1a + " m");
         System.out.println("wk = " + result2 + " m");
 
-        assertEquals(17.22 * Math.pow(10, -3), result1, DELTA);
+        assertEquals(14.55 * Math.pow(10, -3), result1, DELTA);
         assertEquals(0.3230 * Math.pow(10, -3), result2, DELTA1);
 
 
@@ -206,7 +206,7 @@ public class TestSgu2 {
         System.out.println("fc+m = " + result1a + " m");
         System.out.println("wk = " + result2 + " m");
 
-        assertEquals(18.11 * Math.pow(10, -3), result1, DELTA);
+        assertEquals(14.99 * Math.pow(10, -3), result1, DELTA);
         assertEquals(0.3241 * Math.pow(10, -3), result2, DELTA1);
 
     }
@@ -241,7 +241,7 @@ public class TestSgu2 {
         System.out.println("fc+m = " + result1a + " m");
         System.out.println("wk = " + result2 + " m");
 
-        assertEquals(18.11 * Math.pow(10, -3), result1, DELTA);
+        assertEquals(14.99 * Math.pow(10, -3), result1, DELTA);
         assertEquals(0.3241 * Math.pow(10, -3), result2, DELTA1);
 
     }

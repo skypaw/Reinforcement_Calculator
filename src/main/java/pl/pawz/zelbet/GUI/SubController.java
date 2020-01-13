@@ -175,6 +175,7 @@ public class SubController {
     private Label diagnosticRes4 = new Label("N_min");
 
 
+
     //text field for materials could be replaced with choice box depending on check box
     private TextField concreteTxt = new TextField();
 
@@ -297,6 +298,9 @@ public class SubController {
     private float nRd2Value = 0;
     private float nRd3Value = 0;
     private float nRd4Value = 0;
+
+    private char loadChar;
+    private char cementChar;
 
 
     double resRods1Value;
@@ -688,6 +692,24 @@ public class SubController {
         vEdRed.setText(String.valueOf(vEd.getText()));
     }
 
+    private void slsValues() {
+        mEkValue = (float) (getDataFromTextFieldForces(mEk, "M_Ek") * Math.pow(10, -3));
+        mEkLtValue = (float) (getDataFromTextFieldForces(mEkLt, "M_Ek,lt") * Math.pow(10, -3));
+
+        tZeroValue = (int) getDataFromTextFieldForces(tZero, "t_0");
+        rHValue = (getDataFromTextFieldForces(rH, "RH"));
+
+        cNomValue = getDataFromTextFieldForces(cNom, "cNom");
+        lEffValue = getDataFromTextFieldForces(lEff, "l_Eff");
+        alphaMValue = getDataFromTextFieldForces(alphaM, "alpha_M");
+
+        char[] loadList = {'S','L'};
+        loadChar = loadList[choiceBoxLoads.getSelectionModel().getSelectedIndex()];
+
+        char[] cementList = {'S','N','R'};
+        cementChar = cementList[choiceBoxCementClass.getSelectionModel().getSelectedIndex()];
+
+    }
 
     public void calculations() {
         fCk();
@@ -695,6 +717,7 @@ public class SubController {
         dimension();
         forcesValues();
         longitudinalReinforcement();
+        slsValues();
 
         if (!checkBoxLoads.isSelected() && choiceBoxDimensions.getValue().toString().equals("Przekrój Prostokątny")) {
             if (nEdValue == 0) {
@@ -991,15 +1014,17 @@ public class SubController {
             double bEffT = bFTValue * 2 + bValue;
 
             float fiSt = 0.008f;
-            char cementChar = 'N';
-            double mEdkValue = 200;
-            double mEdKLtValue = 200;
+
             double eCmValue = 200;
             char alphaChar = 'A'; //todo change
             double fCtmValue = 20;
             int eSValue = 20;
-            char loadLong = 'L';
 
+            System.out.println(mEkLtValue);
+            System.out.println(mEkValue);
+
+            System.out.println(cementChar);
+            System.out.println(loadChar);
 
         }
 
