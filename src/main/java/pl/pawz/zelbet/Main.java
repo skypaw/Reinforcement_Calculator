@@ -17,6 +17,11 @@ public class Main {
         float a1 = 0.05f;
         float a2 = 0.05f;
 
+        float hf = 0.1f;
+        float bEff = 0.7f;
+        float hft = 0.15f;
+        float bEfft = 0.50f;
+
         float fi = 0.016f;
         float alphaM = 0.104f;
         float lEff = 6f;
@@ -29,11 +34,11 @@ public class Main {
 
 
         float mEd = 0.25f;
-        float mEk = 0.20f;
+        float mEk = 0.25f;
         float mEkLt = 0.2f;
 
-        int rods1 = 6;
-        int rods2 = 0;
+        int rods1 = 3;
+        int rods2 = 6;
 
 
         double as1 = Math.pow(fi * 0.5, 2) * Math.PI * rods1;
@@ -41,11 +46,11 @@ public class Main {
         System.out.println(as1);
 
 
-        Deflection res1 = new Deflection(lEff, mEkLt, mEk, alphaM, mEd, eS, bDimension, hDimension, 0, 0, bDimension, bDimension, a1, a2, as1, as2, 'S', fCk, rH, 'N', 28);
+        Deflection res1 = new Deflection(lEff, mEkLt, mEk, alphaM, mEd, eS, bDimension, hDimension, hf, hft, bEff, bEfft, a1, a2, as1, as2, 'S', fCk, rH, 'N', 28);
         double result1 = res1.resultsShort();
 
 
-        Scratch res2 = new Scratch(cNom, fiSt, fi, 6, fCk, rH, 28, 'N', bDimension, bDimension, bDimension, hDimension, 0, 0, a1, a2, as1, as2, mEk, mEkLt, 'N', eS, 'S');
+        Scratch res2 = new Scratch(cNom, fiSt, fi, rods1, fCk, rH, 28, 'N', bDimension, bEff, bEfft, hDimension, hf, hft, a1, a2, as1, as2, mEk, mEkLt, 'N', eS, 'S');
         double result2 = res2.wK();
 
         System.out.println(res1.iI);
