@@ -10,9 +10,9 @@ import org.apache.pdfbox.pdmodel.font.PDType1Font;
 
 import java.io.IOException;
 
-public class PrintPDF {
+class PrintPDF {
 
-    public static void print(String name, double fYk) throws IOException {
+    static void print(String name, double fYk) throws IOException {
 
         String namePdf = name;
         String concrete = "C25/30";
@@ -26,6 +26,10 @@ public class PrintPDF {
         String vEd = "28";
         String vEdRed = "28";
         String nEd = "28";
+        double aS1 = 0;
+        double aS1Real = 0;
+        double nS1 = 0;
+        double mRd = 0;
 
 
         //Creating PDF document object
@@ -113,14 +117,67 @@ public class PrintPDF {
         contentStream.drawString("V_Ed: " + vEd + " kN / V_Ed,red = " + vEdRed + " kN");
 
 
-        float yPositionResults = 500;
+        float yPositionRes = 500;
 
-        BaseTable tableRes = new BaseTable(yPositionResults, yStartNewPage, bottomMargin, tableWidth, margin, document, blankPage, true, drawContent);
+        BaseTable tableRes = new BaseTable(yPositionRes, yStartNewPage, bottomMargin, tableWidth, margin, document, blankPage, true, drawContent);
 
         Row<PDPage> headerRowRes = tableRes.createRow(12f);
         Cell<PDPage> cellRes = headerRowRes.createCell(100, "W Y N I K I");
 
         tableRes.addHeaderRow(headerRowRes);
+
+        float yPositionResults = 480;
+
+        BaseTable tableResults = new BaseTable(yPositionResults, yStartNewPage, bottomMargin, tableWidth, margin, document, blankPage, true, drawContent);
+
+        Row<PDPage> headerRowResults = tableResults.createRow(15f);
+        Cell<PDPage> cellResults = headerRowResults.createCell(100, "Stan graniczny nosnosci SGN");
+        tableResults.addHeaderRow(headerRowResults);
+
+
+        Row<PDPage> row = tableResults.createRow(12);
+        Row<PDPage> row1 = tableResults.createRow(12);
+
+        cellResults = row.createCell(25, "Rozciagane");
+        cellResults = row.createCell(15, String.valueOf(aS1));
+        cellResults = row.createCell(15, String.valueOf(mEd));
+        cellResults = row.createCell(15, String.valueOf(nS1));
+        cellResults = row.createCell(15, String.valueOf(aS1Real));
+        cellResults = row.createCell(15, String.valueOf(mRd));
+
+        cellResults = row1.createCell(25, "Data 1");
+        cellResults = row1.createCell(15, "Some value");
+        cellResults = row1.createCell(15, "Some value");
+        cellResults = row1.createCell(15, "Some value");
+        cellResults = row1.createCell(15, "Some value");
+        cellResults = row1.createCell(15, "Some value");
+
+
+        float yPositionResultsV = 420;
+
+        BaseTable tableResultsV = new BaseTable(yPositionResultsV, yStartNewPage, bottomMargin, tableWidth, margin, document, blankPage, true, drawContent);
+
+        Row<PDPage> headerRowResultsV = tableResultsV.createRow(15f);
+        Cell<PDPage> cellResultsV = headerRowResultsV.createCell(100, "Stan graniczny nosnosci - scinanie");
+        tableResultsV.addHeaderRow(headerRowResultsV);
+
+
+        Row<PDPage> rowV = tableResultsV.createRow(12);
+        Row<PDPage> rowV1 = tableResultsV.createRow(12);
+
+        cellResults = rowV.createCell(25, "Strzemiona");
+        cellResults = rowV.createCell(15, String.valueOf(aS1));
+        cellResults = rowV.createCell(15, String.valueOf(mEd));
+        cellResults = rowV.createCell(15, String.valueOf(nS1));
+        cellResults = rowV.createCell(15, String.valueOf(aS1Real));
+        cellResults = rowV.createCell(15, String.valueOf(mRd));
+
+        cellResults = rowV1.createCell(25, "Pręty odgięte");
+        cellResults = rowV1.createCell(15, "Some value");
+        cellResults = rowV1.createCell(15, "Some value");
+        cellResults = rowV1.createCell(15, "Some value");
+        cellResults = rowV1.createCell(15, "Some value");
+        cellResults = rowV1.createCell(15, "Some value");
 
 
         table.draw();
@@ -128,9 +185,10 @@ public class PrintPDF {
         tableForces.draw();
         tableForces.draw();
         tableRes.draw();
+        tableResults.draw();
+        tableResultsV.draw();
 
-
-        document.save("D:/dev/inzynierka/results/" + name + ".pdf");
+        document.save("G:/dev/inzynierka/results/" + name + ".pdf");
         System.out.println("PDF created");
         document.close();
 

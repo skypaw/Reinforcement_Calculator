@@ -326,6 +326,10 @@ public class SubController {
 
     private Scene mainScene;
 
+    private String mm = " mm";
+    private String cm = " cm";
+    private String m = " m";
+
 
     public void initialize() {
         scrollCalculations.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
@@ -1050,8 +1054,7 @@ public class SubController {
 
 
                     //res to labels
-                    String mm = " mm";
-                    String cm = " cm";
+
 
                     wResTrue.setText(String.valueOf(roundThreeDigitShearing(result2 * Math.pow(10, 3))) + mm);
                     fMResTrue.setText(String.valueOf(roundThreeDigitShearing(result1 * Math.pow(10, 2))) + cm);
@@ -1300,8 +1303,7 @@ public class SubController {
 
 
                     //res to labels
-                    String mm = " mm";
-                    String cm = " cm";
+
 
                     wResTrue.setText(String.valueOf(roundThreeDigitShearing(result2 * Math.pow(10, 3))) + mm);
                     fMResTrue.setText(String.valueOf(roundThreeDigitShearing(result1 * Math.pow(10, 2))) + cm);
@@ -1319,8 +1321,7 @@ public class SubController {
                     double result2 = res2.wK();
 
                     //res to labels
-                    String mm = " mm";
-                    String cm = " cm";
+
 
                     wResTrue.setText(String.valueOf(roundThreeDigitShearing(result2 * Math.pow(10, 3))) + mm);
                     fMResTrue.setText(String.valueOf(roundThreeDigitShearing(result1 * Math.pow(10, 2))) + cm);
@@ -1341,8 +1342,6 @@ public class SubController {
 
 
                     //res to labels
-                    String mm = " mm";
-                    String cm = " cm";
 
                     wResTrue.setText(String.valueOf(roundThreeDigitShearing(result2 * Math.pow(10, 3))) + mm);
                     fMResTrue.setText(String.valueOf(roundThreeDigitShearing(result1 * Math.pow(10, 2))) + cm);
@@ -1362,8 +1361,6 @@ public class SubController {
                     //res to labels
 
 
-                    String mm = " mm";
-                    String cm = " cm";
 
                     wResTrue.setText(String.valueOf(roundThreeDigitShearing(result2 * Math.pow(10, 3))) + mm);
                     fMResTrue.setText(String.valueOf(roundThreeDigitShearing(result1 * Math.pow(10, 2))) + cm);
