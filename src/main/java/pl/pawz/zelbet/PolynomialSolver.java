@@ -33,6 +33,10 @@ public class PolynomialSolver {
 
             }
         }
-        return Collections.min(results);
+        if (results.isEmpty()) {
+            return 0;
+        } else {
+            return Collections.min(results);
+        }
     }
 }

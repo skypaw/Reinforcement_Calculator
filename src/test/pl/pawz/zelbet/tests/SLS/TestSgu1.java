@@ -45,11 +45,11 @@ public class TestSgu1 {
         System.out.println(as1);
 
 
-        Deflection res1 = new Deflection(lEff, mEkLt, mEk, alphaM, mEd, eS, bDimension, hDimension, 0, 0, bDimension, bDimension, a1, a2, as1, as2, 'L', fCk, rH, 'N', 28);
+        Deflection res1 = new Deflection(lEff, mEkLt, mEk, alphaM, mEd, bDimension, hDimension, 0, 0, bDimension, bDimension, a1, a2, as1, as2, 'L', fCk, rH, 'N', 28);
         double result1 = res1.resultsLong();
         double result1a = res1.resultsLongDeformation();
 
-        Scratch res2 = new Scratch(cNom, fiSt, fi, 6, fCk, rH, 28, 'N', bDimension, bDimension, bDimension, hDimension, 0, 0, a1, a2, as1, as2, mEk, mEkLt, 'N', eS, 'L');
+        Scratch res2 = new Scratch(cNom, fiSt, fi, 6, fCk, rH, 28, 'N', bDimension, bDimension, bDimension, hDimension, 0, 0, a1, a2, as1, as2, mEk, mEkLt, 'L');
         double result2 = res2.wK();
 
         System.out.println(res1.iI);
@@ -80,11 +80,11 @@ public class TestSgu1 {
         System.out.println(as1);
 
 
-        Deflection res1 = new Deflection(lEff, mEkLt, mEk, alphaM, mEd, eS, bDimension, hDimension, 0, 0, bDimension, bDimension, a1, a2, as1, as2, 'L', fCk, rH, 'N', 28);
+        Deflection res1 = new Deflection(lEff, mEkLt, mEk, alphaM, mEd, bDimension, hDimension, 0, 0, bDimension, bDimension, a1, a2, as1, as2, 'L', fCk, rH, 'N', 28);
         double result1 = res1.resultsLong();
         double result1a = res1.resultsLongDeformation();
 
-        Scratch res2 = new Scratch(cNom, fiSt, fi, 6, fCk, rH, 28, 'N', bDimension, bDimension, bDimension, hDimension, 0, 0, a1, a2, as1, as2, mEk, mEkLt, 'N', eS, 'L');
+        Scratch res2 = new Scratch(cNom, fiSt, fi, 6, fCk, rH, 28, 'N', bDimension, bDimension, bDimension, hDimension, 0, 0, a1, a2, as1, as2, mEk, mEkLt, 'L');
         double result2 = res2.wK();
 
         System.out.println(res1.iI);
@@ -115,11 +115,11 @@ public class TestSgu1 {
         System.out.println(as1);
 
 
-        Deflection res1 = new Deflection(lEff, mEkLt, mEk, alphaM, mEd, eS, bDimension, hDimension, 0, 0, bDimension, bDimension, a1, a2, as1, as2, 'L', fCk, rH, 'N', 28);
+        Deflection res1 = new Deflection(lEff, mEkLt, mEk, alphaM, mEd, bDimension, hDimension, 0, 0, bDimension, bDimension, a1, a2, as1, as2, 'L', fCk, rH, 'N', 28);
         double result1 = res1.resultsLong();
         double result1a = res1.resultsLongDeformation();
 
-        Scratch res2 = new Scratch(cNom, fiSt, fi, 6, fCk, rH, 28, 'N', bDimension, bDimension, bDimension, hDimension, 0, 0, a1, a2, as1, as2, mEk, mEkLt, 'N', eS, 'L');
+        Scratch res2 = new Scratch(cNom, fiSt, fi, 6, fCk, rH, 28, 'N', bDimension, bDimension, bDimension, hDimension, 0, 0, a1, a2, as1, as2, mEk, mEkLt, 'L');
         double result2 = res2.wK();
 
         System.out.println(res1.iI);
@@ -150,11 +150,11 @@ public class TestSgu1 {
         System.out.println(as1);
 
 
-        Deflection res1 = new Deflection(lEff, mEkLt, mEk, alphaM, mEd, eS, bDimension, hDimension, 0, 0, bDimension, bDimension, a1, a2, as1, as2, 'L', fCk, rH, 'N', 28);
+        Deflection res1 = new Deflection(lEff, mEkLt, mEk, alphaM, mEd, bDimension, hDimension, 0, 0, bDimension, bDimension, a1, a2, as1, as2, 'L', fCk, rH, 'N', 28);
         double result1 = res1.resultsLong();
         double result1a = res1.resultsLongDeformation();
 
-        Scratch res2 = new Scratch(cNom, fiSt, fi, 6, fCk, rH, 28, 'N', bDimension, bDimension, bDimension, hDimension, 0, 0, a1, a2, as1, as2, mEk, mEkLt, 'N', eS, 'L');
+        Scratch res2 = new Scratch(cNom, fiSt, fi, 6, fCk, rH, 28, 'N', bDimension, bDimension, bDimension, hDimension, 0, 0, a1, a2, as1, as2, mEk, mEkLt, 'L');
         double result2 = res2.wK();
 
         System.out.println(res1.iI);
@@ -185,11 +185,11 @@ public class TestSgu1 {
         System.out.println(as1);
 
 
-        Deflection res1 = new Deflection(lEff, mEkLt, mEk, alphaM, mEd, eS, bDimension, hDimension, 0, 0, bDimension, bDimension, a1, a2, as1, as2, 'L', fCk, rH, 'N', 28);
+        Deflection res1 = new Deflection(lEff, mEkLt, mEk, alphaM, mEd, bDimension, hDimension, 0, 0, bDimension, bDimension, a1, a2, as1, as2, 'L', fCk, rH, 'N', 28);
         double result1 = res1.resultsLong();
         double result1a = res1.resultsLongDeformation();
 
-        Scratch res2 = new Scratch(cNom, fiSt, fi, 6, fCk, rH, 28, 'N', bDimension, bDimension, bDimension, hDimension, 0, 0, a1, a2, as1, as2, mEk, mEkLt, 'N', eS, 'L');
+        Scratch res2 = new Scratch(cNom, fiSt, fi, 6, fCk, rH, 28, 'N', bDimension, bDimension, bDimension, hDimension, 0, 0, a1, a2, as1, as2, mEk, mEkLt, 'L');
         double result2 = res2.wK();
 
         System.out.println(res1.iI);
@@ -220,11 +220,11 @@ public class TestSgu1 {
         System.out.println(as1);
 
 
-        Deflection res1 = new Deflection(lEff, mEkLt, mEk, alphaM, mEd, eS, bDimension, hDimension, 0, 0, bDimension, bDimension, a1, a2, as1, as2, 'L', fCk, rH, 'N', 28);
+        Deflection res1 = new Deflection(lEff, mEkLt, mEk, alphaM, mEd, bDimension, hDimension, 0, 0, bDimension, bDimension, a1, a2, as1, as2, 'L', fCk, rH, 'N', 28);
         double result1 = res1.resultsLong();
         double result1a = res1.resultsLongDeformation();
 
-        Scratch res2 = new Scratch(cNom, fiSt, fi, 6, fCk, rH, 28, 'N', bDimension, bDimension, bDimension, hDimension, 0, 0, a1, a2, as1, as2, mEk, mEkLt, 'N', eS, 'L');
+        Scratch res2 = new Scratch(cNom, fiSt, fi, 6, fCk, rH, 28, 'N', bDimension, bDimension, bDimension, hDimension, 0, 0, a1, a2, as1, as2, mEk, mEkLt, 'L');
         double result2 = res2.wK();
 
         System.out.println(res1.iI);
@@ -255,11 +255,11 @@ public class TestSgu1 {
         System.out.println(as1);
 
 
-        Deflection res1 = new Deflection(lEff, mEkLt, mEk, alphaM, mEd, eS, bDimension, hDimension, 0, 0, bDimension, bDimension, a1, a2, as1, as2, 'L', fCk, rH, 'N', 28);
+        Deflection res1 = new Deflection(lEff, mEkLt, mEk, alphaM, mEd, bDimension, hDimension, 0, 0, bDimension, bDimension, a1, a2, as1, as2, 'L', fCk, rH, 'N', 28);
         double result1 = res1.resultsLong();
         double result1a = res1.resultsLongDeformation();
 
-        Scratch res2 = new Scratch(cNom, fiSt, fi, 3, fCk, rH, 28, 'N', bDimension, bDimension, bDimension, hDimension, 0, 0, a1, a2, as1, as2, mEk, mEkLt, 'N', eS, 'L');
+        Scratch res2 = new Scratch(cNom, fiSt, fi, 3, fCk, rH, 28, 'N', bDimension, bDimension, bDimension, hDimension, 0, 0, a1, a2, as1, as2, mEk, mEkLt, 'L');
         double result2 = res2.wK();
 
         System.out.println(res1.iI);
@@ -290,11 +290,11 @@ public class TestSgu1 {
         System.out.println(as1);
 
 
-        Deflection res1 = new Deflection(lEff, mEkLt, mEk, alphaM, mEd, eS, bDimension, hDimension, 0, 0, bDimension, bDimension, a1, a2, as1, as2, 'L', fCk, rH, 'N', 28);
+        Deflection res1 = new Deflection(lEff, mEkLt, mEk, alphaM, mEd, bDimension, hDimension, 0, 0, bDimension, bDimension, a1, a2, as1, as2, 'L', fCk, rH, 'N', 28);
         double result1 = res1.resultsLong();
         double result1a = res1.resultsLongDeformation();
 
-        Scratch res2 = new Scratch(cNom, fiSt, fi, 3, fCk, rH, 28, 'N', bDimension, bDimension, bDimension, hDimension, 0, 0, a1, a2, as1, as2, mEk, mEkLt, 'N', eS, 'L');
+        Scratch res2 = new Scratch(cNom, fiSt, fi, 3, fCk, rH, 28, 'N', bDimension, bDimension, bDimension, hDimension, 0, 0, a1, a2, as1, as2, mEk, mEkLt, 'L');
         double result2 = res2.wK();
 
         System.out.println(res1.iI);
@@ -327,11 +327,11 @@ public class TestSgu1 {
         System.out.println(as1);
 
 
-        Deflection res1 = new Deflection(lEff, mEkLt, mEk, alphaM, mEd, eS, bDimension, hDimension, 0, 0, bDimension, bDimension, a1, a2, as1, as2, 'S', fCk, rH, 'N', 28);
+        Deflection res1 = new Deflection(lEff, mEkLt, mEk, alphaM, mEd, bDimension, hDimension, 0, 0, bDimension, bDimension, a1, a2, as1, as2, 'S', fCk, rH, 'N', 28);
         double result1 = res1.resultsShort();
 
 
-        Scratch res2 = new Scratch(cNom, fiSt, fi, 6, fCk, rH, 28, 'N', bDimension, bDimension, bDimension, hDimension, 0, 0, a1, a2, as1, as2, mEk, mEkLt, 'N', eS, 'S');
+        Scratch res2 = new Scratch(cNom, fiSt, fi, 6, fCk, rH, 28, 'N', bDimension, bDimension, bDimension, hDimension, 0, 0, a1, a2, as1, as2, mEk, mEkLt, 'S');
         double result2 = res2.wK();
 
         System.out.println(res1.iI);
@@ -361,11 +361,11 @@ public class TestSgu1 {
         System.out.println(as1);
 
 
-        Deflection res1 = new Deflection(lEff, mEkLt, mEk, alphaM, mEd, eS, bDimension, hDimension, 0, 0, bDimension, bDimension, a1, a2, as1, as2, 'S', fCk, rH, 'N', 28);
+        Deflection res1 = new Deflection(lEff, mEkLt, mEk, alphaM, mEd, bDimension, hDimension, 0, 0, bDimension, bDimension, a1, a2, as1, as2, 'S', fCk, rH, 'N', 28);
         double result1 = res1.resultsShort();
 
 
-        Scratch res2 = new Scratch(cNom, fiSt, fi, 6, fCk, rH, 28, 'N', bDimension, bDimension, bDimension, hDimension, 0, 0, a1, a2, as1, as2, mEk, mEkLt, 'N', eS, 'S');
+        Scratch res2 = new Scratch(cNom, fiSt, fi, 6, fCk, rH, 28, 'N', bDimension, bDimension, bDimension, hDimension, 0, 0, a1, a2, as1, as2, mEk, mEkLt, 'S');
         double result2 = res2.wK();
 
         System.out.println(res1.iI);
@@ -396,11 +396,11 @@ public class TestSgu1 {
         System.out.println(as1);
 
 
-        Deflection res1 = new Deflection(lEff, mEkLt, mEk, alphaM, mEd, eS, bDimension, hDimension, 0, 0, bDimension, bDimension, a1, a2, as1, as2, 'S', fCk, rH, 'N', 28);
+        Deflection res1 = new Deflection(lEff, mEkLt, mEk, alphaM, mEd, bDimension, hDimension, 0, 0, bDimension, bDimension, a1, a2, as1, as2, 'S', fCk, rH, 'N', 28);
         double result1 = res1.resultsShort();
 
 
-        Scratch res2 = new Scratch(cNom, fiSt, fi, 6, fCk, rH, 28, 'N', bDimension, bDimension, bDimension, hDimension, 0, 0, a1, a2, as1, as2, mEk, mEkLt, 'N', eS, 'S');
+        Scratch res2 = new Scratch(cNom, fiSt, fi, 6, fCk, rH, 28, 'N', bDimension, bDimension, bDimension, hDimension, 0, 0, a1, a2, as1, as2, mEk, mEkLt, 'S');
         double result2 = res2.wK();
 
         System.out.println(res1.iI);
@@ -430,11 +430,11 @@ public class TestSgu1 {
         System.out.println(as1);
 
 
-        Deflection res1 = new Deflection(lEff, mEkLt, mEk, alphaM, mEd, eS, bDimension, hDimension, 0, 0, bDimension, bDimension, a1, a2, as1, as2, 'S', fCk, rH, 'N', 28);
+        Deflection res1 = new Deflection(lEff, mEkLt, mEk, alphaM, mEd, bDimension, hDimension, 0, 0, bDimension, bDimension, a1, a2, as1, as2, 'S', fCk, rH, 'N', 28);
         double result1 = res1.resultsShort();
 
 
-        Scratch res2 = new Scratch(cNom, fiSt, fi, 6, fCk, rH, 28, 'N', bDimension, bDimension, bDimension, hDimension, 0, 0, a1, a2, as1, as2, mEk, mEkLt, 'N', eS, 'S');
+        Scratch res2 = new Scratch(cNom, fiSt, fi, 6, fCk, rH, 28, 'N', bDimension, bDimension, bDimension, hDimension, 0, 0, a1, a2, as1, as2, mEk, mEkLt, 'S');
         double result2 = res2.wK();
 
         System.out.println(res1.iI);
@@ -465,11 +465,11 @@ public class TestSgu1 {
         System.out.println(as1);
 
 
-        Deflection res1 = new Deflection(lEff, mEkLt, mEk, alphaM, mEd, eS, bDimension, hDimension, 0, 0, bDimension, bDimension, a1, a2, as1, as2, 'S', fCk, rH, 'N', 28);
+        Deflection res1 = new Deflection(lEff, mEkLt, mEk, alphaM, mEd, bDimension, hDimension, 0, 0, bDimension, bDimension, a1, a2, as1, as2, 'S', fCk, rH, 'N', 28);
         double result1 = res1.resultsShort();
 
 
-        Scratch res2 = new Scratch(cNom, fiSt, fi, 6, fCk, rH, 28, 'N', bDimension, bDimension, bDimension, hDimension, 0, 0, a1, a2, as1, as2, mEk, mEkLt, 'N', eS, 'S');
+        Scratch res2 = new Scratch(cNom, fiSt, fi, 6, fCk, rH, 28, 'N', bDimension, bDimension, bDimension, hDimension, 0, 0, a1, a2, as1, as2, mEk, mEkLt, 'S');
         double result2 = res2.wK();
 
         System.out.println(res1.iI);
@@ -500,11 +500,11 @@ public class TestSgu1 {
         System.out.println(as1);
 
 
-        Deflection res1 = new Deflection(lEff, mEkLt, mEk, alphaM, mEd, eS, bDimension, hDimension, 0, 0, bDimension, bDimension, a1, a2, as1, as2, 'S', fCk, rH, 'N', 28);
+        Deflection res1 = new Deflection(lEff, mEkLt, mEk, alphaM, mEd, bDimension, hDimension, 0, 0, bDimension, bDimension, a1, a2, as1, as2, 'S', fCk, rH, 'N', 28);
         double result1 = res1.resultsShort();
 
 
-        Scratch res2 = new Scratch(cNom, fiSt, fi, 6, fCk, rH, 28, 'N', bDimension, bDimension, bDimension, hDimension, 0, 0, a1, a2, as1, as2, mEk, mEkLt, 'N', eS, 'S');
+        Scratch res2 = new Scratch(cNom, fiSt, fi, 6, fCk, rH, 28, 'N', bDimension, bDimension, bDimension, hDimension, 0, 0, a1, a2, as1, as2, mEk, mEkLt, 'S');
         double result2 = res2.wK();
 
         System.out.println(res1.iI);
@@ -535,11 +535,11 @@ public class TestSgu1 {
         System.out.println(as1);
 
 
-        Deflection res1 = new Deflection(lEff, mEkLt, mEk, alphaM, mEd, eS, bDimension, hDimension, 0, 0, bDimension, bDimension, a1, a2, as1, as2, 'S', fCk, rH, 'N', 28);
+        Deflection res1 = new Deflection(lEff, mEkLt, mEk, alphaM, mEd, bDimension, hDimension, 0, 0, bDimension, bDimension, a1, a2, as1, as2, 'S', fCk, rH, 'N', 28);
         double result1 = res1.resultsShort();
 
 
-        Scratch res2 = new Scratch(cNom, fiSt, fi, rods1, fCk, rH, 28, 'N', bDimension, bDimension, bDimension, hDimension, 0, 0, a1, a2, as1, as2, mEk, mEkLt, 'N', eS, 'S');
+        Scratch res2 = new Scratch(cNom, fiSt, fi, rods1, fCk, rH, 28, 'N', bDimension, bDimension, bDimension, hDimension, 0, 0, a1, a2, as1, as2, mEk, mEkLt, 'S');
         double result2 = res2.wK();
 
         System.out.println(res1.iI);
@@ -571,11 +571,11 @@ public class TestSgu1 {
         System.out.println(as1);
 
 
-        Deflection res1 = new Deflection(lEff, mEkLt, mEk, alphaM, mEd, eS, bDimension, hDimension, 0, 0, bDimension, bDimension, a1, a2, as1, as2, 'S', fCk, rH, 'N', 28);
+        Deflection res1 = new Deflection(lEff, mEkLt, mEk, alphaM, mEd, bDimension, hDimension, 0, 0, bDimension, bDimension, a1, a2, as1, as2, 'S', fCk, rH, 'N', 28);
         double result1 = res1.resultsShort();
 
 
-        Scratch res2 = new Scratch(cNom, fiSt, fi, rods1, fCk, rH, 28, 'N', bDimension, bDimension, bDimension, hDimension, 0, 0, a1, a2, as1, as2, mEk, mEkLt, 'N', eS, 'S');
+        Scratch res2 = new Scratch(cNom, fiSt, fi, rods1, fCk, rH, 28, 'N', bDimension, bDimension, bDimension, hDimension, 0, 0, a1, a2, as1, as2, mEk, mEkLt, 'S');
         double result2 = res2.wK();
 
         System.out.println(res1.iI);

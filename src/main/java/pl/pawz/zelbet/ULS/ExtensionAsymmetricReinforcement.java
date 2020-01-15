@@ -120,6 +120,12 @@ public class ExtensionAsymmetricReinforcement {
             aS2GreaterThanAS2Min();
         }
 
+        if (aS1<aS2Min){
+            aS1 = aS2Min;
+        }
+        if (aS2<aS2Min){
+            aS2 = aS2Min;
+        }
         return new double[]{aS1, aS2};
     }
 

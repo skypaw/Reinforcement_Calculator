@@ -49,15 +49,15 @@ public class CompressionAsymmetricReinforcement {
         this.a1 = a1;
         this.a2 = a2;
         this.E_S = BasicValues.steelE();
-        this.xLim = BasicValuesPillars.xLimVar(epsilonCu3,hDimension,a1,fYd,E_S);
-        this.xMinusMinYd = BasicValuesPillars.xMinMinusYdVar(epsilonCu3,a2,fYd,E_S);
-        this.xMinYd = BasicValuesPillars.xMinYdVar(epsilonCu3,a2,fYd,E_S);
-        this.x0 = BasicValuesPillars.x0Var(epsilonCu3,epsilonC3,hDimension);
-        this.xMaxYd = BasicValuesPillars.xYdMaxVar(epsilonCu3,epsilonC3,fYd,E_S,hDimension,a2);
+        this.xLim = BasicValuesPillars.xLimVar(epsilonCu3, hDimension, a1, fYd, E_S);
+        this.xMinusMinYd = BasicValuesPillars.xMinMinusYdVar(epsilonCu3, a2, fYd, E_S);
+        this.xMinYd = BasicValuesPillars.xMinYdVar(epsilonCu3, a2, fYd, E_S);
+        this.x0 = BasicValuesPillars.x0Var(epsilonCu3, epsilonC3, hDimension);
+        this.xMaxYd = BasicValuesPillars.xYdMaxVar(epsilonCu3, epsilonC3, fYd, E_S, hDimension, a2);
 
 
-        this.eS1 = BasicValuesPillars.eccentricityCompression(mEd,nEd,hDimension,a1,a2)[0];
-        this.eS2 = BasicValuesPillars.eccentricityCompression(mEd,nEd,hDimension,a1,a2)[1];
+        this.eS1 = BasicValuesPillars.eccentricityCompression(mEd, nEd, hDimension, a1, a2)[0];
+        this.eS2 = BasicValuesPillars.eccentricityCompression(mEd, nEd, hDimension, a1, a2)[1];
 
         //min reinforcement according to EC 1992;
 
@@ -67,7 +67,7 @@ public class CompressionAsymmetricReinforcement {
 
 
     private void sigmaS2Var() {
-        sigmaS2 =  Math.min(epsilonCu3 * (xLim - a2) / xLim * E_S, fYd);
+        sigmaS2 = Math.min(epsilonCu3 * (xLim - a2) / xLim * E_S, fYd);
     }
 
     private void aS2Var() {
@@ -94,7 +94,7 @@ public class CompressionAsymmetricReinforcement {
         double bVar = 2 * ((nEd * eS2 + mS2) / (Math.pow(lambdaConcrete, 2) * etaConcrete * fCd * bDimension) + a2 * x0 / lambdaConcrete);
         double cVar = (-2 * (nEd * eS2 * x0 + dDimension * mS2)) / (Math.pow(lambdaConcrete, 2) * etaConcrete * fCd * bDimension);
 
-        xVar =  PolynomialSolver.solver(1, aVar, bVar, cVar, hDimension);
+        xVar = PolynomialSolver.solver(1, aVar, bVar, cVar, hDimension);
     }
 
     private double[] xGreaterThanHByLambda() {
@@ -114,7 +114,7 @@ public class CompressionAsymmetricReinforcement {
     }
 
     private void aS2EqualAS2Min() {
-        xVar= 1 / lambdaConcrete * (dDimension - Math.sqrt(Math.pow(dDimension, 2) - (2 * (nEd * eS1 - sigmaS2 * aS2 * (dDimension - a2))) / (etaConcrete * fCd * bDimension)));
+        xVar = 1 / lambdaConcrete * (dDimension - Math.sqrt(Math.pow(dDimension, 2) - (2 * (nEd * eS1 - sigmaS2 * aS2 * (dDimension - a2))) / (etaConcrete * fCd * bDimension)));
     }
 
     private void xSmallerThanXMinYd() {
@@ -123,7 +123,7 @@ public class CompressionAsymmetricReinforcement {
         double bVar = (2 * (nEd * eS1 - mS2)) / (Math.pow(lambdaConcrete, 2) * etaConcrete * fCd * bDimension);
         double cVar = (2 * a2 * mS2) / (Math.pow(lambdaConcrete, 2) * etaConcrete * fCd * bDimension);
 
-        xVar =  PolynomialSolver.solver(1, aVar, bVar, cVar, 0);
+        xVar = PolynomialSolver.solver(1, aVar, bVar, cVar, 0);
     }
 
     private void xGreaterThanXMinMinusYd() {
@@ -136,7 +136,7 @@ public class CompressionAsymmetricReinforcement {
 
     private void xSmallerThanXMinMinusYd() {
         sigmaS2 = -fYd;
-        xVar= 1 / lambdaConcrete * (dDimension - Math.sqrt(Math.pow(dDimension, 2) - (2 * (nEd * eS1 + fYd * aS2 * (dDimension - a2))) / (etaConcrete * fCd * bDimension)));
+        xVar = 1 / lambdaConcrete * (dDimension - Math.sqrt(Math.pow(dDimension, 2) - (2 * (nEd * eS1 + fYd * aS2 * (dDimension - a2))) / (etaConcrete * fCd * bDimension)));
     }
 
     private void f2MinusF1SmallerThan0() {
@@ -146,6 +146,16 @@ public class CompressionAsymmetricReinforcement {
     public double[] resultsCompressionAsymmetricReinforcement() {
         sigmaS2Var();
         aS2Var();
+
+        double aSMinForOneSide = Math.max(0.10 * nEd / fYd, (0.002 * bDimension * 100 * hDimension * 100) * Math.pow(10, -4)) / 2;
+
+        if (aS1 < aSMinForOneSide) {
+            aS1 = aSMinForOneSide;
+        }
+        if (aS2 < aSMinForOneSide) {
+            aS2 = aSMinForOneSide;
+        }
+
 
         if (aS2 <= aS2Min) {
             aS2SmallerThanAS2Min();
@@ -162,6 +172,11 @@ public class CompressionAsymmetricReinforcement {
             }
 
             aS1 = (sigmaS2 * aS2 + etaConcrete * fCd * bDimension * lambdaConcrete * xVar - nEd) / fYd;
+
+            if (aS1 < aSMinForOneSide) {
+                aS1 = aSMinForOneSide;
+            }
+
             return new double[]{aS1, aS2};
         } else {
             aS2GreaterThanA2Min();
@@ -180,6 +195,14 @@ public class CompressionAsymmetricReinforcement {
                             aS1 = (nEd * eS2 + etaConcrete * fCd * bDimension * hDimension * (0.5 * hDimension - a2)) / (sigmaS1 * (dDimension - a2));
                             aS2 = (nEd * eS1 - etaConcrete * fCd * bDimension * hDimension * (0.5 * hDimension - a1)) / (sigmaS2 * (dDimension - a2));
 
+                            if (aS1 < aSMinForOneSide) {
+                                aS1 = aSMinForOneSide;
+                            }
+                            if (aS2 < aSMinForOneSide) {
+                                aS2 = aSMinForOneSide;
+                            }
+
+
                             return new double[]{aS1, aS2};
 
                         } else {
@@ -189,20 +212,46 @@ public class CompressionAsymmetricReinforcement {
                             aS1 = (nEd * eS2 + etaConcrete * fCd * bDimension * hDimension * (0.5 * hDimension - a2)) / (sigmaS1 * (dDimension - a2));
                             aS2 = (nEd * eS1 - etaConcrete * fCd * bDimension * hDimension * (0.5 * hDimension - a1)) / (sigmaS2 * (dDimension - a2));
 
+                            if (aS1 < aSMinForOneSide) {
+                                aS1 = aSMinForOneSide;
+                            }
+                            if (aS2 < aSMinForOneSide) {
+                                aS2 = aSMinForOneSide;
+                            }
+
+
                             return new double[]{aS1, aS2};
 
                         }
                     } else {
                         aS2 = (nEd * eS1 - etaConcrete * fCd * bDimension * lambdaConcrete * xVar * (dDimension - 0.5 * lambdaConcrete * xVar)) / (fYd * (dDimension - a2));
+
+
+                        if (aS2 < aSMinForOneSide) {
+                            aS2 = aSMinForOneSide;
+                        }
+
                         return new double[]{aS1, aS2};
                     }
 
                 } else {
                     aS2 = (nEd * eS1 - etaConcrete * fCd * bDimension * lambdaConcrete * xVar * (dDimension - 0.5 * lambdaConcrete * xVar)) / (fYd * (dDimension - a2));
+
+                    if (aS2 < aSMinForOneSide) {
+                        aS2 = aSMinForOneSide;
+                    }
+
                     return new double[]{aS1, aS2};
                 }
 
             } else {
+                if (aS1 < aSMinForOneSide) {
+                    aS1 = aSMinForOneSide;
+                }
+                if (aS2 < aSMinForOneSide) {
+                    aS2 = aSMinForOneSide;
+                }
+
                 return new double[]{aS1, aS2};
             }
         }

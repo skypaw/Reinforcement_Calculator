@@ -156,8 +156,7 @@
 
 
             <GridPane hgap="5" vgap="5" GridPane.columnIndex="0" GridPane.rowIndex="8"
-                      fx:id="gridPaneSGU"
-                      disable="true">
+                      fx:id="gridPaneSGU">
                 <padding>
                     <Insets top="5" right="5" bottom="5" left="5"/>
                 </padding>
@@ -269,31 +268,31 @@
 
                 <Label text="Obliczeniowe" prefWidth="80" GridPane.columnIndex="1"
                        GridPane.rowIndex="0"/>
-                <Label text="Zastosowane" GridPane.columnIndex="3" GridPane.rowIndex="0"/>
-                <Label text="Liczba Prętów" GridPane.columnIndex="5" GridPane.rowIndex="0"/>
+                <Label text="Zastosowane" GridPane.columnIndex="2" GridPane.rowIndex="0"/>
+                <Label text="Liczba Prętów" GridPane.columnIndex="3" GridPane.rowIndex="0"/>
 
 
                 <Label text="Symetryczne As_1" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
                 <Label text="0" GridPane.columnIndex="1" GridPane.rowIndex="1" fx:id="res1"/>
-                <Label text="0" GridPane.columnIndex="3" GridPane.rowIndex="1" fx:id="res1true"/>
-                <Label text="0" GridPane.columnIndex="5" GridPane.rowIndex="1" fx:id="resRods1"/>
+                <Label text="0" GridPane.columnIndex="2" GridPane.rowIndex="1" fx:id="res1true"/>
+                <Label text="0" GridPane.columnIndex="3" GridPane.rowIndex="1" fx:id="resRods1"/>
 
                 <Label text="Symetryczne As_2" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
                 <Label text="0" GridPane.columnIndex="1" GridPane.rowIndex="2" fx:id="res2"/>
-                <Label text="0" GridPane.columnIndex="3" GridPane.rowIndex="2" fx:id="res2true"/>
-                <Label text="0" GridPane.columnIndex="5" GridPane.rowIndex="2" fx:id="resRods2"/>
+                <Label text="0" GridPane.columnIndex="2" GridPane.rowIndex="2" fx:id="res2true"/>
+                <Label text="0" GridPane.columnIndex="3" GridPane.rowIndex="2" fx:id="resRods2"/>
 
                 <Pane GridPane.rowIndex="3" prefHeight="50"/>
 
                 <Label text="Niesymetryczne As_1" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
                 <Label text="0" GridPane.columnIndex="1" GridPane.rowIndex="4" fx:id="res1Asymmetric"/>
-                <Label text="0" GridPane.columnIndex="3" GridPane.rowIndex="4" fx:id="res1trueAsymmetric"/>
-                <Label text="0" GridPane.columnIndex="5" GridPane.rowIndex="4" fx:id="resRods1Asymmetric"/>
+                <Label text="0" GridPane.columnIndex="2" GridPane.rowIndex="4" fx:id="res1trueAsymmetric"/>
+                <Label text="0" GridPane.columnIndex="3" GridPane.rowIndex="4" fx:id="resRods1Asymmetric"/>
 
                 <Label text="Niesymetryczne As_2" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
                 <Label text="0" GridPane.columnIndex="1" GridPane.rowIndex="5" fx:id="res2Asymmetric"/>
-                <Label text="0" GridPane.columnIndex="3" GridPane.rowIndex="5" fx:id="res2trueAsymmetric"/>
-                <Label text="0" GridPane.columnIndex="5" GridPane.rowIndex="5" fx:id="resRods2Asymmetric"/>
+                <Label text="0" GridPane.columnIndex="2" GridPane.rowIndex="5" fx:id="res2trueAsymmetric"/>
+                <Label text="0" GridPane.columnIndex="3" GridPane.rowIndex="5" fx:id="resRods2Asymmetric"/>
 
 
                 <Pane GridPane.rowIndex="6" prefHeight="50"/>
@@ -307,16 +306,16 @@
 
                 <Label text="Stan Graniczny Użytkowalności" GridPane.columnIndex="0" GridPane.rowIndex="10"/>
                 <Label text="w" GridPane.columnIndex="0" GridPane.rowIndex="11"/>
-                <Label text="0.00" GridPane.columnIndex="1" GridPane.rowIndex="11"/>
-                <Label text="0.00" GridPane.columnIndex="2" GridPane.rowIndex="11"/>
+
+                <Label text="0.00" GridPane.columnIndex="2" GridPane.rowIndex="11" fx:id="wResTrue"/>
 
                 <Label text="f(M)" GridPane.columnIndex="0" GridPane.rowIndex="12"/>
-                <Label text="0.00" GridPane.columnIndex="1" GridPane.rowIndex="12"/>
-                <Label text="0.00" GridPane.columnIndex="2" GridPane.rowIndex="12"/>
+
+                <Label text="0.00" GridPane.columnIndex="2" GridPane.rowIndex="12" fx:id="fMResTrue"/>
 
                 <Label text="f(M)+f(cs)" GridPane.columnIndex="0" GridPane.rowIndex="13"/>
-                <Label text="0.00" GridPane.columnIndex="1" GridPane.rowIndex="13"/>
-                <Label text="0.00" GridPane.columnIndex="2" GridPane.rowIndex="13"/>
+
+                <Label text="0.00" GridPane.columnIndex="2" GridPane.rowIndex="13" fx:id="fMPlusCResTrue"/>
 
 
             </GridPane>

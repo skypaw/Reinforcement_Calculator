@@ -21,8 +21,7 @@ public class ExtensionSymmetricReinforcement {
     private double sigmaS1;
     private double sigmaS2;
     private double xVar;
-
-
+    private double hDimension;
 
     public ExtensionSymmetricReinforcement(float nEd, float mEd, double fCk, double fYk, float bDimension,
                                            float hDimension, float a1, float a2) {
@@ -39,6 +38,7 @@ public class ExtensionSymmetricReinforcement {
         this.E_S = BasicValues.steelE();
         this.xMinusMinYd = BasicValuesPillars.xMinMinusYdVar(epsilonCu3,a2,fYd,E_S);
         this.sigmaS1 = fYd;
+        this.hDimension = hDimension;
 
         this.eS1 = BasicValuesPillars.eccentricityExtension(mEd,nEd,hDimension,a1,a2)[0];
         this.eS2 = BasicValuesPillars.eccentricityExtension(mEd,nEd,hDimension,a1,a2)[1];
@@ -82,6 +82,16 @@ public class ExtensionSymmetricReinforcement {
 
         double aS1 = (nEd * eS2 + etaConcrete * fCd * bDimension * lambdaConcrete * xVar * (0.5 * lambdaConcrete * xVar - a2)) / (sigmaS1 * (dDimension - a2));
         double aS2 = (nEd * eS1 - etaConcrete * fCd * bDimension * lambdaConcrete * xVar * (dDimension - 0.5 * lambdaConcrete * xVar)) / (sigmaS2 * (dDimension - a2));
+
+        double aSMinForOneSide = Math.max(0.10 * nEd / fYd, (0.002 * bDimension * 100 * hDimension * 100) * Math.pow(10, -4)) / 2;
+
+        if (aS1<aSMinForOneSide){
+            aS1 = aSMinForOneSide;
+        }
+        if (aS2<aSMinForOneSide){
+            aS2 = aSMinForOneSide;
+        }
+
 
         return new double[]{aS1, aS2};
     }

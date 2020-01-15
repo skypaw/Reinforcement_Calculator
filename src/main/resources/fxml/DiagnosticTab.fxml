@@ -172,8 +172,7 @@
 
 
             <GridPane hgap="5" vgap="5" GridPane.columnIndex="0" GridPane.rowIndex="8"
-                      fx:id="gridPaneSGU"
-                      disable="true">
+                      fx:id="gridPaneSGU">
                 <padding>
                     <Insets top="5" right="5" bottom="5" left="5"/>
                 </padding>
@@ -312,16 +311,16 @@
 
                 <Label text="Stan Graniczny Użytkowalności" GridPane.columnIndex="0" GridPane.rowIndex="10"/>
                 <Label text="w" GridPane.columnIndex="0" GridPane.rowIndex="11"/>
-                <Label text="0.00" GridPane.columnIndex="1" GridPane.rowIndex="11"/>
-                <Label text="0.00" GridPane.columnIndex="2" GridPane.rowIndex="11"/>
+
+                <Label text="0.00" GridPane.columnIndex="2" GridPane.rowIndex="11" fx:id="wResTrue"/>
 
                 <Label text="f(M)" GridPane.columnIndex="0" GridPane.rowIndex="12"/>
-                <Label text="0.00" GridPane.columnIndex="1" GridPane.rowIndex="12"/>
-                <Label text="0.00" GridPane.columnIndex="2" GridPane.rowIndex="12"/>
+
+                <Label text="0.00" GridPane.columnIndex="2" GridPane.rowIndex="12" fx:id="fMResTrue"/>
 
                 <Label text="f(M)+f(cs)" GridPane.columnIndex="0" GridPane.rowIndex="13"/>
-                <Label text="0.00" GridPane.columnIndex="1" GridPane.rowIndex="13"/>
-                <Label text="0.00" GridPane.columnIndex="2" GridPane.rowIndex="13"/>
+
+                <Label text="0.00" GridPane.columnIndex="2" GridPane.rowIndex="13" fx:id="fMPlusCResTrue"/>
             </GridPane>
         </GridPane>
 
