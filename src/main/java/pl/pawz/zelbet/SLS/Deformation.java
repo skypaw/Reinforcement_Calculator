@@ -15,7 +15,7 @@ public class Deformation {
         this.fCk = fCk;
         this.rH = rH;
         this.cement = cement;
-        this.h0 = h0 * Math.pow(10,2);
+        this.h0 = h0 * Math.pow(10,3);
 
     }
 

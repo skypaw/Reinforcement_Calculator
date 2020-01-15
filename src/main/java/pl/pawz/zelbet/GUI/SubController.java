@@ -1032,8 +1032,8 @@ public class SubController {
         data.put("tZero", roundTwoDigit(tZeroValue));
         data.put("rH", roundTwoDigit(rHValue));
         data.put("cNom", roundTwoDigit(cNomValue * 1000));
-        data.put("lEff", roundTwoDigit(lEffValue));
-        data.put("alphaM", roundTwoDigit(alphaMValue));
+        data.put("lEff", (double) lEffValue);
+        data.put("alphaM", roundThreeDigitShearing( alphaMValue));
 
 
         if (checkBoxResults3.isSelected() && nEdValue == 0) {

@@ -3,29 +3,29 @@ package pl.pawz.zelbet.SLS;
 import pl.pawz.zelbet.BasicValues;
 
 public class Deflection {
-    double mCr;
-    double mEd;
-    float alphaM;
-    double mEk;
-    double mEkLt;
-    float lEff;
-    double eCEff;
-    double eCm;
-    int eS;
+    private double mCr;
+    private double mEd;
+    private float alphaM;
+    private double mEk;
+    private double mEkLt;
+    private float lEff;
+    private double eCEff;
+    private double eCm;
+    private int eS;
 
 
-    double sigmaLt;
-    double sigma;
-    double bIZero;
-    double bIIZero;
-    double bIInf;
-    double bIIInf;
-    double epsilonCs;
+    private double sigmaLt;
+    private double sigma;
+    private double bIZero;
+    private double bIIZero;
+    private double bIInf;
+    private double bIIInf;
+    private double epsilonCs;
 
     public double iI;
     public double iII;
-    double sI;
-    double sII;
+    private double sI;
+    private double sII;
 
 
     public Deflection(float lEff, double mEkLt, double mEk, float alphaM, double mEd, float b, float h, float hF, float hFT, float bEff, float bEffT, float a1, float a2, double aS1, double aS2, char longOrShort, double fCk, float rH, char cement, int tZero) {
@@ -36,7 +36,7 @@ public class Deflection {
         this.lEff = lEff;
         this.eS = BasicValues.steelE();
 
-        float fCm = (float)fCk + 8;
+        float fCm = (float) fCk + 8;
 
         BasicParameters basic = new BasicParameters(eS, b, h, hF, hFT, bEff, bEffT, a1, a2, aS1, aS2, fCk, rH, tZero, cement, longOrShort);
         this.mCr = basic.mCr;
@@ -53,7 +53,7 @@ public class Deflection {
         double h0 = basic.hZero;
 
 
-        Deformation def = new Deformation(h0,fCm, (float)fCk, rH, cement);
+        Deformation def = new Deformation(h0, fCm, (float) fCk, rH, cement);
         this.epsilonCs = def.deformationShrink();
 
         sigmaValue();
@@ -86,7 +86,7 @@ public class Deflection {
         if (mCr > mEd) {
             return alphaM * mEk / bIZero * Math.pow(lEff, 2);
         } else {
-            return sigma * alphaM *mEk/ bIIZero * Math.pow(lEff, 2) + (1 - sigma) * alphaM * mEk / bIZero * Math.pow(lEff, 2);
+            return sigma * alphaM * mEk / bIIZero * Math.pow(lEff, 2) + (1 - sigma) * alphaM * mEk / bIZero * Math.pow(lEff, 2);
         }
     }
 
