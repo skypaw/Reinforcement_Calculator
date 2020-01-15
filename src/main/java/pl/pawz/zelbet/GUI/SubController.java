@@ -1039,7 +1039,7 @@ public class SubController {
         if (checkBoxResults3.isSelected() && nEdValue == 0) {
 
 
-            if (choiceBoxDimensions.getValue().toString().equals("Przekrój Prostokątny")) { //aS1Value - PROBABLY FI AS1!
+            if (choiceBoxDimensions.getValue().toString().equals("Przekrój Prostokątny")) {
                 if (loadChar == 'L') {
                     double aS1True = Math.pow(aS1Value / 2, 2) * Math.PI * resRods1ValueAsymmetric;
                     double aS2True = Math.pow(aS2Value / 2, 2) * Math.PI * resRods2ValueAsymmetric;

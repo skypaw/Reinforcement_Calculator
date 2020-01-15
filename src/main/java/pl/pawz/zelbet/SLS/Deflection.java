@@ -103,7 +103,7 @@ public class Deflection {
         if (mCr > mEd) {
             return alphaM * mEkLt / bIInf * Math.pow(lEff, 2) - 0.125 * (eS * epsilonCs * sI) / bIInf * Math.pow(lEff, 2);
         } else {
-            return sigmaLt * (alphaM * mEkLt / bIIInf * Math.pow(lEff, 2) - 0.125 * (eS * epsilonCs * sII) / bIIInf * Math.pow(lEff, 2) + (1 - sigmaLt) * (alphaM * mEkLt / bIInf * Math.pow(lEff, 2) - 0.125 * (eS * epsilonCs * sI) / bIInf * Math.pow(lEff, 2)));
+            return sigmaLt * (alphaM * mEkLt / bIIInf * Math.pow(lEff, 2) - 0.125 * (eS * epsilonCs * sII) / bIIInf * Math.pow(lEff, 2)) + (1 - sigmaLt) * (alphaM * mEkLt / bIInf * Math.pow(lEff, 2) - 0.125 * (eS * epsilonCs * sI) / bIInf * Math.pow(lEff, 2));
         }
 
 
