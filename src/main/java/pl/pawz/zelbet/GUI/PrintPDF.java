@@ -27,9 +27,13 @@ class PrintPDF {
         String vEdRed = "28";
         String nEd = "28";
         double aS1 = 0;
+        double aS2 = 0;
         double aS1Real = 0;
+        double aS2Real = 0;
         double nS1 = 0;
+        double nS2 = 0;
         double mRd = 0;
+
 
 
         //Creating PDF document object
@@ -117,7 +121,7 @@ class PrintPDF {
         contentStream.drawString("V_Ed: " + vEd + " kN / V_Ed,red = " + vEdRed + " kN");
 
 
-        float yPositionRes = 500;
+        float yPositionRes = 510;
 
         BaseTable tableRes = new BaseTable(yPositionRes, yStartNewPage, bottomMargin, tableWidth, margin, document, blankPage, true, drawContent);
 
@@ -126,7 +130,7 @@ class PrintPDF {
 
         tableRes.addHeaderRow(headerRowRes);
 
-        float yPositionResults = 480;
+        float yPositionResults = 475;
 
         BaseTable tableResults = new BaseTable(yPositionResults, yStartNewPage, bottomMargin, tableWidth, margin, document, blankPage, true, drawContent);
 
@@ -145,15 +149,15 @@ class PrintPDF {
         cellResults = row.createCell(15, String.valueOf(aS1Real));
         cellResults = row.createCell(15, String.valueOf(mRd));
 
-        cellResults = row1.createCell(25, "Data 1");
-        cellResults = row1.createCell(15, "Some value");
-        cellResults = row1.createCell(15, "Some value");
-        cellResults = row1.createCell(15, "Some value");
-        cellResults = row1.createCell(15, "Some value");
-        cellResults = row1.createCell(15, "Some value");
+        cellResults = row1.createCell(25, "Sciskane");
+        cellResults = row1.createCell(15, String.valueOf(aS2));
+        cellResults = row1.createCell(15, String.valueOf(mEd));
+        cellResults = row1.createCell(15, String.valueOf(nS2));
+        cellResults = row1.createCell(15, String.valueOf(aS2Real));
+        cellResults = row1.createCell(15, String.valueOf(mRd));
 
 
-        float yPositionResultsV = 420;
+        float yPositionResultsV = 390;
 
         BaseTable tableResultsV = new BaseTable(yPositionResultsV, yStartNewPage, bottomMargin, tableWidth, margin, document, blankPage, true, drawContent);
 
@@ -172,12 +176,52 @@ class PrintPDF {
         cellResults = rowV.createCell(15, String.valueOf(aS1Real));
         cellResults = rowV.createCell(15, String.valueOf(mRd));
 
-        cellResults = rowV1.createCell(25, "Pręty odgięte");
+        cellResults = rowV1.createCell(25, "Prety odgiete");
         cellResults = rowV1.createCell(15, "Some value");
         cellResults = rowV1.createCell(15, "Some value");
         cellResults = rowV1.createCell(15, "Some value");
         cellResults = rowV1.createCell(15, "Some value");
         cellResults = rowV1.createCell(15, "Some value");
+
+
+        float yPositionResultsSLS = 310;
+
+        BaseTable tableResultsSLS = new BaseTable(yPositionResultsSLS, yStartNewPage, bottomMargin, tableWidth, margin, document, blankPage, true, drawContent);
+
+        Row<PDPage> headerRowResultsSLS = tableResultsSLS.createRow(15f);
+        Cell<PDPage> cellResultsSLS = headerRowResultsSLS.createCell(100, "Stan graniczny uzytkowalnosci SGU - zginanie");
+        tableResultsSLS.addHeaderRow(headerRowResultsSLS);
+
+
+        Row<PDPage> rowSLS = tableResultsSLS.createRow(12);
+        Row<PDPage> rowSLS1 = tableResultsSLS.createRow(12);
+        Row<PDPage> rowSLS2 = tableResultsSLS.createRow(12);
+        Row<PDPage> rowSLS3 = tableResultsSLS.createRow(12);
+
+        cellResults = rowSLS.createCell(30, "Zarysowanie");
+        cellResults = rowSLS.createCell(10, "w");
+        cellResults = rowSLS.createCell(10, "[mm]");
+        cellResults = rowSLS.createCell(25, String.valueOf(nS1));
+        cellResults = rowSLS.createCell(25, String.valueOf(aS1Real));
+
+
+        cellResults = rowSLS1.createCell(30, "Ugiecie od obciazenia");
+        cellResults = rowSLS1.createCell(10, "f_M");
+        cellResults = rowSLS1.createCell(10, "[cm]");
+        cellResults = rowSLS1.createCell(25, "Some value");
+        cellResults = rowSLS1.createCell(25, "Some value");
+
+        cellResults = rowSLS2.createCell(30, "Ugiecie od skurczu");
+        cellResults = rowSLS2.createCell(10, "f_cs");
+        cellResults = rowSLS2.createCell(10, "[cm]");
+        cellResults = rowSLS2.createCell(25, "Some value");
+        cellResults = rowSLS2.createCell(25, "Some value");
+
+        cellResults = rowSLS3.createCell(30, "Ugiecie calkowite");
+        cellResults = rowSLS3.createCell(10, "f_M + f_cs");
+        cellResults = rowSLS3.createCell(10, "[cm]");
+        cellResults = rowSLS3.createCell(25, "Some value");
+        cellResults = rowSLS3.createCell(25, "Some value");
 
 
         table.draw();
@@ -187,6 +231,7 @@ class PrintPDF {
         tableRes.draw();
         tableResults.draw();
         tableResultsV.draw();
+        tableResultsSLS.draw();
 
         document.save("G:/dev/inzynierka/results/" + name + ".pdf");
         System.out.println("PDF created");
