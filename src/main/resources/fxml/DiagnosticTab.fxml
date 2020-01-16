@@ -12,6 +12,7 @@
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="pl.pawz.zelbet.GUI.SubController">
     <VBox>
+
         <GridPane hgap="3" vgap="5">
 
             <GridPane hgap="10" vgap="5" GridPane.columnIndex="0" GridPane.rowIndex="0"
@@ -283,44 +284,46 @@
             <GridPane hgap="10" vgap="5" GridPane.columnIndex="2" GridPane.rowIndex="0" GridPane.rowSpan="10">
 
                 <GridPane hgap="10" vgap="5" fx:id="gridResults" GridPane.columnIndex="0" GridPane.rowIndex="0">
-                    <Label text="Rd" prefWidth="80" GridPane.columnIndex="1"
-                           GridPane.rowIndex="0" fx:id="resultsRd"/>
+                    <Label text="Rd" GridPane.columnIndex="1" GridPane.rowIndex="0" fx:id="resultsRd"/>
                     <Label text="Ed" GridPane.columnIndex="2" GridPane.rowIndex="0" fx:id="resultsEd"/>
 
 
-                    <Label text="M_rd" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
-                    <Label text="0" GridPane.columnIndex="1" GridPane.rowIndex="1" fx:id="res1"/>
-                    <Label text="0" GridPane.columnIndex="3" GridPane.rowIndex="1" fx:id="res1true"/>
+                    <Label text="M_rd" GridPane.columnIndex="0" GridPane.rowIndex="1" minWidth="170"/>
+                    <Label text="0 kNm" GridPane.columnIndex="1" GridPane.rowIndex="1" fx:id="res1"/>
+                    <Label text="0 kNm" GridPane.columnIndex="2" GridPane.rowIndex="1" fx:id="res1true"/>
 
 
                     <Label text="N_rd" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
-                    <Label text="0" GridPane.columnIndex="1" GridPane.rowIndex="2" fx:id="res2"/>
-                    <Label text="0" GridPane.columnIndex="3" GridPane.rowIndex="2" fx:id="res2true"/>
+                    <Label text="0 kN" GridPane.columnIndex="1" GridPane.rowIndex="2" fx:id="res2"/>
+                    <Label text="0 kN" GridPane.columnIndex="2" GridPane.rowIndex="2" fx:id="res2true"/>
                 </GridPane>
 
-                <Pane GridPane.rowIndex="1" prefHeight="50"/>
+                <Pane GridPane.rowIndex="2" prefHeight="50"/>
 
-                <GridPane hgap="10" vgap="5" fx:id="gridResultsShearing" GridPane.columnIndex="0" GridPane.rowIndex="2">
-                    <Label text="Zbrojenie poprzeczne" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+                <GridPane hgap="10" vgap="5" fx:id="gridResultsShearing" GridPane.columnIndex="0" GridPane.rowIndex="3">
+                    <Label text="Zbrojenie poprzeczne" GridPane.columnIndex="0" GridPane.rowIndex="4" minWidth="170"/>
                     <Label text="V" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
-                    <Label text="0.00" GridPane.columnIndex="1" GridPane.rowIndex="5" fx:id="sRods"/>
-                    <Label text="0.00" GridPane.columnIndex="2" GridPane.rowIndex="5" fx:id="sRodsReal"/>
+                    <Label text="0.00 kN" GridPane.columnIndex="1" GridPane.rowIndex="5" fx:id="sRods"/>
+                    <Label text="0.00 kN" GridPane.columnIndex="2" GridPane.rowIndex="5" fx:id="sRodsReal"/>
                 </GridPane>
 
-                <Pane GridPane.rowIndex="9" prefHeight="100"/>
+                <Pane GridPane.rowIndex="4" prefHeight="100"/>
 
-                <Label text="Stan Graniczny Użytkowalności" GridPane.columnIndex="0" GridPane.rowIndex="10"/>
-                <Label text="w" GridPane.columnIndex="0" GridPane.rowIndex="11"/>
+                <GridPane hgap="10" vgap="5" GridPane.columnIndex="0" GridPane.rowIndex="5">
+                    <Label text="Stan Graniczny Użytkowalności" GridPane.columnIndex="0" GridPane.rowIndex="10"/>
+                    <Label text="w" GridPane.columnIndex="0" GridPane.rowIndex="11"/>
 
-                <Label text="0.00" GridPane.columnIndex="2" GridPane.rowIndex="11" fx:id="wResTrue"/>
+                    <Label text="0.00 mm" GridPane.columnIndex="2" GridPane.rowIndex="11" fx:id="wResTrue"/>
 
-                <Label text="f(M)" GridPane.columnIndex="0" GridPane.rowIndex="12"/>
+                    <Label text="f(M)" GridPane.columnIndex="0" GridPane.rowIndex="12"/>
 
-                <Label text="0.00" GridPane.columnIndex="2" GridPane.rowIndex="12" fx:id="fMResTrue"/>
+                    <Label text="0.00 cm" GridPane.columnIndex="2" GridPane.rowIndex="12" fx:id="fMResTrue"/>
 
-                <Label text="f(M)+f(cs)" GridPane.columnIndex="0" GridPane.rowIndex="13"/>
+                    <Label text="f(M)+f(cs)" GridPane.columnIndex="0" GridPane.rowIndex="13"/>
 
-                <Label text="0.00" GridPane.columnIndex="2" GridPane.rowIndex="13" fx:id="fMPlusCResTrue"/>
+                    <Label text="0.00 cm" GridPane.columnIndex="2" GridPane.rowIndex="13" fx:id="fMPlusCResTrue"/>
+
+                </GridPane>
             </GridPane>
         </GridPane>
 

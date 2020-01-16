@@ -9,7 +9,7 @@ For bending without normal force SLS calculations are included.
 
 To do list:
 - [x] check ULS
-- [ ] check SLS
+- [x] check SLS
 - [ ] print to pdf
 
 ### Basic values:
@@ -19,7 +19,7 @@ To do list:
 
 ### Used libraries:
 - Apache Math 3
+- Apache PDFBox
 - JavaFX
-- iTextPDF
 - JUnit 4 
 - Maven
