@@ -233,7 +233,7 @@ class PrintPDF {
         tableResultsV.draw();
         tableResultsSLS.draw();
 
-        document.save("G:/dev/inzynierka/results/" + name + ".pdf");
+        document.save(name + ".pdf");
         System.out.println("PDF created");
         document.close();
 
