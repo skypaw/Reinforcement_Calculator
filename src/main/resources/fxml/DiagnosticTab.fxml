@@ -62,12 +62,12 @@
                            prefWidth="70"
                            fx:id="test1"/>
 
-                <Label text="Klasa Betonu" GridPane.columnIndex="3" GridPane.rowIndex="1"/>
+                <Label text="Klasa betonu:" GridPane.columnIndex="3" GridPane.rowIndex="1"/>
 
-                <CheckBox text="Lista betonów" GridPane.columnIndex="5" GridPane.rowIndex="1"
+                <CheckBox text="Lista klas betonów" GridPane.columnIndex="5" GridPane.rowIndex="1"
                           fx:id="checkBoxConcrete" onAction="#changingConcrete"/>
 
-                <Label text="f_yk" GridPane.columnIndex="3" GridPane.rowIndex="2"/>
+                <Label text="Stal: f_yk" GridPane.columnIndex="3" GridPane.rowIndex="2"/>
                 <TextField GridPane.columnIndex="4" GridPane.rowIndex="2" promptText="[MPa]"
                            prefWidth="70"
                            fx:id="steelFYk"/>

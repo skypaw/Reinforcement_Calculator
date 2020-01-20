@@ -2,38 +2,54 @@ package pl.pawz.zelbet.GUI;
 
 import be.quodlibet.boxable.BaseTable;
 import be.quodlibet.boxable.Cell;
+import be.quodlibet.boxable.HorizontalAlignment;
 import be.quodlibet.boxable.Row;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
 
+import java.awt.*;
 import java.io.IOException;
+
 
 class PrintPDF {
 
-    static void print(String name, double fYk) throws IOException {
+    static void print(String name, double fYk, double rHData, double daysData, double mEdData, double mEkData, double mEkLtData,
+                      double vEdData, double vEdRedData, double nEdData, char cementChar, double concreteFCk, double aS1Data, double aS2Data, double aS1RealData, double aS2RealData, double nS1Data, double nS2Data, double mRdData,
+                      double wCalcData, double wRealData, double fMCalcData, double fMRealData, double fCsCalcData, double fSumCalcData, double fSumRealData, double alphaData) throws IOException {
 
         String namePdf = name;
-        String concrete = "C25/30";
-        String cement = "N";
-        Double fyk = fYk;
-        String rH = "50";
-        String days = "28";
-        String mEd = "28";
-        String mEk = "28";
-        String mEkLt = "28";
-        String vEd = "28";
-        String vEdRed = "28";
-        String nEd = "28";
-        double aS1 = 0;
-        double aS2 = 0;
-        double aS1Real = 0;
-        double aS2Real = 0;
-        double nS1 = 0;
-        double nS2 = 0;
-        double mRd = 0;
 
+        double concrete = concreteFCk;
+        char cement = cementChar;
+        double fyk = fYk;
+        double rH = rHData;
+        double days = daysData;
+        double mEd = roundThreeDigit(mEdData * Math.pow(10, 3));
+        double mEk = mEkData;
+        double mEkLt = mEkLtData;
+        double vEd = vEdData;
+        double vEdRed = vEdRedData;
+        double nEd = nEdData;
+        double aS1 = aS1Data;
+        double aS2 = aS2Data;
+        double aS1Real = aS1RealData;
+        double aS2Real = aS2RealData;
+        double nS1 = nS1Data;
+        double nS2 = nS2Data;
+        double mRd = mRdData;
+        double wCalc = wCalcData;
+        double wReal = wRealData;
+        double fMCalc = fMCalcData;
+        double fMReal = fMRealData;
+        double fCsCalc = fCsCalcData;
+        double fCsReal = fCsCalcData;
+        double fSumCalc = fSumCalcData;
+        double fSumReal = fSumRealData;
+        double alpha = alphaData;
+
+        String rods = "Prety odgiete alpha = "+alpha;
 
 
         //Creating PDF document object
@@ -46,11 +62,11 @@ class PrintPDF {
         PDPageContentStream contentStream = new PDPageContentStream(document, blankPage);
 
         contentStream.beginText();
-        contentStream.setFont(PDType1Font.HELVETICA, 11);
+        contentStream.setFont(PDType1Font.HELVETICA, 10);
         contentStream.setLeading(12.0f);
         contentStream.moveTextPositionByAmount(50, 740);
 
-        contentStream.drawString("Nazwa zadania: " + namePdf);
+        contentStream.showText("Nazwa zadania: " + namePdf);
 
 
         // Title Table
@@ -66,7 +82,8 @@ class PrintPDF {
         BaseTable table = new BaseTable(yPosition, yStartNewPage, bottomMargin, tableWidth, margin, document, blankPage, true, drawContent);
 
         Row<PDPage> headerRow = table.createRow(12f);
-        Cell<PDPage> cell = headerRow.createCell(100, "D A N E");
+        textCell(headerRow.createCell(100, "D A N E"));
+
 
         table.addHeaderRow(headerRow);
 
@@ -77,20 +94,20 @@ class PrintPDF {
         contentStream.newLine();
         contentStream.newLine();
         contentStream.newLine();
-        contentStream.drawString("PARAMETRY MATERIALOWE:");
+        contentStream.showText("PARAMETRY MATERIALOWE:");
         contentStream.newLine();
-        contentStream.drawString("      Beton: " + concrete + "(cement: " + cement + ")");
+        contentStream.showText("      Beton: f_ck " + concrete + "(cement: " + cement + ")");
         contentStream.newLine();
-        contentStream.drawString("      Stal: f_yk = " + fyk + "MPa");
+        contentStream.showText("      Stal: f_yk = " + fyk + "MPa");
         contentStream.newLine();
         contentStream.newLine();
-        contentStream.drawString("PARAMETRY DODATKOWE:");
+        contentStream.showText("PARAMETRY DODATKOWE:");
         contentStream.newLine();
-        contentStream.drawString("      RH: " + rH + "%");
+        contentStream.showText("      RH: " + rH + "%");
         contentStream.newLine();
-        contentStream.drawString("      Wiek t_0: " + days + "dni");
+        contentStream.showText("      Wiek t_0: " + days + "dni");
         contentStream.newLine();
-        contentStream.drawString("      Fi(inf,t_0) = ");
+        contentStream.showText("      Fi(inf,t_0) = ");
 
 
         //Table results
@@ -100,7 +117,7 @@ class PrintPDF {
         BaseTable tableForces = new BaseTable(yPositionForces, yStartNewPage, bottomMargin, tableWidth, margin, document, blankPage, true, drawContent);
 
         Row<PDPage> headerRowForces = tableForces.createRow(12f);
-        Cell<PDPage> cellForces = headerRowForces.createCell(100, "SILY WEWNETRZNE");
+        textCell(headerRowForces.createCell(100, "SILY WEWNETRZNE"));
 
         tableForces.addHeaderRow(headerRowForces);
 
@@ -110,23 +127,23 @@ class PrintPDF {
         contentStream.newLine();
 
         contentStream.newLine();
-        contentStream.drawString("M_Ed: " + mEd + " kNm");
+        contentStream.showText("M_Ed: " + mEd + " kNm");
         contentStream.newLine();
-        contentStream.drawString("      M_Ek: " + mEk + " kNm");
+        contentStream.showText("      M_Ek: " + mEk + " kNm");
         contentStream.newLine();
-        contentStream.drawString("      M_Ek: " + mEkLt + " kNm");
+        contentStream.showText("      M_Ek: " + mEkLt + " kNm");
         contentStream.newLine();
-        contentStream.drawString("N_Ed: " + nEd + " kN");
+        contentStream.showText("N_Ed: " + nEd + " kN");
         contentStream.newLine();
-        contentStream.drawString("V_Ed: " + vEd + " kN / V_Ed,red = " + vEdRed + " kN");
+        contentStream.showText("V_Ed: " + vEd + " kN / V_Ed,red = " + vEdRed + " kN");
 
 
-        float yPositionRes = 510;
+        float yPositionRes = 500;
 
         BaseTable tableRes = new BaseTable(yPositionRes, yStartNewPage, bottomMargin, tableWidth, margin, document, blankPage, true, drawContent);
 
         Row<PDPage> headerRowRes = tableRes.createRow(12f);
-        Cell<PDPage> cellRes = headerRowRes.createCell(100, "W Y N I K I");
+        textCell(headerRowRes.createCell(100, "W Y N I K I"));
 
         tableRes.addHeaderRow(headerRowRes);
 
@@ -135,26 +152,29 @@ class PrintPDF {
         BaseTable tableResults = new BaseTable(yPositionResults, yStartNewPage, bottomMargin, tableWidth, margin, document, blankPage, true, drawContent);
 
         Row<PDPage> headerRowResults = tableResults.createRow(15f);
-        Cell<PDPage> cellResults = headerRowResults.createCell(100, "Stan graniczny nosnosci SGN");
+        textCell(headerRowResults.createCell(100, "Stan graniczny nosnosci SGN"));
         tableResults.addHeaderRow(headerRowResults);
 
 
         Row<PDPage> row = tableResults.createRow(12);
         Row<PDPage> row1 = tableResults.createRow(12);
 
-        cellResults = row.createCell(25, "Rozciagane");
-        cellResults = row.createCell(15, String.valueOf(aS1));
-        cellResults = row.createCell(15, String.valueOf(mEd));
-        cellResults = row.createCell(15, String.valueOf(nS1));
-        cellResults = row.createCell(15, String.valueOf(aS1Real));
-        cellResults = row.createCell(15, String.valueOf(mRd));
+        row.createCell(25, "Rozciagane A_s1");
+        greenCell(row.createCell(15, String.valueOf(aS1)));
+        greenCell(row.createCell(15, String.valueOf(mEd)));
+        blueCellGrey(row.createCell(15, String.valueOf(nS1)));
+        greenCell(row.createCell(15, String.valueOf(aS1Real)));
+        greenCell(row.createCell(15, String.valueOf(mRd)));
 
-        cellResults = row1.createCell(25, "Sciskane");
-        cellResults = row1.createCell(15, String.valueOf(aS2));
-        cellResults = row1.createCell(15, String.valueOf(mEd));
-        cellResults = row1.createCell(15, String.valueOf(nS2));
-        cellResults = row1.createCell(15, String.valueOf(aS2Real));
-        cellResults = row1.createCell(15, String.valueOf(mRd));
+        row1.createCell(25, "Sciskane A_s2");
+        greenCell(row1.createCell(15, String.valueOf(aS2)));
+        greenCell(row1.createCell(15, String.valueOf(mEd)));
+        blueCellGrey(row1.createCell(15, String.valueOf(nS2)));
+        greenCell(row1.createCell(15, String.valueOf(aS2Real)));
+        greenCell(row1.createCell(15, String.valueOf(mRd)));
+
+
+        // Table for Shearing
 
 
         float yPositionResultsV = 390;
@@ -162,66 +182,80 @@ class PrintPDF {
         BaseTable tableResultsV = new BaseTable(yPositionResultsV, yStartNewPage, bottomMargin, tableWidth, margin, document, blankPage, true, drawContent);
 
         Row<PDPage> headerRowResultsV = tableResultsV.createRow(15f);
-        Cell<PDPage> cellResultsV = headerRowResultsV.createCell(100, "Stan graniczny nosnosci - scinanie");
+        textCell(headerRowResultsV.createCell(100, "Stan graniczny nosnosci - scinanie"));
         tableResultsV.addHeaderRow(headerRowResultsV);
 
 
         Row<PDPage> rowV = tableResultsV.createRow(12);
         Row<PDPage> rowV1 = tableResultsV.createRow(12);
 
-        cellResults = rowV.createCell(25, "Strzemiona");
-        cellResults = rowV.createCell(15, String.valueOf(aS1));
-        cellResults = rowV.createCell(15, String.valueOf(mEd));
-        cellResults = rowV.createCell(15, String.valueOf(nS1));
-        cellResults = rowV.createCell(15, String.valueOf(aS1Real));
-        cellResults = rowV.createCell(15, String.valueOf(mRd));
+        rowV.createCell(30, "Strzemiona");
+        blueCell(rowV.createCell(10, String.valueOf(aS1)));
+        greenCell(rowV.createCell(10, String.valueOf(mEd)));
+        greenCell(rowV.createCell(15, String.valueOf(nS1)));
+        greenCellGrey(rowV.createCell(10, String.valueOf(aS1Real)));
+        blueCellGrey(rowV.createCell(10, String.valueOf(mRd)));
+        greenCell(rowV.createCell(15, String.valueOf(mEd)));
 
-        cellResults = rowV1.createCell(25, "Prety odgiete");
-        cellResults = rowV1.createCell(15, "Some value");
-        cellResults = rowV1.createCell(15, "Some value");
-        cellResults = rowV1.createCell(15, "Some value");
-        cellResults = rowV1.createCell(15, "Some value");
-        cellResults = rowV1.createCell(15, "Some value");
+        rowV1.createCell(30, rods);
+        blueCell(rowV1.createCell(10, "Some value"));
+        blueCell(rowV1.createCell(10, "Some value"));
+        greenCell(rowV1.createCell(15, "Some value"));
+        blueCellGrey(rowV1.createCell(10, "Some value"));
+        blueCellGrey(rowV1.createCell(10, "Some value"));
+        greenCell(rowV1.createCell(15, String.valueOf(mEd)));
+
+
+        //Table for SLS
 
 
         float yPositionResultsSLS = 310;
 
         BaseTable tableResultsSLS = new BaseTable(yPositionResultsSLS, yStartNewPage, bottomMargin, tableWidth, margin, document, blankPage, true, drawContent);
 
+
         Row<PDPage> headerRowResultsSLS = tableResultsSLS.createRow(15f);
-        Cell<PDPage> cellResultsSLS = headerRowResultsSLS.createCell(100, "Stan graniczny uzytkowalnosci SGU - zginanie");
+        textCell(headerRowResultsSLS.createCell(100, "Stan graniczny uzytkowalnosci SGU - zginanie"));
+
         tableResultsSLS.addHeaderRow(headerRowResultsSLS);
 
-
+        Row<PDPage> rowSLSSubtitle = tableResultsSLS.createRow(12);
         Row<PDPage> rowSLS = tableResultsSLS.createRow(12);
         Row<PDPage> rowSLS1 = tableResultsSLS.createRow(12);
         Row<PDPage> rowSLS2 = tableResultsSLS.createRow(12);
         Row<PDPage> rowSLS3 = tableResultsSLS.createRow(12);
 
-        cellResults = rowSLS.createCell(30, "Zarysowanie");
-        cellResults = rowSLS.createCell(10, "w");
-        cellResults = rowSLS.createCell(10, "[mm]");
-        cellResults = rowSLS.createCell(25, String.valueOf(nS1));
-        cellResults = rowSLS.createCell(25, String.valueOf(aS1Real));
 
+        textCell(rowSLSSubtitle.createCell(50, "Parametr SGU"));
+        textCell(rowSLSSubtitle.createCell(25, "Zbrojenie obliczeniowe"));
+        textCell(rowSLSSubtitle.createCell(25, "Zbrojenie zastosowane"));
 
-        cellResults = rowSLS1.createCell(30, "Ugiecie od obciazenia");
-        cellResults = rowSLS1.createCell(10, "f_M");
-        cellResults = rowSLS1.createCell(10, "[cm]");
-        cellResults = rowSLS1.createCell(25, "Some value");
-        cellResults = rowSLS1.createCell(25, "Some value");
+        //Content rows
 
-        cellResults = rowSLS2.createCell(30, "Ugiecie od skurczu");
-        cellResults = rowSLS2.createCell(10, "f_cs");
-        cellResults = rowSLS2.createCell(10, "[cm]");
-        cellResults = rowSLS2.createCell(25, "Some value");
-        cellResults = rowSLS2.createCell(25, "Some value");
+        rowSLS.createCell(30, "Zarysowanie");
+        textCell(rowSLS.createCell(10, "w"));
+        textCell(rowSLS.createCell(10, "[mm]"));
+        greenCell(rowSLS.createCell(25, String.valueOf(wCalc)));
+        greenCellGrey(rowSLS.createCell(25, String.valueOf(wReal)));
 
-        cellResults = rowSLS3.createCell(30, "Ugiecie calkowite");
-        cellResults = rowSLS3.createCell(10, "f_M + f_cs");
-        cellResults = rowSLS3.createCell(10, "[cm]");
-        cellResults = rowSLS3.createCell(25, "Some value");
-        cellResults = rowSLS3.createCell(25, "Some value");
+        rowSLS1.createCell(30, "Ugiecie od obciazenia");
+        textCell(rowSLS1.createCell(10, "f_M"));
+        textCell(rowSLS1.createCell(10, "[cm]"));
+        greenCell(rowSLS1.createCell(25, String.valueOf(fMCalc)));
+        greenCell(rowSLS1.createCell(25, String.valueOf(fMReal)));
+
+        rowSLS2.createCell(30, "Ugiecie od skurczu");
+        textCell(rowSLS2.createCell(10, "f_cs"));
+        textCell(rowSLS2.createCell(10, "[cm]"));
+        greenCell(rowSLS2.createCell(25, String.valueOf(fCsCalc)));
+        greenCell(rowSLS2.createCell(25, String.valueOf(fCsReal)));
+
+        rowSLS3.createCell(30, "Ugiecie calkowite");
+        textCell(rowSLS3.createCell(10, "f_M + f_cs"));
+        textCell(rowSLS3.createCell(10, "[cm]"));
+        greenCell(rowSLS3.createCell(25, String.valueOf(fSumCalc)));
+        greenCellGrey(rowSLS3.createCell(25, String.valueOf(fSumReal)));
+
 
 
         table.draw();
@@ -233,9 +267,51 @@ class PrintPDF {
         tableResultsV.draw();
         tableResultsSLS.draw();
 
-        document.save("G:/dev/inzynierka/results/" + name + ".pdf");
+        document.save(name + ".pdf");
         System.out.println("PDF created");
         document.close();
 
+    }
+
+    private static void textCell(Cell cell) {
+        cell.setAlign(HorizontalAlignment.CENTER);
+    }
+
+    private static void greenCell(Cell cell) {
+        float[] hsb = new float[3];
+        Color.RGBtoHSB(0, 176, 80, hsb);
+
+        cell.setTextColor(Color.getHSBColor(hsb[0], hsb[1], hsb[2]));
+        cell.setAlign(HorizontalAlignment.CENTER);
+    }
+
+    private static void greenCellGrey(Cell cell) {
+        greenCell(cell);
+
+        float[] hsb = new float[3];
+        Color.RGBtoHSB(231, 230, 230, hsb);
+
+        cell.setFillColor(Color.getHSBColor(hsb[0], hsb[1], hsb[2]));
+    }
+
+    private static void blueCell(Cell cell) {
+        float[] hsb = new float[3];
+        Color.RGBtoHSB(0, 176, 240, hsb);
+
+        cell.setTextColor(Color.getHSBColor(hsb[0], hsb[1], hsb[2]));
+        cell.setAlign(HorizontalAlignment.CENTER);
+    }
+
+    private static void blueCellGrey(Cell cell) {
+        blueCell(cell);
+
+        float[] hsb = new float[3];
+        Color.RGBtoHSB(231, 230, 230, hsb);
+
+        cell.setFillColor(Color.getHSBColor(hsb[0], hsb[1], hsb[2]));
+    }
+
+    private static double roundThreeDigit(double toRound) {
+        return Math.round(toRound * 1000.00) / 1000D;
     }
 }
