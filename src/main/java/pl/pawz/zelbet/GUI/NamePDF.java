@@ -25,7 +25,7 @@ public class NamePDF {
         closeButton.setOnAction(e -> window.close());
 
         VBox layout = new VBox(10);
-        layout.getChildren().addAll(label,textField, closeButton);
+        layout.getChildren().addAll(label, textField, closeButton);
         layout.setAlignment(Pos.CENTER);
 
         Scene scene = new Scene(layout);
