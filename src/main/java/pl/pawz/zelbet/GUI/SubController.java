@@ -1330,11 +1330,14 @@ public class SubController {
 
                     //res to labels
 
+                    wResVar = roundThreeDigitShearing(result2 * Math.pow(10, 3));
+                    fMResVar = roundThreeDigitShearing(result1 * Math.pow(10, 2));
+                    fMPlusCResVar = roundThreeDigitShearing(result1a * Math.pow(10, 2));
+                    fCsVar = fMPlusCResVar - fMResVar;
 
-                    wResTrue.setText(roundThreeDigitShearing(result2 * Math.pow(10, 3)) + mm);
-                    fMResTrue.setText(roundThreeDigitShearing(result1 * Math.pow(10, 2)) + cm);
-                    fMPlusCResTrue.setText(roundThreeDigitShearing(result1a * Math.pow(10, 2)) + cm);
-
+                    wResTrue.setText(wResVar + mm);
+                    fMResTrue.setText(fMResVar + cm);
+                    fMPlusCResTrue.setText(fMPlusCResVar + cm);
 
                 } else {
                     double aS1True = Math.pow(aS1Value / 2, 2) * Math.PI * n1Value;
@@ -1349,8 +1352,13 @@ public class SubController {
                     //res to labels
 
 
-                    wResTrue.setText(roundThreeDigitShearing(result2 * Math.pow(10, 3)) + mm);
-                    fMResTrue.setText(roundThreeDigitShearing(result1 * Math.pow(10, 2)) + cm);
+                    wResVar = roundThreeDigitShearing(result2 * Math.pow(10, 3));
+                    fMResVar = roundThreeDigitShearing(result1 * Math.pow(10, 2));
+                    fMPlusCResVar = 0;
+                    fCsVar = fMPlusCResVar - fMResVar;
+
+                    wResTrue.setText(wResVar + mm);
+                    fMResTrue.setText(fMResVar + cm);
                     fMPlusCResTrue.setText(roundThreeDigitShearing(0) + cm);
                 }
             } else {
@@ -1368,10 +1376,14 @@ public class SubController {
 
 
                     //res to labels
+                    wResVar = roundThreeDigitShearing(result2 * Math.pow(10, 3));
+                    fMResVar = roundThreeDigitShearing(result1 * Math.pow(10, 2));
+                    fMPlusCResVar = roundThreeDigitShearing(result1a * Math.pow(10, 2));
+                    fCsVar = fMPlusCResVar - fMResVar;
 
-                    wResTrue.setText(roundThreeDigitShearing(result2 * Math.pow(10, 3)) + mm);
-                    fMResTrue.setText(roundThreeDigitShearing(result1 * Math.pow(10, 2)) + cm);
-                    fMPlusCResTrue.setText(roundThreeDigitShearing(result1a * Math.pow(10, 2)) + cm);
+                    wResTrue.setText(wResVar + mm);
+                    fMResTrue.setText(fMResVar + cm);
+                    fMPlusCResTrue.setText(fMPlusCResVar + cm);
 
 
                 } else {
@@ -1387,8 +1399,13 @@ public class SubController {
                     //res to labels
 
 
-                    wResTrue.setText(roundThreeDigitShearing(result2 * Math.pow(10, 3)) + mm);
-                    fMResTrue.setText(roundThreeDigitShearing(result1 * Math.pow(10, 2)) + cm);
+                    wResVar = roundThreeDigitShearing(result2 * Math.pow(10, 3));
+                    fMResVar = roundThreeDigitShearing(result1 * Math.pow(10, 2));
+                    fMPlusCResVar = 0;
+                    fCsVar = fMPlusCResVar - fMResVar;
+
+                    wResTrue.setText(wResVar + mm);
+                    fMResTrue.setText(fMResVar + cm);
                     fMPlusCResTrue.setText(roundThreeDigitShearing(0) + cm);
 
                 }
