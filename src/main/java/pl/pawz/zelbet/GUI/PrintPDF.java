@@ -27,11 +27,11 @@ class PrintPDF {
         double rH = rHData;
         double days = daysData;
         double mEd = roundThreeDigit(mEdData * Math.pow(10, 3));
-        double mEk = mEkData;
-        double mEkLt = mEkLtData;
-        double vEd = vEdData;
-        double vEdRed = vEdRedData;
-        double nEd = nEdData;
+        double mEk = roundThreeDigit(mEkData * Math.pow(10, 3));
+        double mEkLt = roundThreeDigit(mEkLtData * Math.pow(10, 3));
+        double vEd = roundThreeDigit(vEdData * Math.pow(10, 3));
+        double vEdRed = roundThreeDigit(vEdRedData * Math.pow(10, 3));
+        double nEd = roundThreeDigit(nEdData * Math.pow(10, 3));
         double aS1 = aS1Data;
         double aS2 = aS2Data;
         double aS1Real = aS1RealData;
@@ -49,7 +49,7 @@ class PrintPDF {
         double fSumReal = fSumRealData;
         double alpha = alphaData;
 
-        String rods = "Prety odgiete alpha = "+alpha;
+        String rods = "Prety odgiete alpha = " + alpha;
 
 
         //Creating PDF document object
@@ -198,11 +198,11 @@ class PrintPDF {
         greenCell(rowV.createCell(15, String.valueOf(mEd)));
 
         rowV1.createCell(30, rods);
-        blueCell(rowV1.createCell(10, "Some value"));
-        blueCell(rowV1.createCell(10, "Some value"));
-        greenCell(rowV1.createCell(15, "Some value"));
-        blueCellGrey(rowV1.createCell(10, "Some value"));
-        blueCellGrey(rowV1.createCell(10, "Some value"));
+        blueCell(rowV1.createCell(10, String.valueOf(aS1)));
+        blueCell(rowV1.createCell(10, String.valueOf(aS1)));
+        greenCell(rowV1.createCell(15, String.valueOf(aS1)));
+        blueCellGrey(rowV1.createCell(10, String.valueOf(aS1)));
+        blueCellGrey(rowV1.createCell(10, String.valueOf(aS1)));
         greenCell(rowV1.createCell(15, String.valueOf(mEd)));
 
 
@@ -255,7 +255,6 @@ class PrintPDF {
         textCell(rowSLS3.createCell(10, "[cm]"));
         greenCell(rowSLS3.createCell(25, String.valueOf(fSumCalc)));
         greenCellGrey(rowSLS3.createCell(25, String.valueOf(fSumReal)));
-
 
 
         table.draw();

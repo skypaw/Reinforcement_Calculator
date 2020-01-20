@@ -1,7 +1,6 @@
 package pl.pawz.zelbet.GUI;
 
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
@@ -323,6 +322,11 @@ public class SubController {
     private double resRods2Value;
     private double resRods1ValueAsymmetric;
     private double resRods2ValueAsymmetric;
+    private double wResVar;
+    private double fMPlusCResVar;
+    private double fMResVar;
+    private double fCsVar;
+
 
     private String mm = " mm";
     private String cm = " cm";
@@ -1054,11 +1058,14 @@ public class SubController {
 
 
                     //res to labels
+                    wResVar = roundThreeDigitShearing(result2 * Math.pow(10, 3));
+                    fMResVar = roundThreeDigitShearing(result1 * Math.pow(10, 2));
+                    fMPlusCResVar = roundThreeDigitShearing(result1a * Math.pow(10, 2));
+                    fCsVar = fMPlusCResVar - fMResVar;
 
-
-                    wResTrue.setText(roundThreeDigitShearing(result2 * Math.pow(10, 3)) + mm);
-                    fMResTrue.setText(roundThreeDigitShearing(result1 * Math.pow(10, 2)) + cm);
-                    fMPlusCResTrue.setText(roundThreeDigitShearing(result1a * Math.pow(10, 2)) + cm);
+                    wResTrue.setText(wResVar + mm);
+                    fMResTrue.setText(fMResVar + cm);
+                    fMPlusCResTrue.setText(fMPlusCResVar + cm);
 
 
                 } else {
@@ -1075,8 +1082,14 @@ public class SubController {
                     String mm = " mm";
                     String cm = " cm";
 
-                    wResTrue.setText(roundThreeDigitShearing(result2 * Math.pow(10, 3)) + mm);
-                    fMResTrue.setText(roundThreeDigitShearing(result1 * Math.pow(10, 2)) + cm);
+                    wResVar = roundThreeDigitShearing(result2 * Math.pow(10, 3));
+                    fMResVar = roundThreeDigitShearing(result1 * Math.pow(10, 2));
+                    fMPlusCResVar = 0;
+                    fCsVar = fMPlusCResVar - fMResVar;
+
+
+                    wResTrue.setText(wResVar + mm);
+                    fMResTrue.setText(fMResVar + cm);
                     fMPlusCResTrue.setText(roundThreeDigitShearing(0) + cm);
                 }
             } else {
@@ -1097,10 +1110,14 @@ public class SubController {
                     String mm = " mm";
                     String cm = " cm";
 
-                    wResTrue.setText(roundThreeDigitShearing(result2 * Math.pow(10, 3)) + mm);
-                    fMResTrue.setText(roundThreeDigitShearing(result1 * Math.pow(10, 2)) + cm);
-                    fMPlusCResTrue.setText(roundThreeDigitShearing(result1a * Math.pow(10, 2)) + cm);
+                    wResVar = roundThreeDigitShearing(result2 * Math.pow(10, 3));
+                    fMResVar = roundThreeDigitShearing(result1 * Math.pow(10, 2));
+                    fMPlusCResVar = roundThreeDigitShearing(result1a * Math.pow(10, 2));
+                    fCsVar = fMPlusCResVar - fMResVar;
 
+                    wResTrue.setText(wResVar + mm);
+                    fMResTrue.setText(fMResVar + cm);
+                    fMPlusCResTrue.setText(fMPlusCResVar + cm);
 
                 } else {
                     double aS1True = Math.pow(aS1Value / 2, 2) * Math.PI * resRods1ValueAsymmetric;
@@ -1118,8 +1135,13 @@ public class SubController {
                     String mm = " mm";
                     String cm = " cm";
 
-                    wResTrue.setText(roundThreeDigitShearing(result2 * Math.pow(10, 3)) + mm);
-                    fMResTrue.setText(roundThreeDigitShearing(result1 * Math.pow(10, 2)) + cm);
+                    wResVar = roundThreeDigitShearing(result2 * Math.pow(10, 3));
+                    fMResVar = roundThreeDigitShearing(result1 * Math.pow(10, 2));
+                    fMPlusCResVar = 0;
+                    fCsVar = fMPlusCResVar - fMResVar;
+
+                    wResTrue.setText(wResVar + mm);
+                    fMResTrue.setText(fMResVar + cm);
                     fMPlusCResTrue.setText(roundThreeDigitShearing(0) + cm);
 
                 }
@@ -1388,7 +1410,7 @@ public class SubController {
 
         String fileName = stringPdf.display();
         if (!fileName.isEmpty()) {
-            PrintPDF.print(fileName, fYk, rHValue, tZeroValue, mEdValue, mEkValue, mEkLtValue, vEdValue, vEdRedValue, nEdValue, cementChar, fCk, 23, 23, 23, 23, resRods1Value, resRods2Value, 23423, 12312, 3424, 234234, 23423, 23423, 234, 234, alphaValue);
+            PrintPDF.print(fileName, fYk, rHValue, tZeroValue, mEdValue, mEkValue, mEkLtValue, vEdValue, vEdRedValue, nEdValue, cementChar, fCk, 23, 23, 23, 23, resRods1Value, resRods2Value, 23423, wResVar, wResVar, fMResVar, fMResVar, fCsVar, fMPlusCResVar, fMPlusCResVar, alphaValue);
         }
 
     }
