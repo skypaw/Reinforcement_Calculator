@@ -17,7 +17,8 @@ class PrintPDF {
 
     static void print(String name, double fYk, double rHData, double daysData, double mEdData, double mEkData, double mEkLtData,
                       double vEdData, double vEdRedData, double nEdData, char cementChar, double concreteFCk, double aS1Data, double aS2Data, double aS1RealData, double aS2RealData, double nS1Data, double nS2Data, double mRdData,
-                      double wCalcData, double wRealData, double fMCalcData, double fMRealData, double fCsCalcData, double fSumCalcData, double fSumRealData, double alphaData) throws IOException {
+                      double wCalcData, double wRealData, double fMCalcData, double fMRealData, double fCsCalcData, double fSumCalcData, double fSumRealData, double alphaData,
+                      double fi1Data, double fi2Data) throws IOException {
 
         String namePdf = name;
 
@@ -38,7 +39,7 @@ class PrintPDF {
         double aS2Real = aS2RealData;
         double nS1 = nS1Data;
         double nS2 = nS2Data;
-        double mRd = mRdData;
+        double mRd = roundThreeDigit(mRdData * Math.pow(10, 3));
         double wCalc = wCalcData;
         double wReal = wRealData;
         double fMCalc = fMCalcData;
@@ -48,6 +49,9 @@ class PrintPDF {
         double fSumCalc = fSumCalcData;
         double fSumReal = fSumRealData;
         double alpha = alphaData;
+
+        String valueRods1 = nS1 + " fi " + fi1Data;
+        String valueRods2 = nS2 + " fi " + fi2Data;
 
         String rods = "Prety odgiete alpha = " + alpha;
 
@@ -162,14 +166,14 @@ class PrintPDF {
         row.createCell(25, "Rozciagane A_s1");
         greenCell(row.createCell(15, String.valueOf(aS1)));
         greenCell(row.createCell(15, String.valueOf(mEd)));
-        blueCellGrey(row.createCell(15, String.valueOf(nS1)));
+        blueCellGrey(row.createCell(15, String.valueOf(valueRods1)));
         greenCell(row.createCell(15, String.valueOf(aS1Real)));
         greenCell(row.createCell(15, String.valueOf(mRd)));
 
         row1.createCell(25, "Sciskane A_s2");
         greenCell(row1.createCell(15, String.valueOf(aS2)));
         greenCell(row1.createCell(15, String.valueOf(mEd)));
-        blueCellGrey(row1.createCell(15, String.valueOf(nS2)));
+        blueCellGrey(row1.createCell(15, String.valueOf(valueRods2)));
         greenCell(row1.createCell(15, String.valueOf(aS2Real)));
         greenCell(row1.createCell(15, String.valueOf(mRd)));
 

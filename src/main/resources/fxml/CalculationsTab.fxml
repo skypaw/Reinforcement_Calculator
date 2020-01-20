@@ -22,7 +22,7 @@
                 <Label text="Stan Graniczny Nośności" GridPane.columnIndex="0" GridPane.rowIndex="1"
                        GridPane.columnSpan="2"/>
                 <CheckBox text="Kombinacje obciążeń" GridPane.columnIndex="0" GridPane.rowIndex="6"
-                          fx:id="checkBoxLoads" onAction="#fourLoads"/>
+                          fx:id="checkBoxLoads" onAction="#fourLoads" disable="true"/>
             </GridPane>
 
 
