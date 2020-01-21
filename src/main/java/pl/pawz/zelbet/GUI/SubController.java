@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.event.ActionEvent;
 import pl.pawz.zelbet.Diagnostic.DiagnosticBendingBeamAndT;
 import pl.pawz.zelbet.Diagnostic.DiagnosticCompression;
 import pl.pawz.zelbet.Diagnostic.DiagnosticExtension;
@@ -217,8 +218,6 @@ public class SubController {
     CheckBox checkBoxRods = new CheckBox();
 
     @FXML
-    CheckBox checkBoxResults3 = new CheckBox();
-    @FXML
     CheckBox checkBoxLoads = new CheckBox();
     @FXML
     CheckBox checkBoxConcrete = new CheckBox();
@@ -363,9 +362,6 @@ public class SubController {
         scrollCalculations.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
         choiceBoxDimensions.setValue("Przekrój Prostokątny");
 
-
-        checkBoxResults3.setSelected(true);
-        checkBoxResults3.setTooltip(new Tooltip("Stan Graniczny Użytkowalności nie jest liczony dla przekrojów z siłą podłużną"));
         loadsInit();
         concreteInit();
         checkBoxConcrete.setSelected(true);
@@ -376,6 +372,7 @@ public class SubController {
         choiceBoxCementClass.setValue("Klasa N");
 
         checkBoxLoads.setDisable(true);
+        setDefaults();
 
     }
 
@@ -401,13 +398,13 @@ public class SubController {
 
         if (choiceBoxDimensions.getValue().toString().equals("Przekrój Prostokątny")) {
             gridDimensions.getChildren().removeAll(hFDimensionLabel, hFDimension, bFDimension, bFDimensionLabel, hFTDimension, hFTDimensionLabel, bFTDimension, bFTDimensionLabel);
-            checkBoxLoads.setDisable(false);
+            //checkBoxLoads.setDisable(false);
 
             nEdLoadsTxt.setDisable(false);
 
         } else {
             gridDimensions.getChildren().addAll(hFDimensionLabel, hFDimension, bFDimension, bFDimensionLabel, hFTDimension, hFTDimensionLabel, bFTDimension, bFTDimensionLabel);
-            checkBoxLoads.setDisable(true);
+            //checkBoxLoads.setDisable(true);
 
             nEdLoadsTxt.setDisable(true);
             nEdLoadsTxt.setText("");
@@ -546,15 +543,6 @@ public class SubController {
         gridDimensions.getChildren().add(choiceBoxConcrete);
     }
 
-    public void bottomButtonsController() { //todo delete some code, cause of checkboxes are deleted
-
-        if (checkBoxResults3.isSelected()) {
-            gridPaneSGU.setDisable(false);
-        } else {
-            gridPaneSGU.setDisable(true);
-        }
-
-    }
 
     public void fourLoadsResults() {
         gridResultsController();
@@ -745,6 +733,10 @@ public class SubController {
 
     public void vEdRedText() {
         vEdRed.setText(String.valueOf(vEd.getText()));
+    }
+
+    public void mEkText() {
+        mEk.setText(String.valueOf(Double.parseDouble(mEdLoadsTxt.getText())*0.7));
     }
 
     private void slsValues() {
@@ -1044,7 +1036,7 @@ public class SubController {
             double res = shearing.resultShearingStirrups();
             System.out.println(res);
 
-            resShearing = res;
+            resShearing = roundThreeDigitShearingReal(res);
             sRods.setText(roundThreeDigitShearing(res) + m);
 
             sRodsReal.setText(roundThreeDigitShearingReal(res) + m);
@@ -1145,7 +1137,7 @@ public class SubController {
         }
 
 
-        if (checkBoxResults3.isSelected() && nEdValue == 0) {
+        if (nEdValue == 0) {
 
 
             if (choiceBoxDimensions.getValue().toString().equals("Przekrój Prostokątny")) {
@@ -1521,7 +1513,7 @@ public class SubController {
         }
 
 
-        if (checkBoxResults3.isSelected() && nEdValue == 0) {
+        if (nEdValue == 0) {
 
 
             if (choiceBoxDimensions.getValue().toString().equals("Przekrój Prostokątny")) { //aS1Value - PROBABLY FI AS1!

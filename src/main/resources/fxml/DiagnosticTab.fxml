@@ -260,13 +260,6 @@
                 </padding>
 
 
-                <CheckBox text="SGU" GridPane.columnIndex="0" GridPane.rowIndex="0"
-                          fx:id="checkBoxResults3"
-                          onAction="#bottomButtonsController"/>
-
-                <Button text="Wartości podstawowe" GridPane.columnIndex="0" GridPane.rowIndex="4"
-                        onAction="#setDefaults"/>
-
                 <Button text="Diagnotyka" GridPane.columnIndex="1" GridPane.rowIndex="4"
                         onAction="#diagnostic"/>
 

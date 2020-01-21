@@ -67,6 +67,36 @@ public class Controller {
             }
 
 
+            if (tab1Controller.choiceBoxLoads.getValue().equals("Obciążenie doraźne")){
+                if (!tab2Controller.choiceBoxLoads.getValue().equals("Obciążenie doraźne")){
+                    tab2Controller.choiceBoxLoads.setValue("Obciążenie doraźne");
+                }
+            }
+            if (tab1Controller.choiceBoxLoads.getValue().equals("Obciążenie długotrwałe")){
+                if (!tab2Controller.choiceBoxLoads.getValue().equals("Obciążenie długotrwałe")){
+                    tab2Controller.choiceBoxLoads.setValue("Obciążenie długotrwałe");
+                }
+            }
+
+            if (tab1Controller.choiceBoxCementClass.getValue().equals("Klasa N")){
+                if (!tab2Controller.choiceBoxCementClass.getValue().equals("Klasa N")){
+                    tab2Controller.choiceBoxCementClass.setValue("Klasa N");
+                }
+            }
+
+            if (tab1Controller.choiceBoxCementClass.getValue().equals("Klasa S")){
+                if (!tab2Controller.choiceBoxCementClass.getValue().equals("Klasa S")){
+                    tab2Controller.choiceBoxCementClass.setValue("Klasa S");
+                }
+            }
+
+            if (tab1Controller.choiceBoxCementClass.getValue().equals("Klasa R")){
+                if (!tab2Controller.choiceBoxCementClass.getValue().equals("Klasa R")){
+                    tab2Controller.choiceBoxCementClass.setValue("Klasa R");
+                }
+            }
+
+
         }
 
 
