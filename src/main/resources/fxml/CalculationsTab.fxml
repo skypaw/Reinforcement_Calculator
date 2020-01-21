@@ -22,7 +22,7 @@
                 <Label text="Stan Graniczny Nośności" GridPane.columnIndex="0" GridPane.rowIndex="1"
                        GridPane.columnSpan="2"/>
                 <CheckBox text="Kombinacje obciążeń" GridPane.columnIndex="0" GridPane.rowIndex="6"
-                          fx:id="checkBoxLoads" onAction="#fourLoads"/>
+                          fx:id="checkBoxLoads" onAction="#fourLoads" disable="true"/>
             </GridPane>
 
 
@@ -308,14 +308,17 @@
                 <Label text="w" GridPane.columnIndex="0" GridPane.rowIndex="11"/>
 
                 <Label text="0.00 mm" GridPane.columnIndex="2" GridPane.rowIndex="11" fx:id="wResTrue"/>
+                <Label text="0.00 mm" GridPane.columnIndex="1" GridPane.rowIndex="11" fx:id="wRes"/>
 
                 <Label text="f(M)" GridPane.columnIndex="0" GridPane.rowIndex="12"/>
 
                 <Label text="0.00 cm" GridPane.columnIndex="2" GridPane.rowIndex="12" fx:id="fMResTrue"/>
+                <Label text="0.00 cm" GridPane.columnIndex="1" GridPane.rowIndex="12" fx:id="fMRes"/>
 
                 <Label text="f(M)+f(cs)" GridPane.columnIndex="0" GridPane.rowIndex="13"/>
 
                 <Label text="0.00 cm" GridPane.columnIndex="2" GridPane.rowIndex="13" fx:id="fMPlusCResTrue"/>
+                <Label text="0.00 cm" GridPane.columnIndex="1" GridPane.rowIndex="13" fx:id="fMPlusCRes"/>
 
 
             </GridPane>

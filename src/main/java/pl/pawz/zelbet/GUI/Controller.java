@@ -49,7 +49,22 @@ public class Controller {
             tab2Controller.lEff.setText(String.valueOf(tab1Controller.data.get("lEff")));
             tab2Controller.alphaM.setText(String.valueOf(tab1Controller.data.get("alphaM")));
 
+            tab2Controller.s1.setText(String.valueOf(tab1Controller.data.get("sSw1")));
+            tab2Controller.bFDimension.setText(String.valueOf(tab1Controller.data.get("beff")));
+            tab2Controller.bFTDimension.setText(String.valueOf(tab1Controller.data.get("befft")));
+            tab2Controller.hFDimension.setText(String.valueOf(tab1Controller.data.get("hf")));
+            tab2Controller.hFTDimension.setText(String.valueOf(tab1Controller.data.get("hft")));
 
+            if (tab1Controller.choiceBoxDimensions.getValue().equals("Przekrój Prostokątny")){
+                if (!tab2Controller.choiceBoxDimensions.getValue().equals("Przekrój Prostokątny")){
+                    tab2Controller.choiceBoxDimensions.setValue("Przekrój Prostokątny");
+                }
+            }
+            if (tab1Controller.choiceBoxDimensions.getValue().equals("Przekrój Teowy")){
+                if (!tab2Controller.choiceBoxDimensions.getValue().equals("Przekrój Teowy")){
+                    tab2Controller.choiceBoxDimensions.setValue("Przekrój Teowy");
+                }
+            }
 
 
         }
