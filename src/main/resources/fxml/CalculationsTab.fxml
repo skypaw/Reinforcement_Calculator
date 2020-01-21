@@ -60,7 +60,7 @@
                            prefWidth="70"
                            fx:id="test1"/>
 
-                <Label text="Klasa Betonu:" GridPane.columnIndex="3" GridPane.rowIndex="1"/>
+                <Label text="Klasa betonu:" GridPane.columnIndex="3" GridPane.rowIndex="1"/>
 
                 <CheckBox text="Lista klas betonów" GridPane.columnIndex="5" GridPane.rowIndex="1"
                           fx:id="checkBoxConcrete" onAction="#changingConcrete"/>
@@ -243,12 +243,6 @@
                 </padding>
 
 
-                <CheckBox text="SGU" GridPane.columnIndex="0" GridPane.rowIndex="0"
-                          fx:id="checkBoxResults3"
-                          onAction="#bottomButtonsController"/>
-
-                <Button text="Wartości podstawowe" GridPane.columnIndex="0" GridPane.rowIndex="4"
-                        onAction="#setDefaults"/>
 
                 <Button text="Obliczenia" GridPane.columnIndex="1" GridPane.rowIndex="4"
                         onAction="#calculations"/>
