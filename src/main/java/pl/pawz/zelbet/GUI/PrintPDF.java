@@ -18,7 +18,9 @@ class PrintPDF {
     static void print(String name, double fYk, double rHData, double daysData, double mEdData, double mEkData, double mEkLtData,
                       double vEdData, double vEdRedData, double nEdData, char cementChar, double concreteFCk, double aS1Data, double aS2Data, double aS1RealData, double aS2RealData, double nS1Data, double nS2Data, double mRdData,
                       double wCalcData, double wRealData, double fMCalcData, double fMRealData, double fCsCalcData, double fSumCalcData, double fSumRealData, double alphaData,
-                      double fi1Data, double fi2Data) throws IOException {
+                      double fi1Data, double fi2Data, double nSw1, double nSw2, double fiw1Data, double fiw2Data, double s1, double s2,
+                      double vRd, double nSw1Real, double nSw2Real, double fiw1DataReal, double fiw2DataReal, double s1Real,
+                      double s2Real, double vRdReal) throws IOException {
 
         String namePdf = name;
 
@@ -54,6 +56,12 @@ class PrintPDF {
         String valueRods2 = nS2 + " fi " + fi2Data;
 
         String rods = "Prety odgiete alpha = " + alpha;
+
+        String valueRodsShearing1 = nSw1 + " fi " + fiw1Data;
+        String valueRodsShearing2 = nSw2 + " fi " + fiw2Data;
+
+        String valueRodsShearing1Real = nSw1Real+ " fi " + fiw1DataReal;
+        String valueRodsShearing2Real = nSw2Real+ " fi " + fiw2DataReal;
 
 
         //Creating PDF document object
@@ -194,20 +202,20 @@ class PrintPDF {
         Row<PDPage> rowV1 = tableResultsV.createRow(12);
 
         rowV.createCell(30, "Strzemiona");
-        blueCell(rowV.createCell(10, String.valueOf(aS1)));
-        greenCell(rowV.createCell(10, String.valueOf(mEd)));
-        greenCell(rowV.createCell(15, String.valueOf(nS1)));
-        greenCellGrey(rowV.createCell(10, String.valueOf(aS1Real)));
-        blueCellGrey(rowV.createCell(10, String.valueOf(mRd)));
-        greenCell(rowV.createCell(15, String.valueOf(mEd)));
+        blueCell(rowV.createCell(10, String.valueOf(valueRodsShearing1)));
+        greenCell(rowV.createCell(10, String.valueOf(s1)));
+        greenCell(rowV.createCell(15, String.valueOf(vRd)));
+        greenCellGrey(rowV.createCell(10, String.valueOf(valueRodsShearing1Real)));
+        blueCellGrey(rowV.createCell(10, String.valueOf(s1Real)));
+        greenCell(rowV.createCell(15, String.valueOf(vRdReal)));
 
         rowV1.createCell(30, rods);
-        blueCell(rowV1.createCell(10, String.valueOf(aS1)));
-        blueCell(rowV1.createCell(10, String.valueOf(aS1)));
-        greenCell(rowV1.createCell(15, String.valueOf(aS1)));
-        blueCellGrey(rowV1.createCell(10, String.valueOf(aS1)));
-        blueCellGrey(rowV1.createCell(10, String.valueOf(aS1)));
-        greenCell(rowV1.createCell(15, String.valueOf(mEd)));
+        blueCell(rowV1.createCell(10, String.valueOf(valueRodsShearing2)));
+        blueCell(rowV1.createCell(10, String.valueOf(s2)));
+        greenCell(rowV1.createCell(15, String.valueOf(vRd)));
+        blueCellGrey(rowV1.createCell(10, String.valueOf(valueRodsShearing2Real)));
+        blueCellGrey(rowV1.createCell(10, String.valueOf(s2Real)));
+        greenCell(rowV1.createCell(15, String.valueOf(vEdRedData)));
 
 
         //Table for SLS
