@@ -4,7 +4,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-import javafx.event.ActionEvent;
 import pl.pawz.zelbet.Diagnostic.DiagnosticBendingBeamAndT;
 import pl.pawz.zelbet.Diagnostic.DiagnosticCompression;
 import pl.pawz.zelbet.Diagnostic.DiagnosticExtension;
@@ -736,8 +735,14 @@ public class SubController {
         vEdRed.setText(String.valueOf(vEd.getText()));
     }
 
-    public void mEkText() {
-        mEk.setText(String.valueOf(Double.parseDouble(mEdLoadsTxt.getText()) * 0.7));
+    public void mEkLtText() {
+
+
+        if (mEk.getText().isEmpty()){
+            mEkLt.setText(String.valueOf(0));
+        }else {
+            mEkLt.setText(String.valueOf(roundTwoDigit(Double.parseDouble(mEk.getText() )* 0.85)));
+        }
     }
 
     private void slsValues() {
