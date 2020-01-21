@@ -27,6 +27,8 @@ public class Deflection {
     private double sI;
     private double sII;
 
+    public double fiCrawling;
+
 
     public Deflection(float lEff, double mEkLt, double mEk, float alphaM, double mEd, float b, float h, float hF, float hFT, float bEff, float bEffT, float a1, float a2, double aS1, double aS2, char longOrShort, double fCk, float rH, char cement, int tZero) {
         this.alphaM = alphaM;
@@ -41,6 +43,7 @@ public class Deflection {
         BasicParameters basic = new BasicParameters(eS, b, h, hF, hFT, bEff, bEffT, a1, a2, aS1, aS2, fCk, rH, tZero, cement, longOrShort);
         this.mCr = basic.mCr;
         this.eCEff = basic.eCEff;
+        this.fiCrawling = basic.fiCrawling;
 
         this.iI = basic.iI;
         this.iII = basic.iII;

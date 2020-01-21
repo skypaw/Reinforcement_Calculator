@@ -19,8 +19,9 @@ class PrintPDF {
                       double vEdData, double vEdRedData, double nEdData, char cementChar, double concreteFCk, double aS1Data, double aS2Data, double aS1RealData, double aS2RealData, double nS1Data, double nS2Data, double mRdData,
                       double wCalcData, double wRealData, double fMCalcData, double fMRealData, double fCsCalcData, double fSumCalcData, double fSumRealData, double alphaData,
                       double fi1Data, double fi2Data, double nSw1, double nSw2, double fiw1Data, double fiw2Data, double s1, double s2,
-                      double vRd, double nSw1Real, double nSw2Real, double fiw1DataReal, double fiw2DataReal, double s1Real,
-                      double s2Real, double vRdReal) throws IOException {
+                      double vRdData, double nSw1Real, double nSw2Real, double fiw1DataReal, double fiw2DataReal, double s1Real,
+                      double s2Real, double vRdRealData, double fiCrawlingData, double bData, double hData, double cNomData, double a1Data, double a2Data,
+                      double bEffData,double hFData, double bEffTData, double hFTData, double lEff, double alphaMData) throws IOException {
 
         String namePdf = name;
 
@@ -33,6 +34,8 @@ class PrintPDF {
         double mEk = roundThreeDigit(mEkData * Math.pow(10, 3));
         double mEkLt = roundThreeDigit(mEkLtData * Math.pow(10, 3));
         double vEd = roundThreeDigit(vEdData * Math.pow(10, 3));
+        double vRd = roundThreeDigit(vRdData * Math.pow(10, 3));
+        double vRdReal = roundThreeDigit(vRdRealData * Math.pow(10, 3));
         double vEdRed = roundThreeDigit(vEdRedData * Math.pow(10, 3));
         double nEd = roundThreeDigit(nEdData * Math.pow(10, 3));
         double aS1 = aS1Data;
@@ -51,17 +54,27 @@ class PrintPDF {
         double fSumCalc = fSumCalcData;
         double fSumReal = fSumRealData;
         double alpha = alphaData;
+        double fiCrawling = roundThreeDigit(fiCrawlingData);
+        double hf = roundThreeDigit(hFData);
+        double hft = roundThreeDigit(hFTData);
+        double beff = roundThreeDigit(bEffData);
+        double befft = roundThreeDigit(bEffTData);
+        double b = roundThreeDigit(bData);
+        double h = roundThreeDigit(hData);
+        double alphaM = roundThreeDigit(alphaMData);
+        double a1 = roundThreeDigit(a1Data);
+        double a2 = roundThreeDigit(a2Data);
 
-        String valueRods1 = nS1 + " fi " + fi1Data;
-        String valueRods2 = nS2 + " fi " + fi2Data;
+        String valueRods1 = nS1 + " fi " + fi1Data * Math.pow(10, 3);
+        String valueRods2 = nS2 + " fi " + fi2Data * Math.pow(10, 3);
 
         String rods = "Prety odgiete alpha = " + alpha;
 
-        String valueRodsShearing1 = nSw1 + " fi " + fiw1Data;
-        String valueRodsShearing2 = nSw2 + " fi " + fiw2Data;
+        String valueRodsShearing1 = nSw1 + " fi " + fiw1Data * Math.pow(10, 3);
+        String valueRodsShearing2 = nSw2 + " fi " + fiw2Data * Math.pow(10, 3);
 
-        String valueRodsShearing1Real = nSw1Real+ " fi " + fiw1DataReal;
-        String valueRodsShearing2Real = nSw2Real+ " fi " + fiw2DataReal;
+        String valueRodsShearing1Real = nSw1Real + " fi " + fiw1DataReal * Math.pow(10, 3);
+        String valueRodsShearing2Real = nSw2Real + " fi " + fiw2DataReal * Math.pow(10, 3);
 
 
         //Creating PDF document object
@@ -106,20 +119,21 @@ class PrintPDF {
         contentStream.newLine();
         contentStream.newLine();
         contentStream.newLine();
-        contentStream.showText("PARAMETRY MATERIALOWE:");
+        contentStream.showText("PARAMETRY MATERIALOWE:      PARAMETRY GEOMETRYCZNE:");
         contentStream.newLine();
-        contentStream.showText("      Beton: f_ck " + concrete + "(cement: " + cement + ")");
+        contentStream.showText("      Beton: f_ck " + concrete + "(cement: " + cement + ")        h = " + h+"m");
         contentStream.newLine();
-        contentStream.showText("      Stal: f_yk = " + fyk + "MPa");
+        contentStream.showText("      Stal: f_yk = " + fyk + "MPa                 b = " + b+"m");
         contentStream.newLine();
+        contentStream.showText("                                                        b_eff = "+beff+"m, h_f = "+hf+"m");
         contentStream.newLine();
-        contentStream.showText("PARAMETRY DODATKOWE:");
+        contentStream.showText("PARAMETRY DODATKOWE:                   b_eff,T = "+befft+"m, h_fT = "+hft+"m");
         contentStream.newLine();
-        contentStream.showText("      RH: " + rH + "%");
+        contentStream.showText("      RH: " + rH + "%                                        a_1 = " + a1 + "m, a_2 = " + a2 + "m, c_nom = " + cNomData+"m");
         contentStream.newLine();
-        contentStream.showText("      Wiek t_0: " + days + "dni");
+        contentStream.showText("      Wiek t_0: " + days + "dni                              l_eff = "+lEff+"m, alpha_m = "+alphaM);
         contentStream.newLine();
-        contentStream.showText("      Fi(inf,t_0) = ");
+        contentStream.showText("      Fi(inf,t_0) = " + fiCrawling);
 
 
         //Table results

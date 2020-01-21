@@ -339,6 +339,7 @@ public class SubController {
     private double fMResVarTheoretical;
     private double fMPlusCResVarTheoretical;
     private double fCsVarTheoretical;
+    private double fiCrawling;
 
 
     private String mm = " mm";
@@ -736,7 +737,7 @@ public class SubController {
     }
 
     public void mEkText() {
-        mEk.setText(String.valueOf(Double.parseDouble(mEdLoadsTxt.getText())*0.7));
+        mEk.setText(String.valueOf(Double.parseDouble(mEdLoadsTxt.getText()) * 0.7));
     }
 
     private void slsValues() {
@@ -1078,6 +1079,10 @@ public class SubController {
 
             res1true.setText("0" + cm2);
             res2true.setText("0" + cm2);
+
+            toPdfButton.setDisable(false);
+
+
         }
 
         data = new HashMap<>();
@@ -1149,6 +1154,7 @@ public class SubController {
                     Deflection res1 = new Deflection(lEffValue, mEkLtValue, mEkValue, alphaMValue, mEdValue, bValue, hValue, 0, 0, bValue, bValue, a1Value, a2Value, aS1True, aS2True, loadChar, fCk, rHValue, cementChar, tZeroValue);
                     double result1 = res1.resultsLong();
                     double result1a = res1.resultsLongDeformation();
+                    fiCrawling = res1.fiCrawling;
 
                     Scratch res2 = new Scratch(cNomValue, aSw1Value, aS1Value, resRods1ValueAsymmetric, fCk, rHValue, tZeroValue, cementChar, bValue, bValue, bValue, hValue, 0, 0, a1Value, a2Value, aS1True, aS2True, mEkValue, mEkLtValue, loadChar);
                     double result2 = res2.wK();
@@ -1197,6 +1203,7 @@ public class SubController {
 
                     Deflection res1 = new Deflection(lEffValue, mEkLtValue, mEkValue, alphaMValue, mEdValue, bValue, hValue, 0, 0, bValue, bValue, a1Value, a2Value, aS1True, aS2True, loadChar, fCk, rHValue, cementChar, tZeroValue);
                     double result1 = res1.resultsShort();
+                    fiCrawling = res1.fiCrawling;
 
                     Scratch res2 = new Scratch(cNomValue, aSw1Value, aS1Value, resRods1ValueAsymmetric, fCk, rHValue, tZeroValue, cementChar, bValue, bValue, bValue, hValue, 0, 0, a1Value, a2Value, aS1True, aS2True, mEkValue, mEkLtValue, loadChar);
                     double result2 = res2.wK();
@@ -1249,6 +1256,7 @@ public class SubController {
                     Deflection res1 = new Deflection(lEffValue, mEkLtValue, mEkValue, alphaMValue, mEdValue, bValue, hValue, hFValue, hFTValue, bFValue, bFTValue, a1Value, a2Value, aS1True, aS2True, loadChar, fCk, rHValue, cementChar, tZeroValue);
                     double result1 = res1.resultsLong();
                     double result1a = res1.resultsLongDeformation();
+                    fiCrawling = res1.fiCrawling;
 
                     Scratch res2 = new Scratch(cNomValue, aSw1Value, aS1Value, resRods1ValueAsymmetric, fCk, rHValue, tZeroValue, cementChar, bValue, bFValue, bFTValue, hValue, hFValue, hFTValue, a1Value, a2Value, aS1True, aS2True, mEkValue, mEkLtValue, loadChar);
                     double result2 = res2.wK();
@@ -1299,6 +1307,7 @@ public class SubController {
 
                     Deflection res1 = new Deflection(lEffValue, mEkLtValue, mEkValue, alphaMValue, mEdValue, bValue, hValue, hFValue, hFTValue, bFValue, bFTValue, a1Value, a2Value, aS1True, aS2True, loadChar, fCk, rHValue, cementChar, tZeroValue);
                     double result1 = res1.resultsShort();
+                    fiCrawling = res1.fiCrawling;
 
                     Scratch res2 = new Scratch(cNomValue, aSw1Value, aS1Value, resRods1ValueAsymmetric, fCk, rHValue, tZeroValue, cementChar, bValue, bFValue, bFTValue, hValue, hFValue, hFTValue, a1Value, a2Value, aS1True, aS2True, mEkValue, mEkLtValue, loadChar);
                     double result2 = res2.wK();
@@ -1633,7 +1642,8 @@ public class SubController {
             PrintPDF.print(fileName, fYk, rHValue, tZeroValue, mEdValue, mEkValue, mEkLtValue, vEdValue, vEdRedValue,
                     nEdValue, cementChar, fCk, res1AsymmetricVar, res2AsymmetricVar, res1trueAsymmetricVar, res2trueAsymmetricVar,
                     resRods1ValueAsymmetric, resRods2ValueAsymmetric, mRd, wResVar, wResVar, fMResVar, fMResVarTheoretical, fCsVarTheoretical, fMPlusCResVarTheoretical, fMPlusCResVarTheoretical,
-                    alphaValue, aS1Value, aS2Value, nSw1Value, nSw2Value, aSw1Value, aSw2Value, s1Value, nSw2RodSValue, vRd, nSw1Value, nSw2Value, aSw1Value, aSw2Value, s1Value, nSw2RodSValue, vRd);
+                    alphaValue, aS1Value, aS2Value, nSw1Value, nSw2Value, aSw1Value, aSw2Value, s1Value, nSw2RodSValue, vRd, nSw1Value, nSw2Value, aSw1Value, aSw2Value, s1Value, nSw2RodSValue, vRd,fiCrawling,bValue,hValue,cNomValue,a1Value,a2Value,bFValue,hFValue,bFTValue,hFTValue,
+                    lEffValue,alphaMValue);
         }
 
     }
