@@ -19,6 +19,7 @@ import java.util.HashMap;
 public class SubController {
 
     public HashMap<String, Double> data;
+    public HashMap<String, String> dataString;
 
     @FXML
     Label res1 = new Label();
@@ -352,7 +353,7 @@ public class SubController {
 
     //list booleans for passing to another controller
 
-    double crossSectionCheck;
+    String crossSectionCheck;
     boolean concreteListCheck;
     boolean loadsCheck;
     boolean cementCheck;
@@ -1072,7 +1073,7 @@ public class SubController {
             resRods2Asymmetric.setText(resRods2ValueAsymmetric + szt);
 
             res1trueAsymmetricVar = roundTwoDigit(Math.pow(aS1Value * 0.5, 2) * Math.PI * resRods1ValueAsymmetric * Math.pow(10, 4));
-            res1trueAsymmetricVar = roundTwoDigit(Math.pow(aS2Value * 0.5, 2) * Math.PI * resRods2ValueAsymmetric * Math.pow(10, 4));
+            res2trueAsymmetricVar = roundTwoDigit(Math.pow(aS2Value * 0.5, 2) * Math.PI * resRods2ValueAsymmetric * Math.pow(10, 4));
 
             res1trueAsymmetric.setText(res1trueAsymmetricVar + cm2);
             res2trueAsymmetric.setText(res2trueAsymmetricVar + cm2);
@@ -1131,14 +1132,16 @@ public class SubController {
 
         //values for checkbox
 
+        dataString = new HashMap<>();
+
         if (choiceBoxDimensions.getValue().toString().equals("Przekrój Teowy")) {
-            crossSectionCheck = 1;
+            crossSectionCheck = "Przekrój Teowy";
 
-            data.put("cSC", crossSectionCheck);
+            dataString.put("cSC", crossSectionCheck);
         } else {
-            crossSectionCheck = 0;
+            crossSectionCheck = "Przekrój Prostokątny";
 
-            data.put("cSC", crossSectionCheck);
+            dataString.put("cSC", crossSectionCheck);
         }
 
 

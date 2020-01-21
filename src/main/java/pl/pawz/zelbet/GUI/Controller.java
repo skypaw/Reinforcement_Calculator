@@ -55,10 +55,15 @@ public class Controller {
             tab2Controller.hFDimension.setText(String.valueOf(tab1Controller.data.get("hf")));
             tab2Controller.hFTDimension.setText(String.valueOf(tab1Controller.data.get("hft")));
 
-            if (!tab1Controller.data.get("cSC").equals(1d)) {
-                tab2Controller.choiceBoxDimensions.setValue("Przekrój Teowy");
-            }else {
-                tab2Controller.choiceBoxDimensions.setValue("Przekrój Prostokątny");
+            if (tab1Controller.choiceBoxDimensions.getValue().equals("Przekrój Prostokątny")){
+                if (!tab2Controller.choiceBoxDimensions.getValue().equals("Przekrój Prostokątny")){
+                    tab2Controller.choiceBoxDimensions.setValue("Przekrój Prostokątny");
+                }
+            }
+            if (tab1Controller.choiceBoxDimensions.getValue().equals("Przekrój Teowy")){
+                if (!tab2Controller.choiceBoxDimensions.getValue().equals("Przekrój Teowy")){
+                    tab2Controller.choiceBoxDimensions.setValue("Przekrój Teowy");
+                }
             }
 
 
