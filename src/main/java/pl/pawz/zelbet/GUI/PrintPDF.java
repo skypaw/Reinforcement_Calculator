@@ -125,9 +125,9 @@ class PrintPDF {
         contentStream.newLine();
         contentStream.showText("      Stal: f_yk = " + fyk + "MPa                 b = " + b+"m");
         contentStream.newLine();
-        contentStream.showText("                                                        b_eff = "+beff+"m, h_f = "+hf+"m");
+        contentStream.showText("                                                           b_eff = "+beff+"m, h_f = "+hf+"m");
         contentStream.newLine();
-        contentStream.showText("PARAMETRY DODATKOWE:                   b_eff,T = "+befft+"m, h_fT = "+hft+"m");
+        contentStream.showText("PARAMETRY DODATKOWE:                b_eff,T = "+befft+"m, h_fT = "+hft+"m");
         contentStream.newLine();
         contentStream.showText("      RH: " + rH + "%                                        a_1 = " + a1 + "m, a_2 = " + a2 + "m, c_nom = " + cNomData+"m");
         contentStream.newLine();
