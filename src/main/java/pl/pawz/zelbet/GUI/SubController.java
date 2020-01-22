@@ -1061,8 +1061,11 @@ public class SubController {
             double[] ress = beam.resultsBendingT();
             System.out.println(Arrays.toString(ress));
 
-            res1Asymmetric.setText(roundTwoDigit(ress[0] * Math.pow(10, 4)) + cm2);
-            res2Asymmetric.setText(roundTwoDigit(ress[1] * Math.pow(10, 4)) + cm2);
+            res1AsymmetricVar = roundTwoDigit(ress[0] * Math.pow(10, 4));
+            res2AsymmetricVar = roundTwoDigit(ress[1] * Math.pow(10, 4));
+
+            res1Asymmetric.setText(res1AsymmetricVar + cm2);
+            res2Asymmetric.setText(res2AsymmetricVar + cm2);
 
             resRods1ValueAsymmetric = reinforcementRods(ress[0], aS1Value);
             resRods2ValueAsymmetric = reinforcementRods(ress[1], aS2Value);
@@ -1282,7 +1285,7 @@ public class SubController {
 
 
                     //theoretical
-                    double aS1Theoretical = res1AsymmetricVar * Math.pow(10, -4);
+                    double aS1Theoretical = res1AsymmetricVar * Math.pow(10, -4);  //todo res 1 asymmetric var tbeam 
                     double aS2Theoretical = res2AsymmetricVar * Math.pow(10, -4);
 
                     double resRods1ValueTheoretical = res1AsymmetricVar * Math.pow(10, -4) / (Math.pow(aS1Value / 2, 2) * Math.PI);
