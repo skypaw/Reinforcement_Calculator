@@ -4,7 +4,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-import javafx.event.ActionEvent;
 import pl.pawz.zelbet.Diagnostic.DiagnosticBendingBeamAndT;
 import pl.pawz.zelbet.Diagnostic.DiagnosticCompression;
 import pl.pawz.zelbet.Diagnostic.DiagnosticExtension;
@@ -736,8 +735,14 @@ public class SubController {
         vEdRed.setText(String.valueOf(vEd.getText()));
     }
 
-    public void mEkText() {
-        mEk.setText(String.valueOf(Double.parseDouble(mEdLoadsTxt.getText()) * 0.7));
+    public void mEkLtText() {
+
+
+        if (mEk.getText().isEmpty()){
+            mEkLt.setText(String.valueOf(0));
+        }else {
+            mEkLt.setText(String.valueOf(roundTwoDigit(Double.parseDouble(mEk.getText() )* 0.85)));
+        }
     }
 
     private void slsValues() {
@@ -1056,8 +1061,11 @@ public class SubController {
             double[] ress = beam.resultsBendingT();
             System.out.println(Arrays.toString(ress));
 
-            res1Asymmetric.setText(roundTwoDigit(ress[0] * Math.pow(10, 4)) + cm2);
-            res2Asymmetric.setText(roundTwoDigit(ress[1] * Math.pow(10, 4)) + cm2);
+            res1AsymmetricVar = roundTwoDigit(ress[0] * Math.pow(10, 4));
+            res2AsymmetricVar = roundTwoDigit(ress[1] * Math.pow(10, 4));
+
+            res1Asymmetric.setText(res1AsymmetricVar + cm2);
+            res2Asymmetric.setText(res2AsymmetricVar + cm2);
 
             resRods1ValueAsymmetric = reinforcementRods(ress[0], aS1Value);
             resRods2ValueAsymmetric = reinforcementRods(ress[1], aS2Value);
@@ -1277,7 +1285,7 @@ public class SubController {
 
 
                     //theoretical
-                    double aS1Theoretical = res1AsymmetricVar * Math.pow(10, -4);
+                    double aS1Theoretical = res1AsymmetricVar * Math.pow(10, -4);  //todo res 1 asymmetric var tbeam 
                     double aS2Theoretical = res2AsymmetricVar * Math.pow(10, -4);
 
                     double resRods1ValueTheoretical = res1AsymmetricVar * Math.pow(10, -4) / (Math.pow(aS1Value / 2, 2) * Math.PI);

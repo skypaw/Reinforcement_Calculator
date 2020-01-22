@@ -182,7 +182,7 @@
                 <Label text="M_Ek" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
                 <TextField GridPane.columnIndex="1" GridPane.rowIndex="0" promptText="[kNm]"
                            prefWidth="70"
-                           fx:id="mEk"/>
+                           fx:id="mEk" onKeyReleased="#mEkLtText"/>
 
                 <Label text="M_ek,lt" GridPane.columnIndex="2" GridPane.rowIndex="0"/>
                 <TextField GridPane.columnIndex="3" GridPane.rowIndex="0" promptText="[kNm]"
