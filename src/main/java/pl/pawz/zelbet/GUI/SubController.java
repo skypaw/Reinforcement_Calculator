@@ -811,6 +811,7 @@ public class SubController {
                 double ress1 = beam1.resultDiagnostic();
 
                 mRd = ress1;
+                nRdValue = 0;
 
 
             } else {
@@ -857,6 +858,7 @@ public class SubController {
                     DiagnosticCompression beam4 = new DiagnosticCompression(nEdValue, mEdValue, fCk, fYk, bValue, hValue, a1Value, a2Value, res1trueAsymmetricVar * Math.pow(10, -4), res2trueAsymmetricVar * Math.pow(10, -4));
                     double[] results4 = beam4.resultsDiagnosticCompression();
                     mRd = results4[1];
+                    nRdValue = results4[0];
 
 
                 } else {
@@ -901,6 +903,7 @@ public class SubController {
                     DiagnosticExtension beam7 = new DiagnosticExtension(-nEdValue, mEdValue, fCk, fYk, bValue, hValue, a1Value, a2Value, res1trueAsymmetricVar * Math.pow(10, -4), res2trueAsymmetricVar * Math.pow(10, -4));
                     double[] results7 = beam7.resultsDiagnosticExtension();
                     mRd = results7[1];
+                    nRdValue = results7[0];
 
                 }
             }
@@ -1090,6 +1093,13 @@ public class SubController {
             res2true.setText("0" + cm2);
 
             toPdfButton.setDisable(false);
+
+
+            DiagnosticBendingBeamAndT beam1 = new DiagnosticBendingBeamAndT(fCk, fYk, bValue, bFValue, hValue, hFValue, a1Value, a2Value, res1trueAsymmetricVar * Math.pow(10, -4), res2trueAsymmetricVar * Math.pow(10, -4));
+            double ress1 = beam1.resultDiagnostic();
+
+            nRdValue= 0;
+            mRd = ress1;
 
 
         }
@@ -1533,6 +1543,8 @@ public class SubController {
 
             res2.setText(0 + kN);
             res2true.setText(0 + kN);
+
+            nRdValue = 0;
         }
 
 
