@@ -339,6 +339,7 @@ public class SubController {
     private double fMPlusCResVarTheoretical;
     private double fCsVarTheoretical;
     private double fiCrawling;
+    private double nRdValue;
 
 
     private String mm = " mm";
@@ -1407,12 +1408,13 @@ public class SubController {
                 double ress = beam.resultDiagnostic();
                 System.out.println(ress);
 
-
                 res1.setText(roundTwoDigit(ress * Math.pow(10, 3)) + kNm);
                 res1true.setText(roundTwoDigit(mEdValue * Math.pow(10, 3)) + kNm);
 
                 res2.setText(0 + kN);
                 res2true.setText(0 + kN);
+
+                nRdValue = 0;
 
 
             } else {
@@ -1425,6 +1427,8 @@ public class SubController {
                     res1true.setText(roundTwoDigit(mEdValue * Math.pow(10, 3)) + kNm);
                     res2true.setText(roundTwoDigit(nEdValue * Math.pow(10, 3)) + kN);
 
+                    nRdValue = roundTwoDigit(results1[0] * Math.pow(10, 3));
+
                 } else {
                     DiagnosticExtension beam1 = new DiagnosticExtension(-nEdValue, mEdValue, fCk, fYk, bValue, hValue, a1Value, a2Value, aS1ValueDiagnostic, aS2ValueDiagnostic);
                     double[] results1 = beam1.resultsDiagnosticExtension();
@@ -1433,6 +1437,8 @@ public class SubController {
 
                     res1true.setText(roundTwoDigit(mEdValue * Math.pow(10, 3)) + kNm);
                     res2true.setText(roundTwoDigit(nEdValue * Math.pow(10, 3)) + kN);
+
+                    nRdValue = roundTwoDigit(results1[0] * Math.pow(10, 3));
 
                 }
             }
@@ -1651,7 +1657,7 @@ public class SubController {
                     nEdValue, cementChar, fCk, res1AsymmetricVar, res2AsymmetricVar, res1trueAsymmetricVar, res2trueAsymmetricVar,
                     resRods1ValueAsymmetric, resRods2ValueAsymmetric, mRd, wResVar, wResVar, fMResVar, fMResVarTheoretical, fCsVarTheoretical, fMPlusCResVarTheoretical, fMPlusCResVarTheoretical,
                     alphaValue, aS1Value, aS2Value, nSw1Value, nSw2Value, aSw1Value, aSw2Value, s1Value, nSw2RodSValue, vRd, nSw1Value, nSw2Value, aSw1Value, aSw2Value, s1Value, nSw2RodSValue, vRd,fiCrawling,bValue,hValue,cNomValue,a1Value,a2Value,bFValue,hFValue,bFTValue,hFTValue,
-                    lEffValue,alphaMValue);
+                    lEffValue,alphaMValue,nRdValue, ctgThetaValue);
         }
 
     }
