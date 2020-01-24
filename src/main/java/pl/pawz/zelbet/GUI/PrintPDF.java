@@ -4,6 +4,7 @@ import be.quodlibet.boxable.BaseTable;
 import be.quodlibet.boxable.Cell;
 import be.quodlibet.boxable.HorizontalAlignment;
 import be.quodlibet.boxable.Row;
+import be.quodlibet.boxable.line.LineStyle;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
@@ -21,7 +22,7 @@ class PrintPDF {
                       double fi1Data, double fi2Data, double nSw1, double nSw2, double fiw1Data, double fiw2Data, double s1, double s2,
                       double vRdData, double nSw1Real, double nSw2Real, double fiw1DataReal, double fiw2DataReal, double s1Real,
                       double s2Real, double vRdRealData, double fiCrawlingData, double bData, double hData, double cNomData, double a1Data, double a2Data,
-                      double bEffData,double hFData, double bEffTData, double hFTData, double lEff, double alphaMData) throws IOException {
+                      double bEffData, double hFData, double bEffTData, double hFTData, double lEff, double alphaMData, double nRd, double cotTheta) throws IOException {
 
         String namePdf = name;
 
@@ -65,17 +66,21 @@ class PrintPDF {
         double a1 = roundThreeDigit(a1Data);
         double a2 = roundThreeDigit(a2Data);
 
-        String valueRods1 = nS1 + " fi " + fi1Data * Math.pow(10, 3);
-        String valueRods2 = nS2 + " fi " + fi2Data * Math.pow(10, 3);
+        String valueRods1 = (int) nS1 + " fi " + (int) (fi1Data * Math.pow(10, 3));
+        String valueRods2 = (int) nS2 + " fi " + (int) (fi2Data * Math.pow(10, 3));
 
         String rods = "Prety odgiete alpha = " + alpha;
 
-        String valueRodsShearing1 = nSw1 + " fi " + fiw1Data * Math.pow(10, 3);
-        String valueRodsShearing2 = nSw2 + " fi " + fiw2Data * Math.pow(10, 3);
+        String valueRodsShearing1 = (int) nSw1 + " fi " + (int) (fiw1Data * Math.pow(10, 3));
+        String valueRodsShearing2 = (int) nSw2 + " fi " + (int) (fiw2Data * Math.pow(10, 3));
 
-        String valueRodsShearing1Real = nSw1Real + " fi " + fiw1DataReal * Math.pow(10, 3);
-        String valueRodsShearing2Real = nSw2Real + " fi " + fiw2DataReal * Math.pow(10, 3);
+        String valueRodsShearing1Real = (int) nSw1Real + " fi " + (int) (fiw1DataReal * Math.pow(10, 3));
+        String valueRodsShearing2Real = (int) nSw2Real + " fi " + (int) (fiw2DataReal * Math.pow(10, 3));
 
+        String cotThetaString = "cot_Theta = " + cotTheta;
+
+        String mEdString = mEd + " / ";
+        String mRdString = mRd + " / ";
 
         //Creating PDF document object
         PDDocument document = new PDDocument();
@@ -119,19 +124,18 @@ class PrintPDF {
         contentStream.newLine();
         contentStream.newLine();
         contentStream.newLine();
-        contentStream.showText("PARAMETRY MATERIALOWE:      PARAMETRY GEOMETRYCZNE:");
+        contentStream.showText("PARAMETRY MATERIALOWE:");
         contentStream.newLine();
-        contentStream.showText("      Beton: f_ck " + concrete + "(cement: " + cement + ")        h = " + h+"m");
+        contentStream.showText("      Beton: f_ck " + concrete + "(cement: " + cement + ")");
         contentStream.newLine();
-        contentStream.showText("      Stal: f_yk = " + fyk + "MPa                 b = " + b+"m");
+        contentStream.showText("      Stal: f_yk = " + fyk + "MPa");
         contentStream.newLine();
-        contentStream.showText("                                                           b_eff = "+beff+"m, h_f = "+hf+"m");
         contentStream.newLine();
-        contentStream.showText("PARAMETRY DODATKOWE:                b_eff,T = "+befft+"m, h_fT = "+hft+"m");
+        contentStream.showText("PARAMETRY DODATKOWE:");
         contentStream.newLine();
-        contentStream.showText("      RH: " + rH + "%                                        a_1 = " + a1 + "m, a_2 = " + a2 + "m, c_nom = " + cNomData+"m");
+        contentStream.showText("      RH: " + rH + "%");
         contentStream.newLine();
-        contentStream.showText("      Wiek t_0: " + days + "dni                              l_eff = "+lEff+"m, alpha_m = "+alphaM);
+        contentStream.showText("      Wiek t_0: " + days + "dni");
         contentStream.newLine();
         contentStream.showText("      Fi(inf,t_0) = " + fiCrawling);
 
@@ -152,16 +156,32 @@ class PrintPDF {
         contentStream.newLine();
         contentStream.newLine();
 
+
         contentStream.newLine();
         contentStream.showText("M_Ed: " + mEd + " kNm");
         contentStream.newLine();
         contentStream.showText("      M_Ek: " + mEk + " kNm");
         contentStream.newLine();
-        contentStream.showText("      M_Ek: " + mEkLt + " kNm");
+        contentStream.showText("      M_Ek,lt: " + mEkLt + " kNm");
         contentStream.newLine();
         contentStream.showText("N_Ed: " + nEd + " kN");
         contentStream.newLine();
         contentStream.showText("V_Ed: " + vEd + " kN / V_Ed,red = " + vEdRed + " kN");
+
+        contentStream.newLineAtOffset(170, 180);
+        contentStream.showText("PARAMETRY GEOMETRYCZNE:");
+        contentStream.newLine();
+        contentStream.showText("    h = " + h + "m");
+        contentStream.newLine();
+        contentStream.showText("    b = " + b + "m");
+        contentStream.newLine();
+        contentStream.showText("        b_eff = " + beff + "m, h_f = " + hf + "m");
+        contentStream.newLine();
+        contentStream.showText("        b_eff,T = " + befft + "m, h_fT = " + hft + "m");
+        contentStream.newLine();
+        contentStream.showText("    a_1 = " + a1 + "m, a_2 = " + a2 + "m, c_nom = " + cNomData + "m");
+        contentStream.newLine();
+        contentStream.showText("    l_eff = " + lEff + "m, alpha_m = " + alphaM);
 
 
         float yPositionRes = 500;
@@ -181,29 +201,50 @@ class PrintPDF {
         textCell(headerRowResults.createCell(100, "Stan graniczny nosnosci SGN"));
         tableResults.addHeaderRow(headerRowResults);
 
-
+        Row<PDPage> rowDesc1 = tableResults.createRow(10);
+        Row<PDPage> rowDesc2 = tableResults.createRow(10);
+        Row<PDPage> rowDesc3 = tableResults.createRow(10);
         Row<PDPage> row = tableResults.createRow(12);
         Row<PDPage> row1 = tableResults.createRow(12);
 
+        rowDesc1.createCell(25, "").setBottomBorderStyle(LineStyle.produceDotted(Color.WHITE, 0));
+        textCell(rowDesc1.createCell(30, "Zbrojenie obliczeniowe"));
+        textCell(rowDesc1.createCell(45, "Zbrojenie zastosowane"));
+
+        middleCell(rowDesc2.createCell(25, "Zbrojenie"));
+        textCell(rowDesc2.createCell(10, "Powierzchnia"));
+        textCell(rowDesc2.createCell(20, "Nosnosc M_Rd/N_Rd"));
+        textCell(rowDesc2.createCell(15, "Liczba/srednica"));
+        textCell(rowDesc2.createCell(10, "Powierzchnia"));
+        textCell(rowDesc2.createCell(20, "Nosnosc M_Rd/N_Rd"));
+
+        rowDesc3.createCell(25, "").setTopBorderStyle(LineStyle.produceDotted(Color.WHITE, 0));
+        textCell(rowDesc3.createCell(10, "[cm^2]"));
+        textCell(rowDesc3.createCell(20, "[kNm]/[kN]"));
+        textCell(rowDesc3.createCell(15, "[szt.]/[mm]"));
+        textCell(rowDesc3.createCell(10, "[cm^2]"));
+        textCell(rowDesc3.createCell(20, "[kNm]/[kN]"));
+
+
         row.createCell(25, "Rozciagane A_s1");
-        greenCell(row.createCell(15, String.valueOf(aS1)));
-        greenCell(row.createCell(15, String.valueOf(mEd)));
+        greenCell(row.createCell(10, String.valueOf(aS1)));
+        greenCellWhiteBottom(row.createCell(20, String.valueOf(mEdString)));
         blueCellGrey(row.createCell(15, String.valueOf(valueRods1)));
-        greenCell(row.createCell(15, String.valueOf(aS1Real)));
-        greenCell(row.createCell(15, String.valueOf(mRd)));
+        greenCell(row.createCell(10, String.valueOf(aS1Real)));
+        greenCellWhiteBottom(row.createCell(20, String.valueOf(mRdString)));
 
         row1.createCell(25, "Sciskane A_s2");
-        greenCell(row1.createCell(15, String.valueOf(aS2)));
-        greenCell(row1.createCell(15, String.valueOf(mEd)));
+        greenCell(row1.createCell(10, String.valueOf(aS2)));
+        greenCell(row1.createCell(20, String.valueOf(nEd)));
         blueCellGrey(row1.createCell(15, String.valueOf(valueRods2)));
-        greenCell(row1.createCell(15, String.valueOf(aS2Real)));
-        greenCell(row1.createCell(15, String.valueOf(mRd)));
+        greenCell(row1.createCell(10, String.valueOf(aS2Real)));
+        greenCell(row1.createCell(20, String.valueOf(nRd)));
 
 
         // Table for Shearing
 
 
-        float yPositionResultsV = 390;
+        float yPositionResultsV = 340;
 
         BaseTable tableResultsV = new BaseTable(yPositionResultsV, yStartNewPage, bottomMargin, tableWidth, margin, document, blankPage, true, drawContent);
 
@@ -211,31 +252,54 @@ class PrintPDF {
         textCell(headerRowResultsV.createCell(100, "Stan graniczny nosnosci - scinanie"));
         tableResultsV.addHeaderRow(headerRowResultsV);
 
-
+        Row<PDPage> VDesc1 = tableResultsV.createRow(10);
+        Row<PDPage> VDesc2 = tableResultsV.createRow(10);
+        Row<PDPage> VDesc3 = tableResultsV.createRow(10);
         Row<PDPage> rowV = tableResultsV.createRow(12);
         Row<PDPage> rowV1 = tableResultsV.createRow(12);
+
+        VDesc1.createCell(30, "").setBottomBorderStyle(LineStyle.produceDotted(Color.WHITE, 0));
+        textCell(VDesc1.createCell(35, "Zbrojenie obliczeniowe"));
+        textCell(VDesc1.createCell(35, "Zbrojenie zastosowane"));
+
+        middleCell(VDesc2.createCell(30, "Zbrojenie"));
+        textCell(VDesc2.createCell(10, "Srednica"));
+        textCell(VDesc2.createCell(10, "Rozstaw"));
+        textCell(VDesc2.createCell(15, "Nosnosc V_Rd"));
+        textCell(VDesc2.createCell(10, "Srednica"));
+        textCell(VDesc2.createCell(10, "Rozstaw"));
+        textCell(VDesc2.createCell(15, "Nosnosc V_Rd"));
+
+        cotTheta(VDesc3.createCell(30, cotThetaString));
+        textCell(VDesc3.createCell(10, "[szt.]/[mm]"));
+        textCell(VDesc3.createCell(10, "[m]"));
+        textCell(VDesc3.createCell(15, "[kN]"));
+        textCell(VDesc3.createCell(10, "[szt.]/[mm]"));
+        textCell(VDesc3.createCell(10, "[m]"));
+        textCell(VDesc3.createCell(15, "[kN]"));
+
 
         rowV.createCell(30, "Strzemiona");
         blueCell(rowV.createCell(10, String.valueOf(valueRodsShearing1)));
         greenCell(rowV.createCell(10, String.valueOf(s1)));
-        greenCell(rowV.createCell(15, String.valueOf(vRd)));
+        greenCellWhiteBottom(rowV.createCell(15, String.valueOf(vRd)));
         greenCellGrey(rowV.createCell(10, String.valueOf(valueRodsShearing1Real)));
         blueCellGrey(rowV.createCell(10, String.valueOf(s1Real)));
-        greenCell(rowV.createCell(15, String.valueOf(vRdReal)));
+        greenCellWhiteBottom(rowV.createCell(15, String.valueOf(vRdReal)));
 
         rowV1.createCell(30, rods);
         blueCell(rowV1.createCell(10, String.valueOf(valueRodsShearing2)));
         blueCell(rowV1.createCell(10, String.valueOf(s2)));
-        greenCell(rowV1.createCell(15, String.valueOf(vRd)));
+        greenCell(rowV1.createCell(15, String.valueOf("")));
         blueCellGrey(rowV1.createCell(10, String.valueOf(valueRodsShearing2Real)));
         blueCellGrey(rowV1.createCell(10, String.valueOf(s2Real)));
-        greenCell(rowV1.createCell(15, String.valueOf(vEdRedData)));
+        greenCell(rowV1.createCell(15, String.valueOf("")));
 
 
         //Table for SLS
 
 
-        float yPositionResultsSLS = 310;
+        float yPositionResultsSLS = 210;
 
         BaseTable tableResultsSLS = new BaseTable(yPositionResultsSLS, yStartNewPage, bottomMargin, tableWidth, margin, document, blankPage, true, drawContent);
 
@@ -339,4 +403,22 @@ class PrintPDF {
     private static double roundThreeDigit(double toRound) {
         return Math.round(toRound * 1000.00) / 1000D;
     }
+
+    private static void middleCell(Cell cell) {
+        cell.setBottomBorderStyle(LineStyle.produceDotted(Color.WHITE, 0));
+        cell.setTopBorderStyle(LineStyle.produceDotted(Color.WHITE, 0));
+        cell.setAlign(HorizontalAlignment.CENTER);
+    }
+
+
+    private static void cotTheta(Cell cell) {
+        cell.setTopBorderStyle(LineStyle.produceDotted(Color.WHITE, 0));
+        cell.setAlign(HorizontalAlignment.CENTER);
+    }
+
+    private static void greenCellWhiteBottom(Cell cell) {
+        greenCell(cell);
+        cell.setBottomBorderStyle(LineStyle.produceDotted(Color.WHITE, 0));
+    }
+
 }
