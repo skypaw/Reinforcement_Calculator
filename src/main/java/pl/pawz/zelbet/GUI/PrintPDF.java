@@ -79,6 +79,8 @@ class PrintPDF {
 
         String cotThetaString = "cot_Theta = " + cotTheta;
 
+        String mEdString = mEd + " / ";
+        String mRdString = mRd + " / ";
 
         //Creating PDF document object
         PDDocument document = new PDDocument();
@@ -210,33 +212,33 @@ class PrintPDF {
         textCell(rowDesc1.createCell(45, "Zbrojenie zastosowane"));
 
         middleCell(rowDesc2.createCell(25, "Zbrojenie"));
-        textCell(rowDesc2.createCell(15, "Powierzchnia"));
-        textCell(rowDesc2.createCell(15, "Nosnosc M_Rd"));
+        textCell(rowDesc2.createCell(10, "Powierzchnia"));
+        textCell(rowDesc2.createCell(20, "Nosnosc M_Rd/N_Rd"));
         textCell(rowDesc2.createCell(15, "Liczba/srednica"));
-        textCell(rowDesc2.createCell(15, "Powierzchnia"));
-        textCell(rowDesc2.createCell(15, "Nosnosc M_Rd"));
+        textCell(rowDesc2.createCell(10, "Powierzchnia"));
+        textCell(rowDesc2.createCell(20, "Nosnosc M_Rd/N_Rd"));
 
         rowDesc3.createCell(25, "").setTopBorderStyle(LineStyle.produceDotted(Color.WHITE, 0));
-        textCell(rowDesc3.createCell(15, "[cm^2]"));
-        textCell(rowDesc3.createCell(15, "[kNm]"));
+        textCell(rowDesc3.createCell(10, "[cm^2]"));
+        textCell(rowDesc3.createCell(20, "[kNm]/[kN]"));
         textCell(rowDesc3.createCell(15, "[szt.]/[mm]"));
-        textCell(rowDesc3.createCell(15, "[cm^2]"));
-        textCell(rowDesc3.createCell(15, "[kNm]"));
+        textCell(rowDesc3.createCell(10, "[cm^2]"));
+        textCell(rowDesc3.createCell(20, "[kNm]/[kN]"));
 
 
         row.createCell(25, "Rozciagane A_s1");
-        greenCell(row.createCell(15, String.valueOf(aS1)));
-        greenCell(row.createCell(15, String.valueOf(mEd)));
+        greenCell(row.createCell(10, String.valueOf(aS1)));
+        greenCellWhiteBottom(row.createCell(20, String.valueOf(mEdString)));
         blueCellGrey(row.createCell(15, String.valueOf(valueRods1)));
-        greenCell(row.createCell(15, String.valueOf(aS1Real)));
-        greenCell(row.createCell(15, String.valueOf(mRd)));
+        greenCell(row.createCell(10, String.valueOf(aS1Real)));
+        greenCellWhiteBottom(row.createCell(20, String.valueOf(mRdString)));
 
         row1.createCell(25, "Sciskane A_s2");
-        greenCell(row1.createCell(15, String.valueOf(aS2)));
-        greenCell(row1.createCell(15, String.valueOf(nEd)));
+        greenCell(row1.createCell(10, String.valueOf(aS2)));
+        greenCell(row1.createCell(20, String.valueOf(nEd)));
         blueCellGrey(row1.createCell(15, String.valueOf(valueRods2)));
-        greenCell(row1.createCell(15, String.valueOf(aS2Real)));
-        greenCell(row1.createCell(15, String.valueOf(nRd)));
+        greenCell(row1.createCell(10, String.valueOf(aS2Real)));
+        greenCell(row1.createCell(20, String.valueOf(nRd)));
 
 
         // Table for Shearing
@@ -268,7 +270,7 @@ class PrintPDF {
         textCell(VDesc2.createCell(10, "Rozstaw"));
         textCell(VDesc2.createCell(15, "Nosnosc V_Rd"));
 
-        VDesc3.createCell(30, cotThetaString).setTopBorderStyle(LineStyle.produceDotted(Color.WHITE, 0));
+        cotTheta(VDesc3.createCell(30, cotThetaString));
         textCell(VDesc3.createCell(10, "[szt.]/[mm]"));
         textCell(VDesc3.createCell(10, "[m]"));
         textCell(VDesc3.createCell(15, "[kN]"));
@@ -280,18 +282,18 @@ class PrintPDF {
         rowV.createCell(30, "Strzemiona");
         blueCell(rowV.createCell(10, String.valueOf(valueRodsShearing1)));
         greenCell(rowV.createCell(10, String.valueOf(s1)));
-        greenCell(rowV.createCell(15, String.valueOf(vRd)));
+        greenCellWhiteBottom(rowV.createCell(15, String.valueOf(vRd)));
         greenCellGrey(rowV.createCell(10, String.valueOf(valueRodsShearing1Real)));
         blueCellGrey(rowV.createCell(10, String.valueOf(s1Real)));
-        greenCell(rowV.createCell(15, String.valueOf(vRdReal)));
+        greenCellWhiteBottom(rowV.createCell(15, String.valueOf(vRdReal)));
 
         rowV1.createCell(30, rods);
         blueCell(rowV1.createCell(10, String.valueOf(valueRodsShearing2)));
         blueCell(rowV1.createCell(10, String.valueOf(s2)));
-        greenCell(rowV1.createCell(15, String.valueOf(vRd)));
+        greenCell(rowV1.createCell(15, String.valueOf("")));
         blueCellGrey(rowV1.createCell(10, String.valueOf(valueRodsShearing2Real)));
         blueCellGrey(rowV1.createCell(10, String.valueOf(s2Real)));
-        greenCell(rowV1.createCell(15, String.valueOf(vEdRedData)));
+        greenCell(rowV1.createCell(15, String.valueOf("")));
 
 
         //Table for SLS
@@ -406,6 +408,17 @@ class PrintPDF {
         cell.setBottomBorderStyle(LineStyle.produceDotted(Color.WHITE, 0));
         cell.setTopBorderStyle(LineStyle.produceDotted(Color.WHITE, 0));
         cell.setAlign(HorizontalAlignment.CENTER);
+    }
+
+
+    private static void cotTheta(Cell cell) {
+        cell.setTopBorderStyle(LineStyle.produceDotted(Color.WHITE, 0));
+        cell.setAlign(HorizontalAlignment.CENTER);
+    }
+
+    private static void greenCellWhiteBottom(Cell cell) {
+        greenCell(cell);
+        cell.setBottomBorderStyle(LineStyle.produceDotted(Color.WHITE, 0));
     }
 
 }
