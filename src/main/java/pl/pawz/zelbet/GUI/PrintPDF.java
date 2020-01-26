@@ -207,37 +207,37 @@ class PrintPDF {
         Row<PDPage> row = tableResults.createRow(12);
         Row<PDPage> row1 = tableResults.createRow(12);
 
-        rowDesc1.createCell(25, "").setBottomBorderStyle(LineStyle.produceDotted(Color.WHITE, 0));
-        textCell(rowDesc1.createCell(30, "Zbrojenie obliczeniowe"));
+        rowDesc1.createCell(20, "").setBottomBorderStyle(LineStyle.produceDotted(Color.WHITE, 0));
+        textCell(rowDesc1.createCell(35, "Zbrojenie obliczeniowe"));
         textCell(rowDesc1.createCell(45, "Zbrojenie zastosowane"));
 
-        middleCell(rowDesc2.createCell(25, "Zbrojenie"));
-        textCell(rowDesc2.createCell(10, "Powierzchnia"));
+        middleCell(rowDesc2.createCell(20, "Zbrojenie"));
+        textCell(rowDesc2.createCell(15, "Powierzchnia"));
         textCell(rowDesc2.createCell(20, "Nosnosc M_Rd/N_Rd"));
-        textCell(rowDesc2.createCell(15, "Liczba/srednica"));
-        textCell(rowDesc2.createCell(10, "Powierzchnia"));
+        textCell(rowDesc2.createCell(10, "Liczba/srednica"));
+        textCell(rowDesc2.createCell(15, "Powierzchnia"));
         textCell(rowDesc2.createCell(20, "Nosnosc M_Rd/N_Rd"));
 
-        rowDesc3.createCell(25, "").setTopBorderStyle(LineStyle.produceDotted(Color.WHITE, 0));
-        textCell(rowDesc3.createCell(10, "[cm^2]"));
+        rowDesc3.createCell(20, "").setTopBorderStyle(LineStyle.produceDotted(Color.WHITE, 0));
+        textCell(rowDesc3.createCell(15, "[cm^2]"));
         textCell(rowDesc3.createCell(20, "[kNm]/[kN]"));
-        textCell(rowDesc3.createCell(15, "[szt.]/[mm]"));
-        textCell(rowDesc3.createCell(10, "[cm^2]"));
+        textCell(rowDesc3.createCell(10, "[szt.]/[mm]"));
+        textCell(rowDesc3.createCell(15, "[cm^2]"));
         textCell(rowDesc3.createCell(20, "[kNm]/[kN]"));
 
 
-        row.createCell(25, "Rozciagane A_s1");
-        greenCell(row.createCell(10, String.valueOf(aS1)));
+        row.createCell(20, "Rozciagane A_s1");
+        greenCell(row.createCell(15, String.valueOf(aS1)));
         greenCellWhiteBottom(row.createCell(20, String.valueOf(mEdString)));
-        blueCellGrey(row.createCell(15, String.valueOf(valueRods1)));
-        greenCell(row.createCell(10, String.valueOf(aS1Real)));
+        blueCellGrey(row.createCell(10, String.valueOf(valueRods1)));
+        greenCell(row.createCell(15, String.valueOf(aS1Real)));
         greenCellWhiteBottom(row.createCell(20, String.valueOf(mRdString)));
 
-        row1.createCell(25, "Sciskane A_s2");
-        greenCell(row1.createCell(10, String.valueOf(aS2)));
+        row1.createCell(20, "Sciskane A_s2");
+        greenCell(row1.createCell(15, String.valueOf(aS2)));
         greenCell(row1.createCell(20, String.valueOf(nEd)));
-        blueCellGrey(row1.createCell(15, String.valueOf(valueRods2)));
-        greenCell(row1.createCell(10, String.valueOf(aS2Real)));
+        blueCellGrey(row1.createCell(10, String.valueOf(valueRods2)));
+        greenCell(row1.createCell(15, String.valueOf(aS2Real)));
         greenCell(row1.createCell(20, String.valueOf(nRd)));
 
 
