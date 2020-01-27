@@ -317,30 +317,35 @@ public class SubController {
     private char cementChar;
 
 
-    private double resRods1Value;
-    private double resRods2Value;
-    private double resRods1ValueAsymmetric;
-    private double resRods2ValueAsymmetric;
-    private double wResVar;
-    private double fMPlusCResVar;
-    private double fMResVar;
-    private double fCsVar;
+    private double resRods1Value = 0;
+    private double resRods2Value = 0;
+    private double resRods1ValueAsymmetric = 0;
+    private double resRods2ValueAsymmetric = 0;
+    private double wResVar = 0;
+    private double fMPlusCResVar = 0;
+    private double fMResVar = 0;
+    private double fCsVar = 0;
 
-    private double res1AsymmetricVar;
-    private double res2AsymmetricVar;
-    private double resShearing;
-    private double res1trueAsymmetricVar;
-    private double res2trueAsymmetricVar;
-    private double mRd;
-    private double vRd;
+    private double res1AsymmetricVar = 0;
+    private double res2AsymmetricVar = 0;
+    private double resShearing = 0;
+    private double res1trueAsymmetricVar = 0;
+    private double res2trueAsymmetricVar = 0;
+    private double mRd = 0;
+    private double vRd = 0;
 
-    private double wResVarTheoretical;
-    private double fMResVarTheoretical;
-    private double fMPlusCResVarTheoretical;
-    private double fCsVarTheoretical;
-    private double fiCrawling;
-    private double nRdValue;
+    private double wResVarTheoretical = 0;
+    private double fMResVarTheoretical = 0;
+    private double fMPlusCResVarTheoretical = 0;
+    private double fCsVarTheoretical = 0;
+    private double fiCrawling = 0;
+    private double nRdValue = 0;
 
+    private double s1SpacingVar = 0;
+    private double s1SpacingVarTrue = 0;
+
+    private double s2SpacingVar = 0;
+    private double s2SpacingVarTrue = 0;
 
     private String mm = " mm";
     private String cm = " cm";
@@ -859,7 +864,7 @@ public class SubController {
                     DiagnosticCompression beam4 = new DiagnosticCompression(nEdValue, mEdValue, fCk, fYk, bValue, hValue, a1Value, a2Value, res1trueAsymmetricVar * Math.pow(10, -4), res2trueAsymmetricVar * Math.pow(10, -4));
                     double[] results4 = beam4.resultsDiagnosticCompression();
                     mRd = results4[1];
-                    nRdValue = results4[0];
+                    nRdValue = roundThreeDigitShearing(results4[0]*Math.pow(10,3));
 
 
                 } else {
@@ -904,7 +909,7 @@ public class SubController {
                     DiagnosticExtension beam7 = new DiagnosticExtension(-nEdValue, mEdValue, fCk, fYk, bValue, hValue, a1Value, a2Value, res1trueAsymmetricVar * Math.pow(10, -4), res2trueAsymmetricVar * Math.pow(10, -4));
                     double[] results7 = beam7.resultsDiagnosticExtension();
                     mRd = results7[1];
-                    nRdValue = results7[0];
+                    nRdValue = roundThreeDigitShearing(-results7[0]*Math.pow(10,3));
 
                 }
             }
@@ -1041,6 +1046,13 @@ public class SubController {
 
             DiagnosticShearing shearing1 = new DiagnosticShearing(hValue, a1Value, bValue, fCk, nEdValue, aSl, nSw1Value, nSw2Value, aSw1Value, aS2Value, fYk, vEdRedValue, vEdValue, nSw2RodSValue, resShearing, ctgThetaValue, alphaValue);
             vRd = shearing1.resultsShearingDiagnostic();
+
+
+            s1SpacingVar = roundThreeDigitShearingReal(res);
+            s1SpacingVarTrue = roundThreeDigitShearingReal(res);
+
+
+
         } else {
 
             ShearingStirrups shearing = new ShearingStirrups(hValue, bValue, a1Value, fCk, fYk, nEdValue, vEdValue, vEdRedValue, aSl, nSw1Value, aSw1Value, ctgThetaValue); //TODO ASL ISN'T just a dimension! cm^2, not mm
@@ -1055,6 +1067,10 @@ public class SubController {
 
             DiagnosticShearing shearing1 = new DiagnosticShearing(hValue, a1Value, bValue, fCk, nEdValue, aSl, nSw1Value, nSw2Value, aSw1Value, aS2Value, fYk, vEdRedValue, vEdValue, nSw2RodSValue, resShearing, ctgThetaValue, alphaValue);
             vRd = shearing1.resultsShearingDiagnostic();
+
+            s1SpacingVar = roundThreeDigitShearingReal(res);
+            s1SpacingVarTrue = roundThreeDigitShearingReal(res);
+
         }
 
 
@@ -1430,6 +1446,9 @@ public class SubController {
 
                 mRd = ress;
 
+                resRods1ValueAsymmetric = reinforcementRods(aS1ValueDiagnostic, aS1Value);
+                resRods2ValueAsymmetric = reinforcementRods(aS2ValueDiagnostic, aS2Value);
+
 
             } else {
                 if (nEdValue > 0) {
@@ -1448,6 +1467,9 @@ public class SubController {
 
                     mRd = results1[1];
 
+                    resRods1ValueAsymmetric = reinforcementRods(aS1ValueDiagnostic, aS1Value);
+                    resRods2ValueAsymmetric = reinforcementRods(aS2ValueDiagnostic, aS2Value);
+
                 } else {
                     DiagnosticExtension beam1 = new DiagnosticExtension(-nEdValue, mEdValue, fCk, fYk, bValue, hValue, a1Value, a2Value, aS1ValueDiagnostic, aS2ValueDiagnostic);
                     double[] results1 = beam1.resultsDiagnosticExtension();
@@ -1455,7 +1477,7 @@ public class SubController {
                     res2.setText(roundTwoDigit(results1[0] * Math.pow(10, 3)) + kN);
 
                     res1true.setText(roundTwoDigit(mEdValue * Math.pow(10, 3)) + kNm);
-                    res2true.setText(roundTwoDigit(nEdValue * Math.pow(10, 3)) + kN);
+                    res2true.setText(roundTwoDigit(-nEdValue * Math.pow(10, 3)) + kN);
 
                     nRdValue = roundTwoDigit(results1[0] * Math.pow(10, 3));
 
@@ -1463,6 +1485,9 @@ public class SubController {
                     res2trueAsymmetricVar = roundThreeDigitShearing(aS2ValueDiagnostic * Math.pow(10, 4));
 
                     mRd = results1[1];
+
+                    resRods1ValueAsymmetric = reinforcementRods(aS1ValueDiagnostic, aS1Value);
+                    resRods2ValueAsymmetric = reinforcementRods(aS2ValueDiagnostic, aS2Value);
 
                 }
             }
@@ -1546,6 +1571,10 @@ public class SubController {
         vRd = roundThreeDigitShearingReal(res);
         resShearing = roundThreeDigitShearingReal(res);
 
+        s1SpacingVarTrue = 0;
+        s1SpacingVarTrue = s1Value;
+
+
 
         //tBeam
 
@@ -1565,6 +1594,9 @@ public class SubController {
 
             res2.setText(0 + kN);
             res2true.setText(0 + kN);
+
+            resRods1ValueAsymmetric = reinforcementRods(aS1ValueDiagnostic, aS1Value);
+            resRods2ValueAsymmetric = reinforcementRods(aS2ValueDiagnostic, aS2Value);
 
             nRdValue = 0;
 
@@ -1674,7 +1706,6 @@ public class SubController {
                     fMPlusCResTrue.setText(roundThreeDigitShearing(0) + cm);
 
 
-
                 }
             }
 
@@ -1696,8 +1727,8 @@ public class SubController {
         if (!fileName.isEmpty()) {
             PrintPDF.print(fileName, fYk, rHValue, tZeroValue, mEdValue, mEkValue, mEkLtValue, vEdValue, vEdRedValue,
                     nEdValue, cementChar, fCk, res1AsymmetricVar, res2AsymmetricVar, res1trueAsymmetricVar, res2trueAsymmetricVar,
-                    resRods1ValueAsymmetric, resRods2ValueAsymmetric, mRd, wResVarTheoretical, wResVar, fMResVarTheoretical, fMResVar,fCsVarTheoretical,  fMPlusCResVarTheoretical, fCsVar,fMPlusCResVar,
-                    alphaValue, aS1Value, aS2Value, nSw1Value, nSw2Value, aSw1Value, aSw2Value, s1Value, nSw2RodSValue, vRd, nSw1Value, nSw2Value, aSw1Value, aSw2Value, s1Value, nSw2RodSValue, vRd, fiCrawling, bValue, hValue, cNomValue, a1Value, a2Value, bFValue, hFValue, bFTValue, hFTValue,
+                    resRods1ValueAsymmetric, resRods2ValueAsymmetric, mRd, wResVarTheoretical, wResVar, fMResVarTheoretical, fMResVar, fCsVarTheoretical, fMPlusCResVarTheoretical, fCsVar, fMPlusCResVar,
+                    alphaValue, aS1Value, aS2Value, nSw1Value, nSw2Value, aSw1Value, aSw2Value, s1SpacingVar, nSw2RodSValue, vEdValue, nSw1Value, nSw2Value, aSw1Value, aSw2Value, s1SpacingVarTrue, nSw2RodSValue, vRd, fiCrawling, bValue, hValue, cNomValue, a1Value, a2Value, bFValue, hFValue, bFTValue, hFTValue,
                     lEffValue, alphaMValue, nRdValue, ctgThetaValue);
         }
 

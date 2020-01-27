@@ -43,21 +43,21 @@ public class DiagnosticCompression {
         this.etaConcrete = BasicValues.etaConcreteValue(fCk);
         this.fYd = BasicValues.fYdValue(fYk);
         this.E_S = BasicValues.steelE();
-        this.dDimension = BasicValues.dValue(hDimension,a1);
+        this.dDimension = BasicValues.dValue(hDimension, a1);
         this.bDimension = bDimension;
         this.hDimension = hDimension;
         this.a1 = a1;
         this.a2 = a2;
 
-        this.xLim = BasicValuesPillars.xLimVar(epsilonCu3,hDimension,a1,fYd,E_S);
-        this.xMinusMinYd =BasicValuesPillars.xMinMinusYdVar(epsilonCu3,a2,fYd,E_S);
-        this.xMinYd = BasicValuesPillars.xMinYdVar(epsilonCu3,a2,fYd,E_S);
-        this.x0 = BasicValuesPillars.x0Var(epsilonCu3,epsilonC3,hDimension);
-        this.xMaxYd = BasicValuesPillars.xYdMaxVar(epsilonCu3,epsilonC3,fYd,E_S,hDimension,a2);
+        this.xLim = BasicValuesPillars.xLimVar(epsilonCu3, hDimension, a1, fYd, E_S);
+        this.xMinusMinYd = BasicValuesPillars.xMinMinusYdVar(epsilonCu3, a2, fYd, E_S);
+        this.xMinYd = BasicValuesPillars.xMinYdVar(epsilonCu3, a2, fYd, E_S);
+        this.x0 = BasicValuesPillars.x0Var(epsilonCu3, epsilonC3, hDimension);
+        this.xMaxYd = BasicValuesPillars.xYdMaxVar(epsilonCu3, epsilonC3, fYd, E_S, hDimension, a2);
         this.aS1 = aS1;
         this.aS2 = aS2;
 
-        e = BasicValuesPillars.eccentricityCompression(mEd,nEd,hDimension,a1,a2)[2];
+        e = BasicValuesPillars.eccentricityCompression(mEd, nEd, hDimension, a1, a2)[2];
 
         double eMin = (epsilonC3 * E_S * (aS2 * (0.5 * hDimension - a2) - aS1 * (0.5 * hDimension - a1))) / (etaConcrete * fCd * bDimension * hDimension + epsilonC3 * E_S * (aS1 + aS2));
 
@@ -67,8 +67,8 @@ public class DiagnosticCompression {
         }
 
 
-        eS1 = BasicValuesPillars.eccentricityCompression(mEd,nEd,hDimension,a1,a2)[0];
-        eS2 = BasicValuesPillars.eccentricityCompression(mEd,nEd,hDimension,a1,a2)[1];
+        eS1 = BasicValuesPillars.eccentricityCompression(mEd, nEd, hDimension, a1, a2)[0];
+        eS2 = BasicValuesPillars.eccentricityCompression(mEd, nEd, hDimension, a1, a2)[1];
     }
 
     private void xVar() {
@@ -153,7 +153,7 @@ public class DiagnosticCompression {
                     sigmaSmallEccentricity();
                 }
                 sigmaSmallEccentricity();
-            }else{
+            } else {
                 sigmaGreatEccentricity();
             }
 
@@ -166,6 +166,8 @@ public class DiagnosticCompression {
 
         double nRd = etaConcrete * fCd * bDimension * lambdaConcrete * x - sigmaS1 * aS1 + sigmaS2 * aS2;
         double mRd = etaConcrete * fCd * bDimension * lambdaConcrete * x * (dDimension - 0.5 * lambdaConcrete * x) + sigmaS2 * aS2 * (dDimension - a2) - nEd * (0.5 * hDimension - a1);
+
+        if (mRd < 0) mRd = 0;
 
         return new double[]{nRd, mRd};
     }
