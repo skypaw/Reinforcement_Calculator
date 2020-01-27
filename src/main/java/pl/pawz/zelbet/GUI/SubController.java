@@ -782,135 +782,277 @@ public class SubController {
         String szt = " szt.";
         if (!checkBoxLoads.isSelected() && choiceBoxDimensions.getValue().toString().equals("Przekrój Prostokątny")) {
             if (nEdValue == 0) {
-                BendingBeamRectangle beam = new BendingBeamRectangle(mEdValue, fCk, fYk, hValue, bValue, a1Value, a2Value);
-                double[] ress = beam.resultsBendingBeamRectangle();
-                System.out.println(Arrays.toString(ress));
 
-                res1AsymmetricVar = roundTwoDigit(ress[0] * Math.pow(10, 4));
-                res2AsymmetricVar = roundTwoDigit(ress[1] * Math.pow(10, 4));
+                if (mEdValue < 0) {
+                    BendingBeamRectangle beam = new BendingBeamRectangle(-mEdValue, fCk, fYk, hValue, bValue, a1Value, a2Value);
+                    double[] ress = beam.resultsBendingBeamRectangle();
+                    System.out.println(Arrays.toString(ress));
 
-                res1Asymmetric.setText(res1AsymmetricVar + cm2);
-                res2Asymmetric.setText(res2AsymmetricVar + cm2);
+                    res1AsymmetricVar = roundTwoDigit(ress[1] * Math.pow(10, 4));
+                    res2AsymmetricVar = roundTwoDigit(ress[0] * Math.pow(10, 4));
 
-                resRods1ValueAsymmetric = reinforcementRods(ress[0], aS1Value);
-                resRods2ValueAsymmetric = reinforcementRods(ress[1], aS2Value);
+                    if (mEdValue < 0) {
+                        res1AsymmetricVar = res2AsymmetricVar;
+                        res2AsymmetricVar = res1AsymmetricVar;
+                    }
 
-                resRods1Asymmetric.setText(String.valueOf(resRods1ValueAsymmetric));
-                resRods2Asymmetric.setText(String.valueOf(resRods2ValueAsymmetric));
+                    res1Asymmetric.setText(res1AsymmetricVar + cm2);
+                    res2Asymmetric.setText(res2AsymmetricVar + cm2);
 
-                res1trueAsymmetricVar = roundTwoDigit(Math.pow(aS1Value * 0.5, 2) * Math.PI * resRods1ValueAsymmetric * Math.pow(10, 4));
-                res2trueAsymmetricVar = roundTwoDigit(Math.pow(aS2Value * 0.5, 2) * Math.PI * resRods2ValueAsymmetric * Math.pow(10, 4));
+                    resRods1ValueAsymmetric = reinforcementRods(ress[1], aS1Value);
+                    resRods2ValueAsymmetric = reinforcementRods(ress[0], aS2Value);
 
-                res1trueAsymmetric.setText(res1trueAsymmetricVar + cm2);
-                res2trueAsymmetric.setText(res2trueAsymmetricVar + cm2);
+                    resRods1Asymmetric.setText(String.valueOf(resRods1ValueAsymmetric));
+                    resRods2Asymmetric.setText(String.valueOf(resRods2ValueAsymmetric));
 
-                res1.setText("0" + cm2);
-                res2.setText("0" + cm2);
+                    res1trueAsymmetricVar = roundTwoDigit(Math.pow(aS1Value * 0.5, 2) * Math.PI * resRods1ValueAsymmetric * Math.pow(10, 4));
+                    res2trueAsymmetricVar = roundTwoDigit(Math.pow(aS2Value * 0.5, 2) * Math.PI * resRods2ValueAsymmetric * Math.pow(10, 4));
 
-                resRods1.setText("0" + szt);
-                resRods2.setText("0" + szt);
+                    res1trueAsymmetric.setText(res1trueAsymmetricVar + cm2);
+                    res2trueAsymmetric.setText(res2trueAsymmetricVar + cm2);
 
-                res1true.setText("0" + cm2);
-                res2true.setText("0" + cm2);
+                    res1.setText("0" + cm2);
+                    res2.setText("0" + cm2);
 
-                DiagnosticBendingBeamAndT beam1 = new DiagnosticBendingBeamAndT(fCk, fYk, bValue, bValue, hValue, 0, a1Value, a2Value, res1trueAsymmetricVar * Math.pow(10, -4), res2AsymmetricVar * Math.pow(10, -4));
-                double ress1 = beam1.resultDiagnostic();
+                    resRods1.setText("0" + szt);
+                    resRods2.setText("0" + szt);
 
-                mRd = ress1;
-                nRdValue = 0;
+                    res1true.setText("0" + cm2);
+                    res2true.setText("0" + cm2);
 
+                    DiagnosticBendingBeamAndT beam1 = new DiagnosticBendingBeamAndT(fCk, fYk, bValue, bValue, hValue, 0, a1Value, a2Value, res1trueAsymmetricVar * Math.pow(10, -4), res2AsymmetricVar * Math.pow(10, -4));
+                    double ress1 = beam1.resultDiagnostic();
+
+                    mRd = -ress1;
+                    nRdValue = 0;
+                } else {
+
+                    BendingBeamRectangle beam = new BendingBeamRectangle(mEdValue, fCk, fYk, hValue, bValue, a1Value, a2Value);
+                    double[] ress = beam.resultsBendingBeamRectangle();
+                    System.out.println(Arrays.toString(ress));
+
+                    res1AsymmetricVar = roundTwoDigit(ress[0] * Math.pow(10, 4));
+                    res2AsymmetricVar = roundTwoDigit(ress[1] * Math.pow(10, 4));
+
+                    if (mEdValue < 0) {
+                        res1AsymmetricVar = res2AsymmetricVar;
+                        res2AsymmetricVar = res1AsymmetricVar;
+                    }
+
+                    res1Asymmetric.setText(res1AsymmetricVar + cm2);
+                    res2Asymmetric.setText(res2AsymmetricVar + cm2);
+
+                    resRods1ValueAsymmetric = reinforcementRods(ress[0], aS1Value);
+                    resRods2ValueAsymmetric = reinforcementRods(ress[1], aS2Value);
+
+                    resRods1Asymmetric.setText(String.valueOf(resRods1ValueAsymmetric));
+                    resRods2Asymmetric.setText(String.valueOf(resRods2ValueAsymmetric));
+
+                    res1trueAsymmetricVar = roundTwoDigit(Math.pow(aS1Value * 0.5, 2) * Math.PI * resRods1ValueAsymmetric * Math.pow(10, 4));
+                    res2trueAsymmetricVar = roundTwoDigit(Math.pow(aS2Value * 0.5, 2) * Math.PI * resRods2ValueAsymmetric * Math.pow(10, 4));
+
+                    res1trueAsymmetric.setText(res1trueAsymmetricVar + cm2);
+                    res2trueAsymmetric.setText(res2trueAsymmetricVar + cm2);
+
+                    res1.setText("0" + cm2);
+                    res2.setText("0" + cm2);
+
+                    resRods1.setText("0" + szt);
+                    resRods2.setText("0" + szt);
+
+                    res1true.setText("0" + cm2);
+                    res2true.setText("0" + cm2);
+
+                    DiagnosticBendingBeamAndT beam1 = new DiagnosticBendingBeamAndT(fCk, fYk, bValue, bValue, hValue, 0, a1Value, a2Value, res1trueAsymmetricVar * Math.pow(10, -4), res2AsymmetricVar * Math.pow(10, -4));
+                    double ress1 = beam1.resultDiagnostic();
+
+                    mRd = ress1;
+                    nRdValue = 0;
+                }
 
             } else {
                 if (nEdValue > 0) {
-                    CompressionSymmetricReinforcement beam1 = new CompressionSymmetricReinforcement(nEdValue, mEdValue, fCk, fYk, bValue, hValue, a1Value, a2Value);
-                    double[] results1 = beam1.resultsCompressionSymmetricReinforcement();
+
+                    if (mEdValue < 0) {
+                        CompressionSymmetricReinforcement beam1 = new CompressionSymmetricReinforcement(nEdValue, mEdValue, fCk, fYk, bValue, hValue, a1Value, a2Value);
+                        double[] results1 = beam1.resultsCompressionSymmetricReinforcement();
 
 
-                    res1.setText(roundTwoDigit(results1[0] * Math.pow(10, 4)) + cm2);
-                    res2.setText(roundTwoDigit(results1[1] * Math.pow(10, 4)) + cm2);
+                        res1.setText(roundTwoDigit(results1[1] * Math.pow(10, 4)) + cm2);
+                        res2.setText(roundTwoDigit(results1[0] * Math.pow(10, 4)) + cm2);
 
-                    resRods1Value = reinforcementRods(results1[0], aS1Value);
-                    resRods2Value = reinforcementRods(results1[1], aS2Value);
+                        resRods1Value = reinforcementRods(results1[1], aS1Value);
+                        resRods2Value = reinforcementRods(results1[0], aS2Value);
 
-                    resRods1.setText(resRods1Value + szt);
-                    resRods2.setText(resRods2Value + szt);
+                        resRods1.setText(resRods1Value + szt);
+                        resRods2.setText(resRods2Value + szt);
 
-                    res1true.setText(roundTwoDigit(Math.pow(aS1Value * 0.5, 2) * Math.PI * resRods1Value * Math.pow(10, 4)) + cm2);
-                    res2true.setText(roundTwoDigit(Math.pow(aS2Value * 0.5, 2) * Math.PI * resRods2Value * Math.pow(10, 4)) + cm2);
+                        res1true.setText(roundTwoDigit(Math.pow(aS1Value * 0.5, 2) * Math.PI * resRods1Value * Math.pow(10, 4)) + cm2);
+                        res2true.setText(roundTwoDigit(Math.pow(aS2Value * 0.5, 2) * Math.PI * resRods2Value * Math.pow(10, 4)) + cm2);
 
-                    //asymmetric
+                        //asymmetric
 
-                    CompressionAsymmetricReinforcement beam2 = new CompressionAsymmetricReinforcement(nEdValue, mEdValue, fCk, fYk, bValue, hValue, a1Value, a2Value);
-                    double[] results2 = beam2.resultsCompressionAsymmetricReinforcement();
+                        CompressionAsymmetricReinforcement beam2 = new CompressionAsymmetricReinforcement(nEdValue, mEdValue, fCk, fYk, bValue, hValue, a1Value, a2Value);
+                        double[] results2 = beam2.resultsCompressionAsymmetricReinforcement();
 
-                    res1AsymmetricVar = roundTwoDigit(results2[0] * Math.pow(10, 4));
-                    res2AsymmetricVar = roundTwoDigit(results2[1] * Math.pow(10, 4));
+                        res1AsymmetricVar = roundTwoDigit(results2[1] * Math.pow(10, 4));
+                        res2AsymmetricVar = roundTwoDigit(results2[0] * Math.pow(10, 4));
 
-                    res1Asymmetric.setText(res1AsymmetricVar + cm2);
-                    res2Asymmetric.setText(res2AsymmetricVar + cm2);
+                        res1Asymmetric.setText(res1AsymmetricVar + cm2);
+                        res2Asymmetric.setText(res2AsymmetricVar + cm2);
 
-                    resRods1ValueAsymmetric = reinforcementRods(results2[0], aS1Value);
-                    resRods2ValueAsymmetric = reinforcementRods(results2[1], aS2Value);
+                        resRods1ValueAsymmetric = reinforcementRods(results2[1], aS1Value);
+                        resRods2ValueAsymmetric = reinforcementRods(results2[0], aS2Value);
 
-                    resRods1Asymmetric.setText(resRods1ValueAsymmetric + szt);
-                    resRods2Asymmetric.setText(resRods2ValueAsymmetric + szt);
+                        resRods1Asymmetric.setText(resRods1ValueAsymmetric + szt);
+                        resRods2Asymmetric.setText(resRods2ValueAsymmetric + szt);
 
-                    res1trueAsymmetricVar = roundTwoDigit(Math.pow(aS1Value * 0.5, 2) * Math.PI * resRods1ValueAsymmetric * Math.pow(10, 4));
-                    res2trueAsymmetricVar = roundTwoDigit(Math.pow(aS2Value * 0.5, 2) * Math.PI * resRods2ValueAsymmetric * Math.pow(10, 4));
+                        res1trueAsymmetricVar = roundTwoDigit(Math.pow(aS1Value * 0.5, 2) * Math.PI * resRods1ValueAsymmetric * Math.pow(10, 4));
+                        res2trueAsymmetricVar = roundTwoDigit(Math.pow(aS2Value * 0.5, 2) * Math.PI * resRods2ValueAsymmetric * Math.pow(10, 4));
 
-                    res1trueAsymmetric.setText(res1trueAsymmetricVar + cm2);
-                    res2trueAsymmetric.setText(res2trueAsymmetricVar + cm2);
+                        res1trueAsymmetric.setText(res1trueAsymmetricVar + cm2);
+                        res2trueAsymmetric.setText(res2trueAsymmetricVar + cm2);
 
-                    DiagnosticCompression beam4 = new DiagnosticCompression(nEdValue, mEdValue, fCk, fYk, bValue, hValue, a1Value, a2Value, res1trueAsymmetricVar * Math.pow(10, -4), res2trueAsymmetricVar * Math.pow(10, -4));
-                    double[] results4 = beam4.resultsDiagnosticCompression();
-                    mRd = results4[1];
-                    nRdValue = roundThreeDigitShearing(results4[0]*Math.pow(10,3));
+                        DiagnosticCompression beam4 = new DiagnosticCompression(nEdValue, mEdValue, fCk, fYk, bValue, hValue, a1Value, a2Value, res1trueAsymmetricVar * Math.pow(10, -4), res2trueAsymmetricVar * Math.pow(10, -4));
+                        double[] results4 = beam4.resultsDiagnosticCompression();
+                        mRd = -results4[1];
+                        nRdValue = roundThreeDigitShearing(results4[0] * Math.pow(10, 3));
+                    } else {
+                        CompressionSymmetricReinforcement beam1 = new CompressionSymmetricReinforcement(nEdValue, mEdValue, fCk, fYk, bValue, hValue, a1Value, a2Value);
+                        double[] results1 = beam1.resultsCompressionSymmetricReinforcement();
 
+
+                        res1.setText(roundTwoDigit(results1[0] * Math.pow(10, 4)) + cm2);
+                        res2.setText(roundTwoDigit(results1[1] * Math.pow(10, 4)) + cm2);
+
+                        resRods1Value = reinforcementRods(results1[0], aS1Value);
+                        resRods2Value = reinforcementRods(results1[1], aS2Value);
+
+                        resRods1.setText(resRods1Value + szt);
+                        resRods2.setText(resRods2Value + szt);
+
+                        res1true.setText(roundTwoDigit(Math.pow(aS1Value * 0.5, 2) * Math.PI * resRods1Value * Math.pow(10, 4)) + cm2);
+                        res2true.setText(roundTwoDigit(Math.pow(aS2Value * 0.5, 2) * Math.PI * resRods2Value * Math.pow(10, 4)) + cm2);
+
+                        //asymmetric
+
+                        CompressionAsymmetricReinforcement beam2 = new CompressionAsymmetricReinforcement(nEdValue, mEdValue, fCk, fYk, bValue, hValue, a1Value, a2Value);
+                        double[] results2 = beam2.resultsCompressionAsymmetricReinforcement();
+
+                        res1AsymmetricVar = roundTwoDigit(results2[0] * Math.pow(10, 4));
+                        res2AsymmetricVar = roundTwoDigit(results2[1] * Math.pow(10, 4));
+
+                        res1Asymmetric.setText(res1AsymmetricVar + cm2);
+                        res2Asymmetric.setText(res2AsymmetricVar + cm2);
+
+                        resRods1ValueAsymmetric = reinforcementRods(results2[0], aS1Value);
+                        resRods2ValueAsymmetric = reinforcementRods(results2[1], aS2Value);
+
+                        resRods1Asymmetric.setText(resRods1ValueAsymmetric + szt);
+                        resRods2Asymmetric.setText(resRods2ValueAsymmetric + szt);
+
+                        res1trueAsymmetricVar = roundTwoDigit(Math.pow(aS1Value * 0.5, 2) * Math.PI * resRods1ValueAsymmetric * Math.pow(10, 4));
+                        res2trueAsymmetricVar = roundTwoDigit(Math.pow(aS2Value * 0.5, 2) * Math.PI * resRods2ValueAsymmetric * Math.pow(10, 4));
+
+                        res1trueAsymmetric.setText(res1trueAsymmetricVar + cm2);
+                        res2trueAsymmetric.setText(res2trueAsymmetricVar + cm2);
+
+                        DiagnosticCompression beam4 = new DiagnosticCompression(nEdValue, mEdValue, fCk, fYk, bValue, hValue, a1Value, a2Value, res1trueAsymmetricVar * Math.pow(10, -4), res2trueAsymmetricVar * Math.pow(10, -4));
+                        double[] results4 = beam4.resultsDiagnosticCompression();
+                        mRd = -results4[1];
+                        nRdValue = roundThreeDigitShearing(results4[0] * Math.pow(10, 3));
+                    }
 
                 } else {
-                    ExtensionSymmetricReinforcement beam1 = new ExtensionSymmetricReinforcement(-nEdValue, mEdValue, fCk, fYk, bValue, hValue, a1Value, a2Value);
-                    double[] results1 = beam1.resultsExtensionSymmetric();
-                    res1.setText(roundTwoDigit(results1[0] * Math.pow(10, 4)) + cm2);
-                    res2.setText(roundTwoDigit(results1[1] * Math.pow(10, 4)) + cm2);
 
-                    resRods1Value = reinforcementRods(results1[0], aS1Value);
-                    resRods2Value = reinforcementRods(results1[1], aS2Value);
+                    if (nEdValue < 0) {
+                        ExtensionSymmetricReinforcement beam1 = new ExtensionSymmetricReinforcement(-nEdValue, mEdValue, fCk, fYk, bValue, hValue, a1Value, a2Value);
+                        double[] results1 = beam1.resultsExtensionSymmetric();
+                        res1.setText(roundTwoDigit(results1[1] * Math.pow(10, 4)) + cm2);
+                        res2.setText(roundTwoDigit(results1[0] * Math.pow(10, 4)) + cm2);
 
-                    resRods1.setText(resRods1Value + szt);
-                    resRods2.setText(resRods2Value + szt);
+                        resRods1Value = reinforcementRods(results1[1], aS1Value);
+                        resRods2Value = reinforcementRods(results1[0], aS2Value);
 
-                    res1true.setText(roundTwoDigit(Math.pow(aS1Value * 0.5, 2) * Math.PI * resRods1Value * Math.pow(10, 4)) + cm2);
-                    res2true.setText(roundTwoDigit(Math.pow(aS2Value * 0.5, 2) * Math.PI * resRods2Value * Math.pow(10, 4)) + cm2);
+                        resRods1.setText(resRods1Value + szt);
+                        resRods2.setText(resRods2Value + szt);
 
-                    //asymmetric
+                        res1true.setText(roundTwoDigit(Math.pow(aS1Value * 0.5, 2) * Math.PI * resRods1Value * Math.pow(10, 4)) + cm2);
+                        res2true.setText(roundTwoDigit(Math.pow(aS2Value * 0.5, 2) * Math.PI * resRods2Value * Math.pow(10, 4)) + cm2);
 
-                    ExtensionAsymmetricReinforcement beam2 = new ExtensionAsymmetricReinforcement(-nEdValue, mEdValue, fCk, fYk, bValue, hValue, a1Value, a2Value);
-                    double[] results2 = beam2.resultsExtensionAsymmetric();
+                        //asymmetric
 
-                    res1AsymmetricVar = roundTwoDigit(results2[0] * Math.pow(10, 4));
-                    res2AsymmetricVar = roundTwoDigit(results2[1] * Math.pow(10, 4));
+                        ExtensionAsymmetricReinforcement beam2 = new ExtensionAsymmetricReinforcement(-nEdValue, mEdValue, fCk, fYk, bValue, hValue, a1Value, a2Value);
+                        double[] results2 = beam2.resultsExtensionAsymmetric();
 
-                    res1Asymmetric.setText(res1AsymmetricVar + cm2);
-                    res2Asymmetric.setText(res2AsymmetricVar + cm2);
+                        res1AsymmetricVar = roundTwoDigit(results2[1] * Math.pow(10, 4));
+                        res2AsymmetricVar = roundTwoDigit(results2[0] * Math.pow(10, 4));
 
-                    resRods1ValueAsymmetric = reinforcementRods(results2[0], aS1Value);
-                    resRods2ValueAsymmetric = reinforcementRods(results2[1], aS2Value);
+                        res1Asymmetric.setText(res1AsymmetricVar + cm2);
+                        res2Asymmetric.setText(res2AsymmetricVar + cm2);
 
-                    resRods1Asymmetric.setText(resRods1ValueAsymmetric + szt);
-                    resRods2Asymmetric.setText(resRods2ValueAsymmetric + szt);
+                        resRods1ValueAsymmetric = reinforcementRods(results2[1], aS1Value);
+                        resRods2ValueAsymmetric = reinforcementRods(results2[0], aS2Value);
+
+                        resRods1Asymmetric.setText(resRods1ValueAsymmetric + szt);
+                        resRods2Asymmetric.setText(resRods2ValueAsymmetric + szt);
 
 
-                    res1trueAsymmetricVar = roundTwoDigit(Math.pow(aS1Value * 0.5, 2) * Math.PI * resRods1ValueAsymmetric * Math.pow(10, 4));
-                    res2trueAsymmetricVar = roundTwoDigit(Math.pow(aS2Value * 0.5, 2) * Math.PI * resRods2ValueAsymmetric * Math.pow(10, 4));
+                        res1trueAsymmetricVar = roundTwoDigit(Math.pow(aS1Value * 0.5, 2) * Math.PI * resRods1ValueAsymmetric * Math.pow(10, 4));
+                        res2trueAsymmetricVar = roundTwoDigit(Math.pow(aS2Value * 0.5, 2) * Math.PI * resRods2ValueAsymmetric * Math.pow(10, 4));
 
-                    res1trueAsymmetric.setText(res1trueAsymmetricVar + cm2);
-                    res2trueAsymmetric.setText(res2trueAsymmetricVar + cm2);
+                        res1trueAsymmetric.setText(res1trueAsymmetricVar + cm2);
+                        res2trueAsymmetric.setText(res2trueAsymmetricVar + cm2);
 
-                    DiagnosticExtension beam7 = new DiagnosticExtension(-nEdValue, mEdValue, fCk, fYk, bValue, hValue, a1Value, a2Value, res1trueAsymmetricVar * Math.pow(10, -4), res2trueAsymmetricVar * Math.pow(10, -4));
-                    double[] results7 = beam7.resultsDiagnosticExtension();
-                    mRd = results7[1];
-                    nRdValue = roundThreeDigitShearing(-results7[0]*Math.pow(10,3));
+                        DiagnosticExtension beam7 = new DiagnosticExtension(-nEdValue, mEdValue, fCk, fYk, bValue, hValue, a1Value, a2Value, res1trueAsymmetricVar * Math.pow(10, -4), res2trueAsymmetricVar * Math.pow(10, -4));
+                        double[] results7 = beam7.resultsDiagnosticExtension();
+                        mRd = -results7[1];
+                        nRdValue = roundThreeDigitShearing(-results7[0] * Math.pow(10, 3));
 
+                    } else {
+                        ExtensionSymmetricReinforcement beam1 = new ExtensionSymmetricReinforcement(-nEdValue, mEdValue, fCk, fYk, bValue, hValue, a1Value, a2Value);
+                        double[] results1 = beam1.resultsExtensionSymmetric();
+                        res1.setText(roundTwoDigit(results1[0] * Math.pow(10, 4)) + cm2);
+                        res2.setText(roundTwoDigit(results1[1] * Math.pow(10, 4)) + cm2);
+
+                        resRods1Value = reinforcementRods(results1[0], aS1Value);
+                        resRods2Value = reinforcementRods(results1[1], aS2Value);
+
+                        resRods1.setText(resRods1Value + szt);
+                        resRods2.setText(resRods2Value + szt);
+
+                        res1true.setText(roundTwoDigit(Math.pow(aS1Value * 0.5, 2) * Math.PI * resRods1Value * Math.pow(10, 4)) + cm2);
+                        res2true.setText(roundTwoDigit(Math.pow(aS2Value * 0.5, 2) * Math.PI * resRods2Value * Math.pow(10, 4)) + cm2);
+
+                        //asymmetric
+
+                        ExtensionAsymmetricReinforcement beam2 = new ExtensionAsymmetricReinforcement(-nEdValue, mEdValue, fCk, fYk, bValue, hValue, a1Value, a2Value);
+                        double[] results2 = beam2.resultsExtensionAsymmetric();
+
+                        res1AsymmetricVar = roundTwoDigit(results2[0] * Math.pow(10, 4));
+                        res2AsymmetricVar = roundTwoDigit(results2[1] * Math.pow(10, 4));
+
+                        res1Asymmetric.setText(res1AsymmetricVar + cm2);
+                        res2Asymmetric.setText(res2AsymmetricVar + cm2);
+
+                        resRods1ValueAsymmetric = reinforcementRods(results2[0], aS1Value);
+                        resRods2ValueAsymmetric = reinforcementRods(results2[1], aS2Value);
+
+                        resRods1Asymmetric.setText(resRods1ValueAsymmetric + szt);
+                        resRods2Asymmetric.setText(resRods2ValueAsymmetric + szt);
+
+
+                        res1trueAsymmetricVar = roundTwoDigit(Math.pow(aS1Value * 0.5, 2) * Math.PI * resRods1ValueAsymmetric * Math.pow(10, 4));
+                        res2trueAsymmetricVar = roundTwoDigit(Math.pow(aS2Value * 0.5, 2) * Math.PI * resRods2ValueAsymmetric * Math.pow(10, 4));
+
+                        res1trueAsymmetric.setText(res1trueAsymmetricVar + cm2);
+                        res2trueAsymmetric.setText(res2trueAsymmetricVar + cm2);
+
+                        DiagnosticExtension beam7 = new DiagnosticExtension(-nEdValue, mEdValue, fCk, fYk, bValue, hValue, a1Value, a2Value, res1trueAsymmetricVar * Math.pow(10, -4), res2trueAsymmetricVar * Math.pow(10, -4));
+                        double[] results7 = beam7.resultsDiagnosticExtension();
+                        mRd = results7[1];
+                        nRdValue = roundThreeDigitShearing(-results7[0] * Math.pow(10, 3));
+                    }
                 }
             }
         } /*else if (choiceBoxDimensions.getValue().toString().equals("Przekrój Prostokątny")) {
@@ -1052,7 +1194,6 @@ public class SubController {
             s1SpacingVarTrue = roundThreeDigitShearingReal(res);
 
 
-
         } else {
 
             ShearingStirrups shearing = new ShearingStirrups(hValue, bValue, a1Value, fCk, fYk, nEdValue, vEdValue, vEdRedValue, aSl, nSw1Value, aSw1Value, ctgThetaValue); //TODO ASL ISN'T just a dimension! cm^2, not mm
@@ -1078,47 +1219,91 @@ public class SubController {
 
 
         if (choiceBoxDimensions.getValue().toString().equals("Przekrój Teowy")) {
-            BendingBeamT beam = new BendingBeamT(mEdValue, fCk, fYk, bValue, bFValue, hValue, hFValue, a1Value, a2Value);
-            double[] ress = beam.resultsBendingT();
-            System.out.println(Arrays.toString(ress));
 
-            res1AsymmetricVar = roundTwoDigit(ress[0] * Math.pow(10, 4));
-            res2AsymmetricVar = roundTwoDigit(ress[1] * Math.pow(10, 4));
+            if (mEdValue < 0) {
+                BendingBeamT beam = new BendingBeamT(-mEdValue, fCk, fYk, bValue, bFValue, hValue, hFValue, a1Value, a2Value);
+                double[] ress = beam.resultsBendingT();
+                System.out.println(Arrays.toString(ress));
 
-            res1Asymmetric.setText(res1AsymmetricVar + cm2);
-            res2Asymmetric.setText(res2AsymmetricVar + cm2);
+                res1AsymmetricVar = roundTwoDigit(ress[1] * Math.pow(10, 4));
+                res2AsymmetricVar = roundTwoDigit(ress[0] * Math.pow(10, 4));
 
-            resRods1ValueAsymmetric = reinforcementRods(ress[0], aS1Value);
-            resRods2ValueAsymmetric = reinforcementRods(ress[1], aS2Value);
+                res1Asymmetric.setText(res1AsymmetricVar + cm2);
+                res2Asymmetric.setText(res2AsymmetricVar + cm2);
 
-            resRods1Asymmetric.setText(resRods1ValueAsymmetric + szt);
-            resRods2Asymmetric.setText(resRods2ValueAsymmetric + szt);
+                resRods1ValueAsymmetric = reinforcementRods(ress[1], aS1Value);
+                resRods2ValueAsymmetric = reinforcementRods(ress[0], aS2Value);
 
-            res1trueAsymmetricVar = roundTwoDigit(Math.pow(aS1Value * 0.5, 2) * Math.PI * resRods1ValueAsymmetric * Math.pow(10, 4));
-            res2trueAsymmetricVar = roundTwoDigit(Math.pow(aS2Value * 0.5, 2) * Math.PI * resRods2ValueAsymmetric * Math.pow(10, 4));
+                resRods1Asymmetric.setText(resRods1ValueAsymmetric + szt);
+                resRods2Asymmetric.setText(resRods2ValueAsymmetric + szt);
 
-            res1trueAsymmetric.setText(res1trueAsymmetricVar + cm2);
-            res2trueAsymmetric.setText(res2trueAsymmetricVar + cm2);
+                res1trueAsymmetricVar = roundTwoDigit(Math.pow(aS1Value * 0.5, 2) * Math.PI * resRods1ValueAsymmetric * Math.pow(10, 4));
+                res2trueAsymmetricVar = roundTwoDigit(Math.pow(aS2Value * 0.5, 2) * Math.PI * resRods2ValueAsymmetric * Math.pow(10, 4));
 
-            res1.setText("0" + cm2);
-            res2.setText("0" + cm2);
+                res1trueAsymmetric.setText(res1trueAsymmetricVar + cm2);
+                res2trueAsymmetric.setText(res2trueAsymmetricVar + cm2);
 
-            resRods1.setText("0" + szt);
-            resRods2.setText("0" + szt);
+                res1.setText("0" + cm2);
+                res2.setText("0" + cm2);
 
-            res1true.setText("0" + cm2);
-            res2true.setText("0" + cm2);
+                resRods1.setText("0" + szt);
+                resRods2.setText("0" + szt);
 
-            toPdfButton.setDisable(false);
+                res1true.setText("0" + cm2);
+                res2true.setText("0" + cm2);
 
-
-            DiagnosticBendingBeamAndT beam1 = new DiagnosticBendingBeamAndT(fCk, fYk, bValue, bFValue, hValue, hFValue, a1Value, a2Value, res1trueAsymmetricVar * Math.pow(10, -4), res2trueAsymmetricVar * Math.pow(10, -4));
-            double ress1 = beam1.resultDiagnostic();
-
-            nRdValue = 0;
-            mRd = ress1;
+                toPdfButton.setDisable(false);
 
 
+                DiagnosticBendingBeamAndT beam1 = new DiagnosticBendingBeamAndT(fCk, fYk, bValue, bFValue, hValue, hFValue, a1Value, a2Value, res1trueAsymmetricVar * Math.pow(10, -4), res2trueAsymmetricVar * Math.pow(10, -4));
+                double ress1 = beam1.resultDiagnostic();
+
+                nRdValue = 0;
+                mRd = -ress1;
+
+            } else {
+
+                BendingBeamT beam = new BendingBeamT(mEdValue, fCk, fYk, bValue, bFValue, hValue, hFValue, a1Value, a2Value);
+                double[] ress = beam.resultsBendingT();
+                System.out.println(Arrays.toString(ress));
+
+                res1AsymmetricVar = roundTwoDigit(ress[0] * Math.pow(10, 4));
+                res2AsymmetricVar = roundTwoDigit(ress[1] * Math.pow(10, 4));
+
+                res1Asymmetric.setText(res1AsymmetricVar + cm2);
+                res2Asymmetric.setText(res2AsymmetricVar + cm2);
+
+                resRods1ValueAsymmetric = reinforcementRods(ress[0], aS1Value);
+                resRods2ValueAsymmetric = reinforcementRods(ress[1], aS2Value);
+
+                resRods1Asymmetric.setText(resRods1ValueAsymmetric + szt);
+                resRods2Asymmetric.setText(resRods2ValueAsymmetric + szt);
+
+                res1trueAsymmetricVar = roundTwoDigit(Math.pow(aS1Value * 0.5, 2) * Math.PI * resRods1ValueAsymmetric * Math.pow(10, 4));
+                res2trueAsymmetricVar = roundTwoDigit(Math.pow(aS2Value * 0.5, 2) * Math.PI * resRods2ValueAsymmetric * Math.pow(10, 4));
+
+                res1trueAsymmetric.setText(res1trueAsymmetricVar + cm2);
+                res2trueAsymmetric.setText(res2trueAsymmetricVar + cm2);
+
+                res1.setText("0" + cm2);
+                res2.setText("0" + cm2);
+
+                resRods1.setText("0" + szt);
+                resRods2.setText("0" + szt);
+
+                res1true.setText("0" + cm2);
+                res2true.setText("0" + cm2);
+
+                toPdfButton.setDisable(false);
+
+
+                DiagnosticBendingBeamAndT beam1 = new DiagnosticBendingBeamAndT(fCk, fYk, bValue, bFValue, hValue, hFValue, a1Value, a2Value, res1trueAsymmetricVar * Math.pow(10, -4), res2trueAsymmetricVar * Math.pow(10, -4));
+                double ress1 = beam1.resultDiagnostic();
+
+                nRdValue = 0;
+                mRd = ress1;
+
+            }
         }
 
         data = new HashMap<>();
@@ -1452,43 +1637,81 @@ public class SubController {
 
             } else {
                 if (nEdValue > 0) {
-                    DiagnosticCompression beam1 = new DiagnosticCompression(nEdValue, mEdValue, fCk, fYk, bValue, hValue, a1Value, a2Value, aS1ValueDiagnostic, aS2ValueDiagnostic);
-                    double[] results1 = beam1.resultsDiagnosticCompression();
-                    res1.setText(roundTwoDigit(results1[1] * Math.pow(10, 3)) + kNm);
-                    res2.setText(roundTwoDigit(results1[0] * Math.pow(10, 3)) + kN);
+                    if (mEdValue < 0) {
+                        DiagnosticCompression beam1 = new DiagnosticCompression(nEdValue, -mEdValue, fCk, fYk, bValue, hValue, a2Value, a1Value, aS2ValueDiagnostic, aS1ValueDiagnostic);
+                        double[] results1 = beam1.resultsDiagnosticCompression();
+                        res1.setText(roundTwoDigit(-results1[1] * Math.pow(10, 3)) + kNm);
+                        res2.setText(roundTwoDigit(results1[0] * Math.pow(10, 3)) + kN);
 
-                    res1true.setText(roundTwoDigit(mEdValue * Math.pow(10, 3)) + kNm);
-                    res2true.setText(roundTwoDigit(nEdValue * Math.pow(10, 3)) + kN);
+                        res1true.setText(roundTwoDigit(mEdValue * Math.pow(10, 3)) + kNm);
+                        res2true.setText(roundTwoDigit(nEdValue * Math.pow(10, 3)) + kN);
 
-                    nRdValue = roundTwoDigit(results1[0] * Math.pow(10, 3));
+                        nRdValue = roundTwoDigit(results1[0] * Math.pow(10, 3));
 
-                    res1trueAsymmetricVar = roundThreeDigitShearing(aS1ValueDiagnostic * Math.pow(10, 4));
-                    res2trueAsymmetricVar = roundThreeDigitShearing(aS2ValueDiagnostic * Math.pow(10, 4));
+                        res1trueAsymmetricVar = roundThreeDigitShearing(aS2ValueDiagnostic * Math.pow(10, 4));
+                        res2trueAsymmetricVar = roundThreeDigitShearing(aS1ValueDiagnostic * Math.pow(10, 4));
 
-                    mRd = results1[1];
+                        mRd = -results1[1];
 
-                    resRods1ValueAsymmetric = reinforcementRods(aS1ValueDiagnostic, aS1Value);
-                    resRods2ValueAsymmetric = reinforcementRods(aS2ValueDiagnostic, aS2Value);
+                        resRods1ValueAsymmetric = reinforcementRods(aS2ValueDiagnostic, aS2Value);
+                        resRods2ValueAsymmetric = reinforcementRods(aS1ValueDiagnostic, aS1Value);
+                    } else {
+                        DiagnosticCompression beam1 = new DiagnosticCompression(nEdValue, mEdValue, fCk, fYk, bValue, hValue, a1Value, a2Value, aS1ValueDiagnostic, aS2ValueDiagnostic);
+                        double[] results1 = beam1.resultsDiagnosticCompression();
+                        res1.setText(roundTwoDigit(results1[1] * Math.pow(10, 3)) + kNm);
+                        res2.setText(roundTwoDigit(results1[0] * Math.pow(10, 3)) + kN);
 
+                        res1true.setText(roundTwoDigit(mEdValue * Math.pow(10, 3)) + kNm);
+                        res2true.setText(roundTwoDigit(nEdValue * Math.pow(10, 3)) + kN);
+
+                        nRdValue = roundTwoDigit(results1[0] * Math.pow(10, 3));
+
+                        res1trueAsymmetricVar = roundThreeDigitShearing(aS1ValueDiagnostic * Math.pow(10, 4));
+                        res2trueAsymmetricVar = roundThreeDigitShearing(aS2ValueDiagnostic * Math.pow(10, 4));
+
+                        mRd = results1[1];
+
+                        resRods1ValueAsymmetric = reinforcementRods(aS1ValueDiagnostic, aS1Value);
+                        resRods2ValueAsymmetric = reinforcementRods(aS2ValueDiagnostic, aS2Value);
+                    }
                 } else {
-                    DiagnosticExtension beam1 = new DiagnosticExtension(-nEdValue, mEdValue, fCk, fYk, bValue, hValue, a1Value, a2Value, aS1ValueDiagnostic, aS2ValueDiagnostic);
-                    double[] results1 = beam1.resultsDiagnosticExtension();
-                    res1.setText(roundTwoDigit(results1[1] * Math.pow(10, 3)) + kNm);
-                    res2.setText(roundTwoDigit(results1[0] * Math.pow(10, 3)) + kN);
+                    if (mEdValue < 0) {
+                        DiagnosticExtension beam1 = new DiagnosticExtension(-nEdValue, -mEdValue, fCk, fYk, bValue, hValue, a2Value, a1Value, aS2ValueDiagnostic, aS1ValueDiagnostic);
+                        double[] results1 = beam1.resultsDiagnosticExtension();
+                        res1.setText(roundTwoDigit(-results1[1] * Math.pow(10, 3)) + kNm);
+                        res2.setText(roundTwoDigit(-results1[0] * Math.pow(10, 3)) + kN);
 
-                    res1true.setText(roundTwoDigit(mEdValue * Math.pow(10, 3)) + kNm);
-                    res2true.setText(roundTwoDigit(-nEdValue * Math.pow(10, 3)) + kN);
+                        res1true.setText(roundTwoDigit(mEdValue * Math.pow(10, 3)) + kNm);
+                        res2true.setText(roundTwoDigit(nEdValue * Math.pow(10, 3)) + kN);
 
-                    nRdValue = roundTwoDigit(results1[0] * Math.pow(10, 3));
+                        nRdValue = roundTwoDigit(results1[0] * Math.pow(10, 3));
 
-                    res1trueAsymmetricVar = roundThreeDigitShearing(aS1ValueDiagnostic * Math.pow(10, 4));
-                    res2trueAsymmetricVar = roundThreeDigitShearing(aS2ValueDiagnostic * Math.pow(10, 4));
+                        res1trueAsymmetricVar = roundThreeDigitShearing(aS2ValueDiagnostic * Math.pow(10, 4));
+                        res2trueAsymmetricVar = roundThreeDigitShearing(aS1ValueDiagnostic * Math.pow(10, 4));
 
-                    mRd = results1[1];
+                        mRd = -results1[1];
 
-                    resRods1ValueAsymmetric = reinforcementRods(aS1ValueDiagnostic, aS1Value);
-                    resRods2ValueAsymmetric = reinforcementRods(aS2ValueDiagnostic, aS2Value);
+                        resRods1ValueAsymmetric = reinforcementRods(aS2ValueDiagnostic, aS2Value);
+                        resRods2ValueAsymmetric = reinforcementRods(aS1ValueDiagnostic, aS1Value);
+                    } else {
+                        DiagnosticExtension beam1 = new DiagnosticExtension(-nEdValue, mEdValue, fCk, fYk, bValue, hValue, a1Value, a2Value, aS1ValueDiagnostic, aS2ValueDiagnostic);
+                        double[] results1 = beam1.resultsDiagnosticExtension();
+                        res1.setText(roundTwoDigit(results1[1] * Math.pow(10, 3)) + kNm);
+                        res2.setText(roundTwoDigit(-results1[0] * Math.pow(10, 3)) + kN);
 
+                        res1true.setText(roundTwoDigit(mEdValue * Math.pow(10, 3)) + kNm);
+                        res2true.setText(roundTwoDigit(nEdValue * Math.pow(10, 3)) + kN);
+
+                        nRdValue = roundTwoDigit(results1[0] * Math.pow(10, 3));
+
+                        res1trueAsymmetricVar = roundThreeDigitShearing(aS1ValueDiagnostic * Math.pow(10, 4));
+                        res2trueAsymmetricVar = roundThreeDigitShearing(aS2ValueDiagnostic * Math.pow(10, 4));
+
+                        mRd = results1[1];
+
+                        resRods1ValueAsymmetric = reinforcementRods(aS1ValueDiagnostic, aS1Value);
+                        resRods2ValueAsymmetric = reinforcementRods(aS2ValueDiagnostic, aS2Value);
+                    }
                 }
             }
         } /*else if (choiceBoxDimensions.getValue().toString().equals("Przekrój Prostokątny")) {
@@ -1575,30 +1798,51 @@ public class SubController {
         s1SpacingVarTrue = s1Value;
 
 
-
         //tBeam
 
 
         if (choiceBoxDimensions.getValue().toString().equals("Przekrój Teowy")) {
-            DiagnosticBendingBeamAndT beam = new DiagnosticBendingBeamAndT(fCk, fYk, bValue, bFValue, hValue, hFValue, a1Value, a2Value, aS1ValueDiagnostic, aS2ValueDiagnostic);
-            double ress = beam.resultDiagnostic();
-            System.out.println(ress);
+            if (mEdValue < 0) {
+                DiagnosticBendingBeamAndT beam = new DiagnosticBendingBeamAndT(fCk, fYk, bValue, bFValue, hValue, hFValue, a2Value, a1Value, aS2ValueDiagnostic, aS1ValueDiagnostic);
+                double ress = -beam.resultDiagnostic();
+                System.out.println(ress);
 
-            res1.setText(roundTwoDigit(ress * Math.pow(10, 3)) + kNm);
-            res1true.setText(roundTwoDigit(mEdValue * Math.pow(10, 3)) + kNm);
+                res1.setText(roundTwoDigit(ress * Math.pow(10, 3)) + kNm);
+                res1true.setText(roundTwoDigit(-mEdValue * Math.pow(10, 3)) + kNm);
 
-            res1trueAsymmetricVar = roundThreeDigitShearing(aS1ValueDiagnostic * Math.pow(10, 4));
-            res2trueAsymmetricVar = roundThreeDigitShearing(aS2ValueDiagnostic * Math.pow(10, 4));
+                res1trueAsymmetricVar = roundThreeDigitShearing(aS2ValueDiagnostic * Math.pow(10, 4));
+                res2trueAsymmetricVar = roundThreeDigitShearing(aS1ValueDiagnostic * Math.pow(10, 4));
 
-            mRd = ress;
+                mRd = ress;
 
-            res2.setText(0 + kN);
-            res2true.setText(0 + kN);
+                res2.setText(0 + kN);
+                res2true.setText(0 + kN);
 
-            resRods1ValueAsymmetric = reinforcementRods(aS1ValueDiagnostic, aS1Value);
-            resRods2ValueAsymmetric = reinforcementRods(aS2ValueDiagnostic, aS2Value);
+                resRods1ValueAsymmetric = reinforcementRods(aS2ValueDiagnostic, aS2Value);
+                resRods2ValueAsymmetric = reinforcementRods(aS1ValueDiagnostic, aS1Value);
 
-            nRdValue = 0;
+                nRdValue = 0;
+            } else {
+                DiagnosticBendingBeamAndT beam = new DiagnosticBendingBeamAndT(fCk, fYk, bValue, bFValue, hValue, hFValue, a1Value, a2Value, aS1ValueDiagnostic, aS2ValueDiagnostic);
+                double ress = beam.resultDiagnostic();
+                System.out.println(ress);
+
+                res1.setText(roundTwoDigit(ress * Math.pow(10, 3)) + kNm);
+                res1true.setText(roundTwoDigit(mEdValue * Math.pow(10, 3)) + kNm);
+
+                res1trueAsymmetricVar = roundThreeDigitShearing(aS1ValueDiagnostic * Math.pow(10, 4));
+                res2trueAsymmetricVar = roundThreeDigitShearing(aS2ValueDiagnostic * Math.pow(10, 4));
+
+                mRd = ress;
+
+                res2.setText(0 + kN);
+                res2true.setText(0 + kN);
+
+                resRods1ValueAsymmetric = reinforcementRods(aS1ValueDiagnostic, aS1Value);
+                resRods2ValueAsymmetric = reinforcementRods(aS2ValueDiagnostic, aS2Value);
+
+                nRdValue = 0;
+            }
 
             toPdfButton.setDisable(false);
         }
