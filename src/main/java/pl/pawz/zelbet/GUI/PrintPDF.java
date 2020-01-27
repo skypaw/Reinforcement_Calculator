@@ -18,9 +18,9 @@ class PrintPDF {
 
     static void print(String name, double fYk, double rHData, double daysData, double mEdData, double mEkData, double mEkLtData,
                       double vEdData, double vEdRedData, double nEdData, char cementChar, double concreteFCk, double aS1Data, double aS2Data, double aS1RealData, double aS2RealData, double nS1Data, double nS2Data, double mRdData,
-                      double wCalcData, double wRealData, double fMCalcData, double fMRealData, double fCsCalcData, double fSumCalcData, double fSumRealData, double alphaData,
-                      double fi1Data, double fi2Data, double nSw1, double nSw2, double fiw1Data, double fiw2Data, double s1, double s2,
-                      double vRdData, double nSw1Real, double nSw2Real, double fiw1DataReal, double fiw2DataReal, double s1Real,
+                      double wCalcData, double wRealData, double fMCalcData, double fMRealData, double fCsCalcData, double fSumCalcData,double fCsRealData, double fSumRealData, double alphaData,
+                      double fi1Data, double fi2Data, double nSw1, double nSw2, double fiw1Data, double fiw2Data, double s1Data, double s2,
+                      double vRdData, double nSw1Real, double nSw2Real, double fiw1DataReal, double fiw2DataReal, double s1RealData,
                       double s2Real, double vRdRealData, double fiCrawlingData, double bData, double hData, double cNomData, double a1Data, double a2Data,
                       double bEffData, double hFData, double bEffTData, double hFTData, double lEff, double alphaMData, double nRd, double cotTheta) throws IOException {
 
@@ -50,8 +50,8 @@ class PrintPDF {
         double wReal = wRealData;
         double fMCalc = fMCalcData;
         double fMReal = fMRealData;
-        double fCsCalc = fCsCalcData;
-        double fCsReal = fCsCalcData;
+        double fCsCalc = roundThreeDigit(fCsCalcData);
+        double fCsReal = roundThreeDigit(fCsRealData);
         double fSumCalc = fSumCalcData;
         double fSumReal = fSumRealData;
         double alpha = alphaData;
@@ -65,6 +65,8 @@ class PrintPDF {
         double alphaM = roundThreeDigit(alphaMData);
         double a1 = roundThreeDigit(a1Data);
         double a2 = roundThreeDigit(a2Data);
+        double s1 = roundThreeDigit(s1Data);
+        double s1Real = roundThreeDigit(s1RealData);
 
         String valueRods1 = (int) nS1 + " fi " + (int) (fi1Data * Math.pow(10, 3));
         String valueRods2 = (int) nS2 + " fi " + (int) (fi2Data * Math.pow(10, 3));

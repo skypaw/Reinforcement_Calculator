@@ -404,7 +404,7 @@ public class SubController {
             nEdLoadsTxt.setDisable(false);
 
         } else {
-            gridDimensions.getChildren().removeAll(hFDimensionLabel, hFDimension, bFDimension, bFDimensionLabel, hFTDimension, hFTDimensionLabel, bFTDimension, bFTDimensionLabel);
+            gridDimensions.getChildren().removeAll(hFDimensionLabel, hFDimension, bFDimension, bFDimensionLabel, hFTDimension, hFTDimensionLabel, bFTDimension, bFTDimensionLabel); //todo change this solution
             gridDimensions.getChildren().addAll(hFDimensionLabel, hFDimension, bFDimension, bFDimensionLabel, hFTDimension, hFTDimensionLabel, bFTDimension, bFTDimensionLabel);
             //checkBoxLoads.setDisable(true);
 
@@ -740,10 +740,10 @@ public class SubController {
     public void mEkLtText() {
 
 
-        if (mEk.getText().isEmpty()){
+        if (mEk.getText().isEmpty()) {
             mEkLt.setText(String.valueOf(0));
-        }else {
-            mEkLt.setText(String.valueOf(roundTwoDigit(Double.parseDouble(mEk.getText() )* 0.85)));
+        } else {
+            mEkLt.setText(String.valueOf(roundTwoDigit(Double.parseDouble(mEk.getText()) * 0.85)));
         }
     }
 
@@ -1033,7 +1033,7 @@ public class SubController {
             double res = shearing.resultShearingStirrups();
             System.out.println(res);
 
-            resShearing = res;
+            resShearing = roundThreeDigitShearingReal(res);
 
             sRods.setText(roundThreeDigitShearing(res) + m);
 
@@ -1099,7 +1099,7 @@ public class SubController {
             DiagnosticBendingBeamAndT beam1 = new DiagnosticBendingBeamAndT(fCk, fYk, bValue, bFValue, hValue, hFValue, a1Value, a2Value, res1trueAsymmetricVar * Math.pow(10, -4), res2trueAsymmetricVar * Math.pow(10, -4));
             double ress1 = beam1.resultDiagnostic();
 
-            nRdValue= 0;
+            nRdValue = 0;
             mRd = ress1;
 
 
@@ -1371,6 +1371,7 @@ public class SubController {
                     fMRes.setText(fMResVarTheoretical + cm);
                     fMPlusCRes.setText(roundThreeDigitShearing(0) + cm);
 
+
                 }
             }
 
@@ -1407,9 +1408,6 @@ public class SubController {
         double aS1ValueDiagnostic = Math.pow(aS1Value * 0.5, 2) * Math.PI * n1Value;
         double aS2ValueDiagnostic = Math.pow(aS2Value * 0.5, 2) * Math.PI * n2Value;
 
-        res1AsymmetricVar = aS1ValueDiagnostic;
-        res2AsymmetricVar = aS2ValueDiagnostic;
-
 
         String kNm = " kNm";
         String kN = " kN";
@@ -1427,6 +1425,11 @@ public class SubController {
 
                 nRdValue = 0;
 
+                res1trueAsymmetricVar = roundThreeDigitShearing(aS1ValueDiagnostic * Math.pow(10, 4));
+                res2trueAsymmetricVar = roundThreeDigitShearing(aS2ValueDiagnostic * Math.pow(10, 4));
+
+                mRd = ress;
+
 
             } else {
                 if (nEdValue > 0) {
@@ -1440,6 +1443,11 @@ public class SubController {
 
                     nRdValue = roundTwoDigit(results1[0] * Math.pow(10, 3));
 
+                    res1trueAsymmetricVar = roundThreeDigitShearing(aS1ValueDiagnostic * Math.pow(10, 4));
+                    res2trueAsymmetricVar = roundThreeDigitShearing(aS2ValueDiagnostic * Math.pow(10, 4));
+
+                    mRd = results1[1];
+
                 } else {
                     DiagnosticExtension beam1 = new DiagnosticExtension(-nEdValue, mEdValue, fCk, fYk, bValue, hValue, a1Value, a2Value, aS1ValueDiagnostic, aS2ValueDiagnostic);
                     double[] results1 = beam1.resultsDiagnosticExtension();
@@ -1450,6 +1458,11 @@ public class SubController {
                     res2true.setText(roundTwoDigit(nEdValue * Math.pow(10, 3)) + kN);
 
                     nRdValue = roundTwoDigit(results1[0] * Math.pow(10, 3));
+
+                    res1trueAsymmetricVar = roundThreeDigitShearing(aS1ValueDiagnostic * Math.pow(10, 4));
+                    res2trueAsymmetricVar = roundThreeDigitShearing(aS2ValueDiagnostic * Math.pow(10, 4));
+
+                    mRd = results1[1];
 
                 }
             }
@@ -1530,6 +1543,9 @@ public class SubController {
         sRods.setText(roundThreeDigitShearing(res * Math.pow(10, 3)) + kN);
         sRodsReal.setText(roundThreeDigitShearing(vEdValue * Math.pow(10, 3)) + kN);
 
+        vRd = roundThreeDigitShearingReal(res);
+        resShearing = roundThreeDigitShearingReal(res);
+
 
         //tBeam
 
@@ -1542,10 +1558,17 @@ public class SubController {
             res1.setText(roundTwoDigit(ress * Math.pow(10, 3)) + kNm);
             res1true.setText(roundTwoDigit(mEdValue * Math.pow(10, 3)) + kNm);
 
+            res1trueAsymmetricVar = roundThreeDigitShearing(aS1ValueDiagnostic * Math.pow(10, 4));
+            res2trueAsymmetricVar = roundThreeDigitShearing(aS2ValueDiagnostic * Math.pow(10, 4));
+
+            mRd = ress;
+
             res2.setText(0 + kN);
             res2true.setText(0 + kN);
 
             nRdValue = 0;
+
+            toPdfButton.setDisable(false);
         }
 
 
@@ -1561,6 +1584,7 @@ public class SubController {
                     Deflection res1 = new Deflection(lEffValue, mEkLtValue, mEkValue, alphaMValue, mEdValue, bValue, hValue, 0, 0, bValue, bValue, a1Value, a2Value, aS1True, aS2True, loadChar, fCk, rHValue, cementChar, tZeroValue);
                     double result1 = res1.resultsLong();
                     double result1a = res1.resultsLongDeformation();
+                    fiCrawling = res1.fiCrawling;
 
                     Scratch res2 = new Scratch(cNomValue, aSw1Value, aS1Value, resRods1ValueAsymmetric, fCk, rHValue, tZeroValue, cementChar, bValue, bValue, bValue, hValue, 0, 0, a1Value, a2Value, aS1True, aS2True, mEkValue, mEkLtValue, loadChar);
                     double result2 = res2.wK();
@@ -1571,7 +1595,7 @@ public class SubController {
                     wResVar = roundThreeDigitShearing(result2 * Math.pow(10, 3));
                     fMResVar = roundThreeDigitShearing(result1 * Math.pow(10, 2));
                     fMPlusCResVar = roundThreeDigitShearing(result1a * Math.pow(10, 2));
-                    fCsVar = fMPlusCResVar - fMResVar;
+                    fCsVar = roundThreeDigitShearing(fMPlusCResVar - fMResVar);
 
                     wResTrue.setText(wResVar + mm);
                     fMResTrue.setText(fMResVar + cm);
@@ -1583,6 +1607,7 @@ public class SubController {
 
                     Deflection res1 = new Deflection(lEffValue, mEkLtValue, mEkValue, alphaMValue, mEdValue, bValue, hValue, 0, 0, bValue, bValue, a1Value, a2Value, aS1True, aS2True, loadChar, fCk, rHValue, cementChar, tZeroValue);
                     double result1 = res1.resultsShort();
+                    fiCrawling = res1.fiCrawling;
 
                     Scratch res2 = new Scratch(cNomValue, aSw1Value, aS1Value, resRods1ValueAsymmetric, fCk, rHValue, tZeroValue, cementChar, bValue, bValue, bValue, hValue, 0, 0, a1Value, a2Value, aS1True, aS2True, mEkValue, mEkLtValue, loadChar);
                     double result2 = res2.wK();
@@ -1593,7 +1618,7 @@ public class SubController {
                     wResVar = roundThreeDigitShearing(result2 * Math.pow(10, 3));
                     fMResVar = roundThreeDigitShearing(result1 * Math.pow(10, 2));
                     fMPlusCResVar = 0;
-                    fCsVar = fMPlusCResVar - fMResVar;
+                    fCsVar = roundThreeDigitShearing(fMPlusCResVar - fMResVar);
 
                     wResTrue.setText(wResVar + mm);
                     fMResTrue.setText(fMResVar + cm);
@@ -1608,6 +1633,7 @@ public class SubController {
                     Deflection res1 = new Deflection(lEffValue, mEkLtValue, mEkValue, alphaMValue, mEdValue, bValue, hValue, hFValue, hFTValue, bFValue, bFTValue, a1Value, a2Value, aS1True, aS2True, loadChar, fCk, rHValue, cementChar, tZeroValue);
                     double result1 = res1.resultsLong();
                     double result1a = res1.resultsLongDeformation();
+                    fiCrawling = res1.fiCrawling;
 
                     Scratch res2 = new Scratch(cNomValue, aSw1Value, aS1Value, resRods1ValueAsymmetric, fCk, rHValue, tZeroValue, cementChar, bValue, bFValue, bFTValue, hValue, hFValue, hFTValue, a1Value, a2Value, aS1True, aS2True, mEkValue, mEkLtValue, loadChar);
                     double result2 = res2.wK();
@@ -1617,7 +1643,7 @@ public class SubController {
                     wResVar = roundThreeDigitShearing(result2 * Math.pow(10, 3));
                     fMResVar = roundThreeDigitShearing(result1 * Math.pow(10, 2));
                     fMPlusCResVar = roundThreeDigitShearing(result1a * Math.pow(10, 2));
-                    fCsVar = fMPlusCResVar - fMResVar;
+                    fCsVar = roundThreeDigitShearing(fMPlusCResVar - fMResVar);
 
                     wResTrue.setText(wResVar + mm);
                     fMResTrue.setText(fMResVar + cm);
@@ -1630,6 +1656,7 @@ public class SubController {
 
                     Deflection res1 = new Deflection(lEffValue, mEkLtValue, mEkValue, alphaMValue, mEdValue, bValue, hValue, hFValue, hFTValue, bFValue, bFTValue, a1Value, a2Value, aS1True, aS2True, loadChar, fCk, rHValue, cementChar, tZeroValue);
                     double result1 = res1.resultsShort();
+                    fiCrawling = res1.fiCrawling;
 
                     Scratch res2 = new Scratch(cNomValue, aSw1Value, aS1Value, resRods1ValueAsymmetric, fCk, rHValue, tZeroValue, cementChar, bValue, bFValue, bFTValue, hValue, hFValue, hFTValue, a1Value, a2Value, aS1True, aS2True, mEkValue, mEkLtValue, loadChar);
                     double result2 = res2.wK();
@@ -1640,11 +1667,12 @@ public class SubController {
                     wResVar = roundThreeDigitShearing(result2 * Math.pow(10, 3));
                     fMResVar = roundThreeDigitShearing(result1 * Math.pow(10, 2));
                     fMPlusCResVar = 0;
-                    fCsVar = fMPlusCResVar - fMResVar;
+                    fCsVar = roundThreeDigitShearing(fMPlusCResVar - fMResVar);
 
                     wResTrue.setText(wResVar + mm);
                     fMResTrue.setText(fMResVar + cm);
                     fMPlusCResTrue.setText(roundThreeDigitShearing(0) + cm);
+
 
 
                 }
@@ -1668,9 +1696,9 @@ public class SubController {
         if (!fileName.isEmpty()) {
             PrintPDF.print(fileName, fYk, rHValue, tZeroValue, mEdValue, mEkValue, mEkLtValue, vEdValue, vEdRedValue,
                     nEdValue, cementChar, fCk, res1AsymmetricVar, res2AsymmetricVar, res1trueAsymmetricVar, res2trueAsymmetricVar,
-                    resRods1ValueAsymmetric, resRods2ValueAsymmetric, mRd, wResVar, wResVar, fMResVar, fMResVarTheoretical, fCsVarTheoretical, fMPlusCResVarTheoretical, fMPlusCResVarTheoretical,
-                    alphaValue, aS1Value, aS2Value, nSw1Value, nSw2Value, aSw1Value, aSw2Value, s1Value, nSw2RodSValue, vRd, nSw1Value, nSw2Value, aSw1Value, aSw2Value, s1Value, nSw2RodSValue, vRd,fiCrawling,bValue,hValue,cNomValue,a1Value,a2Value,bFValue,hFValue,bFTValue,hFTValue,
-                    lEffValue,alphaMValue,nRdValue, ctgThetaValue);
+                    resRods1ValueAsymmetric, resRods2ValueAsymmetric, mRd, wResVarTheoretical, wResVar, fMResVarTheoretical, fMResVar,fCsVarTheoretical,  fMPlusCResVarTheoretical, fCsVar,fMPlusCResVar,
+                    alphaValue, aS1Value, aS2Value, nSw1Value, nSw2Value, aSw1Value, aSw2Value, s1Value, nSw2RodSValue, vRd, nSw1Value, nSw2Value, aSw1Value, aSw2Value, s1Value, nSw2RodSValue, vRd, fiCrawling, bValue, hValue, cNomValue, a1Value, a2Value, bFValue, hFValue, bFTValue, hFTValue,
+                    lEffValue, alphaMValue, nRdValue, ctgThetaValue);
         }
 
     }
