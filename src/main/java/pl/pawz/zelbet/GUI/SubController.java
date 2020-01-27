@@ -404,6 +404,7 @@ public class SubController {
             nEdLoadsTxt.setDisable(false);
 
         } else {
+            gridDimensions.getChildren().removeAll(hFDimensionLabel, hFDimension, bFDimension, bFDimensionLabel, hFTDimension, hFTDimensionLabel, bFTDimension, bFTDimensionLabel);
             gridDimensions.getChildren().addAll(hFDimensionLabel, hFDimension, bFDimension, bFDimensionLabel, hFTDimension, hFTDimensionLabel, bFTDimension, bFTDimensionLabel);
             //checkBoxLoads.setDisable(true);
 
