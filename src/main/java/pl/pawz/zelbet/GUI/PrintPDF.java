@@ -18,9 +18,9 @@ class PrintPDF {
 
     static void print(String name, double fYk, double rHData, double daysData, double mEdData, double mEkData, double mEkLtData,
                       double vEdData, double vEdRedData, double nEdData, char cementChar, double concreteFCk, double aS1Data, double aS2Data, double aS1RealData, double aS2RealData, double nS1Data, double nS2Data, double mRdData,
-                      double wCalcData, double wRealData, double fMCalcData, double fMRealData, double fCsCalcData, double fSumCalcData, double fSumRealData, double alphaData,
-                      double fi1Data, double fi2Data, double nSw1, double nSw2, double fiw1Data, double fiw2Data, double s1, double s2,
-                      double vRdData, double nSw1Real, double nSw2Real, double fiw1DataReal, double fiw2DataReal, double s1Real,
+                      double wCalcData, double wRealData, double fMCalcData, double fMRealData, double fCsCalcData, double fSumCalcData,double fCsRealData, double fSumRealData, double alphaData,
+                      double fi1Data, double fi2Data, double nSw1, double nSw2, double fiw1Data, double fiw2Data, double s1Data, double s2,
+                      double vRdData, double nSw1Real, double nSw2Real, double fiw1DataReal, double fiw2DataReal, double s1RealData,
                       double s2Real, double vRdRealData, double fiCrawlingData, double bData, double hData, double cNomData, double a1Data, double a2Data,
                       double bEffData, double hFData, double bEffTData, double hFTData, double lEff, double alphaMData, double nRd, double cotTheta) throws IOException {
 
@@ -50,8 +50,8 @@ class PrintPDF {
         double wReal = wRealData;
         double fMCalc = fMCalcData;
         double fMReal = fMRealData;
-        double fCsCalc = fCsCalcData;
-        double fCsReal = fCsCalcData;
+        double fCsCalc = roundThreeDigit(fCsCalcData);
+        double fCsReal = roundThreeDigit(fCsRealData);
         double fSumCalc = fSumCalcData;
         double fSumReal = fSumRealData;
         double alpha = alphaData;
@@ -65,6 +65,8 @@ class PrintPDF {
         double alphaM = roundThreeDigit(alphaMData);
         double a1 = roundThreeDigit(a1Data);
         double a2 = roundThreeDigit(a2Data);
+        double s1 = roundThreeDigit(s1Data);
+        double s1Real = roundThreeDigit(s1RealData);
 
         String valueRods1 = (int) nS1 + " fi " + (int) (fi1Data * Math.pow(10, 3));
         String valueRods2 = (int) nS2 + " fi " + (int) (fi2Data * Math.pow(10, 3));
@@ -207,37 +209,37 @@ class PrintPDF {
         Row<PDPage> row = tableResults.createRow(12);
         Row<PDPage> row1 = tableResults.createRow(12);
 
-        rowDesc1.createCell(25, "").setBottomBorderStyle(LineStyle.produceDotted(Color.WHITE, 0));
-        textCell(rowDesc1.createCell(30, "Zbrojenie obliczeniowe"));
+        rowDesc1.createCell(20, "").setBottomBorderStyle(LineStyle.produceDotted(Color.WHITE, 0));
+        textCell(rowDesc1.createCell(35, "Zbrojenie obliczeniowe"));
         textCell(rowDesc1.createCell(45, "Zbrojenie zastosowane"));
 
-        middleCell(rowDesc2.createCell(25, "Zbrojenie"));
-        textCell(rowDesc2.createCell(10, "Powierzchnia"));
+        middleCell(rowDesc2.createCell(20, "Zbrojenie"));
+        textCell(rowDesc2.createCell(15, "Powierzchnia"));
         textCell(rowDesc2.createCell(20, "Nosnosc M_Rd/N_Rd"));
-        textCell(rowDesc2.createCell(15, "Liczba/srednica"));
-        textCell(rowDesc2.createCell(10, "Powierzchnia"));
+        textCell(rowDesc2.createCell(10, "Liczba/srednica"));
+        textCell(rowDesc2.createCell(15, "Powierzchnia"));
         textCell(rowDesc2.createCell(20, "Nosnosc M_Rd/N_Rd"));
 
-        rowDesc3.createCell(25, "").setTopBorderStyle(LineStyle.produceDotted(Color.WHITE, 0));
-        textCell(rowDesc3.createCell(10, "[cm^2]"));
+        rowDesc3.createCell(20, "").setTopBorderStyle(LineStyle.produceDotted(Color.WHITE, 0));
+        textCell(rowDesc3.createCell(15, "[cm^2]"));
         textCell(rowDesc3.createCell(20, "[kNm]/[kN]"));
-        textCell(rowDesc3.createCell(15, "[szt.]/[mm]"));
-        textCell(rowDesc3.createCell(10, "[cm^2]"));
+        textCell(rowDesc3.createCell(10, "[szt.]/[mm]"));
+        textCell(rowDesc3.createCell(15, "[cm^2]"));
         textCell(rowDesc3.createCell(20, "[kNm]/[kN]"));
 
 
-        row.createCell(25, "Rozciagane A_s1");
-        greenCell(row.createCell(10, String.valueOf(aS1)));
+        row.createCell(20, "Rozciagane A_s1");
+        greenCell(row.createCell(15, String.valueOf(aS1)));
         greenCellWhiteBottom(row.createCell(20, String.valueOf(mEdString)));
-        blueCellGrey(row.createCell(15, String.valueOf(valueRods1)));
-        greenCell(row.createCell(10, String.valueOf(aS1Real)));
+        blueCellGrey(row.createCell(10, String.valueOf(valueRods1)));
+        greenCell(row.createCell(15, String.valueOf(aS1Real)));
         greenCellWhiteBottom(row.createCell(20, String.valueOf(mRdString)));
 
-        row1.createCell(25, "Sciskane A_s2");
-        greenCell(row1.createCell(10, String.valueOf(aS2)));
+        row1.createCell(20, "Sciskane A_s2");
+        greenCell(row1.createCell(15, String.valueOf(aS2)));
         greenCell(row1.createCell(20, String.valueOf(nEd)));
-        blueCellGrey(row1.createCell(15, String.valueOf(valueRods2)));
-        greenCell(row1.createCell(10, String.valueOf(aS2Real)));
+        blueCellGrey(row1.createCell(10, String.valueOf(valueRods2)));
+        greenCell(row1.createCell(15, String.valueOf(aS2Real)));
         greenCell(row1.createCell(20, String.valueOf(nRd)));
 
 
