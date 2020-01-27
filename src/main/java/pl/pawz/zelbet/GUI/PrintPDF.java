@@ -19,9 +19,9 @@ class PrintPDF {
     static void print(String name, double fYk, double rHData, double daysData, double mEdData, double mEkData, double mEkLtData,
                       double vEdData, double vEdRedData, double nEdData, char cementChar, double concreteFCk, double aS1Data, double aS2Data, double aS1RealData, double aS2RealData, double nS1Data, double nS2Data, double mRdData,
                       double wCalcData, double wRealData, double fMCalcData, double fMRealData, double fCsCalcData, double fSumCalcData,double fCsRealData, double fSumRealData, double alphaData,
-                      double fi1Data, double fi2Data, double nSw1, double nSw2, double fiw1Data, double fiw2Data, double s1Data, double s2,
+                      double fi1Data, double fi2Data, double nSw1, double nSw2, double fiw1Data, double fiw2Data, double s1Data, double s2Data,
                       double vRdData, double nSw1Real, double nSw2Real, double fiw1DataReal, double fiw2DataReal, double s1RealData,
-                      double s2Real, double vRdRealData, double fiCrawlingData, double bData, double hData, double cNomData, double a1Data, double a2Data,
+                      double s2RealData, double vRdRealData, double fiCrawlingData, double bData, double hData, double cNomData, double a1Data, double a2Data,
                       double bEffData, double hFData, double bEffTData, double hFTData, double lEff, double alphaMData, double nRd, double cotTheta) throws IOException {
 
         String namePdf = name;
@@ -68,16 +68,23 @@ class PrintPDF {
         double s1 = roundThreeDigit(s1Data);
         double s1Real = roundThreeDigit(s1RealData);
 
+        double s2 = roundThreeDigit(s2Data);
+        double s2Real = roundThreeDigit(s2RealData);
+
+
+        System.out.println(s1);
+        System.out.println(s1Data);
+
         String valueRods1 = (int) nS1 + " fi " + (int) (fi1Data * Math.pow(10, 3));
         String valueRods2 = (int) nS2 + " fi " + (int) (fi2Data * Math.pow(10, 3));
 
         String rods = "Prety odgiete alpha = " + alpha;
 
         String valueRodsShearing1 = (int) nSw1 + " fi " + (int) (fiw1Data * Math.pow(10, 3));
-        String valueRodsShearing2 = (int) nSw2 + " fi " + (int) (fiw2Data * Math.pow(10, 3));
+        String valueRodsShearing2 = (int) nSw2 + " fi " + (int) (fiw2Data * Math.pow(10, 4));
 
         String valueRodsShearing1Real = (int) nSw1Real + " fi " + (int) (fiw1DataReal * Math.pow(10, 3));
-        String valueRodsShearing2Real = (int) nSw2Real + " fi " + (int) (fiw2DataReal * Math.pow(10, 3));
+        String valueRodsShearing2Real = (int) nSw2Real + " fi " + (int) (fiw2DataReal * Math.pow(10, 4));
 
         String cotThetaString = "cot_Theta = " + cotTheta;
 
@@ -284,7 +291,7 @@ class PrintPDF {
         rowV.createCell(30, "Strzemiona");
         blueCell(rowV.createCell(10, String.valueOf(valueRodsShearing1)));
         greenCell(rowV.createCell(10, String.valueOf(s1)));
-        greenCellWhiteBottom(rowV.createCell(15, String.valueOf(vRd)));
+        greenCellWhiteBottom(rowV.createCell(15, String.valueOf(vEd)));
         greenCellGrey(rowV.createCell(10, String.valueOf(valueRodsShearing1Real)));
         blueCellGrey(rowV.createCell(10, String.valueOf(s1Real)));
         greenCellWhiteBottom(rowV.createCell(15, String.valueOf(vRdReal)));
