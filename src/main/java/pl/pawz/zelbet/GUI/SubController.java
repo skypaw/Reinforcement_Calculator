@@ -1702,14 +1702,14 @@ public class SubController {
                         double aS1Theoretical = res1AsymmetricVar * Math.pow(10, -4);  //todo res 1 asymmetric var tbeam
                         double aS2Theoretical = res2AsymmetricVar * Math.pow(10, -4);
 
-                        double resRods1ValueTheoretical = res2AsymmetricVar * Math.pow(10, -4) / (Math.pow(aS2Value / 2, 2) * Math.PI);
-                        System.out.println("Pręty teoretyczne" + resRods1ValueTheoretical);
+                        double resRods2ValueTheoretical = res2AsymmetricVar * Math.pow(10, -4) / (Math.pow(aS2Value / 2, 2) * Math.PI);
+                        System.out.println("Pręty teoretyczne" + resRods2ValueTheoretical);
 
-                        Deflection res3 = new Deflection(lEffValue, -mEkLtValue, -mEkValue, alphaMValue, -mEdValue, bValue, hValue, hFValue, hFTValue, bFValue, bFTValue, a2Value, a1Value, aS2Theoretical, aS1Theoretical, loadChar, fCk, rHValue, cementChar, tZeroValue);
+                        Deflection res3 = new Deflection(lEffValue, -mEkLtValue, -mEkValue, alphaMValue, -mEdValue, bValue, hValue, hFTValue, hFValue, bFTValue, bFValue, a2Value, a1Value, aS2Theoretical, aS1Theoretical, loadChar, fCk, rHValue, cementChar, tZeroValue);
                         double result3 = res3.resultsLong();
                         double result3a = res3.resultsLongDeformation();
 
-                        Scratch res4 = new Scratch(cNomValue, aSw1Value, aS2Value, resRods1ValueTheoretical, fCk, rHValue, tZeroValue, cementChar, bValue, bFValue, bFTValue, hValue, hFValue, hFTValue, a2Value, a1Value, aS2Theoretical, aS1Theoretical, -mEkValue, -mEkLtValue, loadChar);
+                        Scratch res4 = new Scratch(cNomValue, aSw1Value, aS2Value, resRods2ValueTheoretical, fCk, rHValue, tZeroValue, cementChar, bValue, bFTValue, bFValue, hValue, hFTValue, hFValue, a2Value, a1Value, aS2Theoretical, aS1Theoretical, -mEkValue, -mEkLtValue, loadChar);
                         double result4 = res4.wK();
 
 
