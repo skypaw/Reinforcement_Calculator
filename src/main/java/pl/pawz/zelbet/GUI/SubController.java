@@ -784,17 +784,13 @@ public class SubController {
             if (nEdValue == 0) {
 
                 if (mEdValue < 0) {
-                    BendingBeamRectangle beam = new BendingBeamRectangle(-mEdValue, fCk, fYk, hValue, bValue, a1Value, a2Value);
+                    BendingBeamRectangle beam = new BendingBeamRectangle(-mEdValue, fCk, fYk, hValue, bValue, a2Value, a1Value);
                     double[] ress = beam.resultsBendingBeamRectangle();
                     System.out.println(Arrays.toString(ress));
 
                     res1AsymmetricVar = roundTwoDigit(ress[1] * Math.pow(10, 4));
                     res2AsymmetricVar = roundTwoDigit(ress[0] * Math.pow(10, 4));
 
-                    if (mEdValue < 0) {
-                        res1AsymmetricVar = res2AsymmetricVar;
-                        res2AsymmetricVar = res1AsymmetricVar;
-                    }
 
                     res1Asymmetric.setText(res1AsymmetricVar + cm2);
                     res2Asymmetric.setText(res2AsymmetricVar + cm2);
@@ -820,7 +816,7 @@ public class SubController {
                     res1true.setText("0" + cm2);
                     res2true.setText("0" + cm2);
 
-                    DiagnosticBendingBeamAndT beam1 = new DiagnosticBendingBeamAndT(fCk, fYk, bValue, bValue, hValue, 0, a1Value, a2Value, res1trueAsymmetricVar * Math.pow(10, -4), res2AsymmetricVar * Math.pow(10, -4));
+                    DiagnosticBendingBeamAndT beam1 = new DiagnosticBendingBeamAndT(fCk, fYk, bValue, bValue, hValue, 0, a2Value, a1Value, res2trueAsymmetricVar * Math.pow(10, -4), res1trueAsymmetricVar * Math.pow(10, -4));
                     double ress1 = beam1.resultDiagnostic();
 
                     mRd = -ress1;
@@ -834,10 +830,6 @@ public class SubController {
                     res1AsymmetricVar = roundTwoDigit(ress[0] * Math.pow(10, 4));
                     res2AsymmetricVar = roundTwoDigit(ress[1] * Math.pow(10, 4));
 
-                    if (mEdValue < 0) {
-                        res1AsymmetricVar = res2AsymmetricVar;
-                        res2AsymmetricVar = res1AsymmetricVar;
-                    }
 
                     res1Asymmetric.setText(res1AsymmetricVar + cm2);
                     res2Asymmetric.setText(res2AsymmetricVar + cm2);
@@ -863,7 +855,7 @@ public class SubController {
                     res1true.setText("0" + cm2);
                     res2true.setText("0" + cm2);
 
-                    DiagnosticBendingBeamAndT beam1 = new DiagnosticBendingBeamAndT(fCk, fYk, bValue, bValue, hValue, 0, a1Value, a2Value, res1trueAsymmetricVar * Math.pow(10, -4), res2AsymmetricVar * Math.pow(10, -4));
+                    DiagnosticBendingBeamAndT beam1 = new DiagnosticBendingBeamAndT(fCk, fYk, bValue, bValue, hValue, 0, a1Value, a2Value, res1trueAsymmetricVar * Math.pow(10, -4), res2trueAsymmetricVar * Math.pow(10, -4));
                     double ress1 = beam1.resultDiagnostic();
 
                     mRd = ress1;
@@ -874,7 +866,7 @@ public class SubController {
                 if (nEdValue > 0) {
 
                     if (mEdValue < 0) {
-                        CompressionSymmetricReinforcement beam1 = new CompressionSymmetricReinforcement(nEdValue, mEdValue, fCk, fYk, bValue, hValue, a1Value, a2Value);
+                        CompressionSymmetricReinforcement beam1 = new CompressionSymmetricReinforcement(nEdValue, mEdValue, fCk, fYk, bValue, hValue, a2Value, a1Value);
                         double[] results1 = beam1.resultsCompressionSymmetricReinforcement();
 
 
@@ -892,7 +884,7 @@ public class SubController {
 
                         //asymmetric
 
-                        CompressionAsymmetricReinforcement beam2 = new CompressionAsymmetricReinforcement(nEdValue, mEdValue, fCk, fYk, bValue, hValue, a1Value, a2Value);
+                        CompressionAsymmetricReinforcement beam2 = new CompressionAsymmetricReinforcement(nEdValue, mEdValue, fCk, fYk, bValue, hValue, a2Value, a1Value);
                         double[] results2 = beam2.resultsCompressionAsymmetricReinforcement();
 
                         res1AsymmetricVar = roundTwoDigit(results2[1] * Math.pow(10, 4));
@@ -913,7 +905,7 @@ public class SubController {
                         res1trueAsymmetric.setText(res1trueAsymmetricVar + cm2);
                         res2trueAsymmetric.setText(res2trueAsymmetricVar + cm2);
 
-                        DiagnosticCompression beam4 = new DiagnosticCompression(nEdValue, mEdValue, fCk, fYk, bValue, hValue, a1Value, a2Value, res1trueAsymmetricVar * Math.pow(10, -4), res2trueAsymmetricVar * Math.pow(10, -4));
+                        DiagnosticCompression beam4 = new DiagnosticCompression(nEdValue, mEdValue, fCk, fYk, bValue, hValue, a2Value, a1Value, res2trueAsymmetricVar * Math.pow(10, -4), res1trueAsymmetricVar * Math.pow(10, -4));
                         double[] results4 = beam4.resultsDiagnosticCompression();
                         mRd = -results4[1];
                         nRdValue = roundThreeDigitShearing(results4[0] * Math.pow(10, 3));
@@ -965,8 +957,8 @@ public class SubController {
 
                 } else {
 
-                    if (nEdValue < 0) {
-                        ExtensionSymmetricReinforcement beam1 = new ExtensionSymmetricReinforcement(-nEdValue, mEdValue, fCk, fYk, bValue, hValue, a1Value, a2Value);
+                    if (mEdValue < 0) {
+                        ExtensionSymmetricReinforcement beam1 = new ExtensionSymmetricReinforcement(-nEdValue, mEdValue, fCk, fYk, bValue, hValue, a2Value, a1Value);
                         double[] results1 = beam1.resultsExtensionSymmetric();
                         res1.setText(roundTwoDigit(results1[1] * Math.pow(10, 4)) + cm2);
                         res2.setText(roundTwoDigit(results1[0] * Math.pow(10, 4)) + cm2);
@@ -982,7 +974,7 @@ public class SubController {
 
                         //asymmetric
 
-                        ExtensionAsymmetricReinforcement beam2 = new ExtensionAsymmetricReinforcement(-nEdValue, mEdValue, fCk, fYk, bValue, hValue, a1Value, a2Value);
+                        ExtensionAsymmetricReinforcement beam2 = new ExtensionAsymmetricReinforcement(-nEdValue, mEdValue, fCk, fYk, bValue, hValue, a2Value, a1Value);
                         double[] results2 = beam2.resultsExtensionAsymmetric();
 
                         res1AsymmetricVar = roundTwoDigit(results2[1] * Math.pow(10, 4));
@@ -1004,7 +996,7 @@ public class SubController {
                         res1trueAsymmetric.setText(res1trueAsymmetricVar + cm2);
                         res2trueAsymmetric.setText(res2trueAsymmetricVar + cm2);
 
-                        DiagnosticExtension beam7 = new DiagnosticExtension(-nEdValue, mEdValue, fCk, fYk, bValue, hValue, a1Value, a2Value, res1trueAsymmetricVar * Math.pow(10, -4), res2trueAsymmetricVar * Math.pow(10, -4));
+                        DiagnosticExtension beam7 = new DiagnosticExtension(-nEdValue, mEdValue, fCk, fYk, bValue, hValue, a2Value, a1Value, res2trueAsymmetricVar * Math.pow(10, -4), res1trueAsymmetricVar * Math.pow(10, -4));
                         double[] results7 = beam7.resultsDiagnosticExtension();
                         mRd = -results7[1];
                         nRdValue = roundThreeDigitShearing(-results7[0] * Math.pow(10, 3));
@@ -1221,7 +1213,7 @@ public class SubController {
         if (choiceBoxDimensions.getValue().toString().equals("Przekrój Teowy")) {
 
             if (mEdValue < 0) {
-                BendingBeamT beam = new BendingBeamT(-mEdValue, fCk, fYk, bValue, bFValue, hValue, hFValue, a1Value, a2Value);
+                BendingBeamT beam = new BendingBeamT(-mEdValue, fCk, fYk, bValue, bFTValue, hValue, hFTValue, a2Value, a1Value);
                 double[] ress = beam.resultsBendingT();
                 System.out.println(Arrays.toString(ress));
 
@@ -1255,7 +1247,7 @@ public class SubController {
                 toPdfButton.setDisable(false);
 
 
-                DiagnosticBendingBeamAndT beam1 = new DiagnosticBendingBeamAndT(fCk, fYk, bValue, bFValue, hValue, hFValue, a1Value, a2Value, res1trueAsymmetricVar * Math.pow(10, -4), res2trueAsymmetricVar * Math.pow(10, -4));
+                DiagnosticBendingBeamAndT beam1 = new DiagnosticBendingBeamAndT(fCk, fYk, bValue, bFTValue, hValue, hFTValue, a2Value, a1Value, res2trueAsymmetricVar * Math.pow(10, -4), res1trueAsymmetricVar * Math.pow(10, -4));
                 double ress1 = beam1.resultDiagnostic();
 
                 nRdValue = 0;
@@ -1364,223 +1356,433 @@ public class SubController {
 
 
         if (nEdValue == 0) {
+            if (mEdValue > 0) {
+                if (choiceBoxDimensions.getValue().toString().equals("Przekrój Prostokątny")) {
+                    if (loadChar == 'L') {
+                        double aS1True = Math.pow(aS1Value / 2, 2) * Math.PI * resRods1ValueAsymmetric;
+                        double aS2True = Math.pow(aS2Value / 2, 2) * Math.PI * resRods2ValueAsymmetric;
 
 
-            if (choiceBoxDimensions.getValue().toString().equals("Przekrój Prostokątny")) {
-                if (loadChar == 'L') {
-                    double aS1True = Math.pow(aS1Value / 2, 2) * Math.PI * resRods1ValueAsymmetric;
-                    double aS2True = Math.pow(aS2Value / 2, 2) * Math.PI * resRods2ValueAsymmetric;
+                        Deflection res1 = new Deflection(lEffValue, mEkLtValue, mEkValue, alphaMValue, mEdValue, bValue, hValue, 0, 0, bValue, bValue, a1Value, a2Value, aS1True, aS2True, loadChar, fCk, rHValue, cementChar, tZeroValue);
+                        double result1 = res1.resultsLong();
+                        double result1a = res1.resultsLongDeformation();
+                        fiCrawling = res1.fiCrawling;
+
+                        Scratch res2 = new Scratch(cNomValue, aSw1Value, aS1Value, resRods1ValueAsymmetric, fCk, rHValue, tZeroValue, cementChar, bValue, bValue, bValue, hValue, 0, 0, a1Value, a2Value, aS1True, aS2True, mEkValue, mEkLtValue, loadChar);
+                        double result2 = res2.wK();
 
 
-                    Deflection res1 = new Deflection(lEffValue, mEkLtValue, mEkValue, alphaMValue, mEdValue, bValue, hValue, 0, 0, bValue, bValue, a1Value, a2Value, aS1True, aS2True, loadChar, fCk, rHValue, cementChar, tZeroValue);
-                    double result1 = res1.resultsLong();
-                    double result1a = res1.resultsLongDeformation();
-                    fiCrawling = res1.fiCrawling;
+                        //res to labels
+                        wResVar = roundThreeDigitShearing(result2 * Math.pow(10, 3));
+                        fMResVar = roundThreeDigitShearing(result1 * Math.pow(10, 2));
+                        fMPlusCResVar = roundThreeDigitShearing(result1a * Math.pow(10, 2));
+                        fCsVar = fMPlusCResVar - fMResVar;
 
-                    Scratch res2 = new Scratch(cNomValue, aSw1Value, aS1Value, resRods1ValueAsymmetric, fCk, rHValue, tZeroValue, cementChar, bValue, bValue, bValue, hValue, 0, 0, a1Value, a2Value, aS1True, aS2True, mEkValue, mEkLtValue, loadChar);
-                    double result2 = res2.wK();
+                        wResTrue.setText(wResVar + mm);
+                        fMResTrue.setText(fMResVar + cm);
+                        fMPlusCResTrue.setText(fMPlusCResVar + cm);
 
+                        //res theroretical
+                        double aS1Theoretical = res1AsymmetricVar * Math.pow(10, -4);
+                        double aS2Theoretical = res2AsymmetricVar * Math.pow(10, -4);
 
-                    //res to labels
-                    wResVar = roundThreeDigitShearing(result2 * Math.pow(10, 3));
-                    fMResVar = roundThreeDigitShearing(result1 * Math.pow(10, 2));
-                    fMPlusCResVar = roundThreeDigitShearing(result1a * Math.pow(10, 2));
-                    fCsVar = fMPlusCResVar - fMResVar;
-
-                    wResTrue.setText(wResVar + mm);
-                    fMResTrue.setText(fMResVar + cm);
-                    fMPlusCResTrue.setText(fMPlusCResVar + cm);
-
-                    //res theroretical
-                    double aS1Theoretical = res1AsymmetricVar * Math.pow(10, -4);
-                    double aS2Theoretical = res2AsymmetricVar * Math.pow(10, -4);
-
-                    double resRods1ValueTheoretical = res1AsymmetricVar * Math.pow(10, -4) / (Math.pow(aS1Value / 2, 2) * Math.PI);
-                    System.out.println("Pręty teoretyczne" + resRods1ValueTheoretical);
+                        double resRods1ValueTheoretical = res1AsymmetricVar * Math.pow(10, -4) / (Math.pow(aS1Value / 2, 2) * Math.PI);
+                        System.out.println("Pręty teoretyczne" + resRods1ValueTheoretical);
 
 
-                    Deflection res3 = new Deflection(lEffValue, mEkLtValue, mEkValue, alphaMValue, mEdValue, bValue, hValue, 0, 0, bValue, bValue, a1Value, a2Value, aS1Theoretical, aS2Theoretical, loadChar, fCk, rHValue, cementChar, tZeroValue);
-                    double result3 = res3.resultsLong();
-                    double result3a = res3.resultsLongDeformation();
+                        Deflection res3 = new Deflection(lEffValue, mEkLtValue, mEkValue, alphaMValue, mEdValue, bValue, hValue, 0, 0, bValue, bValue, a1Value, a2Value, aS1Theoretical, aS2Theoretical, loadChar, fCk, rHValue, cementChar, tZeroValue);
+                        double result3 = res3.resultsLong();
+                        double result3a = res3.resultsLongDeformation();
 
-                    Scratch res4 = new Scratch(cNomValue, aSw1Value, aS1Value, resRods1ValueTheoretical, fCk, rHValue, tZeroValue, cementChar, bValue, bValue, bValue, hValue, 0, 0, a1Value, a2Value, aS1Theoretical, aS2Theoretical, mEkValue, mEkLtValue, loadChar);
-                    double result4 = res4.wK();
-
-
-                    //res to labels
-                    wResVarTheoretical = roundThreeDigitShearing(result4 * Math.pow(10, 3));
-                    fMResVarTheoretical = roundThreeDigitShearing(result3 * Math.pow(10, 2));
-                    fMPlusCResVarTheoretical = roundThreeDigitShearing(result3a * Math.pow(10, 2));
-                    fCsVarTheoretical = fMPlusCResVarTheoretical - fMResVarTheoretical;
-
-                    wRes.setText(wResVarTheoretical + mm);
-                    fMRes.setText(fMResVarTheoretical + cm);
-                    fMPlusCRes.setText(fMPlusCResVarTheoretical + cm);
+                        Scratch res4 = new Scratch(cNomValue, aSw1Value, aS1Value, resRods1ValueTheoretical, fCk, rHValue, tZeroValue, cementChar, bValue, bValue, bValue, hValue, 0, 0, a1Value, a2Value, aS1Theoretical, aS2Theoretical, mEkValue, mEkLtValue, loadChar);
+                        double result4 = res4.wK();
 
 
+                        //res to labels
+                        wResVarTheoretical = roundThreeDigitShearing(result4 * Math.pow(10, 3));
+                        fMResVarTheoretical = roundThreeDigitShearing(result3 * Math.pow(10, 2));
+                        fMPlusCResVarTheoretical = roundThreeDigitShearing(result3a * Math.pow(10, 2));
+                        fCsVarTheoretical = fMPlusCResVarTheoretical - fMResVarTheoretical;
+
+                        wRes.setText(wResVarTheoretical + mm);
+                        fMRes.setText(fMResVarTheoretical + cm);
+                        fMPlusCRes.setText(fMPlusCResVarTheoretical + cm);
+
+
+                    } else {
+                        double aS1True = Math.pow(aS1Value / 2, 2) * Math.PI * resRods1ValueAsymmetric;
+                        double aS2True = Math.pow(aS2Value / 2, 2) * Math.PI * resRods2ValueAsymmetric;
+
+                        Deflection res1 = new Deflection(lEffValue, mEkLtValue, mEkValue, alphaMValue, mEdValue, bValue, hValue, 0, 0, bValue, bValue, a1Value, a2Value, aS1True, aS2True, loadChar, fCk, rHValue, cementChar, tZeroValue);
+                        double result1 = res1.resultsShort();
+                        fiCrawling = res1.fiCrawling;
+
+                        Scratch res2 = new Scratch(cNomValue, aSw1Value, aS1Value, resRods1ValueAsymmetric, fCk, rHValue, tZeroValue, cementChar, bValue, bValue, bValue, hValue, 0, 0, a1Value, a2Value, aS1True, aS2True, mEkValue, mEkLtValue, loadChar);
+                        double result2 = res2.wK();
+
+                        //res to labels
+                        String mm = " mm";
+                        String cm = " cm";
+
+                        wResVar = roundThreeDigitShearing(result2 * Math.pow(10, 3));
+                        fMResVar = roundThreeDigitShearing(result1 * Math.pow(10, 2));
+                        fMPlusCResVar = 0;
+                        fCsVar = fMPlusCResVar - fMResVar;
+
+
+                        wResTrue.setText(wResVar + mm);
+                        fMResTrue.setText(fMResVar + cm);
+                        fMPlusCResTrue.setText(roundThreeDigitShearing(0) + cm);
+
+                        //res theroretical
+                        double aS1Theoretical = res1AsymmetricVar * Math.pow(10, -4);
+                        double aS2Theoretical = res2AsymmetricVar * Math.pow(10, -4);
+
+                        double resRods1ValueTheoretical = res1AsymmetricVar * Math.pow(10, -4) / (Math.pow(aS1Value / 2, 2) * Math.PI);
+                        System.out.println("Pręty teoretyczne" + resRods1ValueTheoretical);
+
+
+                        Deflection res3 = new Deflection(lEffValue, mEkLtValue, mEkValue, alphaMValue, mEdValue, bValue, hValue, 0, 0, bValue, bValue, a1Value, a2Value, aS1Theoretical, aS2Theoretical, loadChar, fCk, rHValue, cementChar, tZeroValue);
+                        double result3 = res3.resultsShort();
+
+                        Scratch res4 = new Scratch(cNomValue, aSw1Value, aS1Value, resRods1ValueTheoretical, fCk, rHValue, tZeroValue, cementChar, bValue, bValue, bValue, hValue, 0, 0, a1Value, a2Value, aS1Theoretical, aS2Theoretical, mEkValue, mEkLtValue, loadChar);
+                        double result4 = res4.wK();
+
+
+                        //res to labels
+                        wResVarTheoretical = roundThreeDigitShearing(result4 * Math.pow(10, 3));
+                        fMResVarTheoretical = roundThreeDigitShearing(result3 * Math.pow(10, 2));
+                        fMPlusCResVarTheoretical = 0;
+                        fCsVarTheoretical = fMPlusCResVarTheoretical - fMResVarTheoretical;
+
+                        wRes.setText(wResVarTheoretical + mm);
+                        fMRes.setText(fMResVarTheoretical + cm);
+                        fMPlusCRes.setText(roundThreeDigitShearing(0) + cm);
+                    }
                 } else {
-                    double aS1True = Math.pow(aS1Value / 2, 2) * Math.PI * resRods1ValueAsymmetric;
-                    double aS2True = Math.pow(aS2Value / 2, 2) * Math.PI * resRods2ValueAsymmetric;
-
-                    Deflection res1 = new Deflection(lEffValue, mEkLtValue, mEkValue, alphaMValue, mEdValue, bValue, hValue, 0, 0, bValue, bValue, a1Value, a2Value, aS1True, aS2True, loadChar, fCk, rHValue, cementChar, tZeroValue);
-                    double result1 = res1.resultsShort();
-                    fiCrawling = res1.fiCrawling;
-
-                    Scratch res2 = new Scratch(cNomValue, aSw1Value, aS1Value, resRods1ValueAsymmetric, fCk, rHValue, tZeroValue, cementChar, bValue, bValue, bValue, hValue, 0, 0, a1Value, a2Value, aS1True, aS2True, mEkValue, mEkLtValue, loadChar);
-                    double result2 = res2.wK();
-
-                    //res to labels
-                    String mm = " mm";
-                    String cm = " cm";
-
-                    wResVar = roundThreeDigitShearing(result2 * Math.pow(10, 3));
-                    fMResVar = roundThreeDigitShearing(result1 * Math.pow(10, 2));
-                    fMPlusCResVar = 0;
-                    fCsVar = fMPlusCResVar - fMResVar;
+                    if (loadChar == 'L') {
+                        double aS1True = Math.pow(aS1Value / 2, 2) * Math.PI * resRods1ValueAsymmetric;
+                        double aS2True = Math.pow(aS2Value / 2, 2) * Math.PI * resRods2ValueAsymmetric;
 
 
-                    wResTrue.setText(wResVar + mm);
-                    fMResTrue.setText(fMResVar + cm);
-                    fMPlusCResTrue.setText(roundThreeDigitShearing(0) + cm);
+                        Deflection res1 = new Deflection(lEffValue, mEkLtValue, mEkValue, alphaMValue, mEdValue, bValue, hValue, hFValue, hFTValue, bFValue, bFTValue, a1Value, a2Value, aS1True, aS2True, loadChar, fCk, rHValue, cementChar, tZeroValue);
+                        double result1 = res1.resultsLong();
+                        double result1a = res1.resultsLongDeformation();
+                        fiCrawling = res1.fiCrawling;
 
-                    //res theroretical
-                    double aS1Theoretical = res1AsymmetricVar * Math.pow(10, -4);
-                    double aS2Theoretical = res2AsymmetricVar * Math.pow(10, -4);
-
-                    double resRods1ValueTheoretical = res1AsymmetricVar * Math.pow(10, -4) / (Math.pow(aS1Value / 2, 2) * Math.PI);
-                    System.out.println("Pręty teoretyczne" + resRods1ValueTheoretical);
+                        Scratch res2 = new Scratch(cNomValue, aSw1Value, aS1Value, resRods1ValueAsymmetric, fCk, rHValue, tZeroValue, cementChar, bValue, bFValue, bFTValue, hValue, hFValue, hFTValue, a1Value, a2Value, aS1True, aS2True, mEkValue, mEkLtValue, loadChar);
+                        double result2 = res2.wK();
 
 
-                    Deflection res3 = new Deflection(lEffValue, mEkLtValue, mEkValue, alphaMValue, mEdValue, bValue, hValue, 0, 0, bValue, bValue, a1Value, a2Value, aS1Theoretical, aS2Theoretical, loadChar, fCk, rHValue, cementChar, tZeroValue);
-                    double result3 = res3.resultsShort();
+                        //res to labels
+                        String mm = " mm";
+                        String cm = " cm";
 
-                    Scratch res4 = new Scratch(cNomValue, aSw1Value, aS1Value, resRods1ValueTheoretical, fCk, rHValue, tZeroValue, cementChar, bValue, bValue, bValue, hValue, 0, 0, a1Value, a2Value, aS1Theoretical, aS2Theoretical, mEkValue, mEkLtValue, loadChar);
-                    double result4 = res4.wK();
+                        wResVar = roundThreeDigitShearing(result2 * Math.pow(10, 3));
+                        fMResVar = roundThreeDigitShearing(result1 * Math.pow(10, 2));
+                        fMPlusCResVar = roundThreeDigitShearing(result1a * Math.pow(10, 2));
+                        fCsVar = fMPlusCResVar - fMResVar;
+
+                        wResTrue.setText(wResVar + mm);
+                        fMResTrue.setText(fMResVar + cm);
+                        fMPlusCResTrue.setText(fMPlusCResVar + cm);
 
 
-                    //res to labels
-                    wResVarTheoretical = roundThreeDigitShearing(result4 * Math.pow(10, 3));
-                    fMResVarTheoretical = roundThreeDigitShearing(result3 * Math.pow(10, 2));
-                    fMPlusCResVarTheoretical = 0;
-                    fCsVarTheoretical = fMPlusCResVarTheoretical - fMResVarTheoretical;
+                        //theoretical
+                        double aS1Theoretical = res1AsymmetricVar * Math.pow(10, -4);  //todo res 1 asymmetric var tbeam
+                        double aS2Theoretical = res2AsymmetricVar * Math.pow(10, -4);
 
-                    wRes.setText(wResVarTheoretical + mm);
-                    fMRes.setText(fMResVarTheoretical + cm);
-                    fMPlusCRes.setText(roundThreeDigitShearing(0) + cm);
+                        double resRods1ValueTheoretical = res1AsymmetricVar * Math.pow(10, -4) / (Math.pow(aS1Value / 2, 2) * Math.PI);
+                        System.out.println("Pręty teoretyczne" + resRods1ValueTheoretical);
+
+                        Deflection res3 = new Deflection(lEffValue, mEkLtValue, mEkValue, alphaMValue, mEdValue, bValue, hValue, hFValue, hFTValue, bFValue, bFTValue, a1Value, a2Value, aS1Theoretical, aS2Theoretical, loadChar, fCk, rHValue, cementChar, tZeroValue);
+                        double result3 = res3.resultsLong();
+                        double result3a = res3.resultsLongDeformation();
+
+                        Scratch res4 = new Scratch(cNomValue, aSw1Value, aS1Value, resRods1ValueTheoretical, fCk, rHValue, tZeroValue, cementChar, bValue, bFValue, bFTValue, hValue, hFValue, hFTValue, a1Value, a2Value, aS1Theoretical, aS2Theoretical, mEkValue, mEkLtValue, loadChar);
+                        double result4 = res4.wK();
+
+
+                        //res to labels
+                        wResVarTheoretical = roundThreeDigitShearing(result4 * Math.pow(10, 3));
+                        fMResVarTheoretical = roundThreeDigitShearing(result3 * Math.pow(10, 2));
+                        fMPlusCResVarTheoretical = roundThreeDigitShearing(result3a * Math.pow(10, 2));
+                        fCsVarTheoretical = fMPlusCResVarTheoretical - fMResVarTheoretical;
+
+                        wRes.setText(wResVarTheoretical + mm);
+                        fMRes.setText(fMResVarTheoretical + cm);
+                        fMPlusCRes.setText(fMPlusCResVarTheoretical + cm);
+
+                    } else {
+                        double aS1True = Math.pow(aS1Value / 2, 2) * Math.PI * resRods1ValueAsymmetric;
+                        double aS2True = Math.pow(aS2Value / 2, 2) * Math.PI * resRods2ValueAsymmetric;
+
+                        Deflection res1 = new Deflection(lEffValue, mEkLtValue, mEkValue, alphaMValue, mEdValue, bValue, hValue, hFValue, hFTValue, bFValue, bFTValue, a1Value, a2Value, aS1True, aS2True, loadChar, fCk, rHValue, cementChar, tZeroValue);
+                        double result1 = res1.resultsShort();
+                        fiCrawling = res1.fiCrawling;
+
+                        Scratch res2 = new Scratch(cNomValue, aSw1Value, aS1Value, resRods1ValueAsymmetric, fCk, rHValue, tZeroValue, cementChar, bValue, bFValue, bFTValue, hValue, hFValue, hFTValue, a1Value, a2Value, aS1True, aS2True, mEkValue, mEkLtValue, loadChar);
+                        double result2 = res2.wK();
+
+                        //res to labels
+
+
+                        String mm = " mm";
+                        String cm = " cm";
+
+                        wResVar = roundThreeDigitShearing(result2 * Math.pow(10, 3));
+                        fMResVar = roundThreeDigitShearing(result1 * Math.pow(10, 2));
+                        fMPlusCResVar = 0;
+                        fCsVar = fMPlusCResVar - fMResVar;
+
+                        wResTrue.setText(wResVar + mm);
+                        fMResTrue.setText(fMResVar + cm);
+                        fMPlusCResTrue.setText(roundThreeDigitShearing(0) + cm);
+
+                        //theoretical
+                        double aS1Theoretical = res1AsymmetricVar * Math.pow(10, -4);
+                        double aS2Theoretical = res2AsymmetricVar * Math.pow(10, -4);
+
+                        double resRods1ValueTheoretical = res1AsymmetricVar * Math.pow(10, -4) / (Math.pow(aS1Value / 2, 2) * Math.PI);
+                        System.out.println("Pręty teoretyczne" + resRods1ValueTheoretical);
+
+                        Deflection res3 = new Deflection(lEffValue, mEkLtValue, mEkValue, alphaMValue, mEdValue, bValue, hValue, hFValue, hFTValue, bFValue, bFTValue, a1Value, a2Value, aS1Theoretical, aS2Theoretical, loadChar, fCk, rHValue, cementChar, tZeroValue);
+                        double result3 = res3.resultsShort();
+
+
+                        Scratch res4 = new Scratch(cNomValue, aSw1Value, aS1Value, resRods1ValueTheoretical, fCk, rHValue, tZeroValue, cementChar, bValue, bFValue, bFTValue, hValue, hFValue, hFTValue, a1Value, a2Value, aS1Theoretical, aS2Theoretical, mEkValue, mEkLtValue, loadChar);
+                        double result4 = res4.wK();
+
+                        //res to labels
+                        wResVarTheoretical = roundThreeDigitShearing(result4 * Math.pow(10, 3));
+                        fMResVarTheoretical = roundThreeDigitShearing(result3 * Math.pow(10, 2));
+                        fMPlusCResVarTheoretical = 0;
+                        fCsVarTheoretical = fMPlusCResVarTheoretical - fMResVarTheoretical;
+
+                        wRes.setText(wResVarTheoretical + mm);
+                        fMRes.setText(fMResVarTheoretical + cm);
+                        fMPlusCRes.setText(roundThreeDigitShearing(0) + cm);
+
+
+                    }
                 }
             } else {
-                if (loadChar == 'L') {
-                    double aS1True = Math.pow(aS1Value / 2, 2) * Math.PI * resRods1ValueAsymmetric;
-                    double aS2True = Math.pow(aS2Value / 2, 2) * Math.PI * resRods2ValueAsymmetric;
+                if (choiceBoxDimensions.getValue().toString().equals("Przekrój Prostokątny")) {
+                    if (loadChar == 'L') {
+                        double aS1True = Math.pow(aS1Value / 2, 2) * Math.PI * resRods1ValueAsymmetric;
+                        double aS2True = Math.pow(aS2Value / 2, 2) * Math.PI * resRods2ValueAsymmetric;
 
 
-                    Deflection res1 = new Deflection(lEffValue, mEkLtValue, mEkValue, alphaMValue, mEdValue, bValue, hValue, hFValue, hFTValue, bFValue, bFTValue, a1Value, a2Value, aS1True, aS2True, loadChar, fCk, rHValue, cementChar, tZeroValue);
-                    double result1 = res1.resultsLong();
-                    double result1a = res1.resultsLongDeformation();
-                    fiCrawling = res1.fiCrawling;
+                        Deflection res1 = new Deflection(lEffValue, -mEkLtValue, -mEkValue, alphaMValue, -mEdValue, bValue, hValue, 0, 0, bValue, bValue, a2Value, a1Value, aS2True, aS1True, loadChar, fCk, rHValue, cementChar, tZeroValue);
+                        double result1 = res1.resultsLong();
+                        double result1a = res1.resultsLongDeformation();
+                        fiCrawling = res1.fiCrawling;
 
-                    Scratch res2 = new Scratch(cNomValue, aSw1Value, aS1Value, resRods1ValueAsymmetric, fCk, rHValue, tZeroValue, cementChar, bValue, bFValue, bFTValue, hValue, hFValue, hFTValue, a1Value, a2Value, aS1True, aS2True, mEkValue, mEkLtValue, loadChar);
-                    double result2 = res2.wK();
-
-
-                    //res to labels
-                    String mm = " mm";
-                    String cm = " cm";
-
-                    wResVar = roundThreeDigitShearing(result2 * Math.pow(10, 3));
-                    fMResVar = roundThreeDigitShearing(result1 * Math.pow(10, 2));
-                    fMPlusCResVar = roundThreeDigitShearing(result1a * Math.pow(10, 2));
-                    fCsVar = fMPlusCResVar - fMResVar;
-
-                    wResTrue.setText(wResVar + mm);
-                    fMResTrue.setText(fMResVar + cm);
-                    fMPlusCResTrue.setText(fMPlusCResVar + cm);
+                        Scratch res2 = new Scratch(cNomValue, aSw1Value, aS2Value, resRods2ValueAsymmetric, fCk, rHValue, tZeroValue, cementChar, bValue, bValue, bValue, hValue, 0, 0, a2Value, a1Value, aS2True, aS1True, -mEkValue, -mEkLtValue, loadChar);
+                        double result2 = res2.wK();
 
 
-                    //theoretical
-                    double aS1Theoretical = res1AsymmetricVar * Math.pow(10, -4);  //todo res 1 asymmetric var tbeam 
-                    double aS2Theoretical = res2AsymmetricVar * Math.pow(10, -4);
+                        //res to labels
+                        wResVar = roundThreeDigitShearing(result2 * Math.pow(10, 3));
+                        fMResVar = roundThreeDigitShearing(result1 * Math.pow(10, 2));
+                        fMPlusCResVar = roundThreeDigitShearing(result1a * Math.pow(10, 2));
+                        fCsVar = fMPlusCResVar - fMResVar;
 
-                    double resRods1ValueTheoretical = res1AsymmetricVar * Math.pow(10, -4) / (Math.pow(aS1Value / 2, 2) * Math.PI);
-                    System.out.println("Pręty teoretyczne" + resRods1ValueTheoretical);
+                        wResTrue.setText(wResVar + mm);
+                        fMResTrue.setText(fMResVar + cm);
+                        fMPlusCResTrue.setText(fMPlusCResVar + cm);
 
-                    Deflection res3 = new Deflection(lEffValue, mEkLtValue, mEkValue, alphaMValue, mEdValue, bValue, hValue, hFValue, hFTValue, bFValue, bFTValue, a1Value, a2Value, aS1Theoretical, aS2Theoretical, loadChar, fCk, rHValue, cementChar, tZeroValue);
-                    double result3 = res3.resultsLong();
-                    double result3a = res3.resultsLongDeformation();
+                        //res theroretical
+                        double aS1Theoretical = res1AsymmetricVar * Math.pow(10, -4);
+                        double aS2Theoretical = res2AsymmetricVar * Math.pow(10, -4);
 
-                    Scratch res4 = new Scratch(cNomValue, aSw1Value, aS1Value, resRods1ValueTheoretical, fCk, rHValue, tZeroValue, cementChar, bValue, bFValue, bFTValue, hValue, hFValue, hFTValue, a1Value, a2Value, aS1Theoretical, aS2Theoretical, mEkValue, mEkLtValue, loadChar);
-                    double result4 = res4.wK();
+                        double resRods1ValueTheoretical = res2AsymmetricVar * Math.pow(10, -4) / (Math.pow(aS2Value / 2, 2) * Math.PI);
+                        System.out.println("Pręty teoretyczne" + resRods1ValueTheoretical);
 
 
-                    //res to labels
-                    wResVarTheoretical = roundThreeDigitShearing(result4 * Math.pow(10, 3));
-                    fMResVarTheoretical = roundThreeDigitShearing(result3 * Math.pow(10, 2));
-                    fMPlusCResVarTheoretical = roundThreeDigitShearing(result3a * Math.pow(10, 2));
-                    fCsVarTheoretical = fMPlusCResVarTheoretical - fMResVarTheoretical;
+                        Deflection res3 = new Deflection(lEffValue, -mEkLtValue, -mEkValue, alphaMValue, -mEdValue, bValue, hValue, 0, 0, bValue, bValue, a2Value, a1Value, aS2Theoretical, aS1Theoretical, loadChar, fCk, rHValue, cementChar, tZeroValue);
+                        double result3 = res3.resultsLong();
+                        double result3a = res3.resultsLongDeformation();
 
-                    wRes.setText(wResVarTheoretical + mm);
-                    fMRes.setText(fMResVarTheoretical + cm);
-                    fMPlusCRes.setText(fMPlusCResVarTheoretical + cm);
+                        Scratch res4 = new Scratch(cNomValue, aSw1Value, aS2Value, resRods1ValueTheoretical, fCk, rHValue, tZeroValue, cementChar, bValue, bValue, bValue, hValue, 0, 0, a2Value, a1Value, aS2Theoretical, aS1Theoretical, -mEkValue, -mEkLtValue, loadChar);
+                        double result4 = res4.wK();
 
+
+                        //res to labels
+                        wResVarTheoretical = roundThreeDigitShearing(result4 * Math.pow(10, 3));
+                        fMResVarTheoretical = roundThreeDigitShearing(result3 * Math.pow(10, 2));
+                        fMPlusCResVarTheoretical = roundThreeDigitShearing(result3a * Math.pow(10, 2));
+                        fCsVarTheoretical = fMPlusCResVarTheoretical - fMResVarTheoretical;
+
+                        wRes.setText(wResVarTheoretical + mm);
+                        fMRes.setText(fMResVarTheoretical + cm);
+                        fMPlusCRes.setText(fMPlusCResVarTheoretical + cm);
+
+
+                    } else {
+                        double aS1True = Math.pow(aS1Value / 2, 2) * Math.PI * resRods1ValueAsymmetric;
+                        double aS2True = Math.pow(aS2Value / 2, 2) * Math.PI * resRods2ValueAsymmetric;
+
+                        Deflection res1 = new Deflection(lEffValue, -mEkLtValue, -mEkValue, alphaMValue, -mEdValue, bValue, hValue, 0, 0, bValue, bValue, a2Value, a1Value, aS2True, aS1True, loadChar, fCk, rHValue, cementChar, tZeroValue);
+                        double result1 = res1.resultsShort();
+                        fiCrawling = res1.fiCrawling;
+
+                        Scratch res2 = new Scratch(cNomValue, aSw1Value, aS2Value, resRods2ValueAsymmetric, fCk, rHValue, tZeroValue, cementChar, bValue, bValue, bValue, hValue, 0, 0, a2Value, a1Value, aS2True, aS1True, -mEkValue, -mEkLtValue, loadChar);
+                        double result2 = res2.wK();
+
+                        //res to labels
+                        String mm = " mm";
+                        String cm = " cm";
+
+                        wResVar = roundThreeDigitShearing(result2 * Math.pow(10, 3));
+                        fMResVar = roundThreeDigitShearing(result1 * Math.pow(10, 2));
+                        fMPlusCResVar = 0;
+                        fCsVar = fMPlusCResVar - fMResVar;
+
+
+                        wResTrue.setText(wResVar + mm);
+                        fMResTrue.setText(fMResVar + cm);
+                        fMPlusCResTrue.setText(roundThreeDigitShearing(0) + cm);
+
+                        //res theroretical
+                        double aS1Theoretical = res1AsymmetricVar * Math.pow(10, -4);
+                        double aS2Theoretical = res2AsymmetricVar * Math.pow(10, -4);
+
+                        double resRods2ValueTheoretical = res2AsymmetricVar * Math.pow(10, -4) / (Math.pow(aS2Value / 2, 2) * Math.PI);
+                        System.out.println("Pręty teoretyczne" + resRods2ValueTheoretical);
+
+
+                        Deflection res3 = new Deflection(lEffValue, -mEkLtValue,- mEkValue, alphaMValue, -mEdValue, bValue, hValue, 0, 0, bValue, bValue, a2Value, a1Value, aS2Theoretical, aS1Theoretical, loadChar, fCk, rHValue, cementChar, tZeroValue);
+                        double result3 = res3.resultsShort();
+
+                        Scratch res4 = new Scratch(cNomValue, aSw1Value, aS2Value, resRods2ValueTheoretical, fCk, rHValue, tZeroValue, cementChar, bValue, bValue, bValue, hValue, 0, 0, a2Value, a1Value, aS2Theoretical, aS1Theoretical, -mEkValue, -mEkLtValue, loadChar);
+                        double result4 = res4.wK();
+
+
+                        //res to labels
+                        wResVarTheoretical = roundThreeDigitShearing(result4 * Math.pow(10, 3));
+                        fMResVarTheoretical = roundThreeDigitShearing(result3 * Math.pow(10, 2));
+                        fMPlusCResVarTheoretical = 0;
+                        fCsVarTheoretical = fMPlusCResVarTheoretical - fMResVarTheoretical;
+
+                        wRes.setText(wResVarTheoretical + mm);
+                        fMRes.setText(fMResVarTheoretical + cm);
+                        fMPlusCRes.setText(roundThreeDigitShearing(0) + cm);
+                    }
                 } else {
-                    double aS1True = Math.pow(aS1Value / 2, 2) * Math.PI * resRods1ValueAsymmetric;
-                    double aS2True = Math.pow(aS2Value / 2, 2) * Math.PI * resRods2ValueAsymmetric;
-
-                    Deflection res1 = new Deflection(lEffValue, mEkLtValue, mEkValue, alphaMValue, mEdValue, bValue, hValue, hFValue, hFTValue, bFValue, bFTValue, a1Value, a2Value, aS1True, aS2True, loadChar, fCk, rHValue, cementChar, tZeroValue);
-                    double result1 = res1.resultsShort();
-                    fiCrawling = res1.fiCrawling;
-
-                    Scratch res2 = new Scratch(cNomValue, aSw1Value, aS1Value, resRods1ValueAsymmetric, fCk, rHValue, tZeroValue, cementChar, bValue, bFValue, bFTValue, hValue, hFValue, hFTValue, a1Value, a2Value, aS1True, aS2True, mEkValue, mEkLtValue, loadChar);
-                    double result2 = res2.wK();
-
-                    //res to labels
+                    if (loadChar == 'L') {
+                        double aS1True = Math.pow(aS1Value / 2, 2) * Math.PI * resRods1ValueAsymmetric;
+                        double aS2True = Math.pow(aS2Value / 2, 2) * Math.PI * resRods2ValueAsymmetric;
 
 
-                    String mm = " mm";
-                    String cm = " cm";
+                        Deflection res1 = new Deflection(lEffValue, -mEkLtValue, -mEkValue, alphaMValue, -mEdValue, bValue, hValue, hFTValue, hFValue, bFTValue, bFValue, a2Value, a1Value, aS2True, aS1True, loadChar, fCk, rHValue, cementChar, tZeroValue);
+                        double result1 = res1.resultsLong();
+                        double result1a = res1.resultsLongDeformation();
+                        fiCrawling = res1.fiCrawling;
 
-                    wResVar = roundThreeDigitShearing(result2 * Math.pow(10, 3));
-                    fMResVar = roundThreeDigitShearing(result1 * Math.pow(10, 2));
-                    fMPlusCResVar = 0;
-                    fCsVar = fMPlusCResVar - fMResVar;
-
-                    wResTrue.setText(wResVar + mm);
-                    fMResTrue.setText(fMResVar + cm);
-                    fMPlusCResTrue.setText(roundThreeDigitShearing(0) + cm);
-
-                    //theoretical
-                    double aS1Theoretical = res1AsymmetricVar * Math.pow(10, -4);
-                    double aS2Theoretical = res2AsymmetricVar * Math.pow(10, -4);
-
-                    double resRods1ValueTheoretical = res1AsymmetricVar * Math.pow(10, -4) / (Math.pow(aS1Value / 2, 2) * Math.PI);
-                    System.out.println("Pręty teoretyczne" + resRods1ValueTheoretical);
-
-                    Deflection res3 = new Deflection(lEffValue, mEkLtValue, mEkValue, alphaMValue, mEdValue, bValue, hValue, hFValue, hFTValue, bFValue, bFTValue, a1Value, a2Value, aS1Theoretical, aS2Theoretical, loadChar, fCk, rHValue, cementChar, tZeroValue);
-                    double result3 = res3.resultsShort();
+                        Scratch res2 = new Scratch(cNomValue, aSw1Value, aS2Value, resRods2ValueAsymmetric, fCk, rHValue, tZeroValue, cementChar, bValue, bFTValue, bFValue, hValue, hFTValue, hFValue, a2Value, a1Value, aS2True, aS1True, -mEkValue, -mEkLtValue, loadChar);
+                        double result2 = res2.wK();
 
 
-                    Scratch res4 = new Scratch(cNomValue, aSw1Value, aS1Value, resRods1ValueTheoretical, fCk, rHValue, tZeroValue, cementChar, bValue, bFValue, bFTValue, hValue, hFValue, hFTValue, a1Value, a2Value, aS1Theoretical, aS2Theoretical, mEkValue, mEkLtValue, loadChar);
-                    double result4 = res4.wK();
+                        //res to labels
+                        String mm = " mm";
+                        String cm = " cm";
 
-                    //res to labels
-                    wResVarTheoretical = roundThreeDigitShearing(result4 * Math.pow(10, 3));
-                    fMResVarTheoretical = roundThreeDigitShearing(result3 * Math.pow(10, 2));
-                    fMPlusCResVarTheoretical = 0;
-                    fCsVarTheoretical = fMPlusCResVarTheoretical - fMResVarTheoretical;
+                        wResVar = roundThreeDigitShearing(result2 * Math.pow(10, 3));
+                        fMResVar = roundThreeDigitShearing(result1 * Math.pow(10, 2));
+                        fMPlusCResVar = roundThreeDigitShearing(result1a * Math.pow(10, 2));
+                        fCsVar = fMPlusCResVar - fMResVar;
 
-                    wRes.setText(wResVarTheoretical + mm);
-                    fMRes.setText(fMResVarTheoretical + cm);
-                    fMPlusCRes.setText(roundThreeDigitShearing(0) + cm);
+                        wResTrue.setText(wResVar + mm);
+                        fMResTrue.setText(fMResVar + cm);
+                        fMPlusCResTrue.setText(fMPlusCResVar + cm);
 
 
+                        //theoretical
+                        double aS1Theoretical = res1AsymmetricVar * Math.pow(10, -4);  //todo res 1 asymmetric var tbeam
+                        double aS2Theoretical = res2AsymmetricVar * Math.pow(10, -4);
+
+                        double resRods1ValueTheoretical = res2AsymmetricVar * Math.pow(10, -4) / (Math.pow(aS2Value / 2, 2) * Math.PI);
+                        System.out.println("Pręty teoretyczne" + resRods1ValueTheoretical);
+
+                        Deflection res3 = new Deflection(lEffValue, -mEkLtValue, -mEkValue, alphaMValue, -mEdValue, bValue, hValue, hFValue, hFTValue, bFValue, bFTValue, a2Value, a1Value, aS2Theoretical, aS1Theoretical, loadChar, fCk, rHValue, cementChar, tZeroValue);
+                        double result3 = res3.resultsLong();
+                        double result3a = res3.resultsLongDeformation();
+
+                        Scratch res4 = new Scratch(cNomValue, aSw1Value, aS2Value, resRods1ValueTheoretical, fCk, rHValue, tZeroValue, cementChar, bValue, bFValue, bFTValue, hValue, hFValue, hFTValue, a2Value, a1Value, aS2Theoretical, aS1Theoretical, -mEkValue, -mEkLtValue, loadChar);
+                        double result4 = res4.wK();
+
+
+                        //res to labels
+                        wResVarTheoretical = roundThreeDigitShearing(result4 * Math.pow(10, 3));
+                        fMResVarTheoretical = roundThreeDigitShearing(result3 * Math.pow(10, 2));
+                        fMPlusCResVarTheoretical = roundThreeDigitShearing(result3a * Math.pow(10, 2));
+                        fCsVarTheoretical = fMPlusCResVarTheoretical - fMResVarTheoretical;
+
+                        wRes.setText(wResVarTheoretical + mm);
+                        fMRes.setText(fMResVarTheoretical + cm);
+                        fMPlusCRes.setText(fMPlusCResVarTheoretical + cm);
+
+                    } else {
+                        double aS1True = Math.pow(aS1Value / 2, 2) * Math.PI * resRods1ValueAsymmetric;
+                        double aS2True = Math.pow(aS2Value / 2, 2) * Math.PI * resRods2ValueAsymmetric;
+
+                        Deflection res1 = new Deflection(lEffValue, -mEkLtValue, -mEkValue, alphaMValue, -mEdValue, bValue, hValue, hFTValue, hFValue, bFTValue, bFValue, a2Value, a1Value, aS2True, aS1True, loadChar, fCk, rHValue, cementChar, tZeroValue);
+                        double result1 = res1.resultsShort();
+                        fiCrawling = res1.fiCrawling;
+
+                        Scratch res2 = new Scratch(cNomValue, aSw1Value, aS2Value, resRods2ValueAsymmetric, fCk, rHValue, tZeroValue, cementChar, bValue, bFTValue, bFValue, hValue, hFTValue, hFValue, a2Value, a1Value, aS2True, aS1True, -mEkValue, -mEkLtValue, loadChar);
+                        double result2 = res2.wK();
+
+                        //res to labels
+
+
+                        String mm = " mm";
+                        String cm = " cm";
+
+                        wResVar = roundThreeDigitShearing(result2 * Math.pow(10, 3));
+                        fMResVar = roundThreeDigitShearing(result1 * Math.pow(10, 2));
+                        fMPlusCResVar = 0;
+                        fCsVar = fMPlusCResVar - fMResVar;
+
+                        wResTrue.setText(wResVar + mm);
+                        fMResTrue.setText(fMResVar + cm);
+                        fMPlusCResTrue.setText(roundThreeDigitShearing(0) + cm);
+
+                        //theoretical
+                        double aS1Theoretical = res1AsymmetricVar * Math.pow(10, -4);
+                        double aS2Theoretical = res2AsymmetricVar * Math.pow(10, -4);
+
+                        double resRods2ValueTheoretical = res2AsymmetricVar * Math.pow(10, -4) / (Math.pow(aS2Value / 2, 2) * Math.PI);
+                        System.out.println("Pręty teoretyczne" + resRods2ValueTheoretical);
+
+                        Deflection res3 = new Deflection(lEffValue, -mEkLtValue, -mEkValue, alphaMValue, -mEdValue, bValue, hValue, hFTValue, hFValue, bFTValue, bFValue, a2Value, a1Value, aS2Theoretical, aS1Theoretical, loadChar, fCk, rHValue, cementChar, tZeroValue);
+                        double result3 = res3.resultsShort();
+
+
+                        Scratch res4 = new Scratch(cNomValue, aSw1Value, aS2Value, resRods2ValueTheoretical, fCk, rHValue, tZeroValue, cementChar, bValue, bFTValue, bFValue, hValue, hFTValue, hFValue, a2Value, a1Value, aS2Theoretical, aS1Theoretical, -mEkValue, -mEkLtValue, loadChar);
+                        double result4 = res4.wK();
+
+                        //res to labels
+                        wResVarTheoretical = roundThreeDigitShearing(result4 * Math.pow(10, 3));
+                        fMResVarTheoretical = roundThreeDigitShearing(result3 * Math.pow(10, 2));
+                        fMPlusCResVarTheoretical = 0;
+                        fCsVarTheoretical = fMPlusCResVarTheoretical - fMResVarTheoretical;
+
+                        wRes.setText(wResVarTheoretical + mm);
+                        fMRes.setText(fMResVarTheoretical + cm);
+                        fMPlusCRes.setText(roundThreeDigitShearing(0) + cm);
+
+
+                    }
                 }
             }
-
         } else {
             wResTrue.setText(0 + mm);
             fMResTrue.setText(0 + cm);
             fMPlusCResTrue.setText(0 + cm);
         }
+
 
         toPdfButton.setDisable(false);
 
