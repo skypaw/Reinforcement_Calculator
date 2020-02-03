@@ -10,12 +10,12 @@
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="pl.pawz.zelbet.GUI.GraphController">
-    <LineChart fx:id="lineChart" title="Krzywa Nosności Granicznej">
+    <LineChart fx:id="lineChart" title="Krzywa Nosności Granicznej" prefHeight="850" prefWidth="1050">
         <xAxis>
-            <NumberAxis side="BOTTOM"/>
+            <NumberAxis side="BOTTOM" label="Normalna"/>
         </xAxis>
         <yAxis>
-            <NumberAxis side="LEFT"/>
+            <NumberAxis side="LEFT" label="Moment"/>
         </yAxis>
     </LineChart>
 
