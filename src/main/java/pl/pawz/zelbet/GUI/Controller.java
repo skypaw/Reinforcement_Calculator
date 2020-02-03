@@ -10,7 +10,12 @@ public class Controller {
     SubController tab1Controller;
     @FXML
     SubController tab2Controller;
+    @FXML
+    GraphController tab3Controller;
 
+    public void button(){
+        tab3Controller.button();
+    }
 
     public void dataPass() {
 

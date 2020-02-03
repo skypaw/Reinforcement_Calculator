@@ -16,5 +16,9 @@
         <fx:include fx:id="tab2" source="DiagnosticTab.fxml"/>
     </Tab>
 
+    <Tab text="KNG" onSelectionChanged="#button">
+        <fx:include fx:id="tab3" source="KNG.fxml"/>
+    </Tab>
+
 
 </TabPane>
