@@ -1208,6 +1208,12 @@ public class SubController {
             s1SpacingVar = roundThreeDigitShearing(res);
             s1SpacingVarTrue = roundThreeDigitShearingReal(res);
 
+            nSw2RodSValue = 0;
+            nSw2Value = 0;
+            aSw2Value = 0;
+
+
+
         }
 
 
@@ -1788,6 +1794,11 @@ public class SubController {
             fMPlusCResVar = 0;
             fCsVar = 0;
 
+            wResVarTheoretical = 0;
+            fMResVarTheoretical = 0;
+            fMPlusCResVarTheoretical = 0;
+            fCsVarTheoretical = 0;
+
             wResTrue.setText(0 + mm);
             fMResTrue.setText(0 + cm);
             fMPlusCResTrue.setText(0 + cm);
@@ -2046,6 +2057,10 @@ public class SubController {
 
             s1SpacingVarTrue = 0;
             s1SpacingVarTrue = s1Value;
+
+            nSw2RodSValue = 0;
+            nSw2Value = 0;
+            aSw2Value = 0;
         }
 
         //tBeam
@@ -2311,6 +2326,11 @@ public class SubController {
             fMResVar = 0;
             fMPlusCResVar = 0;
             fCsVar = 0;
+
+            wResVarTheoretical = 0;
+            fMResVarTheoretical = 0;
+            fMPlusCResVarTheoretical = 0;
+            fCsVarTheoretical = 0;
 
             wResTrue.setText(0 + mm);
             fMResTrue.setText(0 + cm);
