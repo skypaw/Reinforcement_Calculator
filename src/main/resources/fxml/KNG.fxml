@@ -7,16 +7,51 @@
 
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.NumberAxis?>
-<AnchorPane xmlns="http://javafx.com/javafx"
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="pl.pawz.zelbet.GUI.GraphController">
-    <LineChart fx:id="lineChart" title="Krzywa Nosności Granicznej" prefHeight="850" prefWidth="1050">
-        <xAxis>
-            <NumberAxis side="BOTTOM" label="Normalna"/>
-        </xAxis>
-        <yAxis>
-            <NumberAxis side="LEFT" label="Moment"/>
-        </yAxis>
-    </LineChart>
+    <left>
+        <GridPane hgap="5" vgap="5">
+            <Pane GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="2" prefHeight="10"/>
+            <Pane GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.rowSpan="5" prefWidth="10"/>
+            <Label GridPane.columnIndex="1" GridPane.rowIndex="1" text="b = "/>
+            <Label GridPane.columnIndex="1" GridPane.rowIndex="2" text="h = "/>
+            <Label GridPane.columnIndex="1" GridPane.rowIndex="3" text="a1 = "/>
+            <Label GridPane.columnIndex="1" GridPane.rowIndex="4" text="a2 = "/>
+            <Label GridPane.columnIndex="1" GridPane.rowIndex="5" text="fCk = "/>
+            <Label GridPane.columnIndex="1" GridPane.rowIndex="6" text="fYk = "/>
+            <Label GridPane.columnIndex="1" GridPane.rowIndex="7" text="fi_1 = "/>
+            <Label GridPane.columnIndex="1" GridPane.rowIndex="8" text="fi_2 = "/>
+            <Label GridPane.columnIndex="1" GridPane.rowIndex="9" text="n_1 = "/>
+            <Label GridPane.columnIndex="1" GridPane.rowIndex="10" text="n_2 = "/>
 
-</AnchorPane>
+            <TextField GridPane.columnIndex="2" GridPane.rowIndex="1" promptText="[cm]" prefWidth="50" fx:id="test1"/>
+            <TextField GridPane.columnIndex="2" GridPane.rowIndex="2" promptText="[cm]" prefWidth="50"
+                       fx:id="geometryHeight"/>
+            <TextField GridPane.columnIndex="2" GridPane.rowIndex="3" promptText="[mm]" prefWidth="50" fx:id="a1"/>
+            <TextField GridPane.columnIndex="2" GridPane.rowIndex="4" promptText="[mm]" prefWidth="50" fx:id="a2"/>
+            <TextField GridPane.columnIndex="2" GridPane.rowIndex="5" promptText="[MPa]" prefWidth="50" fx:id="fCk"/>
+            <TextField GridPane.columnIndex="2" GridPane.rowIndex="6" promptText="[MPa]" prefWidth="50" fx:id="steelFYk"/>
+            <TextField GridPane.columnIndex="2" GridPane.rowIndex="7" promptText="[mm]" prefWidth="50" fx:id="aS1"/>
+            <TextField GridPane.columnIndex="2" GridPane.rowIndex="8" promptText="[mm]" prefWidth="50" fx:id="aS2"/>
+            <TextField GridPane.columnIndex="2" GridPane.rowIndex="9" promptText="[szt.]" prefWidth="50" fx:id="n1"/>
+            <TextField GridPane.columnIndex="2" GridPane.rowIndex="10" promptText="[szt.]" prefWidth="50" fx:id="n2"/>
+
+            <Button GridPane.columnIndex="2" GridPane.rowIndex="12" text="Obliczenia" onAction="#button"/>
+        </GridPane>
+    </left>
+    <center>
+        <LineChart fx:id="lineChart" title="Krzywa Nosności Granicznej" prefHeight="500" prefWidth="700">
+            <xAxis>
+                <NumberAxis side="BOTTOM" label="Normalna"/>
+            </xAxis>
+            <yAxis>
+                <NumberAxis side="LEFT" label="Moment"/>
+            </yAxis>
+        </LineChart>
+    </center>
+</BorderPane>

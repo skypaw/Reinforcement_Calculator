@@ -116,10 +116,12 @@ public class FourForcesLimit {
         double sigmaS2 = fYd;
 
         double n3 = fYd * (aS2 - aS1) + etaConcrete * fCd * bDimension * lambdaConcrete * xLim;
+        System.out.println(n3);
         double n4 = -epsilonCu3 * (dDimension - hDimension) / hDimension * eS * aS1 + fYd * aS2 + etaConcrete * fCd * bDimension * lambdaConcrete * hDimension;
+        System.out.println(n4);
 
-        double x3 = PolynomialSolverKNG.solverPhaseIV(n3, fYd, aS1, epsilonCu3, eS, aS2, etaConcrete, fCd, bDimension, lambdaConcrete, dDimension);
-        double x4 = PolynomialSolverKNG.solverPhaseIV(n4, fYd, aS1, epsilonCu3, eS, aS2, etaConcrete, fCd, bDimension, lambdaConcrete, dDimension);
+        double x3 = PolynomialSolverKNG.solverPhaseIV(n3, fYd, aS1, epsilonCu3, eS, aS2, etaConcrete, fCd, bDimension, lambdaConcrete, dDimension,xLim);
+        double x4 = PolynomialSolverKNG.solverPhaseIV(n4, fYd, aS1, epsilonCu3, eS, aS2, etaConcrete, fCd, bDimension, lambdaConcrete, dDimension,xLim);
 
         double res3 = sigmaS1One * aS1 * (0.5 * hDimension - a1) + fYd * aS2 * (0.5 * hDimension - a2) + etaConcrete * fCd * bDimension * lambdaConcrete * x3 * 0.5 * (hDimension - lambdaConcrete * x3);
         double res4 = sigmaS1Two * aS1 * (0.5 * hDimension - a1) + fYd * aS2 * (0.5 * hDimension - a2) + etaConcrete * fCd * bDimension * lambdaConcrete * x4 * 0.5 * (hDimension - lambdaConcrete * x4);

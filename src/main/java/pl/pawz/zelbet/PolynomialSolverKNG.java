@@ -37,7 +37,7 @@ public class PolynomialSolverKNG {
         return Collections.min(results);
     }
 
-    public static double solverPhaseIV(double nValue, double fYd, double aS1, double epsilonCu3, int eS, double aS2, double etaConcrete, double fCd, double bValue, double lambdaConcrete, double dValue) {
+    public static double solverPhaseIV(double nValue, double fYd, double aS1, double epsilonCu3, int eS, double aS2, double etaConcrete, double fCd, double bValue, double lambdaConcrete, double dValue, double xLim) {
         BrentSolver solver = new BrentSolver();
         UnivariateFunction f = new UnivariateFunction() {
 
@@ -47,7 +47,7 @@ public class PolynomialSolverKNG {
             }
         };
 
-        double intervalStart = 0;
+        double intervalStart = xLim;
         double intervalSize = 0.001;
         int i = 0;
         ArrayList<Double> results = new ArrayList<Double>(i);

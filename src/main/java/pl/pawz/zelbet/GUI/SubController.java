@@ -280,7 +280,7 @@ public class SubController {
 
     //values which depends on check box
 
-    private double fCk = 0;
+    double fCk = 0;
     private float mEdValue = 0;
     private float nEdValue = 0;
     private float mEd1Value = 0;
@@ -667,7 +667,7 @@ public class SubController {
         vEdRedValue = getDataFromTextField(vEdRed, "V_EdRed") * Math.pow(10, -3);
         ctgThetaValue = getDataFromTextField(ctgTheta, "ctg_theta");
         alphaValue = getDataFromTextField(alpha, "alpha");
-        aSl = getDataFromTextField(aSlTxt, "A_sl");
+        aSl = getDataFromTextField(aSlTxt, "A_sl")* Math.pow(10, -4);
 
         aSw1Value = getDataFromTextField(aSw1, "a_Sw1") * Math.pow(10, -3);
         nSw1Value = getDataFromTextField(nSw1, "n_sw1");
@@ -1170,7 +1170,7 @@ public class SubController {
         String m = " m";
 
         if (checkBoxRods.isSelected()) {
-            ShearingBendRods shearing = new ShearingBendRods(hValue, a1Value, bValue, fCk, nEdValue, aSl, nSw1Value, nSw2Value, aSw1Value, aS2Value, fYk, vEdRedValue, vEdValue, nSw2RodSValue, ctgThetaValue, alphaValue);
+            ShearingBendRods shearing = new ShearingBendRods(hValue, a1Value, bValue, fCk, nEdValue, aSl, nSw1Value, nSw2Value, aSw1Value, aSw2Value, fYk, vEdRedValue, vEdValue, nSw2RodSValue, ctgThetaValue, alphaValue);
             double res = shearing.resultShearingStirrups();
             System.out.println(res);
 
@@ -1180,7 +1180,7 @@ public class SubController {
 
             sRodsReal.setText(roundThreeDigitShearingReal(res) + m);
 
-            DiagnosticShearing shearing1 = new DiagnosticShearing(hValue, a1Value, bValue, fCk, nEdValue, aSl, nSw1Value, nSw2Value, aSw1Value, aS2Value, fYk, vEdRedValue, vEdValue, nSw2RodSValue, resShearing, ctgThetaValue, alphaValue);
+            DiagnosticShearing shearing1 = new DiagnosticShearing(hValue, a1Value, bValue, fCk, nEdValue, aSl, nSw1Value, nSw2Value, aSw1Value, aSw2Value, fYk, vEdRedValue, vEdValue, nSw2RodSValue, resShearing, ctgThetaValue, alphaValue);
             vRd = shearing1.resultsShearingDiagnostic();
 
 
@@ -1200,7 +1200,7 @@ public class SubController {
             sRodsReal.setText(roundThreeDigitShearingReal(res) + m);
 
 
-            DiagnosticShearing shearing1 = new DiagnosticShearing(hValue, a1Value, bValue, fCk, nEdValue, aSl, nSw1Value, nSw2Value, aSw1Value, aS2Value, fYk, vEdRedValue, vEdValue, nSw2RodSValue, resShearing, ctgThetaValue, alphaValue);
+            DiagnosticShearing shearing1 = new DiagnosticShearing(hValue, a1Value, bValue, fCk, nEdValue, aSl, nSw1Value, nSw2Value, aSw1Value, aSw2Value, fYk, vEdRedValue, vEdValue, nSw2RodSValue, resShearing, ctgThetaValue, alphaValue);
             vRd = shearing1.resultsShearingDiagnostic();
 
             s1SpacingVar = roundThreeDigitShearing(res);
@@ -2010,7 +2010,7 @@ public class SubController {
 
         shearingValues();
 
-        DiagnosticShearing shearing = new DiagnosticShearing(hValue, a1Value, bValue, fCk, nEdValue, aSl, nSw1Value, nSw2Value, aSw1Value, aS2Value, fYk, vEdRedValue, vEdValue, nSw2RodSValue, s1Value, ctgThetaValue, alphaValue);
+        DiagnosticShearing shearing = new DiagnosticShearing(hValue, a1Value, bValue, fCk, nEdValue, aSl, nSw1Value, nSw2Value, aSw1Value, aSw2Value, fYk, vEdRedValue, vEdValue, nSw2RodSValue, s1Value, ctgThetaValue, alphaValue);
         double res = shearing.resultsShearingDiagnostic();
         System.out.println(res);
         sRods.setText(roundThreeDigitShearing(res * Math.pow(10, 3)) + kN);
