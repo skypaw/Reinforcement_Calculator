@@ -81,10 +81,10 @@ class PrintPDF {
         String rods = "Prety odgiete alpha = " + alpha;
 
         String valueRodsShearing1 = (int) nSw1 + " fi " + (int) (fiw1Data * Math.pow(10, 3));
-        String valueRodsShearing2 = (int) nSw2 + " fi " + (int) (fiw2Data * Math.pow(10, 4));
+        String valueRodsShearing2 = (int) nSw2 + " fi " + (int) (fiw2Data * Math.pow(10, 3));
 
         String valueRodsShearing1Real = (int) nSw1Real + " fi " + (int) (fiw1DataReal * Math.pow(10, 3));
-        String valueRodsShearing2Real = (int) nSw2Real + " fi " + (int) (fiw2DataReal * Math.pow(10, 4));
+        String valueRodsShearing2Real = (int) nSw2Real + " fi " + (int) (fiw2DataReal * Math.pow(10, 3));
 
         String cotThetaString = "cot_Theta = " + cotTheta;
 

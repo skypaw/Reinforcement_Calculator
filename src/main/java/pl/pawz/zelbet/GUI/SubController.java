@@ -667,13 +667,13 @@ public class SubController {
         vEdRedValue = getDataFromTextField(vEdRed, "V_EdRed") * Math.pow(10, -3);
         ctgThetaValue = getDataFromTextField(ctgTheta, "ctg_theta");
         alphaValue = getDataFromTextField(alpha, "alpha");
-        aSl = getDataFromTextField(aSlTxt, "A_sl")* Math.pow(10, -4);
+        aSl = getDataFromTextField(aSlTxt, "A_sl") * Math.pow(10, -4);
 
         aSw1Value = getDataFromTextField(aSw1, "a_Sw1") * Math.pow(10, -3);
         nSw1Value = getDataFromTextField(nSw1, "n_sw1");
 
         if (checkBoxRods.isSelected()) {
-            aSw2Value = getDataFromTextField(aSw2RodTxt, "a_Sw2") * Math.pow(10, -4);
+            aSw2Value = getDataFromTextField(aSw2RodTxt, "a_Sw2") * Math.pow(10, -3);
             nSw2Value = getDataFromTextField(nSw2RodTxt, "n_sw2");
             nSw2RodSValue = (float) (getDataFromTextField(nSw2RodSTxt, "s_sw2") * Math.pow(10, -2));
         }
@@ -734,7 +734,9 @@ public class SubController {
         return Math.round(toRound * 1000.00) / 1000D;
     }
 
-    private double roundSixDigitShearing(double toRound){return Math.round(toRound * 1000000.00) / 1000000D;}
+    private double roundSixDigitShearing(double toRound) {
+        return Math.round(toRound * 1000000.00) / 1000000D;
+    }
 
     private double roundThreeDigitShearingReal(double toRound) {
         return Math.floor(toRound * 100.00) / 100D;
@@ -953,7 +955,7 @@ public class SubController {
 
                         DiagnosticCompression beam4 = new DiagnosticCompression(nEdValue, mEdValue, fCk, fYk, bValue, hValue, a1Value, a2Value, res1trueAsymmetricVar * Math.pow(10, -4), res2trueAsymmetricVar * Math.pow(10, -4));
                         double[] results4 = beam4.resultsDiagnosticCompression();
-                        mRd = -results4[1];
+                        mRd = results4[1];
                         nRdValue = roundThreeDigitShearing(results4[0] * Math.pow(10, 3));
                     }
 
@@ -1200,7 +1202,7 @@ public class SubController {
             sRodsReal.setText(roundThreeDigitShearingReal(res) + m);
 
 
-            DiagnosticShearing shearing1 = new DiagnosticShearing(hValue, a1Value, bValue, fCk, nEdValue, aSl, nSw1Value, nSw2Value, aSw1Value, aSw2Value, fYk, vEdRedValue, vEdValue, nSw2RodSValue, resShearing, ctgThetaValue, alphaValue);
+            DiagnosticShearing shearing1 = new DiagnosticShearing(hValue, a1Value, bValue, fCk, nEdValue, aSl, nSw1Value, nSw2Value, aSw1Value, 0, fYk, vEdRedValue, vEdValue, nSw2RodSValue, resShearing, ctgThetaValue, alphaValue);
             vRd = shearing1.resultsShearingDiagnostic();
 
             s1SpacingVar = roundThreeDigitShearing(res);
@@ -1320,7 +1322,7 @@ public class SubController {
         data.put("alpha", roundTwoDigit(alphaValue));
         data.put("aSl", roundTwoDigit(aSl));
         data.put("aSw1", roundTwoDigit(aSw1Value * 1000));
-        data.put("aSw2", roundTwoDigit(aSw2Value * 10000));
+        data.put("aSw2", roundTwoDigit(aSw2Value * 1000));
         data.put("nSw1", roundTwoDigit(nSw1Value));
         data.put("nSw2", roundTwoDigit(nSw2Value));
         data.put("sSw2", roundTwoDigit(nSw2RodSValue * 100));
@@ -1780,9 +1782,20 @@ public class SubController {
                 }
             }
         } else {
+
+            wResVar = 0;
+            fMResVar = 0;
+            fMPlusCResVar = 0;
+            fCsVar = 0;
+
             wResTrue.setText(0 + mm);
             fMResTrue.setText(0 + cm);
             fMPlusCResTrue.setText(0 + cm);
+
+
+            wRes.setText(0 + mm);
+            fMRes.setText(0 + cm);
+            fMPlusCRes.setText(0 + cm);
         }
 
 
@@ -2009,19 +2022,31 @@ public class SubController {
         //Shearing Calculations
 
         shearingValues();
+        if (checkBoxRods.isSelected()) {
+            DiagnosticShearing shearing = new DiagnosticShearing(hValue, a1Value, bValue, fCk, nEdValue, aSl, nSw1Value, nSw2Value, aSw1Value, aSw2Value, fYk, vEdRedValue, vEdValue, nSw2RodSValue, s1Value, ctgThetaValue, alphaValue);
+            double res = shearing.resultsShearingDiagnostic();
+            System.out.println(res);
+            sRods.setText(roundThreeDigitShearing(res * Math.pow(10, 3)) + kN);
+            sRodsReal.setText(roundThreeDigitShearing(vEdValue * Math.pow(10, 3)) + kN);
 
-        DiagnosticShearing shearing = new DiagnosticShearing(hValue, a1Value, bValue, fCk, nEdValue, aSl, nSw1Value, nSw2Value, aSw1Value, aSw2Value, fYk, vEdRedValue, vEdValue, nSw2RodSValue, s1Value, ctgThetaValue, alphaValue);
-        double res = shearing.resultsShearingDiagnostic();
-        System.out.println(res);
-        sRods.setText(roundThreeDigitShearing(res * Math.pow(10, 3)) + kN);
-        sRodsReal.setText(roundThreeDigitShearing(vEdValue * Math.pow(10, 3)) + kN);
+            vRd = roundSixDigitShearing(res);
+            resShearing = roundSixDigitShearing(res);
 
-        vRd = roundSixDigitShearing(res);
-        resShearing = roundSixDigitShearing(res);
+            s1SpacingVarTrue = 0;
+            s1SpacingVarTrue = s1Value;
+        } else {
+            DiagnosticShearing shearing = new DiagnosticShearing(hValue, a1Value, bValue, fCk, nEdValue, aSl, nSw1Value, 0, aSw1Value, 0, fYk, vEdRedValue, vEdValue, nSw2RodSValue, s1Value, ctgThetaValue, alphaValue);
+            double res = shearing.resultsShearingDiagnostic();
+            System.out.println(res);
+            sRods.setText(roundThreeDigitShearing(res * Math.pow(10, 3)) + kN);
+            sRodsReal.setText(roundThreeDigitShearing(vEdValue * Math.pow(10, 3)) + kN);
 
-        s1SpacingVarTrue = 0;
-        s1SpacingVarTrue = s1Value;
+            vRd = roundSixDigitShearing(res);
+            resShearing = roundSixDigitShearing(res);
 
+            s1SpacingVarTrue = 0;
+            s1SpacingVarTrue = s1Value;
+        }
 
         //tBeam
 
@@ -2281,6 +2306,12 @@ public class SubController {
                 }
             }
         } else {
+
+            wResVar = 0;
+            fMResVar = 0;
+            fMPlusCResVar = 0;
+            fCsVar = 0;
+
             wResTrue.setText(0 + mm);
             fMResTrue.setText(0 + cm);
             fMPlusCResTrue.setText(0 + cm);

@@ -21,7 +21,7 @@ public class Controller {
 
 
         if (tab1Controller.data != null) {
-            tab3Controller.geometryHeight.setText(String.valueOf(tab1Controller.data.get("hValue")));
+            /*tab3Controller.geometryHeight.setText(String.valueOf(tab1Controller.data.get("hValue")));
             tab3Controller.test1.setText(String.valueOf(tab1Controller.data.get("bValue")));
             tab3Controller.steelFYk.setText(String.valueOf(tab1Controller.data.get("fYk")));
             tab3Controller.aS1.setText(String.valueOf(tab1Controller.data.get("fiS1")));
@@ -31,7 +31,7 @@ public class Controller {
             tab3Controller.n1.setText(String.valueOf(tab1Controller.data.get("ns1")));
             tab3Controller.n2.setText(String.valueOf(tab1Controller.data.get("ns2")));
             tab3Controller.fCk.setText(String.valueOf(tab1Controller.fCk));
-
+*/
 
 
 
