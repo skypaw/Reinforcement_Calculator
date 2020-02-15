@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 
@@ -23,6 +24,9 @@ public class GuiWindow extends Application {
         primaryStage.setTitle("Reinforcement Calculator");
         primaryStage.setScene(sceneRectangle);
         primaryStage.show();
+
+        Image ico = new Image("/icons/ico.png");
+        primaryStage.getIcons().add(ico);
 
     }
 
