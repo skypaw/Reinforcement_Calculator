@@ -23,7 +23,7 @@ public class FourForcesLimit {
     private double xMaxYd;
     private double epsilonC3;
     private int eS;
-    double dDimension;
+    private double dDimension;
 
     public FourForcesLimit(double fYk, double aS1, double aS2, double bDimension, float hDimension, double fCk, float a1, float a2) {
 
@@ -53,131 +53,176 @@ public class FourForcesLimit {
 
     }
 
-    public double[] firstCase() {
+
+    public double[] firstCase(double x) {
         double sigmaS1 = fYd;
         double sigmaS2 = -fYd;
 
-        //limit values of N in this case
+        double n = -fYd * aS1 - fYd * aS2 + etaConcrete * fCd * bDimension * lambdaConcrete * x;
 
-        double n0 = -fYd * (aS1 + aS2);
-        double n1 = -fYd * (aS1 + aS2) + etaConcrete * fCd * bDimension * lambdaConcrete * xMinMinusYd;
-
-        double x0 = (n0 + fYd * (aS1 + aS2)) / (etaConcrete * fCd * bDimension * lambdaConcrete);
-        double x1 = (n1 + fYd * (aS1 + aS2)) / (etaConcrete * fCd * bDimension * lambdaConcrete);
-
-        double res1 = momentFrom0To1(x0);
-        double res2 = momentFrom0To1(x1);
-
-        return new double[]{res1, res2, n0, n1};
-    }
-
-    private double momentFrom0To1(double x) {
-        return fYd * aS1 * (0.5 * hDimension - a1) - fYd * aS2 * (0.5 * hDimension - a2) + etaConcrete * fCd *
+        double m = sigmaS1 * aS1 * (0.5 * hDimension - a1) + sigmaS2 * aS2 * (0.5 * hDimension - a2) + etaConcrete * fCd *
                 bDimension * lambdaConcrete * x * 0.5 * (hDimension - lambdaConcrete * x);
+
+        double nReturn = n;
+
+        n = n + 0.1;
+        x = (n + fYd * (aS1 + aS2)) / (etaConcrete * fCd * bDimension * lambdaConcrete);
+
+        return new double[]{nReturn, m, x};
     }
 
-    public double[] secondCase() {
+
+    public double[] secondCase(double x, double interval) {
         double sigmaS1 = fYd;
-        double sigmaS2First = epsilonCu3 * (xMinMinusYd - a2) / xMinMinusYd * eS;
-        double sigmaS2Second = epsilonCu3 * (xMinYd - a2) / xMinYd * eS;
+        double sigmaS2 = Math.max(Math.min(epsilonCu3 * (x - a2) / x * eS,fYd),-fYd);
 
-        double n1 = -fYd * (aS1 + aS2) + etaConcrete * fCd * bDimension * lambdaConcrete * xMinMinusYd;
-        double n2 = fYd * (aS2 - aS1) + etaConcrete * fCd * bDimension * lambdaConcrete * xMinYd;
+        double n = -fYd * aS1 + epsilonCu3 * (x - a2) / x * eS * aS2 + etaConcrete * fCd * bDimension * lambdaConcrete * x;
 
-        double x1 = PolynomialSolverKNG.solverPhaseII(n1, fYd, aS1, epsilonCu3, eS, aS2, etaConcrete, fCd, bDimension, lambdaConcrete, a2);
-        double x2 = PolynomialSolverKNG.solverPhaseII(n2, fYd, aS1, epsilonCu3, eS, aS2, etaConcrete, fCd, bDimension, lambdaConcrete, a2);
+        double m = sigmaS1 * aS1 * (0.5 * hDimension - a1) + sigmaS2 * aS2 * (0.5 * hDimension - a2) + etaConcrete * fCd * bDimension * lambdaConcrete * x * 0.5 * (hDimension - lambdaConcrete * x);
 
+        double nReturn = n;
 
-        double res1 = fYd * aS1 * (0.5 * hDimension - a1) + sigmaS2First * aS2 * (0.5 * hDimension - a2) + etaConcrete * fCd * bDimension * lambdaConcrete * x1 * 0.5 * (hDimension - lambdaConcrete * x1);
-        double res2 = fYd * aS1 * (0.5 * hDimension - a1) + sigmaS2Second * aS2 * (0.5 * hDimension - a2) + etaConcrete * fCd * bDimension * lambdaConcrete * x2 * 0.5 * (hDimension - lambdaConcrete * x2);
+        n = n + interval;
+        x = PolynomialSolverKNG.solverPhaseII(n, fYd, aS1, epsilonCu3, eS, aS2, etaConcrete, fCd, bDimension, lambdaConcrete, a2);
 
-        return new double[]{res1, res2, n1, n2};
+        return new double[]{nReturn, m, x};
     }
 
-    public double[] thirdCase() {
+    public double[] thirdCase(double x) {
         double sigmaS1 = fYd;
         double sigmaS2 = fYd;
 
-        double n2 = fYd * (aS2 - aS1) + etaConcrete * fCd * bDimension * lambdaConcrete * xMinYd;
-        double n3 = fYd * (aS2 - aS1) + etaConcrete * fCd * bDimension * lambdaConcrete * xLim;
+        double n = fYd * (aS2 - aS1) + etaConcrete * fCd * bDimension * lambdaConcrete * x;
 
-        double x2 = (n2 + fYd * (aS1 - aS2)) / (etaConcrete * fCd * bDimension * lambdaConcrete);
-        double x3 = (n3 + fYd * (aS1 - aS2)) / (etaConcrete * fCd * bDimension * lambdaConcrete);
+        double m = sigmaS1 * aS1 * (0.5 * hDimension - a1) + sigmaS2 * aS2 * (0.5 * hDimension - a2) + etaConcrete * fCd * bDimension * lambdaConcrete * x * 0.5 * (hDimension - lambdaConcrete * x);
 
-        double res2 = fYd * aS1 * (0.5 * hDimension - a1) + fYd * aS2 * (0.5 * hDimension - a2) + etaConcrete * fCd * bDimension * lambdaConcrete * x2 * 0.5 * (hDimension - lambdaConcrete * x2);
-        double res3 = fYd * aS1 * (0.5 * hDimension - a1) + fYd * aS2 * (0.5 * hDimension - a2) + etaConcrete * fCd * bDimension * lambdaConcrete * x3 * 0.5 * (hDimension - lambdaConcrete * x3);
+        double nReturn = n;
 
-        return new double[]{res2, res3, n2, n3};
+        n = n + 0.1;
+        x = (n + fYd * (aS1 - aS2)) / (etaConcrete * fCd * bDimension * lambdaConcrete);
+
+
+        return new double[]{nReturn, m, x};
     }
 
-    public double[] fourthCase() {
-        double sigmaS1One = Math.min(fYd, epsilonCu3 * (dDimension - xLim) / xLim * eS);
-        double sigmaS1Two = Math.min(fYd, epsilonCu3 * (dDimension - hDimension) / hDimension * eS);
+    public double[] fourthCase(double x, double interval) {
+        double sigmaS1 = Math.max(Math.min(fYd, epsilonCu3 * (dDimension - x) / x * eS),-fYd);
         double sigmaS2 = fYd;
 
-        double n3 = fYd * (aS2 - aS1) + etaConcrete * fCd * bDimension * lambdaConcrete * xLim;
-        System.out.println(n3);
-        double n4 = -epsilonCu3 * (dDimension - hDimension) / hDimension * eS * aS1 + fYd * aS2 + etaConcrete * fCd * bDimension * lambdaConcrete * hDimension;
-        System.out.println(n4);
+        double n = -epsilonCu3 * (dDimension - x) / x * eS * aS1 + fYd * aS2 + etaConcrete * fCd * bDimension * lambdaConcrete * x;
+        double m = sigmaS1 * aS1 * (0.5 * hDimension - a1) + sigmaS2 * aS2 * (0.5 * hDimension - a2) + etaConcrete * fCd * bDimension * lambdaConcrete * x * 0.5 * (hDimension - lambdaConcrete * x);
 
-        double x3 = PolynomialSolverKNG.solverPhaseIV(n3, fYd, aS1, epsilonCu3, eS, aS2, etaConcrete, fCd, bDimension, lambdaConcrete, dDimension,xLim);
-        double x4 = PolynomialSolverKNG.solverPhaseIV(n4, fYd, aS1, epsilonCu3, eS, aS2, etaConcrete, fCd, bDimension, lambdaConcrete, dDimension,xLim);
+        double nReturn = n;
 
-        double res3 = sigmaS1One * aS1 * (0.5 * hDimension - a1) + fYd * aS2 * (0.5 * hDimension - a2) + etaConcrete * fCd * bDimension * lambdaConcrete * x3 * 0.5 * (hDimension - lambdaConcrete * x3);
-        double res4 = sigmaS1Two * aS1 * (0.5 * hDimension - a1) + fYd * aS2 * (0.5 * hDimension - a2) + etaConcrete * fCd * bDimension * lambdaConcrete * x4 * 0.5 * (hDimension - lambdaConcrete * x4);
+        n = n + interval;
+        x = PolynomialSolverKNG.solverPhaseIV(n, fYd, aS1, epsilonCu3, eS, aS2, etaConcrete, fCd, bDimension, lambdaConcrete, dDimension, xLim);
 
-
-        return new double[]{res3, res4, n3, n4};
+        return new double[]{nReturn, m, x};
     }
 
-    public double[] fifthCase() {
-        double sigmaS1One = Math.max(epsilonC3 * (dDimension - hDimension) / (hDimension - x0) * eS, -fYd);
-        double sigmaS1Two = Math.max(epsilonC3 * (dDimension - (hDimension / lambdaConcrete)) / ((hDimension / lambdaConcrete) - x0) * eS, -fYd);
-
+    public double[] fifthCase(double x, double interval) {
+        double sigmaS1 = Math.max(epsilonC3 * (dDimension - x) / (x - x0) * eS, -fYd);
         double sigmaS2 = fYd;
 
-        double n4 = -epsilonCu3 * (dDimension - hDimension) / hDimension * eS * aS1 + fYd * aS2 + etaConcrete * fCd * bDimension * lambdaConcrete * hDimension;
-        double n5 = -epsilonCu3 * (dDimension - hDimension / lambdaConcrete) / (hDimension / lambdaConcrete - x0) * eS * aS1 + fYd * aS2 + etaConcrete * fCd * bDimension * lambdaConcrete * hDimension;
+        double n = -epsilonC3 * (dDimension - x) / (x - x0) * eS * aS1 + fYd * aS2 + etaConcrete * fCd * bDimension * lambdaConcrete * x;
 
-        double x4 = PolynomialSolverKNG.solverPhaseV(n4, fYd, aS1, epsilonC3, eS, aS2, etaConcrete, fCd, bDimension, lambdaConcrete, dDimension, x0);
-        double x5 = PolynomialSolverKNG.solverPhaseV(n5, fYd, aS1, epsilonC3, eS, aS2, etaConcrete, fCd, bDimension, lambdaConcrete, dDimension, x0);
+        double m = sigmaS1 * aS1 * (0.5 * hDimension - a1) + sigmaS2 * aS2 * (0.5 * hDimension - a2) + etaConcrete * fCd * bDimension * lambdaConcrete * x * 0.5 * (hDimension - lambdaConcrete * x);
 
-        double res4 = sigmaS1One * aS1 * (0.5 * hDimension - a1) + fYd * aS2 * (0.5 * hDimension - a2) + etaConcrete * fCd * bDimension * lambdaConcrete * x4 * 0.5 * (hDimension - lambdaConcrete * x4);
-        double res5 = sigmaS1Two * aS1 * (0.5 * hDimension - a1) + fYd * aS2 * (0.5 * hDimension - a2) + etaConcrete * fCd * bDimension * lambdaConcrete * x5 * 0.5 * (hDimension - lambdaConcrete * x5);
+        double nReturn = n;
 
-        return new double[]{res4, res5, n4, n5};
+        n = n + interval;
+        x = PolynomialSolverKNG.solverPhaseV(n, fYd, aS1, epsilonC3, eS, aS2, etaConcrete, fCd, bDimension, lambdaConcrete, dDimension, x0);
+
+        return new double[]{nReturn, m, x};
     }
 
-    public double[] sixthCase() {
-        double sigmaS1One = Math.max(epsilonC3 * (dDimension - hDimension / lambdaConcrete) / (hDimension / lambdaConcrete - x0) * eS, -fYd);
-        double sigmaS1Two = Math.max(epsilonC3 * (dDimension - xMaxYd) / (xMaxYd - x0) * eS, -fYd);
+    public double[] sixthCase(double x) {
+        double sigmaS1 = Math.max(epsilonC3 * (dDimension - x) / (x - x0) * eS, -fYd);
         double sigmaS2 = fYd;
 
-        double n5 = -epsilonC3 * (dDimension - hDimension / lambdaConcrete) / (hDimension / lambdaConcrete - x0) * eS * aS1 + fYd * aS2 + etaConcrete * fCd * bDimension * hDimension;
-        double n6 = -epsilonC3 * (dDimension - xMaxYd) / (xMaxYd - x0) * eS * aS1 + fYd * aS2 + etaConcrete * fCd * bDimension * hDimension;
+        double n = -epsilonC3 * (dDimension - x) / (x - x0) * eS * aS1 + fYd * aS2 + etaConcrete * fCd * bDimension * hDimension;
 
-        double x5 = (epsilonC3 * eS * aS1 * dDimension + x0 * (-n5 + fYd * aS2 + etaConcrete * fCd * bDimension * hDimension)) / (epsilonC3 * eS * aS1 - n5 + fYd * aS2 + etaConcrete * fCd * bDimension * hDimension);
-        double x6 = (epsilonC3 * eS * aS1 * dDimension + x0 * (-n6 + fYd * aS2 + etaConcrete * fCd * bDimension * hDimension)) / (epsilonC3 * eS * aS1 - n6 + fYd * aS2 + etaConcrete * fCd * bDimension * hDimension);
+        double m = sigmaS1 * aS1 * (0.5 * hDimension - a1) + sigmaS2 * aS2 * (0.5 * hDimension - a2);
 
-        double res5 = sigmaS1One * aS1 * (0.5 * hDimension - a1) + fYd * aS2 * (0.5 * hDimension - a2);
-        double res6 = sigmaS1Two * aS1 * (0.5 * hDimension - a1) + fYd * aS2 * (0.5 * hDimension - a2);
-
-        return new double[]{res5, res6, n5, n6};
+        double nReturn = n;
+        n = n + 0.1;
+        x = x + 0.1;
+        return new double[]{nReturn, m, x};
     }
 
-    public double[] seventhCase() {
-        double sigmaS1One = Math.max(epsilonC3 * (dDimension - xMaxYd) / (xMaxYd - x0) * eS, -fYd);
-        double sigmaS1Two = Math.max(epsilonC3 * (dDimension - Double.MAX_VALUE) / (Double.MAX_VALUE - x0) * eS, -fYd);
+    public double[] seventhCase(double x) {
+        double sigmaS1 = Math.max(epsilonC3 * (dDimension - x) / (x - x0) * eS, -fYd);
+        double sigmaS2 = Math.min(epsilonC3 * (x - a2) / (x - x0) * eS, fYd);
 
-        double sigmaS2One = Math.min(epsilonC3 * (xMaxYd - a2) / (xMaxYd - x0) * eS, fYd);
-        double sigmaS2Two = Math.min(epsilonC3 * (Double.MAX_VALUE - a2) / (Double.MAX_VALUE - x0) * eS, fYd);
+        double n = -epsilonC3 * (dDimension - x) / (x - x0) * eS * aS1 + epsilonC3 * (x - a2) / (x - x0) * eS * aS2 + etaConcrete * fCd * bDimension * hDimension;
 
-        double n6 = -epsilonC3 * (dDimension - xMaxYd) / (xMaxYd - x0) * eS * aS1 + fYd * aS2 + etaConcrete * fCd * bDimension * hDimension;
-        double n7 = epsilonC3 * eS * (aS1 + aS2) + etaConcrete * fCd * bDimension * hDimension;
+        double m = sigmaS1 * aS1 * (0.5 * hDimension - a1) + sigmaS2 * aS2 * (0.5 * hDimension - a2);
 
-        double res6 = sigmaS1One * aS1 * (0.5 * hDimension - a1) + sigmaS2One * aS2 * (0.5 * hDimension - a2);
-        double res7 = sigmaS1Two * aS1 * (0.5 * hDimension - a1) + sigmaS2Two * aS2 * (0.5 * hDimension - a2);
+        double nReturn = n;
+        //n = n + 1;
+        //x = x + 0.1;
+        // = (epsilonC3 * eS * (aS1 * dDimension + aS2 * a2) + x0 * (etaConcrete * fCd * bDimension * hDimension - n)) / (epsilonC3 * (eS * aS1 + eS * aS2) - n + etaConcrete * fCd * bDimension * hDimension);
 
-        return new double[]{res6, res7, n6, n7};
+        return new double[]{nReturn, m, x};
     }
+
+    // Limit Values for graph
+
+    public double[] limitFirst() {
+        double n = firstCase(0)[0];
+        double m = firstCase(0)[1];
+
+        return new double[]{n, m};
+    }
+
+    public double[] limitSecond() {
+        double n = firstCase(xMinMinusYd)[0];
+        double m = firstCase(xMinMinusYd)[1];
+
+        return new double[]{n, m};
+    }
+
+    public double[] limitThird() {
+        double n = secondCase(xMinYd,0.1)[0];
+        double m = secondCase(xMinYd,0.1)[1];
+
+        return new double[]{n, m};
+    }
+
+    public double[] limitFourth() {
+        double n = thirdCase(xLim)[0];
+        double m = thirdCase(xLim)[1];
+
+        return new double[]{n, m};
+    }
+
+    public double[] limitFifth() {
+        double n = fourthCase(hDimension,0.1)[0];
+        double m = fourthCase(hDimension,0.1)[1];
+
+        return new double[]{n, m};
+    }
+
+    public double[] limitSixth() {
+        double n = fifthCase(hDimension / lambdaConcrete,0.1)[0];
+        double m = fifthCase(hDimension / lambdaConcrete,0.1)[1];
+
+        return new double[]{n, m};
+    }
+
+    public double[] limitSeventh() {
+        double n = sixthCase(xMaxYd)[0];
+        double m = sixthCase(xMaxYd)[1];
+
+        return new double[]{n, m};
+    }
+
+    public double[] limitEighth() {
+        double n = seventhCase(Integer.MAX_VALUE)[0];
+        double m = seventhCase(Integer.MAX_VALUE)[1];
+
+        return new double[]{n, m};
+    }
+
+
 }

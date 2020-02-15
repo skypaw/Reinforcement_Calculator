@@ -1,6 +1,7 @@
 package pl.pawz.zelbet.GUI;
 
 import javafx.fxml.FXML;
+import javafx.scene.chart.Axis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.TextField;
@@ -9,6 +10,9 @@ import pl.pawz.zelbet.BasicValues;
 import pl.pawz.zelbet.BasicValuesPillars;
 import pl.pawz.zelbet.PolynomialSolverKNG;
 import pl.pawz.zelbet.ULS.FourForcesLimit;
+
+import java.lang.reflect.Method;
+import java.util.Arrays;
 
 public class GraphController {
     @FXML
@@ -34,17 +38,19 @@ public class GraphController {
     @FXML
     public TextField fCk;
 
-    double fYk = 500;
-    double fYd = 0;
+    private double fYkValue = 0;
+    private double fCkValue = 0;
+    private double aS1Value = 0;
+    private double aS2Value = 0;
+    private double n1Value = 0;
+    private double n2Value = 0;
+    private float a1Value = 0.05f;
+    private float a2Value = 0.05f;
+    private float bDimension = 0;
+    private float hDimension = 0;
 
-    double aS1Value = 0;
-    double aS2Value = 0;
+    private Object FourForcesLimit;
 
-    double n1Value = 0;
-    double n2Value = 0;
-
-    float a1Value = 0.05f;
-    float a2Value = 0.05f;
 
     public void initialize() {
         a1.setText("50");
@@ -53,47 +59,13 @@ public class GraphController {
         geometryHeight.setText("60");
         aS1.setText("16");
         aS2.setText("16");
-
-
+        fCk.setText("30");
+        steelFYk.setText("500");
     }
 
-
-    public static float getDataFromTextField(TextField specificTextField, String variable) {
-        try {
-            float value;
-            if (specificTextField.getText().isEmpty()) {
-                specificTextField.setText(String.valueOf(0));
-            }
-
-            value = Float.parseFloat(specificTextField.getText().replaceAll(",", "."));
-
-            if (value >= 0) {
-                return value;
-            } else {
-                AlertBox.display("Błąd", "Wartość powinna być liczbą dodatnią");
-                return 0;
-            }
-        } catch (NumberFormatException e) {
-
-            AlertBox.display("Błąd", "Wartość " + variable + " powinna być liczbą dodatnią");
-            return 0;
-        }
-    }
 
     public void button() {
-
-        fYk = 500;
-        fYd = BasicValues.fYdValue(fYk);
-
-        aS1Value = getDataFromTextField(aS1, "as1"); //Problem with value of a1/a2 - when tab is cliccked it takes zero, then the equasion isnt true
-        aS2Value = getDataFromTextField(aS2, "as2");
-
-        n1Value = getDataFromTextField(n1, "n1");
-        n2Value = getDataFromTextField(n2, "n2");
-
-        a1Value = (float) (getDataFromTextField(a1, "a1") * Math.pow(10, -3));
-        a2Value = (float) (getDataFromTextField(a2, "a2") * Math.pow(10, -3));
-
+        takeData();
         double aSTrueValue1 = Math.pow(aS1Value * Math.pow(10, -3) / 2, 2) * n1Value * Math.PI;
         double aSTrueValue2 = Math.pow(aS2Value * Math.pow(10, -3) / 2, 2) * n2Value * Math.PI;
 
@@ -103,182 +75,198 @@ public class GraphController {
         XYChart.Series<Number, Number> series1 = new XYChart.Series<>();
         XYChart.Series<Number, Number> series2 = new XYChart.Series<>();
 
-
-        resultsRed(series1, aSTrueValue1, aSTrueValue2, a1Value, a2Value, fYd);
-        resultsYellow(series2, aSTrueValue2, aSTrueValue1, a2Value, a1Value);
+        resultsRed(series1, aSTrueValue1, aSTrueValue2, a1Value, a2Value, fYkValue, bDimension, hDimension, fCkValue);
+        yellowRes(series2, aSTrueValue2, aSTrueValue1, a2Value, a1Value, fYkValue, bDimension, hDimension, fCkValue);
 
 
         series1.setName("KNG");
         series2.setName("KNG");
-
-
         lineChart.getData().add(series1);
         lineChart.getData().add(series2);
 
-
         lineChart.setCreateSymbols(false);
+
+
     }
 
-    private void resultsRed(XYChart.Series series, double aS1, double aS2, float a1, float a2, double fYd) {
+    public void takeData() {
+        Validator validator = new Validator();
 
-        double xLim = BasicValuesPillars.xLimVar(0.0035, 0.6f, a1, fYd, 200000);
-        double xMinYd = BasicValuesPillars.xMinMinusYdVar(0.0035, 0.05f, fYd, 200000);
-        FourForcesLimit results = new FourForcesLimit(500, aS1, aS2, 0.3f, 0.6f, 30, a1, a2);
+        fYkValue = validator.textToPositiveNumber(steelFYk, 500);
+        fCkValue = validator.textToPositiveNumber(fCk, 30);
 
+        aS1Value = validator.textToPositiveNumber(aS1, 16);
+        aS2Value = validator.textToPositiveNumber(aS2, 16);
 
-        double[] results1Case = results.firstCase();
-        double res0 = results1Case[0] * Math.pow(10, 3);
-        double res1 = results1Case[1] * Math.pow(10, 3);
-        double n0 = results1Case[2] * Math.pow(10, 3);
-        double n1 = results1Case[3] * Math.pow(10, 3);
+        n1Value = validator.textToPositiveNumber(n1, 0);
+        n2Value = validator.textToPositiveNumber(n2, 0);
 
-        double[] results2Case = results.secondCase();
-        double res2 = results2Case[0] * Math.pow(10, 3);
-        double res3 = results2Case[1] * Math.pow(10, 3);
-        double n2 = results2Case[2] * Math.pow(10, 3);
-        double n3 = results2Case[3] * Math.pow(10, 3);
+        a1Value = (float) (validator.textToPositiveNumber(a1, 50) * Math.pow(10, -3));
+        a2Value = (float) (validator.textToPositiveNumber(a2, 50) * Math.pow(10, -3));
 
-        //double[] results3Case = results.thirdCase();
-        //double res4 = results3Case[0] * Math.pow(10, 3);
-        //double res5 = results3Case[1] * Math.pow(10, 3);
-        //double n4 = results3Case[2] * Math.pow(10, 3);
-        //double n5 = results3Case[3] * Math.pow(10, 3);
+        bDimension = (float) (validator.textToPositiveNumber(test1, 30) * Math.pow(10, -2));
+        hDimension = (float) (validator.textToPositiveNumber(geometryHeight, 60) * Math.pow(10, -2));
 
-        //double[] results4Case = results.fourthCase();
-        //double res6 = results4Case[0] * Math.pow(10, 3);
-        //double res7 = results4Case[1] * Math.pow(10, 3);
-        //double n6 = results4Case[2] * Math.pow(10, 3);
-        //double n7 = results4Case[3] * Math.pow(10, 3);
+    }
 
-        double[] results5Case = results.fifthCase();
-        double res8 = results5Case[0] * Math.pow(10, 3);
-        double res9 = results5Case[1] * Math.pow(10, 3);
-        double n8 = results5Case[2] * Math.pow(10, 3);
-        double n9 = results5Case[3] * Math.pow(10, 3);
+    private void resultsRed(XYChart.Series series, double aS1, double aS2, float a1, float a2, double fYk, float bDimension, float hDimension, double fCk) {
 
-        double[] results6Case = results.sixthCase();
-        double res10 = results6Case[0] * Math.pow(10, 3);
-        double res11 = results6Case[1] * Math.pow(10, 3);
-        double n10 = results6Case[2] * Math.pow(10, 3);
-        double n11 = results6Case[3] * Math.pow(10, 3);
+        int eS = BasicValues.steelE();
+        double epsilonCu3 = BasicValues.epsilonCu3Value(fCk);
+        double epsilonC3 = BasicValues.epsilonC3Value(fCk);
 
-        double[] results7Case = results.seventhCase();
-        double res12 = results7Case[0] * Math.pow(10, 3);
-        double res13 = results7Case[1] * Math.pow(10, 3);
-        double n12 = results7Case[2] * Math.pow(10, 3);
-        double n13 = results7Case[3] * Math.pow(10, 3);
+        double etaConcrete = BasicValues.etaConcreteValue(fCk);
+        double lambdaConcrete = BasicValues.lambdaConcreteValue(fCk);
+        double fYd = BasicValues.fYdValue(fYk);
+        double xLim = BasicValuesPillars.xLimVar(epsilonCu3, hDimension, a1, fYd, eS);
+        double xMinYd = BasicValuesPillars.xMinYdVar(epsilonCu3, a2Value, fYd, eS);
+        double xMaxYd = BasicValuesPillars.xYdMaxVar(epsilonCu3, epsilonC3, fYd, eS, hDimension, a2Value);
+        double xMinMinusYd = BasicValuesPillars.xMinMinusYdVar(epsilonCu3, a2Value, fYd, eS);
 
-        series.getData().add(new XYChart.Data<>(n0, res0));
-        series.getData().add(new XYChart.Data<>(n1, res1));
-        series.getData().add(new XYChart.Data<>(n2, res2));
-        series.getData().add(new XYChart.Data<>(n3, res3));
-        //series.getData().add(new XYChart.Data<>(n4, res4));
-        //series.getData().add(new XYChart.Data<>(n5, res5));
+        this.FourForcesLimit = new FourForcesLimit(fYk, aS1, aS2, bDimension, hDimension, fCk, a1, a2);
+        FourForcesLimit graph = (pl.pawz.zelbet.ULS.FourForcesLimit) FourForcesLimit; //to think about that
 
 
+        //Limit values for graph
 
-        double x = xMinYd;
-        double h = 0.6;
+        double[] firstIntervalLimit = graph.limitFirst();
+        double[] secondIntervalLimit = graph.limitSecond();
+        double[] thirdIntervalLimit = graph.limitThird();
+        double[] fourthIntervalLimit = graph.limitFourth();
+        double[] fifthIntervalLimit = graph.limitFifth();
+        double[] sixthIntervalLimit = graph.limitSixth();
+        double[] seventhIntervalLimit = graph.limitSeventh();
+        double[] eighthIntervalLimit = graph.limitEighth();
 
-        while (x <= xLim) {
+        series.getData().add(new XYChart.Data<>(firstIntervalLimit[0] * 1000, firstIntervalLimit[1] * 1000));
+        // series.getData().add(new XYChart.Data<>(secondIntervalLimit[0] * 1000, secondIntervalLimit[1] * 1000)); <- While is filling this up
+        series.getData().add(new XYChart.Data<>(thirdIntervalLimit[0] * 1000, thirdIntervalLimit[1] * 1000));
+        //series.getData().add(new XYChart.Data<>(fourthIntervalLimit[0] * 1000, fourthIntervalLimit[1] * 1000));
+        //series.getData().add(new XYChart.Data<>(fifthIntervalLimit[0] * 1000, fifthIntervalLimit[1] * 1000));
+        series.getData().add(new XYChart.Data<>(sixthIntervalLimit[0] * 1000, sixthIntervalLimit[1] * 1000));
+        series.getData().add(new XYChart.Data<>(seventhIntervalLimit[0] * 1000, seventhIntervalLimit[1] * 1000));
+        series.getData().add(new XYChart.Data<>(eighthIntervalLimit[0] * 1000, eighthIntervalLimit[1] * 1000));
 
-            double n = fYd * (aS2 - aS1) + 1 * 21.43 * 0.3 * 0.8 * x;
+        double secondIntervalPoints = (thirdIntervalLimit[0]-secondIntervalLimit[0])/20;
+        double fourthIntervalPoints = (fifthIntervalLimit[0]-fourthIntervalLimit[0])/20;
+        double fifthIntervalPoints = (sixthIntervalLimit[0]-fifthIntervalLimit[0])/20;
 
-            double res = fYd * aS1 * (0.5 *0.6 - a1) + fYd * aS2 * (0.5 * 0.6 - a2) + 1 * 21.43 * 0.3 * 0.8 * x * 0.5 * (0.6 - 0.8 * x);
-            series.getData().add(new XYChart.Data<>(n * 1000, res * Math.pow(10, 3)));
+        double x = xMinMinusYd;
 
-            System.out.println(n * 1000);
-            n = n + 0.1;
+        while (x < xMinYd) {
+            double[] results = graph.secondCase(x, secondIntervalPoints);
 
-            x = (n + fYd * (aS1 - aS2)) / (1 * 21.43 * 0.3 * 0.8);
+            double nValue = results[0] * 1000;
+            double mValue = results[1] * 1000;
+            series.getData().add(new XYChart.Data<>(nValue, mValue));
 
+            x = results[2];
         }
 
         x = xLim;
-        while (x <= h) {
 
-            double sigmaS1Two = Math.min(fYd, 0.0035 * (0.55 - x) / x * 200000);
-            double n = -0.0035 * (0.55 - x) / x * 200000 * aS1 + fYd * aS2 + 21.34 * 0.3 * 0.8 * x;
-            double res = sigmaS1Two * aS1 * (0.5 * 0.6 - a1) + fYd * aS2 * (0.5 * 0.6 - a2) + 1 * 21.34 * 0.3 * 0.8 * x * 0.5 * (0.6 - 0.8 * x);
-            series.getData().add(new XYChart.Data<>(n * 1000, res * Math.pow(10, 3)));
+        while (x < hDimension) {
+            double[] results = graph.fourthCase(x, fourthIntervalPoints);
 
-            System.out.println(n * 1000);
-            n = n + 0.1;
-            x = PolynomialSolverKNG.solverPhaseIV(n, fYd, aS1, 0.0035, 200000, aS2, 1, 21.34, 0.3f, 0.8, 0.55, 0);
+            double nValue = results[0] * 1000;
+            double mValue = results[1] * 1000;
+            series.getData().add(new XYChart.Data<>(nValue, mValue));
 
+            x = results[2];
+        }
+
+        x= hDimension;
+
+        while (x < hDimension/lambdaConcrete) {
+            double[] results = graph.fifthCase(x, fifthIntervalPoints);
+
+            double nValue = results[0] * 1000;
+            double mValue = results[1] * 1000;
+            series.getData().add(new XYChart.Data<>(nValue, mValue));
+
+            x = results[2];
+        }
+
+    }
+
+    private void yellowRes(XYChart.Series series, double aS1, double aS2, float a1, float a2, double fYk, float bDimension, float hDimension, double fCk) {
+
+        int eS = BasicValues.steelE();
+        double epsilonCu3 = BasicValues.epsilonCu3Value(fCk);
+        double epsilonC3 = BasicValues.epsilonC3Value(fCk);
+
+        double etaConcrete = BasicValues.etaConcreteValue(fCk);
+        double lambdaConcrete = BasicValues.lambdaConcreteValue(fCk);
+        double fYd = BasicValues.fYdValue(fYk);
+        double xLim = BasicValuesPillars.xLimVar(epsilonCu3, hDimension, a1, fYd, eS);
+        double xMinYd = BasicValuesPillars.xMinYdVar(epsilonCu3, a2Value, fYd, eS);
+        double xMaxYd = BasicValuesPillars.xYdMaxVar(epsilonCu3, epsilonC3, fYd, eS, hDimension, a2Value);
+        double xMinMinusYd = BasicValuesPillars.xMinMinusYdVar(epsilonCu3, a2Value, fYd, eS);
+
+        this.FourForcesLimit = new FourForcesLimit(fYk, aS1, aS2, bDimension, hDimension, fCk, a1, a2);
+        FourForcesLimit graph = (pl.pawz.zelbet.ULS.FourForcesLimit) FourForcesLimit; //to think about that
+
+
+        double[] firstIntervalLimit = graph.limitFirst();
+        double[] secondIntervalLimit = graph.limitSecond();
+        double[] thirdIntervalLimit = graph.limitThird();
+        double[] fourthIntervalLimit = graph.limitFourth();
+        double[] fifthIntervalLimit = graph.limitFifth();
+        double[] sixthIntervalLimit = graph.limitSixth();
+        double[] seventhIntervalLimit = graph.limitSeventh();
+        double[] eighthIntervalLimit = graph.limitEighth();
+
+
+        series.getData().add(new XYChart.Data<>(firstIntervalLimit[0] * 1000, -firstIntervalLimit[1] * 1000));
+        //series.getData().add(new XYChart.Data<>(secondIntervalLimit[0] * 1000, -secondIntervalLimit[1] * 1000));
+        series.getData().add(new XYChart.Data<>(thirdIntervalLimit[0] * 1000, -thirdIntervalLimit[1] * 1000));
+        //series.getData().add(new XYChart.Data<>(fourthIntervalLimit[0] * 1000, -fourthIntervalLimit[1] * 1000));
+        //series.getData().add(new XYChart.Data<>(fifthIntervalLimit[0] * 1000, -fifthIntervalLimit[1] * 1000));
+        series.getData().add(new XYChart.Data<>(sixthIntervalLimit[0] * 1000, -sixthIntervalLimit[1] * 1000));
+        series.getData().add(new XYChart.Data<>(seventhIntervalLimit[0] * 1000, -seventhIntervalLimit[1] * 1000));
+        series.getData().add(new XYChart.Data<>(eighthIntervalLimit[0] * 1000, -eighthIntervalLimit[1] * 1000));
+
+
+        double secondIntervalPoints = (thirdIntervalLimit[0]-secondIntervalLimit[0])/20;
+        double fourthIntervalPoints = (fifthIntervalLimit[0]-fourthIntervalLimit[0])/20;
+        double fifthIntervalPoints = (sixthIntervalLimit[0]-fifthIntervalLimit[0])/20;
+
+        double x = xMinMinusYd;
+
+        while (x < xMinYd) {
+            double[] results = graph.secondCase(x, secondIntervalPoints);
+
+            double nValue = results[0] * 1000;
+            double mValue = -results[1] * 1000;
+            series.getData().add(new XYChart.Data<>(nValue, mValue));
+
+            x = results[2];
+        }
+
+        x = xLim;
+
+        while (x < hDimension) {
+            double[] results = graph.fourthCase(x, fourthIntervalPoints);
+
+            double nValue = results[0] * 1000;
+            double mValue = -results[1] * 1000;
+            series.getData().add(new XYChart.Data<>(nValue, mValue));
+
+            x = results[2];
+        }
+
+        x= hDimension;
+
+        while (x < hDimension/lambdaConcrete) {
+            double[] results = graph.fifthCase(x, fifthIntervalPoints);
+
+            double nValue = results[0] * 1000;
+            double mValue = -results[1] * 1000;
+            series.getData().add(new XYChart.Data<>(nValue, mValue));
+
+            x = results[2];
         }
 
 
-        series.getData().add(new XYChart.Data<>(n8, res8));
-        series.getData().add(new XYChart.Data<>(n9, res9));
-        series.getData().add(new XYChart.Data<>(n10, res10));
-        series.getData().add(new XYChart.Data<>(n11, res11));
-        series.getData().add(new XYChart.Data<>(n12, res12));
-        series.getData().add(new XYChart.Data<>(n13, res13));
-
-
     }
-
-    private void resultsYellow(XYChart.Series series, double aS1, double aS2, float a1, float a2) {
-        FourForcesLimit results = new FourForcesLimit(500, aS1, aS2, 0.3f, 0.6f, 30, a1, a2);
-
-        double[] results1Case = results.firstCase();
-        double res0 = -results1Case[0] * Math.pow(10, 3);
-        double res1 = -results1Case[1] * Math.pow(10, 3);
-        double n0 = results1Case[2] * Math.pow(10, 3);
-        double n1 = results1Case[3] * Math.pow(10, 3);
-
-        double[] results2Case = results.secondCase();
-        double res2 = -results2Case[0] * Math.pow(10, 3);
-        double res3 = -results2Case[1] * Math.pow(10, 3);
-        double n2 = results2Case[2] * Math.pow(10, 3);
-        double n3 = results2Case[3] * Math.pow(10, 3);
-
-        double[] results3Case = results.thirdCase();
-        double res4 = -results3Case[0] * Math.pow(10, 3);
-        double res5 = -results3Case[1] * Math.pow(10, 3);
-        double n4 = results3Case[2] * Math.pow(10, 3);
-        double n5 = results3Case[3] * Math.pow(10, 3);
-
-        //double[] results4Case = results.fourthCase();
-        //double res6 = -results4Case[0] * Math.pow(10, 3);
-        //double res7 = -results4Case[1] * Math.pow(10, 3);
-        //double n6 = results4Case[2] * Math.pow(10, 3);
-        // double n7 = results4Case[3] * Math.pow(10, 3);
-
-        double[] results5Case = results.fifthCase();
-        double res8 = -results5Case[0] * Math.pow(10, 3);
-        double res9 = -results5Case[1] * Math.pow(10, 3);
-        double n8 = results5Case[2] * Math.pow(10, 3);
-        double n9 = results5Case[3] * Math.pow(10, 3);
-
-        double[] results6Case = results.sixthCase();
-        double res10 = -results6Case[0] * Math.pow(10, 3);
-        double res11 = -results6Case[1] * Math.pow(10, 3);
-        double n10 = results6Case[2] * Math.pow(10, 3);
-        double n11 = results6Case[3] * Math.pow(10, 3);
-
-        double[] results7Case = results.seventhCase();
-        double res12 = -results7Case[0] * Math.pow(10, 3);
-        double res13 = -results7Case[1] * Math.pow(10, 3);
-        double n12 = results7Case[2] * Math.pow(10, 3);
-        double n13 = results7Case[3] * Math.pow(10, 3);
-
-        series.getData().add(new XYChart.Data<>(n0, res0));
-        series.getData().add(new XYChart.Data<>(n1, res1));
-        series.getData().add(new XYChart.Data<>(n2, res2));
-        series.getData().add(new XYChart.Data<>(n3, res3));
-        series.getData().add(new XYChart.Data<>(n4, res4));
-        series.getData().add(new XYChart.Data<>(n5, res5));
-        //series.getData().add(new XYChart.Data<>(n6, res6));
-        //series.getData().add(new XYChart.Data<>(n7, res7));
-        series.getData().add(new XYChart.Data<>(n8, res8));
-        series.getData().add(new XYChart.Data<>(n9, res9));
-        series.getData().add(new XYChart.Data<>(n10, res10));
-        series.getData().add(new XYChart.Data<>(n11, res11));
-        series.getData().add(new XYChart.Data<>(n12, res12));
-        series.getData().add(new XYChart.Data<>(n13, res13));
-    }
-
-
 }

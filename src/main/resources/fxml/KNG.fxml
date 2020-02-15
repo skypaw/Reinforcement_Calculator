@@ -29,17 +29,26 @@
             <Label GridPane.columnIndex="1" GridPane.rowIndex="9" text="n_1 = "/>
             <Label GridPane.columnIndex="1" GridPane.rowIndex="10" text="n_2 = "/>
 
-            <TextField GridPane.columnIndex="2" GridPane.rowIndex="1" promptText="[cm]" prefWidth="50" fx:id="test1"/>
+            <TextField GridPane.columnIndex="2" GridPane.rowIndex="1" promptText="[cm]" prefWidth="50" fx:id="test1"
+                       onKeyReleased="#takeData"/>
             <TextField GridPane.columnIndex="2" GridPane.rowIndex="2" promptText="[cm]" prefWidth="50"
-                       fx:id="geometryHeight"/>
-            <TextField GridPane.columnIndex="2" GridPane.rowIndex="3" promptText="[mm]" prefWidth="50" fx:id="a1"/>
-            <TextField GridPane.columnIndex="2" GridPane.rowIndex="4" promptText="[mm]" prefWidth="50" fx:id="a2"/>
-            <TextField GridPane.columnIndex="2" GridPane.rowIndex="5" promptText="[MPa]" prefWidth="50" fx:id="fCk"/>
-            <TextField GridPane.columnIndex="2" GridPane.rowIndex="6" promptText="[MPa]" prefWidth="50" fx:id="steelFYk"/>
-            <TextField GridPane.columnIndex="2" GridPane.rowIndex="7" promptText="[mm]" prefWidth="50" fx:id="aS1"/>
-            <TextField GridPane.columnIndex="2" GridPane.rowIndex="8" promptText="[mm]" prefWidth="50" fx:id="aS2"/>
-            <TextField GridPane.columnIndex="2" GridPane.rowIndex="9" promptText="[szt.]" prefWidth="50" fx:id="n1"/>
-            <TextField GridPane.columnIndex="2" GridPane.rowIndex="10" promptText="[szt.]" prefWidth="50" fx:id="n2"/>
+                       fx:id="geometryHeight" onKeyReleased="#takeData"/>
+            <TextField GridPane.columnIndex="2" GridPane.rowIndex="3" promptText="[mm]" prefWidth="50" fx:id="a1"
+                       onKeyReleased="#takeData"/>
+            <TextField GridPane.columnIndex="2" GridPane.rowIndex="4" promptText="[mm]" prefWidth="50" fx:id="a2"
+                       onKeyReleased="#takeData"/>
+            <TextField GridPane.columnIndex="2" GridPane.rowIndex="5" promptText="[MPa]" prefWidth="50" fx:id="fCk"
+                       onKeyReleased="#takeData"/>
+            <TextField GridPane.columnIndex="2" GridPane.rowIndex="6" promptText="[MPa]" prefWidth="50"
+                       fx:id="steelFYk" onKeyReleased="#takeData"/>
+            <TextField GridPane.columnIndex="2" GridPane.rowIndex="7" promptText="[mm]" prefWidth="50" fx:id="aS1"
+                       onKeyReleased="#takeData"/>
+            <TextField GridPane.columnIndex="2" GridPane.rowIndex="8" promptText="[mm]" prefWidth="50" fx:id="aS2"
+                       onKeyReleased="#takeData"/>
+            <TextField GridPane.columnIndex="2" GridPane.rowIndex="9" promptText="[szt.]" prefWidth="50" fx:id="n1"
+                       onKeyReleased="#takeData"/>
+            <TextField GridPane.columnIndex="2" GridPane.rowIndex="10" promptText="[szt.]" prefWidth="50" fx:id="n2"
+                       onKeyReleased="#takeData"/>
 
             <Button GridPane.columnIndex="2" GridPane.rowIndex="12" text="Obliczenia" onAction="#button"/>
         </GridPane>
@@ -47,10 +56,10 @@
     <center>
         <LineChart fx:id="lineChart" title="Krzywa Nosności Granicznej" prefHeight="500" prefWidth="700">
             <xAxis>
-                <NumberAxis side="BOTTOM" label="Normalna"/>
+                <NumberAxis side="BOTTOM" label="Normalna [kN]"/>
             </xAxis>
             <yAxis>
-                <NumberAxis side="LEFT" label="Moment"/>
+                <NumberAxis side="LEFT" label="Moment [kNm]"/>
             </yAxis>
         </LineChart>
     </center>
