@@ -19,7 +19,6 @@ public class DiagnosticExtension {
     private int E_S;
     private double xMinusMinYd;
     private double xMinYd;
-    private double xLim;
     private double eS1;
     private double eS2;
     private double sigmaS1;
@@ -44,7 +43,6 @@ public class DiagnosticExtension {
         this.a1 = a1;
         this.a2 = a2;
 
-        this.xLim = BasicValuesPillars.xLimVar(epsilonCu3, hDimension, a1, fYd, E_S);
         this.xMinusMinYd = BasicValuesPillars.xMinMinusYdVar(epsilonCu3, a2, fYd, E_S);
         this.xMinYd = BasicValuesPillars.xMinYdVar(epsilonCu3, a2, fYd, E_S);
 

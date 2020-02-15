@@ -55,7 +55,7 @@ public class ShearingStirrups {
     }
 
 
-    public double vRdCValue() {
+    double vRdCValue() {
         double kValue = Math.min(1 + Math.sqrt(200 / (dDimension * Math.pow(10, 3))), 2);
         double nuMin = 0.035 * Math.pow(kValue, 1.5) * Math.pow(fCk, 0.5);
         double rhoL = Math.min((aSl * Math.pow(10, 4)) / (bDimension * dDimension * Math.pow(10, 4)), 0.02);

@@ -24,37 +24,16 @@ class PrintPDF {
                       double s2RealData, double vRdRealData, double fiCrawlingData, double bData, double hData, double cNomData, double a1Data, double a2Data,
                       double bEffData, double hFData, double bEffTData, double hFTData, double lEff, double alphaMData, double nRd, double cotTheta) throws IOException {
 
-        String namePdf = name;
-
-        double concrete = concreteFCk;
-        char cement = cementChar;
-        double fyk = fYk;
-        double rH = rHData;
-        double days = daysData;
         double mEd = roundThreeDigit(mEdData * Math.pow(10, 3));
         double mEk = roundThreeDigit(mEkData * Math.pow(10, 3));
         double mEkLt = roundThreeDigit(mEkLtData * Math.pow(10, 3));
         double vEd = roundThreeDigit(vEdData * Math.pow(10, 3));
-        double vRd = roundThreeDigit(vRdData * Math.pow(10, 3));
         double vRdReal = roundThreeDigit(vRdRealData * Math.pow(10, 3));
         double vEdRed = roundThreeDigit(vEdRedData * Math.pow(10, 3));
         double nEd = roundThreeDigit(nEdData * Math.pow(10, 3));
-        double aS1 = aS1Data;
-        double aS2 = aS2Data;
-        double aS1Real = aS1RealData;
-        double aS2Real = aS2RealData;
-        double nS1 = nS1Data;
-        double nS2 = nS2Data;
         double mRd = roundThreeDigit(mRdData * Math.pow(10, 3));
-        double wCalc = wCalcData;
-        double wReal = wRealData;
-        double fMCalc = fMCalcData;
-        double fMReal = fMRealData;
         double fCsCalc = roundThreeDigit(fCsCalcData);
         double fCsReal = roundThreeDigit(fCsRealData);
-        double fSumCalc = fSumCalcData;
-        double fSumReal = fSumRealData;
-        double alpha = alphaData;
         double fiCrawling = roundThreeDigit(fiCrawlingData);
         double hf = roundThreeDigit(hFData);
         double hft = roundThreeDigit(hFTData);
@@ -75,16 +54,16 @@ class PrintPDF {
         System.out.println(s1);
         System.out.println(s1Data);
 
-        String valueRods1 = (int) nS1 + " fi " + (int) (fi1Data * Math.pow(10, 3));
-        String valueRods2 = (int) nS2 + " fi " + (int) (fi2Data * Math.pow(10, 3));
+        String valueRods1 = (int) nS1Data + " fi " + (int) (fi1Data * Math.pow(10, 3));
+        String valueRods2 = (int) nS2Data + " fi " + (int) (fi2Data * Math.pow(10, 3));
 
-        String rods = "Prety odgiete alpha = " + alpha;
+        String rods = "Prety odgiete alpha = " + alphaData;
 
         String valueRodsShearing1 = (int) nSw1 + " fi " + (int) (fiw1Data * Math.pow(10, 3));
-        String valueRodsShearing2 = (int) nSw2 + " fi " + (int) (fiw2Data * Math.pow(10, 4));
+        String valueRodsShearing2 = (int) nSw2 + " fi " + (int) (fiw2Data * Math.pow(10, 3));
 
         String valueRodsShearing1Real = (int) nSw1Real + " fi " + (int) (fiw1DataReal * Math.pow(10, 3));
-        String valueRodsShearing2Real = (int) nSw2Real + " fi " + (int) (fiw2DataReal * Math.pow(10, 4));
+        String valueRodsShearing2Real = (int) nSw2Real + " fi " + (int) (fiw2DataReal * Math.pow(10, 3));
 
         String cotThetaString = "cot_Theta = " + cotTheta;
 
@@ -105,7 +84,7 @@ class PrintPDF {
         contentStream.setLeading(12.0f);
         contentStream.moveTextPositionByAmount(50, 740);
 
-        contentStream.showText("Nazwa zadania: " + namePdf);
+        contentStream.showText("Nazwa zadania: " + name);
 
 
         // Title Table
@@ -113,12 +92,10 @@ class PrintPDF {
         float yStartNewPage = blankPage.getMediaBox().getHeight() - (2 * margin);
         float tableWidth = blankPage.getMediaBox().getWidth() - (2 * margin);
 
-        boolean drawContent = true;
-        float yStart = yStartNewPage;
         float bottomMargin = 70;
         float yPosition = 725;
 
-        BaseTable table = new BaseTable(yPosition, yStartNewPage, bottomMargin, tableWidth, margin, document, blankPage, true, drawContent);
+        BaseTable table = new BaseTable(yPosition, yStartNewPage, bottomMargin, tableWidth, margin, document, blankPage, true, true);
 
         Row<PDPage> headerRow = table.createRow(12f);
         textCell(headerRow.createCell(100, "D A N E"));
@@ -135,16 +112,16 @@ class PrintPDF {
         contentStream.newLine();
         contentStream.showText("PARAMETRY MATERIALOWE:");
         contentStream.newLine();
-        contentStream.showText("      Beton: f_ck " + concrete + "(cement: " + cement + ")");
+        contentStream.showText("      Beton: f_ck " + concreteFCk + "(cement: " + cementChar + ")");
         contentStream.newLine();
-        contentStream.showText("      Stal: f_yk = " + fyk + "MPa");
+        contentStream.showText("      Stal: f_yk = " + fYk + "MPa");
         contentStream.newLine();
         contentStream.newLine();
         contentStream.showText("PARAMETRY DODATKOWE:");
         contentStream.newLine();
-        contentStream.showText("      RH: " + rH + "%");
+        contentStream.showText("      RH: " + rHData + "%");
         contentStream.newLine();
-        contentStream.showText("      Wiek t_0: " + days + "dni");
+        contentStream.showText("      Wiek t_0: " + daysData + "dni");
         contentStream.newLine();
         contentStream.showText("      Fi(inf,t_0) = " + fiCrawling);
 
@@ -153,7 +130,7 @@ class PrintPDF {
 
         float yPositionForces = 600;
 
-        BaseTable tableForces = new BaseTable(yPositionForces, yStartNewPage, bottomMargin, tableWidth, margin, document, blankPage, true, drawContent);
+        BaseTable tableForces = new BaseTable(yPositionForces, yStartNewPage, bottomMargin, tableWidth, margin, document, blankPage, true, true);
 
         Row<PDPage> headerRowForces = tableForces.createRow(12f);
         textCell(headerRowForces.createCell(100, "SILY WEWNETRZNE"));
@@ -195,7 +172,7 @@ class PrintPDF {
 
         float yPositionRes = 500;
 
-        BaseTable tableRes = new BaseTable(yPositionRes, yStartNewPage, bottomMargin, tableWidth, margin, document, blankPage, true, drawContent);
+        BaseTable tableRes = new BaseTable(yPositionRes, yStartNewPage, bottomMargin, tableWidth, margin, document, blankPage, true, true);
 
         Row<PDPage> headerRowRes = tableRes.createRow(12f);
         textCell(headerRowRes.createCell(100, "W Y N I K I"));
@@ -204,7 +181,7 @@ class PrintPDF {
 
         float yPositionResults = 475;
 
-        BaseTable tableResults = new BaseTable(yPositionResults, yStartNewPage, bottomMargin, tableWidth, margin, document, blankPage, true, drawContent);
+        BaseTable tableResults = new BaseTable(yPositionResults, yStartNewPage, bottomMargin, tableWidth, margin, document, blankPage, true, true);
 
         Row<PDPage> headerRowResults = tableResults.createRow(15f);
         textCell(headerRowResults.createCell(100, "Stan graniczny nosnosci SGN"));
@@ -236,17 +213,17 @@ class PrintPDF {
 
 
         row.createCell(20, "Rozciagane A_s1");
-        greenCell(row.createCell(15, String.valueOf(aS1)));
-        greenCellWhiteBottom(row.createCell(20, String.valueOf(mEdString)));
-        blueCellGrey(row.createCell(10, String.valueOf(valueRods1)));
-        greenCell(row.createCell(15, String.valueOf(aS1Real)));
-        greenCellWhiteBottom(row.createCell(20, String.valueOf(mRdString)));
+        greenCell(row.createCell(15, String.valueOf(aS1Data)));
+        greenCellWhiteBottom(row.createCell(20, mEdString));
+        blueCellGrey(row.createCell(10, valueRods1));
+        greenCell(row.createCell(15, String.valueOf(aS1RealData)));
+        greenCellWhiteBottom(row.createCell(20, mRdString));
 
         row1.createCell(20, "Sciskane A_s2");
-        greenCell(row1.createCell(15, String.valueOf(aS2)));
+        greenCell(row1.createCell(15, String.valueOf(aS2Data)));
         greenCell(row1.createCell(20, String.valueOf(nEd)));
-        blueCellGrey(row1.createCell(10, String.valueOf(valueRods2)));
-        greenCell(row1.createCell(15, String.valueOf(aS2Real)));
+        blueCellGrey(row1.createCell(10, valueRods2));
+        greenCell(row1.createCell(15, String.valueOf(aS2RealData)));
         greenCell(row1.createCell(20, String.valueOf(nRd)));
 
 
@@ -255,7 +232,7 @@ class PrintPDF {
 
         float yPositionResultsV = 340;
 
-        BaseTable tableResultsV = new BaseTable(yPositionResultsV, yStartNewPage, bottomMargin, tableWidth, margin, document, blankPage, true, drawContent);
+        BaseTable tableResultsV = new BaseTable(yPositionResultsV, yStartNewPage, bottomMargin, tableWidth, margin, document, blankPage, true, true);
 
         Row<PDPage> headerRowResultsV = tableResultsV.createRow(15f);
         textCell(headerRowResultsV.createCell(100, "Stan graniczny nosnosci - scinanie"));
@@ -289,20 +266,20 @@ class PrintPDF {
 
 
         rowV.createCell(30, "Strzemiona");
-        blueCell(rowV.createCell(10, String.valueOf(valueRodsShearing1)));
+        blueCell(rowV.createCell(10, valueRodsShearing1));
         greenCell(rowV.createCell(10, String.valueOf(s1)));
         greenCellWhiteBottom(rowV.createCell(15, String.valueOf(vEd)));
-        greenCellGrey(rowV.createCell(10, String.valueOf(valueRodsShearing1Real)));
+        greenCellGrey(rowV.createCell(10, valueRodsShearing1Real));
         blueCellGrey(rowV.createCell(10, String.valueOf(s1Real)));
         greenCellWhiteBottom(rowV.createCell(15, String.valueOf(vRdReal)));
 
         rowV1.createCell(30, rods);
-        blueCell(rowV1.createCell(10, String.valueOf(valueRodsShearing2)));
+        blueCell(rowV1.createCell(10, valueRodsShearing2));
         blueCell(rowV1.createCell(10, String.valueOf(s2)));
-        greenCell(rowV1.createCell(15, String.valueOf("")));
-        blueCellGrey(rowV1.createCell(10, String.valueOf(valueRodsShearing2Real)));
+        greenCell(rowV1.createCell(15, ""));
+        blueCellGrey(rowV1.createCell(10, valueRodsShearing2Real));
         blueCellGrey(rowV1.createCell(10, String.valueOf(s2Real)));
-        greenCell(rowV1.createCell(15, String.valueOf("")));
+        greenCell(rowV1.createCell(15, ""));
 
 
         //Table for SLS
@@ -310,7 +287,7 @@ class PrintPDF {
 
         float yPositionResultsSLS = 210;
 
-        BaseTable tableResultsSLS = new BaseTable(yPositionResultsSLS, yStartNewPage, bottomMargin, tableWidth, margin, document, blankPage, true, drawContent);
+        BaseTable tableResultsSLS = new BaseTable(yPositionResultsSLS, yStartNewPage, bottomMargin, tableWidth, margin, document, blankPage, true, true);
 
 
         Row<PDPage> headerRowResultsSLS = tableResultsSLS.createRow(15f);
@@ -334,14 +311,14 @@ class PrintPDF {
         rowSLS.createCell(30, "Zarysowanie");
         textCell(rowSLS.createCell(10, "w"));
         textCell(rowSLS.createCell(10, "[mm]"));
-        greenCell(rowSLS.createCell(25, String.valueOf(wCalc)));
-        greenCellGrey(rowSLS.createCell(25, String.valueOf(wReal)));
+        greenCell(rowSLS.createCell(25, String.valueOf(wCalcData)));
+        greenCellGrey(rowSLS.createCell(25, String.valueOf(wRealData)));
 
         rowSLS1.createCell(30, "Ugiecie od obciazenia");
         textCell(rowSLS1.createCell(10, "f_M"));
         textCell(rowSLS1.createCell(10, "[cm]"));
-        greenCell(rowSLS1.createCell(25, String.valueOf(fMCalc)));
-        greenCell(rowSLS1.createCell(25, String.valueOf(fMReal)));
+        greenCell(rowSLS1.createCell(25, String.valueOf(fMCalcData)));
+        greenCell(rowSLS1.createCell(25, String.valueOf(fMRealData)));
 
         rowSLS2.createCell(30, "Ugiecie od skurczu");
         textCell(rowSLS2.createCell(10, "f_cs"));
@@ -352,8 +329,8 @@ class PrintPDF {
         rowSLS3.createCell(30, "Ugiecie calkowite");
         textCell(rowSLS3.createCell(10, "f_M + f_cs"));
         textCell(rowSLS3.createCell(10, "[cm]"));
-        greenCell(rowSLS3.createCell(25, String.valueOf(fSumCalc)));
-        greenCellGrey(rowSLS3.createCell(25, String.valueOf(fSumReal)));
+        greenCell(rowSLS3.createCell(25, String.valueOf(fSumCalcData)));
+        greenCellGrey(rowSLS3.createCell(25, String.valueOf(fSumRealData)));
 
 
         table.draw();

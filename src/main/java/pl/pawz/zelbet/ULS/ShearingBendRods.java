@@ -7,9 +7,6 @@ public class ShearingBendRods {
     private double bDimension;
     private double fCk;
     private double fCd;
-    private float nEd;
-    private double aC;
-    private double aSl;
     private double vRdMax;
     private double aSw1;
     private double aSw2;
@@ -37,9 +34,6 @@ public class ShearingBendRods {
         this.bDimension = bDimension;
         this.fCk = fCk;
         this.fCd = BasicValues.fCdValue(fCk);
-        this.nEd = nEd;
-        this.aC = bDimension*hDimension;
-        this.aSl = aSl;
         this.nS1= nS1;
         this.nS2= nS2;
         this.fiS2 = fiS2;
@@ -69,7 +63,7 @@ public class ShearingBendRods {
 
     }
 
-    public void vRdMax() {
+    private void vRdMax() {
         int alphaCw = 1;
         double nu1 = 0.6 * (1 - fCk / 250); //from 6.6N EC2
 

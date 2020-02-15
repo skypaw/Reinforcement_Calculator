@@ -27,7 +27,7 @@ public class ExtensionSymmetricReinforcement {
                                            float hDimension, float a1, float a2) {
         this.nEd = nEd;
         this.epsilonCu3 = BasicValues.epsilonCu3Value(fCk);
-        double epsilonC3 = BasicValues.epsilonC3Value(fCk);
+
         this.fCd = BasicValues.fCdValue(fCk);
         this.fYd = BasicValues.fYdValue(fYk);
         this.etaConcrete = BasicValues.etaConcreteValue(fCk);

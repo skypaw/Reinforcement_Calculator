@@ -10,12 +10,30 @@ public class Controller {
     SubController tab1Controller;
     @FXML
     SubController tab2Controller;
+    @FXML
+    GraphController tab3Controller;
 
+    public void button(){
+        tab3Controller.button();
+    }
 
     public void dataPass() {
 
 
         if (tab1Controller.data != null) {
+            tab3Controller.geometryHeight.setText(String.valueOf(tab1Controller.data.get("hValue")));
+            tab3Controller.test1.setText(String.valueOf(tab1Controller.data.get("bValue")));
+            tab3Controller.steelFYk.setText(String.valueOf(tab1Controller.data.get("fYk")));
+            tab3Controller.aS1.setText(String.valueOf(tab1Controller.data.get("fiS1")));
+            tab3Controller.aS2.setText(String.valueOf(tab1Controller.data.get("fiS2")));
+            tab3Controller.a1.setText(String.valueOf(tab1Controller.data.get("a1")));
+            tab3Controller.a2.setText(String.valueOf(tab1Controller.data.get("a2")));
+            tab3Controller.n1.setText(String.valueOf(tab1Controller.data.get("ns1")));
+            tab3Controller.n2.setText(String.valueOf(tab1Controller.data.get("ns2")));
+            tab3Controller.fCk.setText(String.valueOf(tab1Controller.fCk));
+
+
+
 
             tab2Controller.mEdLoadsTxt.setText(String.valueOf(tab1Controller.data.get("mEd")));
             tab2Controller.nEdLoadsTxt.setText(String.valueOf(tab1Controller.data.get("nEd")));
