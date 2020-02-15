@@ -1,18 +1,13 @@
 package pl.pawz.zelbet.GUI;
 
 import javafx.fxml.FXML;
-import javafx.scene.chart.Axis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.GridPane;
 import pl.pawz.zelbet.BasicValues;
 import pl.pawz.zelbet.BasicValuesPillars;
-import pl.pawz.zelbet.PolynomialSolverKNG;
 import pl.pawz.zelbet.ULS.FourForcesLimit;
 
-import java.lang.reflect.Method;
-import java.util.Arrays;
 
 public class GraphController {
     @FXML
@@ -86,7 +81,6 @@ public class GraphController {
 
         lineChart.setCreateSymbols(false);
 
-
     }
 
     public void takeData() {
@@ -113,14 +107,10 @@ public class GraphController {
 
         int eS = BasicValues.steelE();
         double epsilonCu3 = BasicValues.epsilonCu3Value(fCk);
-        double epsilonC3 = BasicValues.epsilonC3Value(fCk);
-
-        double etaConcrete = BasicValues.etaConcreteValue(fCk);
         double lambdaConcrete = BasicValues.lambdaConcreteValue(fCk);
         double fYd = BasicValues.fYdValue(fYk);
         double xLim = BasicValuesPillars.xLimVar(epsilonCu3, hDimension, a1, fYd, eS);
         double xMinYd = BasicValuesPillars.xMinYdVar(epsilonCu3, a2Value, fYd, eS);
-        double xMaxYd = BasicValuesPillars.xYdMaxVar(epsilonCu3, epsilonC3, fYd, eS, hDimension, a2Value);
         double xMinMinusYd = BasicValuesPillars.xMinMinusYdVar(epsilonCu3, a2Value, fYd, eS);
 
         this.FourForcesLimit = new FourForcesLimit(fYk, aS1, aS2, bDimension, hDimension, fCk, a1, a2);
@@ -139,10 +129,7 @@ public class GraphController {
         double[] eighthIntervalLimit = graph.limitEighth();
 
         series.getData().add(new XYChart.Data<>(firstIntervalLimit[0] * 1000, firstIntervalLimit[1] * 1000));
-        // series.getData().add(new XYChart.Data<>(secondIntervalLimit[0] * 1000, secondIntervalLimit[1] * 1000)); <- While is filling this up
         series.getData().add(new XYChart.Data<>(thirdIntervalLimit[0] * 1000, thirdIntervalLimit[1] * 1000));
-        //series.getData().add(new XYChart.Data<>(fourthIntervalLimit[0] * 1000, fourthIntervalLimit[1] * 1000));
-        //series.getData().add(new XYChart.Data<>(fifthIntervalLimit[0] * 1000, fifthIntervalLimit[1] * 1000));
         series.getData().add(new XYChart.Data<>(sixthIntervalLimit[0] * 1000, sixthIntervalLimit[1] * 1000));
         series.getData().add(new XYChart.Data<>(seventhIntervalLimit[0] * 1000, seventhIntervalLimit[1] * 1000));
         series.getData().add(new XYChart.Data<>(eighthIntervalLimit[0] * 1000, eighthIntervalLimit[1] * 1000));
@@ -193,16 +180,11 @@ public class GraphController {
 
         int eS = BasicValues.steelE();
         double epsilonCu3 = BasicValues.epsilonCu3Value(fCk);
-        double epsilonC3 = BasicValues.epsilonC3Value(fCk);
-
-        double etaConcrete = BasicValues.etaConcreteValue(fCk);
         double lambdaConcrete = BasicValues.lambdaConcreteValue(fCk);
         double fYd = BasicValues.fYdValue(fYk);
         double xLim = BasicValuesPillars.xLimVar(epsilonCu3, hDimension, a1, fYd, eS);
         double xMinYd = BasicValuesPillars.xMinYdVar(epsilonCu3, a2Value, fYd, eS);
-        double xMaxYd = BasicValuesPillars.xYdMaxVar(epsilonCu3, epsilonC3, fYd, eS, hDimension, a2Value);
         double xMinMinusYd = BasicValuesPillars.xMinMinusYdVar(epsilonCu3, a2Value, fYd, eS);
-
         this.FourForcesLimit = new FourForcesLimit(fYk, aS1, aS2, bDimension, hDimension, fCk, a1, a2);
         FourForcesLimit graph = (pl.pawz.zelbet.ULS.FourForcesLimit) FourForcesLimit; //to think about that
 
@@ -218,10 +200,7 @@ public class GraphController {
 
 
         series.getData().add(new XYChart.Data<>(firstIntervalLimit[0] * 1000, -firstIntervalLimit[1] * 1000));
-        //series.getData().add(new XYChart.Data<>(secondIntervalLimit[0] * 1000, -secondIntervalLimit[1] * 1000));
         series.getData().add(new XYChart.Data<>(thirdIntervalLimit[0] * 1000, -thirdIntervalLimit[1] * 1000));
-        //series.getData().add(new XYChart.Data<>(fourthIntervalLimit[0] * 1000, -fourthIntervalLimit[1] * 1000));
-        //series.getData().add(new XYChart.Data<>(fifthIntervalLimit[0] * 1000, -fifthIntervalLimit[1] * 1000));
         series.getData().add(new XYChart.Data<>(sixthIntervalLimit[0] * 1000, -sixthIntervalLimit[1] * 1000));
         series.getData().add(new XYChart.Data<>(seventhIntervalLimit[0] * 1000, -seventhIntervalLimit[1] * 1000));
         series.getData().add(new XYChart.Data<>(eighthIntervalLimit[0] * 1000, -eighthIntervalLimit[1] * 1000));

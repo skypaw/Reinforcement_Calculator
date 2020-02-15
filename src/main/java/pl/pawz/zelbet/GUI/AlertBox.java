@@ -8,13 +8,13 @@ import javafx.scene.layout.VBox;
 import javafx.stage.*;
 
 
-public class AlertBox {
+class AlertBox {
 
-    public static void display(String title, String message) {
+    static void display(String message) {
         Stage window = new Stage();
 
         window.initModality(Modality.APPLICATION_MODAL);
-        window.setTitle(title);
+        window.setTitle("Błąd");
         window.setMinWidth(250);
 
         Label label = new Label(message);

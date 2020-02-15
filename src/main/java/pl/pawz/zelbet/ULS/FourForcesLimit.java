@@ -54,7 +54,7 @@ public class FourForcesLimit {
     }
 
 
-    public double[] firstCase(double x) {
+    private double[] firstCase(double x) {
         double sigmaS1 = fYd;
         double sigmaS2 = -fYd;
 
@@ -88,7 +88,7 @@ public class FourForcesLimit {
         return new double[]{nReturn, m, x};
     }
 
-    public double[] thirdCase(double x) {
+    private double[] thirdCase(double x) {
         double sigmaS1 = fYd;
         double sigmaS2 = fYd;
 
@@ -136,7 +136,7 @@ public class FourForcesLimit {
         return new double[]{nReturn, m, x};
     }
 
-    public double[] sixthCase(double x) {
+    private double[] sixthCase(double x) {
         double sigmaS1 = Math.max(epsilonC3 * (dDimension - x) / (x - x0) * eS, -fYd);
         double sigmaS2 = fYd;
 
@@ -144,13 +144,10 @@ public class FourForcesLimit {
 
         double m = sigmaS1 * aS1 * (0.5 * hDimension - a1) + sigmaS2 * aS2 * (0.5 * hDimension - a2);
 
-        double nReturn = n;
-        n = n + 0.1;
-        x = x + 0.1;
-        return new double[]{nReturn, m, x};
+        return new double[]{n, m, x};
     }
 
-    public double[] seventhCase(double x) {
+    private double[] seventhCase(double x) {
         double sigmaS1 = Math.max(epsilonC3 * (dDimension - x) / (x - x0) * eS, -fYd);
         double sigmaS2 = Math.min(epsilonC3 * (x - a2) / (x - x0) * eS, fYd);
 
@@ -158,12 +155,7 @@ public class FourForcesLimit {
 
         double m = sigmaS1 * aS1 * (0.5 * hDimension - a1) + sigmaS2 * aS2 * (0.5 * hDimension - a2);
 
-        double nReturn = n;
-        //n = n + 1;
-        //x = x + 0.1;
-        // = (epsilonC3 * eS * (aS1 * dDimension + aS2 * a2) + x0 * (etaConcrete * fCd * bDimension * hDimension - n)) / (epsilonC3 * (eS * aS1 + eS * aS2) - n + etaConcrete * fCd * bDimension * hDimension);
-
-        return new double[]{nReturn, m, x};
+        return new double[]{n, m, x};
     }
 
     // Limit Values for graph

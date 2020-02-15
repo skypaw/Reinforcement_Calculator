@@ -22,7 +22,7 @@ class Validator {
             if (value >= 0) {
                 return value; // Value greater than 0 -> returning
             } else {
-                AlertBox.display("Błąd", "Wartość powinna być liczbą dodatnią");
+                AlertBox.display("Wartość powinna być liczbą dodatnią");
                 textField.setText(returnBasicValue);
                 return 0; // Value smaller than 0 -> returning 0
             }

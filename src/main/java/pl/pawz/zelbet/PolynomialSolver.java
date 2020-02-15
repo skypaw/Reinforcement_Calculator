@@ -9,18 +9,12 @@ public class PolynomialSolver {
 
     public static double solver(double aPolynomial, double bPolynomial, double cPolynomial, double dPolynomial, double limVar) {
         BrentSolver solver = new BrentSolver();
-        UnivariateFunction f = new UnivariateFunction() {
-
-            @Override
-            public double value(double x) {
-                return aPolynomial * Math.pow(x, 3.0) + bPolynomial * Math.pow(x, 2.0) + cPolynomial * x + dPolynomial;
-            }
-        };
+        UnivariateFunction f = x -> aPolynomial * Math.pow(x, 3.0) + bPolynomial * Math.pow(x, 2.0) + cPolynomial * x + dPolynomial;
 
         double intervalStart = limVar;
         double intervalSize = 0.001;
         int i = 0;
-        ArrayList<Double> results = new ArrayList<Double>(i);
+        ArrayList<Double> results = new ArrayList<>(i);
 
 
         while (intervalStart < 2) {

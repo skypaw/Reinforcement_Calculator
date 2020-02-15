@@ -344,24 +344,17 @@ public class SubController {
     private double s1SpacingVar = 0;
     private double s1SpacingVarTrue = 0;
 
-    private double s2SpacingVar = 0;
-    private double s2SpacingVarTrue = 0;
-
     private String mm = " mm";
     private String cm = " cm";
 
     //checkbox booleans for passing to another controller
 
 
-    boolean concreteCheck;
-    boolean bendRodsCheck;
 
     //list booleans for passing to another controller
 
     String crossSectionCheck;
-    boolean concreteListCheck;
-    boolean loadsCheck;
-    boolean cementCheck;
+
 
 
     public void initialize() {
@@ -618,12 +611,12 @@ public class SubController {
             if (value >= 0) {
                 return value;
             } else {
-                AlertBox.display("Błąd", "Wartość powinna być liczbą dodatnią");
+                AlertBox.display("Wartość powinna być liczbą dodatnią");
                 return 0;
             }
         } catch (NumberFormatException e) {
 
-            AlertBox.display("Błąd", "Wartość " + variable + " powinna być liczbą dodatnią");
+            AlertBox.display("Wartość " + variable + " powinna być liczbą dodatnią");
             return 0;
         }
     }
@@ -637,7 +630,7 @@ public class SubController {
             return Float.parseFloat(specificTextField.getText().replaceAll(",", "."));
 
         } catch (NumberFormatException e) {
-            AlertBox.display("Błąd", "Wartość " + variable + " powinna być liczbą");
+            AlertBox.display("Wartość " + variable + " powinna być liczbą");
             return 0;
 
         }
