@@ -62,7 +62,7 @@ public class DiagnosticCompression {
         double eMin = (epsilonC3 * E_S * (aS2 * (0.5 * hDimension - a2) - aS1 * (0.5 * hDimension - a1))) / (etaConcrete * fCd * bDimension * hDimension + epsilonC3 * E_S * (aS1 + aS2));
 
         if (e < eMin) {
-            this.aS1 = aS2;
+            this.aS1 = aS2; //todo to check this 
             this.aS2 = aS1;
         }
 
@@ -170,6 +170,10 @@ public class DiagnosticCompression {
         if (mRd < 0) mRd = 0;
 
         return new double[]{nRd, mRd};
+    }
+
+    public void setE(double e){
+        this.e = e;
     }
 
 }

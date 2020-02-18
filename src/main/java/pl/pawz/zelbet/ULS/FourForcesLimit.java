@@ -74,7 +74,7 @@ public class FourForcesLimit {
 
     public double[] secondCase(double x, double interval) {
         double sigmaS1 = fYd;
-        double sigmaS2 = Math.max(Math.min(epsilonCu3 * (x - a2) / x * eS,fYd),-fYd);
+        double sigmaS2 = Math.max(Math.min(epsilonCu3 * (x - a2) / x * eS, fYd), -fYd);
 
         double n = -fYd * aS1 + epsilonCu3 * (x - a2) / x * eS * aS2 + etaConcrete * fCd * bDimension * lambdaConcrete * x;
 
@@ -106,7 +106,7 @@ public class FourForcesLimit {
     }
 
     public double[] fourthCase(double x, double interval) {
-        double sigmaS1 = Math.max(Math.min(fYd, epsilonCu3 * (dDimension - x) / x * eS),-fYd);
+        double sigmaS1 = Math.max(Math.min(fYd, epsilonCu3 * (dDimension - x) / x * eS), -fYd);
         double sigmaS2 = fYd;
 
         double n = -epsilonCu3 * (dDimension - x) / x * eS * aS1 + fYd * aS2 + etaConcrete * fCd * bDimension * lambdaConcrete * x;
@@ -161,57 +161,65 @@ public class FourForcesLimit {
     // Limit Values for graph
 
     public double[] limitFirst() {
-        double n = firstCase(0)[0];
-        double m = firstCase(0)[1];
+        double[] results = firstCase(0);
+        double n = results[0];
+        double m = results[1];
 
         return new double[]{n, m};
     }
 
     public double[] limitSecond() {
-        double n = firstCase(xMinMinusYd)[0];
-        double m = firstCase(xMinMinusYd)[1];
+        double[] results = firstCase(xMinMinusYd);
+        double n = results[0];
+        double m = results[1];
 
         return new double[]{n, m};
     }
 
     public double[] limitThird() {
-        double n = secondCase(xMinYd,0.1)[0];
-        double m = secondCase(xMinYd,0.1)[1];
+        double[] results = secondCase(xMinYd, 0.1);
+        double n = results[0];
+        double m = results[1];
 
         return new double[]{n, m};
     }
 
     public double[] limitFourth() {
-        double n = thirdCase(xLim)[0];
-        double m = thirdCase(xLim)[1];
+        double[] results = thirdCase(xLim);
+        double n = results[0];
+        double m = results[1];
 
         return new double[]{n, m};
     }
 
     public double[] limitFifth() {
-        double n = fourthCase(hDimension,0.1)[0];
-        double m = fourthCase(hDimension,0.1)[1];
+        double[] results = fourthCase(hDimension, 0.1);
+        double n = results[0];
+        double m = results[1];
 
         return new double[]{n, m};
     }
 
     public double[] limitSixth() {
-        double n = fifthCase(hDimension / lambdaConcrete,0.1)[0];
-        double m = fifthCase(hDimension / lambdaConcrete,0.1)[1];
+        double[] results = fifthCase(hDimension / lambdaConcrete, 0.1);
+        double n = results[0];
+        double m = results[1];
 
         return new double[]{n, m};
     }
 
     public double[] limitSeventh() {
-        double n = sixthCase(xMaxYd)[0];
-        double m = sixthCase(xMaxYd)[1];
+        double[] results = sixthCase(xMaxYd);
+        double n = results[0];
+        double m = results[1];
 
         return new double[]{n, m};
     }
 
     public double[] limitEighth() {
-        double n = seventhCase(Integer.MAX_VALUE)[0];
-        double m = seventhCase(Integer.MAX_VALUE)[1];
+        double[] results = seventhCase(Integer.MAX_VALUE);
+        double n = results[0];
+        double m = results[1];
 
         return new double[]{n, m};
     }
