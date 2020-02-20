@@ -26,6 +26,7 @@ public class DiagnosticExtension {
     private double xVar;
     private double aS1;
     private double aS2;
+    private double e;
 
 
     public DiagnosticExtension(float nEd, float mEd, double fCk, double fYk, float bDimension,
@@ -50,19 +51,21 @@ public class DiagnosticExtension {
         this.aS2 = aS2;
 
         double eMin = (aS1 * (0.5 * hDimension - a1) - aS2 * (0.5 * hDimension - a2)) / (aS1 + aS2);
-        double e = BasicValuesPillars.eccentricityExtension(mEd, nEd, hDimension, a1, a2)[2];
+        this.e = BasicValuesPillars.eccentricityBasic(mEd, nEd);
 
         if (e < eMin) {
             this.aS1 = aS2;
             this.aS2 = aS1;
         }
 
-
-        this.eS1 = BasicValuesPillars.eccentricityExtension(mEd, nEd, hDimension, a1, a2)[0];
-        this.eS2 = BasicValuesPillars.eccentricityExtension(mEd, nEd, hDimension, a1, a2)[1];
-
-        xVar = 1 / lambdaConcrete * ((eS2 + a2) - Math.sqrt(Math.pow(eS2 + a2, 2) - (2 * fYd * (aS1 * eS1 - aS2 * eS2)) / (etaConcrete * fCd * bDimension)));
     }
+
+    private void eccentricity(){
+        this.eS1 = BasicValuesPillars.eccentricityExtension(e, hDimension, a1, a2)[0];
+        this.eS2 = BasicValuesPillars.eccentricityExtension(e, hDimension, a1, a2)[1];
+    }
+
+
 
     private void xSmallerThanXMinYd() {
         double aVar = -2 * (eS2 + a2) / lambdaConcrete;
@@ -95,6 +98,8 @@ public class DiagnosticExtension {
     }
 
     public double[] resultsDiagnosticExtension() {
+        eccentricity();
+        xVar = 1 / lambdaConcrete * ((eS2 + a2) - Math.sqrt(Math.pow(eS2 + a2, 2) - (2 * fYd * (aS1 * eS1 - aS2 * eS2)) / (etaConcrete * fCd * bDimension)));
 
         if (xVar <= xMinYd) {
             xSmallerThanXMinYd();
@@ -113,5 +118,9 @@ public class DiagnosticExtension {
         double mRd = etaConcrete * fCd * bDimension * lambdaConcrete * xVar * (dDimension - 0.5 * lambdaConcrete * xVar) + sigmaS2 * aS2 * (dDimension - a2) + nEd * (0.5 * hDimension - a1);
 
         return new double[]{nRd, mRd};
+    }
+
+    public void setE(double e){
+        this.e = e;
     }
 }

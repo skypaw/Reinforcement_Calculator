@@ -13,7 +13,9 @@ public class ExtensionAsymmetricReinforcement {
     private double lambdaConcrete;
     private double dDimension;
     private float bDimension;
+    private float hDimension;
     private float a2;
+    private float a1;
     private int E_S;
     private double xMinusMinYd;
     private double xMinYd;
@@ -24,6 +26,8 @@ public class ExtensionAsymmetricReinforcement {
     private double aS2Min;
     private double aS1;
     private double aS2;
+    private double e;
+    private double xLim;
 
 
     public ExtensionAsymmetricReinforcement(float nEd, float mEd, double fCk, double fYk, float bDimension,
@@ -38,20 +42,29 @@ public class ExtensionAsymmetricReinforcement {
         this.bDimension = bDimension;
         this.a2 = a2;
         this.E_S = BasicValues.steelE();
-        double xLim = BasicValuesPillars.xLimVar(epsilonCu3, hDimension, a1, fYd, E_S);
+        this.xLim = BasicValuesPillars.xLimVar(epsilonCu3, hDimension, a1, fYd, E_S);
         this.xMinusMinYd = BasicValuesPillars.xMinMinusYdVar(epsilonCu3, a2, fYd, E_S);
         this.xMinYd = BasicValuesPillars.xMinYdVar(epsilonCu3, a2, fYd, E_S);
+        this.a1 = a1;
+        this.hDimension = hDimension;
+
+        this.e = BasicValuesPillars.eccentricityBasic(mEd,nEd);
 
 
-        this.eS1 = BasicValuesPillars.eccentricityExtension(mEd, nEd, hDimension, a1, a2)[0];
-        this.eS2 = BasicValuesPillars.eccentricityExtension(mEd, nEd, hDimension, a1, a2)[1];
 
+    }
+
+    private void eccentricity(){
+        eS1 = BasicValuesPillars.eccentricityExtension(e, hDimension, a1, a2)[0];
+        eS2 = BasicValuesPillars.eccentricityExtension(e, hDimension, a1, a2)[1];
+    }
+
+    private void basicAS2(){
         xVar = xLim;
         sigmaS2 = Math.min(epsilonCu3 * (xVar - a2) / xVar * E_S, fYd);
 
         this.aS2Min = Math.max(0.10 * nEd / fYd, (0.002 * bDimension * 100 * hDimension * 100) * Math.pow(10, -4)) / 2;
         aS2 = (nEd * eS1 - etaConcrete * fCd * bDimension * lambdaConcrete * xVar * (dDimension - 0.5 * lambdaConcrete * xVar)) / (sigmaS2 * (dDimension - a2));
-
     }
 
     private void aS2GreaterThanAS2Min() {
@@ -97,6 +110,9 @@ public class ExtensionAsymmetricReinforcement {
     }
 
     public double[] resultsExtensionAsymmetric() {
+        eccentricity();
+        basicAS2();
+
         if (aS2 <= aS2Min) {
             aS2SmallerThanAS2Min();
             if (xVar <= xMinYd) {
@@ -127,6 +143,10 @@ public class ExtensionAsymmetricReinforcement {
             aS2 = aS2Min;
         }
         return new double[]{aS1, aS2};
+    }
+
+    private void setE(double e){
+        this.e = e;
     }
 
 }

@@ -26,17 +26,19 @@ public class BasicValuesPillars {
         return (epsilonYdVar(fYd, E_S) * x0Var(epsilonCu3,epsilonC3,h) - epsilonC3 * a2) / (epsilonYdVar(fYd, E_S) - epsilonC3);
     }
 
-    public static double[] eccentricityCompression(float mEd, float nEd, float h, float a1, float a2) {
-        double e = Math.abs(mEd / nEd);
-        double eS1 = e + 0.5 * h - a1;
-        double eS2 = e - 0.5 * h + a2;
-        return new double[]{eS1, eS2, e};
+    public static double eccentricityBasic(float mEd, float nEd){
+        return Math.abs(mEd / nEd);
     }
 
-    public static double[] eccentricityExtension(float mEd, float nEd, float h, float a1, float a2) {
-        double e = Math.abs(mEd / nEd);
+    public static double[] eccentricityCompression(double e, float h, float a1, float a2) {
+        double eS1 = e + 0.5 * h - a1;
+        double eS2 = e - 0.5 * h + a2;
+        return new double[]{eS1, eS2};
+    }
+
+    public static double[] eccentricityExtension(double e, float h, float a1, float a2) {
         double eS1 = e - 0.5 * h + a1;
         double eS2 = e + 0.5 * h - a2;
-        return new double[]{eS1, eS2, e};
+        return new double[]{eS1, eS2};
     }
 }

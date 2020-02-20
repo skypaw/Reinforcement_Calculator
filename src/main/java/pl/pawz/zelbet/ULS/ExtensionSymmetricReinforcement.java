@@ -21,7 +21,9 @@ public class ExtensionSymmetricReinforcement {
     private double sigmaS1;
     private double sigmaS2;
     private double xVar;
-    private double hDimension;
+    private float hDimension;
+    private double e;
+    private float a1;
 
     public ExtensionSymmetricReinforcement(float nEd, float mEd, double fCk, double fYk, float bDimension,
                                            float hDimension, float a1, float a2) {
@@ -36,14 +38,19 @@ public class ExtensionSymmetricReinforcement {
         this.bDimension = bDimension;
         this.a2 = a2;
         this.E_S = BasicValues.steelE();
-        this.xMinusMinYd = BasicValuesPillars.xMinMinusYdVar(epsilonCu3,a2,fYd,E_S);
+        this.xMinusMinYd = BasicValuesPillars.xMinMinusYdVar(epsilonCu3, a2, fYd, E_S);
         this.sigmaS1 = fYd;
         this.hDimension = hDimension;
+        this.a1 = a1;
 
-        this.eS1 = BasicValuesPillars.eccentricityExtension(mEd,nEd,hDimension,a1,a2)[0];
-        this.eS2 = BasicValuesPillars.eccentricityExtension(mEd,nEd,hDimension,a1,a2)[1];
+        this.e = BasicValuesPillars.eccentricityBasic(mEd, nEd);
 
 
+    }
+
+    private void eccentricity(){
+        this.eS1 = BasicValuesPillars.eccentricityExtension(e,hDimension,a1,a2)[0];
+        this.eS2 = BasicValuesPillars.eccentricityExtension(e,hDimension,a1,a2)[1];
     }
 
     private void xStart() {
@@ -69,7 +76,7 @@ public class ExtensionSymmetricReinforcement {
     }
 
     public double[] resultsExtensionSymmetric() {
-
+        eccentricity();
         xStart();
         if (xVar <= xMinusMinYd) {
             xSmallerThanXMinMinusYd();
@@ -85,15 +92,19 @@ public class ExtensionSymmetricReinforcement {
 
         double aSMinForOneSide = Math.max(0.10 * nEd / fYd, (0.002 * bDimension * 100 * hDimension * 100) * Math.pow(10, -4)) / 2;
 
-        if (aS1<aSMinForOneSide){
+        if (aS1 < aSMinForOneSide) {
             aS1 = aSMinForOneSide;
         }
-        if (aS2<aSMinForOneSide){
+        if (aS2 < aSMinForOneSide) {
             aS2 = aSMinForOneSide;
         }
 
 
         return new double[]{aS1, aS2};
+    }
+
+    public void setE(double e){
+        this.e = e;
     }
 
 }

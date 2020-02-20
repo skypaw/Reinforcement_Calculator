@@ -4,7 +4,6 @@ package pl.pawz.zelbet.ULS;
 import pl.pawz.zelbet.BasicValuesPillars;
 import pl.pawz.zelbet.Diagnostic.DiagnosticCompression;
 
-import javax.swing.plaf.nimbus.AbstractRegionPainter;
 
 public class FourForcesResults {
     private float h;
@@ -43,14 +42,12 @@ public class FourForcesResults {
         this.nEd3 = nEd3;
         this.nEd4 = nEd4;
 
+
     }
 
     private double eccentricity(float nEdEccentricity, float mEdEccentricity) {
-        if (nEdEccentricity >= 0) {
-            return BasicValuesPillars.eccentricityCompression(mEdEccentricity, nEdEccentricity, h, a1, a2)[2];
-        } else {
-            return BasicValuesPillars.eccentricityExtension(mEdEccentricity, nEdEccentricity, h, a1, a2)[2];
-        }
+        double e = BasicValuesPillars.eccentricityBasic(mEdEccentricity, nEdEccentricity);
+        return e;
     }
 
     private char maxEccentricity() {
@@ -77,54 +74,91 @@ public class FourForcesResults {
         return 0;
     }
 
-    private double[] calculations() {
+    public double[] diagnostic() {
         char max = maxEccentricity();
         double[] calculationsResults = {0, 0};
+        double e = 0;
 
-        if (max == '1') {
-            CompressionAsymmetricReinforcement results = new CompressionAsymmetricReinforcement(nEd1, mEd1, fCk, fYk, b, h, a1, a2);
-            calculationsResults = results.resultsCompressionAsymmetricReinforcement();
-        }
-        if (max == '2') {
-            CompressionAsymmetricReinforcement results = new CompressionAsymmetricReinforcement(nEd2, mEd2, fCk, fYk, b, h, a1, a2);
-            calculationsResults = results.resultsCompressionAsymmetricReinforcement();
-        }
-        if (max == '3') {
-            CompressionAsymmetricReinforcement results = new CompressionAsymmetricReinforcement(nEd3, mEd3, fCk, fYk, b, h, a1, a2);
-            calculationsResults = results.resultsCompressionAsymmetricReinforcement();
-        }
-        if (max == '4') {
-            CompressionAsymmetricReinforcement results = new CompressionAsymmetricReinforcement(nEd4, mEd4, fCk, fYk, b, h, a1, a2);
-            calculationsResults = results.resultsCompressionAsymmetricReinforcement();
-        }
-
-        return calculationsResults;
-    }
-
-    public double[] diagnostic() {
-        double[] reinforcementResults = calculations();
-
-        double aS1 = reinforcementResults[0];
-        double aS2 = reinforcementResults[1];
 
         double[] results1 = {0, 0};
         double[] results2 = {0, 0};
         double[] results3 = {0, 0};
         double[] results4 = {0, 0};
 
+        double aS1 = 0;
+        double aS2 = 0;
+
+        CompressionAsymmetricReinforcement resultsOne = new CompressionAsymmetricReinforcement(nEd1, mEd1, fCk, fYk, b, h, a1, a2);
+        CompressionAsymmetricReinforcement resultsTwo = new CompressionAsymmetricReinforcement(nEd2, mEd2, fCk, fYk, b, h, a1, a2);
+        CompressionAsymmetricReinforcement resultsThree = new CompressionAsymmetricReinforcement(nEd3, mEd3, fCk, fYk, b, h, a1, a2);
+        CompressionAsymmetricReinforcement resultsFour = new CompressionAsymmetricReinforcement(nEd4, mEd4, fCk, fYk, b, h, a1, a2);
+
+        DiagnosticCompression resultsFirstBeam = new DiagnosticCompression(nEd1, mEd1, fCk, fYk, b, h, a1, a2, aS1, aS2);
+        DiagnosticCompression resultsSecondBeam = new DiagnosticCompression(nEd2, mEd2, fCk, fYk, b, h, a1, a2, aS1, aS2);
+        DiagnosticCompression resultsThirdBeam = new DiagnosticCompression(nEd3, mEd3, fCk, fYk, b, h, a1, a2, aS1, aS2);
+        DiagnosticCompression resultsFourthBeam = new DiagnosticCompression(nEd4, mEd4, fCk, fYk, b, h, a1, a2, aS1, aS2);
+
         while ((results1[0] <= nEd1 && results1[1] <= mEd1) || (results2[0] <= nEd2 && results2[1] <= mEd2) || (results3[0] <= nEd3 && results3[1] <= mEd3) || (results4[0] <= nEd4 || results4[1] <= mEd4)) {
-            DiagnosticCompression resultsFirstBeam = new DiagnosticCompression(nEd1, mEd1, fCk, fYk, b, h, a1, a2, aS1, aS2);
+
+            if (max == '1') {
+
+                calculationsResults = resultsOne.resultsCompressionAsymmetricReinforcement();
+                e = resultsOne.getE();
+            }
+            if (max == '2') {
+
+                calculationsResults = resultsTwo.resultsCompressionAsymmetricReinforcement();
+                e = resultsTwo.getE();
+            }
+            if (max == '3') {
+
+                calculationsResults = resultsThree.resultsCompressionAsymmetricReinforcement();
+                e = resultsThree.getE();
+            }
+            if (max == '4') {
+
+                calculationsResults = resultsFour.resultsCompressionAsymmetricReinforcement();
+                e = resultsFour.getE();
+            }
+
+
+            aS1 = calculationsResults[1];
+            aS2 = calculationsResults[0];
+
+            resultsFirstBeam.setAS1(aS1);
+            resultsFirstBeam.setAS2(aS2);
+
+
+            resultsSecondBeam.setAS1(aS1);
+            resultsSecondBeam.setAS2(aS2);
+
+            resultsThirdBeam.setAS1(aS1);
+            resultsThirdBeam.setAS2(aS2);
+
+            resultsFourthBeam.setAS1(aS1);
+            resultsFourthBeam.setAS2(aS2);
+
+
             results1 = resultsFirstBeam.resultsDiagnosticCompression();
-            DiagnosticCompression resultsSecondBeam = new DiagnosticCompression(nEd2, mEd2, fCk, fYk, b, h, a1, a2, aS1, aS2);
             results2 = resultsSecondBeam.resultsDiagnosticCompression();
-            DiagnosticCompression resultsThirdBeam = new DiagnosticCompression(nEd3, mEd3, fCk, fYk, b, h, a1, a2, aS1, aS2);
             results3 = resultsThirdBeam.resultsDiagnosticCompression();
-            DiagnosticCompression resultsFourthBeam = new DiagnosticCompression(nEd4, mEd4, fCk, fYk, b, h, a1, a2, aS1, aS2);
             results4 = resultsFourthBeam.resultsDiagnosticCompression();
 
-            aS1 = aS1 + 0.0001;
-            aS2 = aS2 + 0.0001;
+
+            e = e + e / 100;
+            System.out.println(e);
+
+            if (results2[0] > 6) {
+                System.out.println("dlaczego xd");
+            }
+
+            resultsOne.setE(e);
+            resultsTwo.setE(e);
+            resultsThree.setE(e);
+            resultsFour.setE(e);
+
             System.out.println(aS1);
+
         }
         return new double[]{aS1, aS2};
     }

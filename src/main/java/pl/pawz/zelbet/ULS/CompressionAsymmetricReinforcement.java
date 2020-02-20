@@ -33,6 +33,7 @@ public class CompressionAsymmetricReinforcement {
     private double aS2Min;
     private double aS1Min;
     private double xVar;
+    private double e;
 
     public CompressionAsymmetricReinforcement(float nEd, float mEd, double fCk, double fYk, float bDimension,
                                               float hDimension, float a1, float a2) {
@@ -56,13 +57,17 @@ public class CompressionAsymmetricReinforcement {
         this.xMaxYd = BasicValuesPillars.xYdMaxVar(epsilonCu3, epsilonC3, fYd, E_S, hDimension, a2);
 
 
-        this.eS1 = BasicValuesPillars.eccentricityCompression(mEd, nEd, hDimension, a1, a2)[0];
-        this.eS2 = BasicValuesPillars.eccentricityCompression(mEd, nEd, hDimension, a1, a2)[1];
+        this.e = BasicValuesPillars.eccentricityBasic(mEd, nEd);
 
         //min reinforcement according to EC 1992;
 
         this.aS2Min = Math.max(0.10 * nEd / fYd, (0.002 * bDimension * 100 * hDimension * 100) * Math.pow(10, -4)) / 2;
         this.aS1Min = aS2Min;
+    }
+
+    private void eccentricity() {
+        eS1 = BasicValuesPillars.eccentricityCompression(e, hDimension, a1, a2)[0];
+        eS2 = BasicValuesPillars.eccentricityCompression(e, hDimension, a1, a2)[1];
     }
 
 
@@ -144,6 +149,7 @@ public class CompressionAsymmetricReinforcement {
     }
 
     public double[] resultsCompressionAsymmetricReinforcement() {
+        eccentricity();
         sigmaS2Var();
         aS2Var();
 
@@ -188,6 +194,7 @@ public class CompressionAsymmetricReinforcement {
                         double f1 = xGreaterThanHByLambda()[0];
                         double f2 = xGreaterThanHByLambda()[1];
                         double sigmaS1;
+
                         if (f2 - f1 > 0) {
                             f2MinusF1GreaterThan0();
                             sigmaS1 = Math.min(epsilonC3 * (dDimension - xVar) / (xVar - x0) * E_S, fYd);
@@ -255,5 +262,13 @@ public class CompressionAsymmetricReinforcement {
                 return new double[]{aS1, aS2};
             }
         }
+    }
+
+    public void setE(double e) {
+        this.e = e;
+    }
+
+    public double getE() {
+        return e;
     }
 }

@@ -1,5 +1,6 @@
 package pl.pawz.zelbet.ULS;
 
+import jdk.internal.org.objectweb.asm.tree.analysis.BasicValue;
 import pl.pawz.zelbet.BasicValues;
 import pl.pawz.zelbet.BasicValuesPillars;
 import pl.pawz.zelbet.PolynomialSolver;
@@ -29,6 +30,7 @@ public class CompressionSymmetricReinforcement {
     private double xVar;
     private double sigmaS1;
     private double sigmaS2;
+    private double e;
 
 
     public CompressionSymmetricReinforcement(float nEd, float mEd, double fCk, double fYk, float bDimension,
@@ -53,10 +55,14 @@ public class CompressionSymmetricReinforcement {
         this.xMaxYd = BasicValuesPillars.xYdMaxVar(epsilonCu3, epsilonC3, fYd, E_S, hDimension, a2);
 
 
-        this.eS1 = BasicValuesPillars.eccentricityCompression(mEd, nEd, hDimension, a1, a2)[0];
-        this.eS2 = BasicValuesPillars.eccentricityCompression(mEd, nEd, hDimension, a1, a2)[1];
+        this.e = BasicValuesPillars.eccentricityBasic(mEd, nEd);
 
 
+    }
+
+    private void eccentricity() {
+        this.eS1 = BasicValuesPillars.eccentricityCompression(e, hDimension, a1, a2)[0];
+        this.eS2 = BasicValuesPillars.eccentricityCompression(e, hDimension, a1, a2)[1];
     }
 
     private void xVar() {
@@ -139,6 +145,7 @@ public class CompressionSymmetricReinforcement {
     }
 
     public double[] resultsCompressionSymmetricReinforcement() {
+        eccentricity();
         xVar();
 
         if (xVar <= xLim) {
@@ -183,14 +190,18 @@ public class CompressionSymmetricReinforcement {
 
         double aSMinForOneSide = Math.max(0.10 * nEd / fYd, (0.002 * bDimension * 100 * hDimension * 100) * Math.pow(10, -4)) / 2;
 
-        if (aS1<aSMinForOneSide){
+        if (aS1 < aSMinForOneSide) {
             aS1 = aSMinForOneSide;
         }
-        if (aS2<aSMinForOneSide){
+        if (aS2 < aSMinForOneSide) {
             aS2 = aSMinForOneSide;
         }
 
         return new double[]{aS1, aS2};
 
+    }
+
+    public void setE(double e) {
+        this.e = e;
     }
 }

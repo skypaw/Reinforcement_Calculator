@@ -11,7 +11,7 @@ public class PolynomialSolver {
         BrentSolver solver = new BrentSolver();
         UnivariateFunction f = x -> aPolynomial * Math.pow(x, 3.0) + bPolynomial * Math.pow(x, 2.0) + cPolynomial * x + dPolynomial;
 
-        double intervalStart = limVar;
+        double intervalStart = limVar-0.001;
         double intervalSize = 0.001;
         int i = 0;
         ArrayList<Double> results = new ArrayList<>(i);
