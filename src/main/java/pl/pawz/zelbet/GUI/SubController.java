@@ -229,11 +229,8 @@ public class SubController {
     ChoiceBox choiceBoxLoads = new ChoiceBox();
     @FXML
     ChoiceBox choiceBoxCementClass = new ChoiceBox();
-
-
     @FXML
     VBox vBoxCenter = new VBox();
-
     @FXML
     TextField test1 = new TextField();
 
@@ -243,13 +240,10 @@ public class SubController {
     Label resultsEd;
     @FXML
     Label resultsRd;
-
     @FXML
     TextField n1;
-
     @FXML
     TextField n2;
-
     @FXML
     TextField s1;
 
@@ -350,11 +344,9 @@ public class SubController {
     //checkbox booleans for passing to another controller
 
 
-
     //list booleans for passing to another controller
 
     String crossSectionCheck;
-
 
 
     public void initialize() {
@@ -1089,7 +1081,6 @@ public class SubController {
             nSw2RodSValue = 0;
             nSw2Value = 0;
             aSw2Value = 0;
-
 
 
         }

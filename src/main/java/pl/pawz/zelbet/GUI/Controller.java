@@ -13,7 +13,7 @@ public class Controller {
     @FXML
     GraphController tab3Controller;
 
-    public void button(){
+    public void button() {
         tab3Controller.button();
     }
 
@@ -31,8 +31,6 @@ public class Controller {
             tab3Controller.n1.setText(String.valueOf(tab1Controller.data.get("ns1")));
             tab3Controller.n2.setText(String.valueOf(tab1Controller.data.get("ns2")));
             tab3Controller.fCk.setText(String.valueOf(tab1Controller.fCk));
-
-
 
 
             tab2Controller.mEdLoadsTxt.setText(String.valueOf(tab1Controller.data.get("mEd")));
@@ -73,43 +71,42 @@ public class Controller {
             tab2Controller.hFDimension.setText(String.valueOf(tab1Controller.data.get("hf")));
             tab2Controller.hFTDimension.setText(String.valueOf(tab1Controller.data.get("hft")));
 
-            if (tab1Controller.choiceBoxDimensions.getValue().equals("Przekrój Prostokątny")){
-                if (!tab2Controller.choiceBoxDimensions.getValue().equals("Przekrój Prostokątny")){
+            if (tab1Controller.choiceBoxDimensions.getValue().equals("Przekrój Prostokątny")) {
+                if (!tab2Controller.choiceBoxDimensions.getValue().equals("Przekrój Prostokątny")) {
                     tab2Controller.choiceBoxDimensions.setValue("Przekrój Prostokątny");
                 }
             }
-            if (tab1Controller.choiceBoxDimensions.getValue().equals("Przekrój Teowy")){
-                if (!tab2Controller.choiceBoxDimensions.getValue().equals("Przekrój Teowy")){
+            if (tab1Controller.choiceBoxDimensions.getValue().equals("Przekrój Teowy")) {
+                if (!tab2Controller.choiceBoxDimensions.getValue().equals("Przekrój Teowy")) {
                     tab2Controller.choiceBoxDimensions.setValue("Przekrój Teowy");
                 }
             }
 
-
-            if (tab1Controller.choiceBoxLoads.getValue().equals("Obciążenie doraźne")){
-                if (!tab2Controller.choiceBoxLoads.getValue().equals("Obciążenie doraźne")){
+            if (tab1Controller.choiceBoxLoads.getValue().equals("Obciążenie doraźne")) {
+                if (!tab2Controller.choiceBoxLoads.getValue().equals("Obciążenie doraźne")) {
                     tab2Controller.choiceBoxLoads.setValue("Obciążenie doraźne");
                 }
             }
-            if (tab1Controller.choiceBoxLoads.getValue().equals("Obciążenie długotrwałe")){
-                if (!tab2Controller.choiceBoxLoads.getValue().equals("Obciążenie długotrwałe")){
+            if (tab1Controller.choiceBoxLoads.getValue().equals("Obciążenie długotrwałe")) {
+                if (!tab2Controller.choiceBoxLoads.getValue().equals("Obciążenie długotrwałe")) {
                     tab2Controller.choiceBoxLoads.setValue("Obciążenie długotrwałe");
                 }
             }
 
-            if (tab1Controller.choiceBoxCementClass.getValue().equals("Klasa N")){
-                if (!tab2Controller.choiceBoxCementClass.getValue().equals("Klasa N")){
+            if (tab1Controller.choiceBoxCementClass.getValue().equals("Klasa N")) {
+                if (!tab2Controller.choiceBoxCementClass.getValue().equals("Klasa N")) {
                     tab2Controller.choiceBoxCementClass.setValue("Klasa N");
                 }
             }
 
-            if (tab1Controller.choiceBoxCementClass.getValue().equals("Klasa S")){
-                if (!tab2Controller.choiceBoxCementClass.getValue().equals("Klasa S")){
+            if (tab1Controller.choiceBoxCementClass.getValue().equals("Klasa S")) {
+                if (!tab2Controller.choiceBoxCementClass.getValue().equals("Klasa S")) {
                     tab2Controller.choiceBoxCementClass.setValue("Klasa S");
                 }
             }
 
-            if (tab1Controller.choiceBoxCementClass.getValue().equals("Klasa R")){
-                if (!tab2Controller.choiceBoxCementClass.getValue().equals("Klasa R")){
+            if (tab1Controller.choiceBoxCementClass.getValue().equals("Klasa R")) {
+                if (!tab2Controller.choiceBoxCementClass.getValue().equals("Klasa R")) {
                     tab2Controller.choiceBoxCementClass.setValue("Klasa R");
                 }
             }

@@ -148,7 +148,7 @@ public class FourForcesResults {
             e = e + e / 100;
             System.out.println(e);
 
-            if (results2[0] > 6) {
+            if (results2[0] > 6 && results2[1]>0.5f) {
                 System.out.println("dlaczego xd");
             }
 
@@ -158,6 +158,7 @@ public class FourForcesResults {
             resultsFour.setE(e);
 
             System.out.println(aS1);
+            System.out.println(aS2);
 
         }
         return new double[]{aS1, aS2};
