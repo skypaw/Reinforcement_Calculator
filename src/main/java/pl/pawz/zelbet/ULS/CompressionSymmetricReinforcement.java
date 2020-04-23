@@ -6,7 +6,7 @@ import pl.pawz.zelbet.PolynomialSolver;
 
 public class CompressionSymmetricReinforcement {
 
-    private float nEd;
+    private double nEd;
     private double epsilonCu3;
     private double epsilonC3;
     private double fCd;
@@ -14,10 +14,10 @@ public class CompressionSymmetricReinforcement {
     private double etaConcrete;
     private double lambdaConcrete;
     private double dDimension;
-    private float bDimension;
-    private float hDimension;
-    private float a1;
-    private float a2;
+    private double bDimension;
+    private double hDimension;
+    private double a1;
+    private double a2;
     private int E_S;
     private double xLim;
     private double xMinusMinYd;
@@ -31,8 +31,8 @@ public class CompressionSymmetricReinforcement {
     private double sigmaS2;
 
 
-    public CompressionSymmetricReinforcement(float nEd, float mEd, double fCk, double fYk, float bDimension,
-                                             float hDimension, float a1, float a2) {
+    public CompressionSymmetricReinforcement(double nEd, double mEd, double fCk, double fYk, double bDimension,
+                                             double hDimension, double a1, double a2) {
         this.nEd = nEd;
         this.epsilonCu3 = BasicValues.epsilonCu3Value(fCk);
         this.epsilonC3 = BasicValues.epsilonC3Value(fCk);

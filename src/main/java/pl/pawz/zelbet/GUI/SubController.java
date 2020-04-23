@@ -256,62 +256,62 @@ public class SubController {
     //basic values for variables
 
     //static Values
-    private float bValue = 0;
-    private float hValue = 0;
+    private double bValue = 0;
+    private double hValue = 0;
     private double fYk = 0;
     private double aS1Value = 0;
     private double aS2Value = 0;
-    private float a1Value = 0;
-    private float a2Value = 0;
+    private double a1Value = 0;
+    private double a2Value = 0;
     private double vEdValue = 0;
     private double vEdRedValue = 0;
     private double ctgThetaValue = 0;
     private double alphaValue = 0;
     private double aSw1Value = 0;
     private double nSw1Value = 0;
-    private float mEkValue = 0;
-    private float mEkLtValue = 0;
+    private double mEkValue = 0;
+    private double mEkLtValue = 0;
     private int tZeroValue = 0;
-    private float rHValue = 0;
+    private double rHValue = 0;
     private double cNomValue = 0;
-    private float lEffValue = 0;
-    private float alphaMValue = 0;
+    private double lEffValue = 0;
+    private double alphaMValue = 0;
     private double aSl = 0;
 
     //values which depends on check box
 
     double fCk = 0;
-    private float mEdValue = 0;
-    private float nEdValue = 0;
-    private float mEd1Value = 0;
-    private float mEd2Value = 0;
-    private float mEd3Value = 0;
-    private float mEd4Value = 0;
-    private float nEd1Value = 0;
-    private float nEd2Value = 0;
-    private float nEd3Value = 0;
-    private float nEd4Value = 0;
+    private double mEdValue = 0;
+    private double nEdValue = 0;
+    private double mEd1Value = 0;
+    private double mEd2Value = 0;
+    private double mEd3Value = 0;
+    private double mEd4Value = 0;
+    private double nEd1Value = 0;
+    private double nEd2Value = 0;
+    private double nEd3Value = 0;
+    private double nEd4Value = 0;
     private double aSw2Value = 0;
     private double nSw2Value = 0;
-    private float nSw2RodSValue = 0;
-    private float bFValue = 0;
-    private float bFTValue = 0;
-    private float hFValue = 0;
-    private float hFTValue = 0;
+    private double nSw2RodSValue = 0;
+    private double bFValue = 0;
+    private double bFTValue = 0;
+    private double hFValue = 0;
+    private double hFTValue = 0;
 
     //diagnostic values
 
-    private float n1Value = 0;
-    private float n2Value = 0;
-    private float s1Value = 0;
-    private float mRd1Value = 0;
-    private float mRd2Value = 0;
-    private float mRd3Value = 0;
-    private float mRd4Value = 0;
-    private float nRd1Value = 0;
-    private float nRd2Value = 0;
-    private float nRd3Value = 0;
-    private float nRd4Value = 0;
+    private double n1Value = 0;
+    private double n2Value = 0;
+    private double s1Value = 0;
+    private double mRd1Value = 0;
+    private double mRd2Value = 0;
+    private double mRd3Value = 0;
+    private double mRd4Value = 0;
+    private double nRd1Value = 0;
+    private double nRd2Value = 0;
+    private double nRd3Value = 0;
+    private double nRd4Value = 0;
 
     private char loadChar;
     private char cementChar;
@@ -599,14 +599,14 @@ public class SubController {
 
 
     //Functionality, calculations and returning correct value
-    private static float getDataFromTextField(TextField specificTextField, String variable) {
+    private static double getDataFromTextField(TextField specificTextField, String variable) {
         try {
-            float value;
+            double value;
             if (specificTextField.getText().isEmpty()) {
                 specificTextField.setText(String.valueOf(0));
             }
 
-            value = Float.parseFloat(specificTextField.getText().replaceAll(",", "."));
+            value = Double.parseDouble(specificTextField.getText().replaceAll(",", "."));
 
             if (value >= 0) {
                 return value;
@@ -621,13 +621,13 @@ public class SubController {
         }
     }
 
-    private static float getDataFromTextFieldForces(TextField specificTextField, String variable) {
+    private static double getDataFromTextFieldForces(TextField specificTextField, String variable) {
         try {
             if (specificTextField.getText().isEmpty()) {
                 specificTextField.setText(String.valueOf(0));
             }
 
-            return Float.parseFloat(specificTextField.getText().replaceAll(",", "."));
+            return Double.parseDouble(specificTextField.getText().replaceAll(",", "."));
 
         } catch (NumberFormatException e) {
             AlertBox.display("Wartość " + variable + " powinna być liczbą");
@@ -651,13 +651,13 @@ public class SubController {
 
     private void dimension() {
 
-        bValue = (float) (getDataFromTextField(test1, "b") * Math.pow(10, -2));
-        hValue = (float) (getDataFromTextField(geometryHeight, "h") * Math.pow(10, -2));
+        bValue = (double) (getDataFromTextField(test1, "b") * Math.pow(10, -2));
+        hValue = (double) (getDataFromTextField(geometryHeight, "h") * Math.pow(10, -2));
         if (choiceBoxDimensions.getValue().toString().equals("Przekrój Teowy")) {
-            bFValue = (float) (getDataFromTextField(bFDimension, "b_eff") * Math.pow(10, -2));
-            bFTValue = (float) (getDataFromTextField(bFTDimension, "b_eff,t") * Math.pow(10, -2));
-            hFValue = (float) (getDataFromTextField(hFDimension, "h_f") * Math.pow(10, -2));
-            hFTValue = (float) (getDataFromTextField(hFTDimension, "h_f,t") * Math.pow(10, -2));
+            bFValue = (double) (getDataFromTextField(bFDimension, "b_eff") * Math.pow(10, -2));
+            bFTValue = (double) (getDataFromTextField(bFTDimension, "b_eff,t") * Math.pow(10, -2));
+            hFValue = (double) (getDataFromTextField(hFDimension, "h_f") * Math.pow(10, -2));
+            hFTValue = (double) (getDataFromTextField(hFTDimension, "h_f,t") * Math.pow(10, -2));
         } else {
             bFValue = 0;
             bFTValue = 0;
@@ -670,8 +670,8 @@ public class SubController {
     private void longitudinalReinforcement() {
         aS1Value = getDataFromTextField(aS1, "a_S1") * Math.pow(10, -3);
         aS2Value = getDataFromTextField(aS2, "a_S2") * Math.pow(10, -3);
-        a1Value = (float) (getDataFromTextField(a1, "a_1") * Math.pow(10, -3));
-        a2Value = (float) (getDataFromTextField(a2, "a_2") * Math.pow(10, -3));
+        a1Value = (double) (getDataFromTextField(a1, "a_1") * Math.pow(10, -3));
+        a2Value = (double) (getDataFromTextField(a2, "a_2") * Math.pow(10, -3));
     }
 
     private void shearingValues() {
@@ -687,26 +687,26 @@ public class SubController {
         if (checkBoxRods.isSelected()) {
             aSw2Value = getDataFromTextField(aSw2RodTxt, "a_Sw2") * Math.pow(10, -3);
             nSw2Value = getDataFromTextField(nSw2RodTxt, "n_sw2");
-            nSw2RodSValue = (float) (getDataFromTextField(nSw2RodSTxt, "s_sw2") * Math.pow(10, -2));
+            nSw2RodSValue = (double) (getDataFromTextField(nSw2RodSTxt, "s_sw2") * Math.pow(10, -2));
         }
     }
 
     private void forcesValues() {
         if (checkBoxLoads.isSelected()) {
 
-            mEd1Value = (float) (getDataFromTextFieldForces(mEdLoadsTxt1, "M_Ed1") * Math.pow(10, -3));
-            mEd2Value = (float) (getDataFromTextFieldForces(mEdLoadsTxt2, "M_Ed2") * Math.pow(10, -3));
-            mEd3Value = (float) (getDataFromTextFieldForces(mEdLoadsTxt3, "M_Ed3") * Math.pow(10, -3));
-            mEd4Value = (float) (getDataFromTextFieldForces(mEdLoadsTxt4, "M_Ed4") * Math.pow(10, -3));
+            mEd1Value = (double) (getDataFromTextFieldForces(mEdLoadsTxt1, "M_Ed1") * Math.pow(10, -3));
+            mEd2Value = (double) (getDataFromTextFieldForces(mEdLoadsTxt2, "M_Ed2") * Math.pow(10, -3));
+            mEd3Value = (double) (getDataFromTextFieldForces(mEdLoadsTxt3, "M_Ed3") * Math.pow(10, -3));
+            mEd4Value = (double) (getDataFromTextFieldForces(mEdLoadsTxt4, "M_Ed4") * Math.pow(10, -3));
 
-            nEd1Value = (float) (getDataFromTextFieldForces(nEdLoadsTxt1, "N_Ed1") * Math.pow(10, -3));
-            nEd2Value = (float) (getDataFromTextFieldForces(nEdLoadsTxt2, "N_Ed2") * Math.pow(10, -3));
-            nEd3Value = (float) (getDataFromTextFieldForces(nEdLoadsTxt3, "N_Ed3") * Math.pow(10, -3));
-            nEd4Value = (float) (getDataFromTextFieldForces(nEdLoadsTxt4, "N_Ed4") * Math.pow(10, -3));
+            nEd1Value = (double) (getDataFromTextFieldForces(nEdLoadsTxt1, "N_Ed1") * Math.pow(10, -3));
+            nEd2Value = (double) (getDataFromTextFieldForces(nEdLoadsTxt2, "N_Ed2") * Math.pow(10, -3));
+            nEd3Value = (double) (getDataFromTextFieldForces(nEdLoadsTxt3, "N_Ed3") * Math.pow(10, -3));
+            nEd4Value = (double) (getDataFromTextFieldForces(nEdLoadsTxt4, "N_Ed4") * Math.pow(10, -3));
 
         } else {
-            mEdValue = (float) (getDataFromTextFieldForces(mEdLoadsTxt, "M_Ed") * Math.pow(10, -3));
-            nEdValue = (float) (getDataFromTextFieldForces(nEdLoadsTxt, "N_Ed") * Math.pow(10, -3));
+            mEdValue = (double) (getDataFromTextFieldForces(mEdLoadsTxt, "M_Ed") * Math.pow(10, -3));
+            nEdValue = (double) (getDataFromTextFieldForces(nEdLoadsTxt, "N_Ed") * Math.pow(10, -3));
 
         }
     }
@@ -748,8 +748,8 @@ public class SubController {
     }
 
     private void slsValues() {
-        mEkValue = (float) (getDataFromTextFieldForces(mEk, "M_Ek") * Math.pow(10, -3));
-        mEkLtValue = (float) (getDataFromTextFieldForces(mEkLt, "M_Ek,lt") * Math.pow(10, -3));
+        mEkValue = (double) (getDataFromTextFieldForces(mEk, "M_Ek") * Math.pow(10, -3));
+        mEkLtValue = (double) (getDataFromTextFieldForces(mEkLt, "M_Ek,lt") * Math.pow(10, -3));
 
         tZeroValue = (int) getDataFromTextFieldForces(tZero, "t_0");
         rHValue = (getDataFromTextFieldForces(rH, "RH"));
@@ -1697,7 +1697,7 @@ public class SubController {
 
         n1Value = getDataFromTextFieldForces(n1, "n_1");
         n2Value = getDataFromTextFieldForces(n2, "n_2");
-        s1Value = (float) (getDataFromTextFieldForces(s1, "s_1") * Math.pow(10, -2));
+        s1Value = (double) (getDataFromTextFieldForces(s1, "s_1") * Math.pow(10, -2));
     }
 
 

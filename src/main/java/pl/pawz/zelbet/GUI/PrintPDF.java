@@ -82,7 +82,7 @@ class PrintPDF {
         contentStream.beginText();
         contentStream.setFont(PDType1Font.HELVETICA, 10);
         contentStream.setLeading(12.0f);
-        contentStream.moveTextPositionByAmount(50, 740);
+        contentStream.newLineAtOffset(50, 740);
 
         contentStream.showText("Nazwa zadania: " + name);
 

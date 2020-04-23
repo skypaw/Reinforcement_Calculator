@@ -3,19 +3,19 @@ import pl.pawz.zelbet.BasicValues;
 
 public class BendingBeamRectangle {
 
-    private float mEd;
+    private double mEd;
     private double fCd;
     private double epsilonCu3;
     private double etaConcrete;
     private double lambdaConcrete;
     private double fYd;
     private int E_S;
-    private float b;
-    private float a2;
+    private double b;
+    private double a2;
     private double d;
 
 
-    public BendingBeamRectangle(float mEd, double fCk, double fYk, float h, float b, float a1, float a2) {
+    public BendingBeamRectangle(double mEd, double fCk, double fYk, double h, double b, double a1, double a2) {
         //constructor
         this.mEd = mEd;
         this.fCd = BasicValues.fCdValue(fCk);

@@ -3,12 +3,12 @@ package pl.pawz.zelbet.SLS;
 public class BasicParameters {
     double eCm;
     double eS;
-    float b;
-    float h;
-    float hF;
-    float bEff;
-    float hFT;
-    float bEffT;
+    double b;
+    double h;
+    double hF;
+    double bEff;
+    double hFT;
+    double bEffT;
     char longOrShort;
 
     double fCk;
@@ -38,7 +38,7 @@ public class BasicParameters {
     double mCr;
     double fCtm;
 
-    public BasicParameters(double eS, float b, float h, float hF, float hFT, float bEff, float bEffT, float a1, float a2, double aS1, double aS2, double fCk, double rH, double tZero, char cement, char longOrShort) {
+    public BasicParameters(double eS, double b, double h, double hF, double hFT, double bEff, double bEffT, double a1, double a2, double aS1, double aS2, double fCk, double rH, double tZero, char cement, char longOrShort) {
         this.eS = eS;
         this.b = b;
         this.h = h;

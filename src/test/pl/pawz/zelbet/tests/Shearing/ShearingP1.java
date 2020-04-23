@@ -1,4 +1,4 @@
-package pl.pawz.zelbet.tests.Shearing;
+package test.pl.pawz.zelbet.tests.Shearing;
 
 import org.junit.Test;
 import pl.pawz.zelbet.ULS.ShearingStirrups;
@@ -8,20 +8,20 @@ import static org.junit.Assert.assertEquals;
 public class ShearingP1 {
 
 
-    private float fCk = 30;
+    private double fCk = 30;
     private double fYk = 500;
-    private float b = 0.30f;
-    private float a1 = 0.05f;
-    private float a2 = 0.05f;
-    private float h = 0.6f;
+    private double b = 0.30f;
+    private double a1 = 0.05f;
+    private double a2 = 0.05f;
+    private double h = 0.6f;
 
-    private float cotTheta = 2f;
-    private float aSl = 0.0f;
-    private float nS = 2;
+    private double cotTheta = 2f;
+    private double aSl = 0.0f;
+    private double nS = 2;
     private double fiS = 6 * Math.pow(10, -3);
 
 
-    float nEd = 0.00f;
+    double nEd = 0.00f;
 
 
     private static final double DELTA = 1e-3;
@@ -29,8 +29,8 @@ public class ShearingP1 {
     @Test
     public void value() {
 
-        float vEd = 0.0624f;
-        float vEdRed = 0.052f;
+        double vEd = 0.0624f;
+        double vEdRed = 0.052f;
 
 
         ShearingStirrups res = new ShearingStirrups(h, b, a1, fCk, fYk, nEd, vEd, vEdRed, aSl, nS, fiS, cotTheta);
@@ -47,8 +47,8 @@ public class ShearingP1 {
     @Test
     public void test62() {
 
-        float vEd = 0.0624f;
-        float vEdRed = 0.052f;
+        double vEd = 0.0624f;
+        double vEdRed = 0.052f;
 
 
         ShearingStirrups res = new ShearingStirrups(h, b, a1, fCk, fYk, nEd, vEd, vEdRed, aSl, nS, fiS, cotTheta);
@@ -63,8 +63,8 @@ public class ShearingP1 {
     @Test
     public void test77() {
 
-        float vEd = 0.077808f;
-        float vEdRed = 0.06484f;
+        double vEd = 0.077808f;
+        double vEdRed = 0.06484f;
 
 
         ShearingStirrups res = new ShearingStirrups(h, b, a1, fCk, fYk, nEd, vEd, vEdRed, aSl, nS, fiS, cotTheta);
@@ -77,8 +77,8 @@ public class ShearingP1 {
     @Test
     public void test105() {
 
-        float vEd = 0.105f;
-        float vEdRed = 0.088f;
+        double vEd = 0.105f;
+        double vEdRed = 0.088f;
 
 
         ShearingStirrups res = new ShearingStirrups(h, b, a1, fCk, fYk, nEd, vEd, vEdRed, aSl, nS, fiS, cotTheta);
@@ -91,8 +91,8 @@ public class ShearingP1 {
     @Test
     public void test148() {
 
-        float vEd = 0.1488f;
-        float vEdRed = 0.124f;
+        double vEd = 0.1488f;
+        double vEdRed = 0.124f;
 
 
         ShearingStirrups res = new ShearingStirrups(h, b, a1, fCk, fYk, nEd, vEd, vEdRed, aSl, nS, fiS, cotTheta);
@@ -105,8 +105,8 @@ public class ShearingP1 {
     @Test
     public void test206() {
 
-        float vEd = 0.2064f;
-        float vEdRed = 0.172f;
+        double vEd = 0.2064f;
+        double vEdRed = 0.172f;
 
 
         ShearingStirrups res = new ShearingStirrups(h, b, a1, fCk, fYk, nEd, vEd, vEdRed, aSl, nS, fiS, cotTheta);
@@ -119,8 +119,8 @@ public class ShearingP1 {
     @Test
     public void test292() {
 
-        float vEd = 0.2928f;
-        float vEdRed = 0.244f;
+        double vEd = 0.2928f;
+        double vEdRed = 0.244f;
 
 
         ShearingStirrups res = new ShearingStirrups(h, b, a1, fCk, fYk, nEd, vEd, vEdRed, aSl, nS, fiS, cotTheta);
@@ -133,8 +133,8 @@ public class ShearingP1 {
     @Test
     public void test364() {
 
-        float vEd = 0.3648f;
-        float vEdRed = 0.304f;
+        double vEd = 0.3648f;
+        double vEdRed = 0.304f;
 
 
         ShearingStirrups res = new ShearingStirrups(h, b, a1, fCk, fYk, nEd, vEd, vEdRed, aSl, nS, fiS, cotTheta);
@@ -147,8 +147,8 @@ public class ShearingP1 {
     @Test
     public void test436() {
 
-        float vEd = 0.4368f;
-        float vEdRed = 0.364f;
+        double vEd = 0.4368f;
+        double vEdRed = 0.364f;
 
 
         ShearingStirrups res = new ShearingStirrups(h, b, a1, fCk, fYk, nEd, vEd, vEdRed, aSl, nS, fiS, cotTheta);
@@ -161,8 +161,8 @@ public class ShearingP1 {
     @Test
     public void test494() {
 
-        float vEd = 0.4944f;
-        float vEdRed = 0.412f;
+        double vEd = 0.4944f;
+        double vEdRed = 0.412f;
 
 
         ShearingStirrups res = new ShearingStirrups(h, b, a1, fCk, fYk, nEd, vEd, vEdRed, aSl, nS, fiS, cotTheta);
@@ -175,8 +175,8 @@ public class ShearingP1 {
     @Test
     public void test580() {
 
-        float vEd = 0.5808f;
-        float vEdRed = 0.484f;
+        double vEd = 0.5808f;
+        double vEdRed = 0.484f;
 
 
         ShearingStirrups res = new ShearingStirrups(h, b, a1, fCk, fYk, nEd, vEd, vEdRed, aSl, nS, fiS, cotTheta);
@@ -189,8 +189,8 @@ public class ShearingP1 {
     @Test
     public void test667() {
 
-        float vEd = 0.6672f;
-        float vEdRed = 0.556f;
+        double vEd = 0.6672f;
+        double vEdRed = 0.556f;
 
 
         ShearingStirrups res = new ShearingStirrups(h, b, a1, fCk, fYk, nEd, vEd, vEdRed, aSl, nS, fiS, cotTheta);

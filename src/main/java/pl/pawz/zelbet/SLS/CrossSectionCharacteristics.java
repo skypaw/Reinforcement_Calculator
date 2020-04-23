@@ -4,20 +4,20 @@ import pl.pawz.zelbet.BasicValues;
 import pl.pawz.zelbet.PolynomialSolverSGU;
 
 public class CrossSectionCharacteristics {
-    private float b;
-    private float bEff;
-    private float bEffT;
-    private float h;
-    private float hF;
-    private float hFT;
-    private float a1;
-    private float a2;
+    private double b;
+    private double bEff;
+    private double bEffT;
+    private double h;
+    private double hF;
+    private double hFT;
+    private double a1;
+    private double a2;
     private double aS1;
     private double aS2;
     private double alphaEOrEEff;
     private double d;
 
-    public CrossSectionCharacteristics(float b, float bEff, float bEffT, float h, float hF, float hFT, float a1, float a2, double aS1, double aS2, double alphaEOrEEff) {
+    public CrossSectionCharacteristics(double b, double bEff, double bEffT, double h, double hF, double hFT, double a1, double a2, double aS1, double aS2, double alphaEOrEEff) {
         this.b = b;
         this.bEff = bEff;
         this.bEffT = bEffT;

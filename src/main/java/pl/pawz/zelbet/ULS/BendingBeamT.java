@@ -4,21 +4,21 @@ import pl.pawz.zelbet.BasicValues;
 
 public class BendingBeamT {
 
-    private float mEd;
+    private double mEd;
     private double fCd;
     private double etaConcrete;
     private double fYd;
-    private float bW;
-    private float bEff;
-    private float hF;
-    private float a2;
+    private double bW;
+    private double bEff;
+    private double hF;
+    private double a2;
     private double d;
     private double[] resultsSeeminglyT;
     private double aZeroLim;
     private double xiLim;
 
 
-    public BendingBeamT(float mEd, double fCk, double fYk, float bW, float bEff, float h, float hF, float a1, float a2) {
+    public BendingBeamT(double mEd, double fCk, double fYk, double bW, double bEff, double h, double hF, double a1, double a2) {
         this.mEd = mEd;
         this.fCd = BasicValues.fCdValue(fCk);
         this.fYd = BasicValues.fYdValue(fYk);

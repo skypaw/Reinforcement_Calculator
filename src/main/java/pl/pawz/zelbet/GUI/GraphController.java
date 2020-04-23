@@ -39,10 +39,10 @@ public class GraphController {
     private double aS2Value = 0;
     private double n1Value = 0;
     private double n2Value = 0;
-    private float a1Value = 0.05f;
-    private float a2Value = 0.05f;
-    private float bDimension = 0;
-    private float hDimension = 0;
+    private double a1Value = 0.05f;
+    private double a2Value = 0.05f;
+    private double bDimension = 0;
+    private double hDimension = 0;
 
     private Object FourForcesLimit;
 
@@ -95,15 +95,15 @@ public class GraphController {
         n1Value = validator.textToPositiveNumber(n1, 0);
         n2Value = validator.textToPositiveNumber(n2, 0);
 
-        a1Value = (float) (validator.textToPositiveNumber(a1, 50) * Math.pow(10, -3));
-        a2Value = (float) (validator.textToPositiveNumber(a2, 50) * Math.pow(10, -3));
+        a1Value = (double) (validator.textToPositiveNumber(a1, 50) * Math.pow(10, -3));
+        a2Value = (double) (validator.textToPositiveNumber(a2, 50) * Math.pow(10, -3));
 
-        bDimension = (float) (validator.textToPositiveNumber(test1, 30) * Math.pow(10, -2));
-        hDimension = (float) (validator.textToPositiveNumber(geometryHeight, 60) * Math.pow(10, -2));
+        bDimension = (double) (validator.textToPositiveNumber(test1, 30) * Math.pow(10, -2));
+        hDimension = (double) (validator.textToPositiveNumber(geometryHeight, 60) * Math.pow(10, -2));
 
     }
 
-    private void resultsRed(XYChart.Series series, double aS1, double aS2, float a1, float a2, double fYk, float bDimension, float hDimension, double fCk) {
+    private void resultsRed(XYChart.Series series, double aS1, double aS2, double a1, double a2, double fYk, double bDimension, double hDimension, double fCk) {
 
         int eS = BasicValues.steelE();
         double epsilonCu3 = BasicValues.epsilonCu3Value(fCk);
@@ -176,7 +176,7 @@ public class GraphController {
 
     }
 
-    private void yellowRes(XYChart.Series series, double aS1, double aS2, float a1, float a2, double fYk, float bDimension, float hDimension, double fCk) {
+    private void yellowRes(XYChart.Series series, double aS1, double aS2, double a1, double a2, double fYk, double bDimension, double hDimension, double fCk) {
 
         int eS = BasicValues.steelE();
         double epsilonCu3 = BasicValues.epsilonCu3Value(fCk);

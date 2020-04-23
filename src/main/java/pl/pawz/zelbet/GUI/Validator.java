@@ -17,7 +17,7 @@ class Validator {
         //Todo Add precision! And check statement above
 
         try {
-            float value = Float.parseFloat(textField.getText().replaceAll(",", ".")); //Replacing comma, to dot
+            double value = Double.parseDouble(textField.getText().replaceAll(",", ".")); //Replacing comma, to dot
 
             if (value >= 0) {
                 return value; // Value greater than 0 -> returning

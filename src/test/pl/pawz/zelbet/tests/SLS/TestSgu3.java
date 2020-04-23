@@ -1,4 +1,4 @@
-package pl.pawz.zelbet.tests.SLS;
+package test.pl.pawz.zelbet.tests.SLS;
 
 import org.junit.Test;
 import pl.pawz.zelbet.SLS.Deflection;
@@ -9,28 +9,28 @@ import static org.junit.Assert.assertEquals;
 
 public class TestSgu3 {
 
-    private float fCk = 30f;
+    private double fCk = 30f;
     private double fYk = 500;
 
-    private float hDimension = 0.6f;
-    private float bDimension = 0.3f;
-    private float hf = 0.1f;
-    private float bEff = 0.7f;
-    private float hft = 0.0f;
-    private float bEfft = 0.3f;
+    private double hDimension = 0.6f;
+    private double bDimension = 0.3f;
+    private double hf = 0.1f;
+    private double bEff = 0.7f;
+    private double hft = 0.0f;
+    private double bEfft = 0.3f;
 
-    private float a1 = 0.05f;
-    private float a2 = 0.05f;
+    private double a1 = 0.05f;
+    private double a2 = 0.05f;
 
-    private float fi = 0.016f;
-    private float alphaM = 0.104f;
-    private float lEff = 6f;
+    private double fi = 0.016f;
+    private double alphaM = 0.104f;
+    private double lEff = 6f;
 
     private int eS = 200000;
     private int rH = 50;
 
-    private float cNom = 0.030f;
-    private float fiSt = 0.008f;
+    private double cNom = 0.030f;
+    private double fiSt = 0.008f;
 
     private static final double DELTA = 1.5e-4;
     private static final double DELTA1 = 1.5e-5;
@@ -38,9 +38,9 @@ public class TestSgu3 {
     @Test
     public void testSixZeroLongOne() {
 
-        float mEd = 0.25f;
-        float mEk = 0.2f;
-        float mEkLt = 0.2f;
+        double mEd = 0.25f;
+        double mEk = 0.2f;
+        double mEkLt = 0.2f;
 
         int rods1 = 6;
         int rods2 = 0;
@@ -73,9 +73,9 @@ public class TestSgu3 {
     @Test
     public void testSixZeroLongTwo() {
 
-        float mEd = 0.25f;
-        float mEk = 0.25f;
-        float mEkLt = 0.2f;
+        double mEd = 0.25f;
+        double mEk = 0.25f;
+        double mEkLt = 0.2f;
 
         int rods1 = 6;
         int rods2 = 0;
@@ -108,9 +108,9 @@ public class TestSgu3 {
     @Test
     public void testSixSixLongOne() {
 
-        float mEd = 0.25f;
-        float mEk = 0.20f;
-        float mEkLt = 0.2f;
+        double mEd = 0.25f;
+        double mEk = 0.20f;
+        double mEkLt = 0.2f;
 
         int rods1 = 6;
         int rods2 = 6;
@@ -143,9 +143,9 @@ public class TestSgu3 {
     @Test
     public void testSixSixLongTwo() {
 
-        float mEd = 0.25f;
-        float mEk = 0.25f;
-        float mEkLt = 0.2f;
+        double mEd = 0.25f;
+        double mEk = 0.25f;
+        double mEkLt = 0.2f;
 
         int rods1 = 6;
         int rods2 = 6;
@@ -179,9 +179,9 @@ public class TestSgu3 {
     @Test
     public void testSixThreeLongOne() {
 
-        float mEd = 0.25f;
-        float mEk = 0.20f;
-        float mEkLt = 0.2f;
+        double mEd = 0.25f;
+        double mEk = 0.20f;
+        double mEkLt = 0.2f;
 
         int rods1 = 6;
         int rods2 = 3;
@@ -214,9 +214,9 @@ public class TestSgu3 {
     @Test
     public void testSixThreeLongTwo() {
 
-        float mEd = 0.25f;
-        float mEk = 0.25f;
-        float mEkLt = 0.2f;
+        double mEd = 0.25f;
+        double mEk = 0.25f;
+        double mEkLt = 0.2f;
 
         int rods1 = 6;
         int rods2 = 3;
@@ -249,9 +249,9 @@ public class TestSgu3 {
     @Test
     public void testThreeSixLongOne() {
 
-        float mEd = 0.25f;
-        float mEk = 0.20f;
-        float mEkLt = 0.2f;
+        double mEd = 0.25f;
+        double mEk = 0.20f;
+        double mEkLt = 0.2f;
 
         int rods1 = 3;
         int rods2 = 6;
@@ -284,9 +284,9 @@ public class TestSgu3 {
     @Test
     public void testThreeSixLongTwo() {
 
-        float mEd = 0.25f;
-        float mEk = 0.25f;
-        float mEkLt = 0.2f;
+        double mEd = 0.25f;
+        double mEk = 0.25f;
+        double mEkLt = 0.2f;
 
         int rods1 = 3;
         int rods2 = 6;
@@ -321,9 +321,9 @@ public class TestSgu3 {
     @Test
     public void testSixZeroShortOne() {
 
-        float mEd = 0.25f;
-        float mEk = 0.20f;
-        float mEkLt = 0.2f;
+        double mEd = 0.25f;
+        double mEk = 0.20f;
+        double mEkLt = 0.2f;
 
         int rods1 = 6;
         int rods2 = 0;
@@ -356,9 +356,9 @@ public class TestSgu3 {
     @Test
     public void testSixZeroShortTwo() {
 
-        float mEd = 0.25f;
-        float mEk = 0.25f;
-        float mEkLt = 0.2f;
+        double mEd = 0.25f;
+        double mEk = 0.25f;
+        double mEkLt = 0.2f;
 
         int rods1 = 6;
         int rods2 = 0;
@@ -391,9 +391,9 @@ public class TestSgu3 {
     @Test
     public void testSixSixShortOne() {
 
-        float mEd = 0.25f;
-        float mEk = 0.20f;
-        float mEkLt = 0.2f;
+        double mEd = 0.25f;
+        double mEk = 0.20f;
+        double mEkLt = 0.2f;
 
         int rods1 = 6;
         int rods2 = 6;
@@ -426,9 +426,9 @@ public class TestSgu3 {
     @Test
     public void testSixSixShortTwo() {
 
-        float mEd = 0.25f;
-        float mEk = 0.25f;
-        float mEkLt = 0.2f;
+        double mEd = 0.25f;
+        double mEk = 0.25f;
+        double mEkLt = 0.2f;
 
         int rods1 = 6;
         int rods2 = 6;
@@ -461,9 +461,9 @@ public class TestSgu3 {
     @Test
     public void testSixThreeShortOne() {
 
-        float mEd = 0.25f;
-        float mEk = 0.20f;
-        float mEkLt = 0.2f;
+        double mEd = 0.25f;
+        double mEk = 0.20f;
+        double mEkLt = 0.2f;
 
         int rods1 = 6;
         int rods2 = 3;
@@ -496,9 +496,9 @@ public class TestSgu3 {
     @Test
     public void testSixThreeShortTwo() {
 
-        float mEd = 0.25f;
-        float mEk = 0.25f;
-        float mEkLt = 0.2f;
+        double mEd = 0.25f;
+        double mEk = 0.25f;
+        double mEkLt = 0.2f;
 
         int rods1 = 6;
         int rods2 = 3;
@@ -531,9 +531,9 @@ public class TestSgu3 {
     @Test
     public void testThreeSixShortOne() {
 
-        float mEd = 0.25f;
-        float mEk = 0.2f;
-        float mEkLt = 0.2f;
+        double mEd = 0.25f;
+        double mEk = 0.2f;
+        double mEkLt = 0.2f;
 
         int rods1 = 3;
         int rods2 = 6;
@@ -567,9 +567,9 @@ public class TestSgu3 {
     @Test
     public void testThreeSixShortTwo() {
 
-        float mEd = 0.25f;
-        float mEk = 0.25f;
-        float mEkLt = 0.2f;
+        double mEd = 0.25f;
+        double mEk = 0.25f;
+        double mEkLt = 0.2f;
 
         int rods1 = 3;
         int rods2 = 6;

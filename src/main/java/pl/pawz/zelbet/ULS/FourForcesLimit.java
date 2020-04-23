@@ -25,7 +25,7 @@ public class FourForcesLimit {
     private int eS;
     private double dDimension;
 
-    public FourForcesLimit(double fYk, double aS1, double aS2, double bDimension, float hDimension, double fCk, float a1, float a2) {
+    public FourForcesLimit(double fYk, double aS1, double aS2, double bDimension, double hDimension, double fCk, double a1, double a2) {
 
         this.aS1 = aS1;
         this.aS2 = aS2;

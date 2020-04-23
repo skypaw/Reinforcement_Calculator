@@ -21,7 +21,7 @@ public class DiagnosticShearing {
     private double vRdS;
 
 
-    public DiagnosticShearing(float hDimension, float a1, float bDimension, double fCk, float nEd, double aSl, double nS1, double nS2, double fiS1, double fiS2, double fYk, double vEdRed, double vEd, double s2, double s1, double cotTheta, double alphaAngleDegree) {
+    public DiagnosticShearing(double hDimension, double a1, double bDimension, double fCk, double nEd, double aSl, double nS1, double nS2, double fiS1, double fiS2, double fYk, double vEdRed, double vEd, double s2, double s1, double cotTheta, double alphaAngleDegree) {
         double dDimension = BasicValues.dValue(hDimension, a1);
         this.nS1 = nS1;
         this.nS2 = nS2;

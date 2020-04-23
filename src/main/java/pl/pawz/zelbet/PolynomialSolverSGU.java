@@ -8,7 +8,7 @@ import java.util.Collections;
 
 public class PolynomialSolverSGU {
 
-    public static double solverPhaseII1(float bEff, float a2, double aS1, double aS2, double alphaEOrEEff, double d) {
+    public static double solverPhaseII1(double bEff, double a2, double aS1, double aS2, double alphaEOrEEff, double d) {
         BrentSolver solver = new BrentSolver();
         UnivariateFunction f = x -> bEff * x * x / 2 + alphaEOrEEff * aS2 * (x - a2) - alphaEOrEEff * aS1 * (d - x);
 
@@ -31,7 +31,7 @@ public class PolynomialSolverSGU {
         return Collections.min(results);
     }
 
-    public static double solverPhaseII2(float b, float bEff, float hF, float a2, double aS1, double aS2, double alphaEOrEEff, double d) {
+    public static double solverPhaseII2(double b, double bEff, double hF, double a2, double aS1, double aS2, double alphaEOrEEff, double d) {
         BrentSolver solver = new BrentSolver();
         UnivariateFunction f = x -> (bEff - b) * hF * (x - hF / 2) + b * x * x / 2 + alphaEOrEEff * aS2 * (x - a2) - alphaEOrEEff * aS1 * (d - x);
 
@@ -54,7 +54,7 @@ public class PolynomialSolverSGU {
         return Collections.min(results);
     }
 
-    public static double solverPhaseII3(float b, float bEff, float bEffT, float h, float hF, float hFT, float a2, double aS1, double aS2, double alphaEOrEEff, double d) {
+    public static double solverPhaseII3(double b, double bEff, double bEffT, double h, double hF, double hFT, double a2, double aS1, double aS2, double alphaEOrEEff, double d) {
         BrentSolver solver = new BrentSolver();
         UnivariateFunction f = x -> (bEff - b) * hF * (x - hF / 2) + b * x * x / 2 + (bEffT - b) * Math.pow(x - h + hFT, 2) / 2 + alphaEOrEEff * aS2 * (x - a2) - alphaEOrEEff * aS1 * (d - x);
 

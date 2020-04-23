@@ -1,4 +1,4 @@
-package pl.pawz.zelbet.tests.Shearing;
+package test.pl.pawz.zelbet.tests.Shearing;
 
 import org.junit.Test;
 import pl.pawz.zelbet.ULS.ShearingBendRods;
@@ -8,23 +8,23 @@ import static org.junit.Assert.assertEquals;
 public class ShearingP10 {
 
 
-    private float fCk = 30;
+    private double fCk = 30;
     private double fYk = 500;
-    private float b = 0.30f;
-    private float a1 = 0.05f;
-    private float a2 = 0.05f;
-    private float h = 0.6f;
+    private double b = 0.30f;
+    private double a1 = 0.05f;
+    private double a2 = 0.05f;
+    private double h = 0.6f;
 
-    private float cotTheta = 2f;
-    private float aSl = 0.001f;
-    private float nS1 = 2;
-    private float nS2 = 2;
+    private double cotTheta = 2f;
+    private double aSl = 0.001f;
+    private double nS1 = 2;
+    private double nS2 = 2;
 
     private double fiS1 = 6 * Math.pow(10, -3);
     private double fiS2 = 12 * Math.pow(10, -3);
 
 
-    float nEd = 0.25f;
+    double nEd = 0.25f;
 
 
     private static final double DELTA = 1e-3;
@@ -33,8 +33,8 @@ public class ShearingP10 {
     @Test
     public void value() {
 
-        float vEd = 0.0624f;
-        float vEdRed = 0.052f;
+        double vEd = 0.0624f;
+        double vEdRed = 0.052f;
 
 
         ShearingBendRods res = new ShearingBendRods(h,a1,b,fCk,nEd,aSl,nS1,nS2,fiS1,fiS2,fYk,vEdRed,vEd,0.55,cotTheta,45);
@@ -51,8 +51,8 @@ public class ShearingP10 {
     @Test
     public void test147() {
 
-        float vEd = 0.147072f;
-        float vEdRed = 0.12256f;
+        double vEd = 0.147072f;
+        double vEdRed = 0.12256f;
 
 
         ShearingBendRods res = new ShearingBendRods(h,a1,b,fCk,nEd,aSl,nS1,nS2,fiS1,fiS2,fYk,vEdRed,vEd,0.55,cotTheta,45);
@@ -65,8 +65,8 @@ public class ShearingP10 {
     @Test
     public void test195() {
 
-        float vEd = 0.1956f;
-        float vEdRed = 0.163f;
+        double vEd = 0.1956f;
+        double vEdRed = 0.163f;
 
 
         ShearingBendRods res = new ShearingBendRods(h,a1,b,fCk,nEd,aSl,nS1,nS2,fiS1,fiS2,fYk,vEdRed,vEd,0.55,cotTheta,45);
@@ -79,8 +79,8 @@ public class ShearingP10 {
     @Test
     public void test211() {
 
-        float vEd = 0.2112f;
-        float vEdRed = 0.176f;
+        double vEd = 0.2112f;
+        double vEdRed = 0.176f;
 
 
         ShearingBendRods res = new ShearingBendRods(h,a1,b,fCk,nEd,aSl,nS1,nS2,fiS1,fiS2,fYk,vEdRed,vEd,0.55,cotTheta,45);
@@ -93,8 +93,8 @@ public class ShearingP10 {
     @Test
     public void test242() {
 
-        float vEd = 0.24249f;
-        float vEdRed = 0.202f;
+        double vEd = 0.24249f;
+        double vEdRed = 0.202f;
 
 
         ShearingBendRods res = new ShearingBendRods(h,a1,b,fCk,nEd,aSl,nS1,nS2,fiS1,fiS2,fYk,vEdRed,vEd,0.55,cotTheta,45);
@@ -107,8 +107,8 @@ public class ShearingP10 {
     @Test
     public void test258() {
 
-        float vEd = 0.258f;
-        float vEdRed = 0.215f;
+        double vEd = 0.258f;
+        double vEdRed = 0.215f;
 
 
         ShearingBendRods res = new ShearingBendRods(h,a1,b,fCk,nEd,aSl,nS1,nS2,fiS1,fiS2,fYk,vEdRed,vEd,0.55,cotTheta,45);
@@ -121,8 +121,8 @@ public class ShearingP10 {
     @Test
     public void test273() {
 
-        float vEd = 0.2736f;
-        float vEdRed = 0.228f;
+        double vEd = 0.2736f;
+        double vEdRed = 0.228f;
 
 
         ShearingBendRods res = new ShearingBendRods(h,a1,b,fCk,nEd,aSl,nS1,nS2,fiS1,fiS2,fYk,vEdRed,vEd,0.55,cotTheta,45);
@@ -137,8 +137,8 @@ public class ShearingP10 {
     @Test
     public void test304() {
 
-        float vEd = 0.3048f;
-        float vEdRed = 0.254f;
+        double vEd = 0.3048f;
+        double vEdRed = 0.254f;
 
 
         ShearingBendRods res = new ShearingBendRods(h,a1,b,fCk,nEd,aSl,nS1,nS2,fiS1,fiS2,fYk,vEdRed,vEd,0.55,cotTheta,45);
@@ -151,8 +151,8 @@ public class ShearingP10 {
     @Test
     public void test351() {
 
-        float vEd = 0.3516f;
-        float vEdRed = 0.293f;
+        double vEd = 0.3516f;
+        double vEdRed = 0.293f;
 
 
         ShearingBendRods res = new ShearingBendRods(h,a1,b,fCk,nEd,aSl,nS1,nS2,fiS1,fiS2,fYk,vEdRed,vEd,0.55,cotTheta,45);
@@ -165,8 +165,8 @@ public class ShearingP10 {
     @Test
     public void test398() {
 
-        float vEd = 0.3984f;
-        float vEdRed = 0.332f;
+        double vEd = 0.3984f;
+        double vEdRed = 0.332f;
 
 
         ShearingBendRods res = new ShearingBendRods(h,a1,b,fCk,nEd,aSl,nS1,nS2,fiS1,fiS2,fYk,vEdRed,vEd,0.55,cotTheta,45);
@@ -179,8 +179,8 @@ public class ShearingP10 {
     @Test
     public void test445() {
 
-        float vEd = 0.4452f;
-        float vEdRed = 0.371f;
+        double vEd = 0.4452f;
+        double vEdRed = 0.371f;
 
 
         ShearingBendRods res = new ShearingBendRods(h,a1,b,fCk,nEd,aSl,nS1,nS2,fiS1,fiS2,fYk,vEdRed,vEd,0.55,cotTheta,45);
@@ -193,8 +193,8 @@ public class ShearingP10 {
     @Test
     public void test507() {
 
-        float vEd = 0.5076f;
-        float vEdRed = 0.423f;
+        double vEd = 0.5076f;
+        double vEdRed = 0.423f;
 
 
         ShearingBendRods res = new ShearingBendRods(h,a1,b,fCk,nEd,aSl,nS1,nS2,fiS1,fiS2,fYk,vEdRed,vEd,0.55,cotTheta,45);
@@ -207,8 +207,8 @@ public class ShearingP10 {
     @Test
     public void test554() {
 
-        float vEd = 0.5544f;
-        float vEdRed = 0.462f;
+        double vEd = 0.5544f;
+        double vEdRed = 0.462f;
 
 
         ShearingBendRods res = new ShearingBendRods(h,a1,b,fCk,nEd,aSl,nS1,nS2,fiS1,fiS2,fYk,vEdRed,vEd,0.55,cotTheta,45);
@@ -221,8 +221,8 @@ public class ShearingP10 {
     @Test
     public void test601() {
 
-        float vEd = 0.6012f;
-        float vEdRed = 0.501f;
+        double vEd = 0.6012f;
+        double vEdRed = 0.501f;
 
 
         ShearingBendRods res = new ShearingBendRods(h,a1,b,fCk,nEd,aSl,nS1,nS2,fiS1,fiS2,fYk,vEdRed,vEd,0.55,cotTheta,45);
@@ -235,8 +235,8 @@ public class ShearingP10 {
     @Test
     public void test663() {
 
-        float vEd = 0.6636f;
-        float vEdRed = 0.553f;
+        double vEd = 0.6636f;
+        double vEdRed = 0.553f;
 
 
         ShearingBendRods res = new ShearingBendRods(h,a1,b,fCk,nEd,aSl,nS1,nS2,fiS1,fiS2,fYk,vEdRed,vEd,0.55,cotTheta,45);
@@ -249,8 +249,8 @@ public class ShearingP10 {
     @Test
     public void test694() {
 
-        float vEd = 0.6948f;
-        float vEdRed = 0.579f;
+        double vEd = 0.6948f;
+        double vEdRed = 0.579f;
 
 
         ShearingBendRods res = new ShearingBendRods(h,a1,b,fCk,nEd,aSl,nS1,nS2,fiS1,fiS2,fYk,vEdRed,vEd,0.55,cotTheta,45);
@@ -263,8 +263,8 @@ public class ShearingP10 {
     @Test
     public void test757() {
 
-        float vEd = 0.7572f;
-        float vEdRed = 0.631f;
+        double vEd = 0.7572f;
+        double vEdRed = 0.631f;
 
 
         ShearingBendRods res = new ShearingBendRods(h,a1,b,fCk,nEd,aSl,nS1,nS2,fiS1,fiS2,fYk,vEdRed,vEd,0.55,cotTheta,45);
@@ -277,8 +277,8 @@ public class ShearingP10 {
     @Test
     public void test788() {
 
-        float vEd = 0.7884f;
-        float vEdRed = 0.657f;
+        double vEd = 0.7884f;
+        double vEdRed = 0.657f;
 
 
         ShearingBendRods res = new ShearingBendRods(h,a1,b,fCk,nEd,aSl,nS1,nS2,fiS1,fiS2,fYk,vEdRed,vEd,0.55,cotTheta,45);
@@ -291,8 +291,8 @@ public class ShearingP10 {
     @Test
     public void test804() {
 
-        float vEd = 0.804f;
-        float vEdRed = 0.670f;
+        double vEd = 0.804f;
+        double vEdRed = 0.670f;
 
 
         ShearingBendRods res = new ShearingBendRods(h,a1,b,fCk,nEd,aSl,nS1,nS2,fiS1,fiS2,fYk,vEdRed,vEd,0.55,cotTheta,45);
@@ -305,8 +305,8 @@ public class ShearingP10 {
     @Test
     public void test807() {
 
-        float vEd = 0.807f;
-        float vEdRed = 0.6725f;
+        double vEd = 0.807f;
+        double vEdRed = 0.6725f;
 
 
         ShearingBendRods res = new ShearingBendRods(h,a1,b,fCk,nEd,aSl,nS1,nS2,fiS1,fiS2,fYk,vEdRed,vEd,0.55,cotTheta,45);

@@ -1,4 +1,4 @@
-package pl.pawz.zelbet.tests.ULS;
+package test.pl.pawz.zelbet.tests.ULS;
 
 import org.junit.Test;
 import pl.pawz.zelbet.ULS.ExtensionAsymmetricReinforcement;
@@ -7,16 +7,16 @@ import static org.junit.Assert.assertEquals;
 
 public class ExtensionAsymmetricTest {
 
-    private float nEd;
-    private float mEd;
+    private double nEd;
+    private double mEd;
     private double aS1;
     private double aS2;
-    private float h = 0.6f;
-    private float b = 0.3f;
-    private float a1 = 0.05f;
-    private float a2 = 0.05f;
-    private float fCk = 30;
-    private float fYk = 500;
+    private double h = 0.6f;
+    private double b = 0.3f;
+    private double a1 = 0.05f;
+    private double a2 = 0.05f;
+    private double fCk = 30;
+    private double fYk = 500;
 
     private static final double DELTA = 1e-6;
 

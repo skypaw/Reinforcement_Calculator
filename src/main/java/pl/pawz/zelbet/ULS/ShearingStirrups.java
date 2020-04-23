@@ -3,14 +3,12 @@ package pl.pawz.zelbet.ULS;
 
 import pl.pawz.zelbet.BasicValues;
 
-import java.util.Map;
-
 public class ShearingStirrups {
     private double dDimension;
     private double bDimension;
     private double fCk;
     private double fCd;
-    private float nEd;
+    private double nEd;
     private double aC;
     private double aSl;
     private double vRdMax;
@@ -29,7 +27,7 @@ public class ShearingStirrups {
     private double vEd;
 
 
-    public ShearingStirrups(float hDimension, float bDimension, float a1, double fCk, double fYk, float nEd, double vEd, double vEdRed, double aSl, double nS, double fiS, double cotTheta) {
+    public ShearingStirrups(double hDimension, double bDimension, double a1, double fCk, double fYk, double nEd, double vEd, double vEdRed, double aSl, double nS, double fiS, double cotTheta) {
         this.dDimension = BasicValues.dValue(hDimension, a1);
         this.bDimension = bDimension;
         this.fCk = fCk;
@@ -62,7 +60,7 @@ public class ShearingStirrups {
         double cRdC = 0.18 / BasicValues.gammaCConcrete();
         double sigmaCp = Math.min(nEd / aC, 0.2 * fCd);
 
-        float k1 = 0.15f;
+        double k1 = 0.15f;
 
         double vRdC1 = (cRdC * kValue * Math.pow(100 * rhoL * fCk, 1.0 / 3.0) + k1 * sigmaCp) * bDimension * dDimension;
         double vRdC2 = (nuMin + k1 * sigmaCp) * bDimension * dDimension;
