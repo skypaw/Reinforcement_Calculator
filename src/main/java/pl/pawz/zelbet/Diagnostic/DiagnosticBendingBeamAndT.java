@@ -10,10 +10,10 @@ public class DiagnosticBendingBeamAndT {
     private double lambdaConcrete;
     private double fYd;
     private int E_S;
-    private float bW;
-    private float bEff;
-    private float hF;
-    private float a2;
+    private double bW;
+    private double bEff;
+    private double hF;
+    private double a2;
     private double d;
     private double aS1;
     private double aS2;
@@ -21,7 +21,7 @@ public class DiagnosticBendingBeamAndT {
     private double xMinYd;
     private double xMinMinusYd;
 
-    public DiagnosticBendingBeamAndT(double fCk,  double fYk, float bW, float bEff, float h, float hF, float a1, float a2, double aS1, double aS2) {
+    public DiagnosticBendingBeamAndT(double fCk,  double fYk, double bW, double bEff, double h, double hF, double a1, double a2, double aS1, double aS2) {
         this.fCd = BasicValues.fCdValue(fCk);
         this.epsilonCu3 = BasicValues.epsilonCu3Value(fCk);
         this.lambdaConcrete = BasicValues.lambdaConcreteValue(fCk);

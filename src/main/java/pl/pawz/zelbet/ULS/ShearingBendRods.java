@@ -29,7 +29,7 @@ public class ShearingBendRods {
     private double sinAlpha;
 
 
-    public ShearingBendRods(float hDimension, float a1, float bDimension, double fCk, float nEd, double aSl, double nS1, double nS2, double fiS1, double fiS2, double fYk, double vEdRed, double vEd, double s2, double cotTheta, double alphaAngleDegree) {
+    public ShearingBendRods(double hDimension, double a1, double bDimension, double fCk, double nEd, double aSl, double nS1, double nS2, double fiS1, double fiS2, double fYk, double vEdRed, double vEd, double s2, double cotTheta, double alphaAngleDegree) {
         this.dDimension = BasicValues.dValue(hDimension,a1);
         this.bDimension = bDimension;
         this.fCk = fCk;
@@ -51,7 +51,7 @@ public class ShearingBendRods {
 
         double alphaAngleRadian = alphaAngleDegree*(Math.PI/180);
 
-        this.sinAlpha = Math.sin(alphaAngleRadian); //todo data from GUI
+        this.sinAlpha = Math.sin(alphaAngleRadian);
         double cosAlpha = Math.cos(alphaAngleRadian);
         double tanAlpha = sinAlpha/cosAlpha;
         this.cotAlpha = 1/tanAlpha;

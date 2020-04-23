@@ -5,10 +5,10 @@ import pl.pawz.zelbet.BasicValues;
 public class Deflection {
     private double mCr;
     private double mEd;
-    private float alphaM;
+    private double alphaM;
     private double mEk;
     private double mEkLt;
-    private float lEff;
+    private double lEff;
     private double eCEff;
     private double eCm;
     private int eS;
@@ -30,7 +30,7 @@ public class Deflection {
     public double fiCrawling;
 
 
-    public Deflection(float lEff, double mEkLt, double mEk, float alphaM, double mEd, float b, float h, float hF, float hFT, float bEff, float bEffT, float a1, float a2, double aS1, double aS2, char longOrShort, double fCk, float rH, char cement, int tZero) {
+    public Deflection(double lEff, double mEkLt, double mEk, double alphaM, double mEd, double b, double h, double hF, double hFT, double bEff, double bEffT, double a1, double a2, double aS1, double aS2, char longOrShort, double fCk, double rH, char cement, int tZero) {
         this.alphaM = alphaM;
         this.mEd = mEd;
         this.mEk = mEk;
@@ -38,7 +38,7 @@ public class Deflection {
         this.lEff = lEff;
         this.eS = BasicValues.steelE();
 
-        float fCm = (float) fCk + 8;
+        double fCm = (double) fCk + 8;
 
         BasicParameters basic = new BasicParameters(eS, b, h, hF, hFT, bEff, bEffT, a1, a2, aS1, aS2, fCk, rH, tZero, cement, longOrShort);
         this.mCr = basic.mCr;
@@ -55,15 +55,13 @@ public class Deflection {
 
         double h0 = basic.hZero;
 
-
-        Deformation def = new Deformation(h0, fCm, (float) fCk, rH, cement);
+        Deformation def = new Deformation(h0, fCm, (double) fCk, rH, cement);
         this.epsilonCs = def.deformationShrink();
 
         sigmaValue();
         sigmaLtValue();
         bValueLong();
-        bValueShort(); //TODO refactor whole SLS
-
+        bValueShort();
     }
 
     private void sigmaValue() {

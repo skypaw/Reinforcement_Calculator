@@ -5,15 +5,15 @@ import pl.pawz.zelbet.BasicValuesPillars;
 import pl.pawz.zelbet.PolynomialSolver;
 
 public class ExtensionSymmetricReinforcement {
-    private float nEd;
+    private double nEd;
     private double epsilonCu3;
     private double fCd;
     private double fYd;
     private double etaConcrete;
     private double lambdaConcrete;
     private double dDimension;
-    private float bDimension;
-    private float a2;
+    private double bDimension;
+    private double a2;
     private int E_S;
     private double xMinusMinYd;
     private double eS1;
@@ -23,8 +23,8 @@ public class ExtensionSymmetricReinforcement {
     private double xVar;
     private double hDimension;
 
-    public ExtensionSymmetricReinforcement(float nEd, float mEd, double fCk, double fYk, float bDimension,
-                                           float hDimension, float a1, float a2) {
+    public ExtensionSymmetricReinforcement(double nEd, double mEd, double fCk, double fYk, double bDimension,
+                                           double hDimension, double a1, double a2) {
         this.nEd = nEd;
         this.epsilonCu3 = BasicValues.epsilonCu3Value(fCk);
 

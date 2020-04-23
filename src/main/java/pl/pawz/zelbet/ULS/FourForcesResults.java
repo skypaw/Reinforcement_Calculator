@@ -7,24 +7,24 @@ import pl.pawz.zelbet.Diagnostic.DiagnosticCompression;
 import javax.swing.plaf.nimbus.AbstractRegionPainter;
 
 public class FourForcesResults {
-    private float h;
-    private float b;
-    private float a1;
-    private float a2;
-    private float mEd1;
-    private float mEd2;
-    private float mEd3;
-    private float mEd4;
+    private double h;
+    private double b;
+    private double a1;
+    private double a2;
+    private double mEd1;
+    private double mEd2;
+    private double mEd3;
+    private double mEd4;
 
-    private float nEd1;
-    private float nEd2;
-    private float nEd3;
-    private float nEd4;
+    private double nEd1;
+    private double nEd2;
+    private double nEd3;
+    private double nEd4;
 
-    private float fCk;
-    private float fYk;
+    private double fCk;
+    private double fYk;
 
-    public FourForcesResults(float b, float h, float a1, float a2, float nEd1, float mEd1, float nEd2, float mEd2, float nEd3, float mEd3, float nEd4, float mEd4, float fCk, float fYk) {
+    public FourForcesResults(double b, double h, double a1, double a2, double nEd1, double mEd1, double nEd2, double mEd2, double nEd3, double mEd3, double nEd4, double mEd4, double fCk, double fYk) {
         this.h = h;
         this.b = b;
         this.a1 = a1;
@@ -45,7 +45,7 @@ public class FourForcesResults {
 
     }
 
-    private double eccentricity(float nEdEccentricity, float mEdEccentricity) {
+    private double eccentricity(double nEdEccentricity, double mEdEccentricity) {
         if (nEdEccentricity >= 0) {
             return BasicValuesPillars.eccentricityCompression(mEdEccentricity, nEdEccentricity, h, a1, a2)[2];
         } else {

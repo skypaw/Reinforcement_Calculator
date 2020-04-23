@@ -1,16 +1,15 @@
 package pl.pawz.zelbet.SLS;
 
 public class Deformation {
-    private float fCm;
-    private float fCk;
-    private float rH; //percent
+    private double fCm;
+    private double fCk;
+    private double rH; //percent
     private double h0;
     private char cement;
-    private float kH;
-    private float alphaDs1;
-    private float alphaDs2;
+    private double alphaDs1;
+    private double alphaDs2;
 
-    public Deformation(double h0,float fCm, float fCk, float rH, char cement) {
+    public Deformation(double h0,double fCm, double fCk, double rH, char cement) {
         this.fCm = fCm;
         this.fCk = fCk;
         this.rH = rH;
@@ -23,6 +22,7 @@ public class Deformation {
         double epsilonCa = 2.5 * (fCk - 10) * Math.pow(10, -6);
 
 
+        double kH;
         if (h0 <= 200) {
             kH = 1f;
         } else if (h0 <= 300) {

@@ -3,10 +3,10 @@ package pl.pawz.zelbet.SLS;
 import pl.pawz.zelbet.BasicValues;
 
 public class Scratch {
-    float b;
-    float bEffT;
-    float h;
-    float hFT;
+    double b;
+    double bEffT;
+    double h;
+    double hFT;
     double aS1;
     double cNom;
     double fiSt;
@@ -34,7 +34,7 @@ public class Scratch {
     double iC;
 
 
-    public Scratch(double cNom, double fiSt, double fiS1, double nS1, double fCk, double rH, double tZero, char cement, float b, float bEff, float bEffT, float h, float hF, float hFT, float a1, float a2, double aS1, double aS2, float mEdK, float mEdKLt, char loadLong) {
+    public Scratch(double cNom, double fiSt, double fiS1, double nS1, double fCk, double rH, double tZero, char cement, double b, double bEff, double bEffT, double h, double hF, double hFT, double a1, double a2, double aS1, double aS2, double mEdK, double mEdKLt, char loadLong) {
         this.b = b;
         this.bEffT = bEffT;
         this.h = h;
@@ -93,7 +93,7 @@ public class Scratch {
     }
 
     private void epsilons() {
-        float kT;
+        double kT;
         double fCtEff = fCtm;
 
         if (loadLong == 'L') {
@@ -106,10 +106,10 @@ public class Scratch {
     }
 
     private void sRMax() {
-        float k1 = 0.8f;
-        float k2 = 0.5f;
-        float k3 = 3.4f;
-        float k4 = 0.425f;
+        double k1 = 0.8f;
+        double k2 = 0.5f;
+        double k3 = 3.4f;
+        double k4 = 0.425f;
 
         double c = cNom + fiSt;
         double a = Math.max((bEffT - 2 * c - fiS1) / (nS1 - 1), 2 * fiS1);

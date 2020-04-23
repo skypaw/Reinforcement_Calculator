@@ -1,4 +1,4 @@
-package pl.pawz.zelbet.tests.ULS;
+package test.pl.pawz.zelbet.tests.ULS;
 
 import org.junit.Test;
 import pl.pawz.zelbet.ULS.BendingBeamT;
@@ -8,16 +8,16 @@ import static org.junit.Assert.assertEquals;
 public class BendingBeamTTest {
 
 
-    private float fCk = 25;
+    private double fCk = 25;
 
     private double fYk = 500;
 
-    private float bEff = 0.9f;
-    private float bW = 0.30f;
-    private float a1 = 0.05f;
-    private float a2 = 0.05f;
-    private float h = 0.6f;
-    private float hF = 0.12f;
+    private double bEff = 0.9f;
+    private double bW = 0.30f;
+    private double a1 = 0.05f;
+    private double a2 = 0.05f;
+    private double h = 0.6f;
+    private double hF = 0.12f;
 
 
     private static final double DELTA = 1e-6;
@@ -25,7 +25,7 @@ public class BendingBeamTTest {
     @Test
     public void test50() {
 
-        float mEd = 0.05f;
+        double mEd = 0.05f;
 
         BendingBeamT res = new BendingBeamT(mEd, fCk, fYk, bW, bEff, h, hF, a1, a2);
         double result1 = res.resultsBendingT()[0];
@@ -40,7 +40,7 @@ public class BendingBeamTTest {
     @Test
     public void test100() {
 
-        float mEd = 0.1f;
+        double mEd = 0.1f;
 
         BendingBeamT res = new BendingBeamT(mEd, fCk, fYk, bW, bEff, h, hF, a1, a2);
         double result1 = res.resultsBendingT()[0];
@@ -55,7 +55,7 @@ public class BendingBeamTTest {
     @Test
     public void test200() {
 
-        float mEd = 0.2f;
+        double mEd = 0.2f;
 
         BendingBeamT res = new BendingBeamT(mEd, fCk, fYk, bW, bEff, h, hF, a1, a2);
         double result1 = res.resultsBendingT()[0];
@@ -70,7 +70,7 @@ public class BendingBeamTTest {
     @Test
     public void test300() {
 
-        float mEd = 0.3f;
+        double mEd = 0.3f;
 
         BendingBeamT res = new BendingBeamT(mEd, fCk, fYk, bW, bEff, h, hF, a1, a2);
         double result1 = res.resultsBendingT()[0];
@@ -85,7 +85,7 @@ public class BendingBeamTTest {
     @Test
     public void test400() {
 
-        float mEd = 0.4f;
+        double mEd = 0.4f;
 
         BendingBeamT res = new BendingBeamT(mEd, fCk, fYk, bW, bEff, h, hF, a1, a2);
         double result1 = res.resultsBendingT()[0];
@@ -100,7 +100,7 @@ public class BendingBeamTTest {
     @Test
     public void test500() {
 
-        float mEd = 0.5f;
+        double mEd = 0.5f;
 
         BendingBeamT res = new BendingBeamT(mEd, fCk, fYk, bW, bEff, h, hF, a1, a2);
         double result1 = res.resultsBendingT()[0];
@@ -115,7 +115,7 @@ public class BendingBeamTTest {
     @Test
     public void test600() {
 
-        float mEd = 0.6f;
+        double mEd = 0.6f;
 
         BendingBeamT res = new BendingBeamT(mEd, fCk, fYk, bW, bEff, h, hF, a1, a2);
         double result1 = res.resultsBendingT()[0];
@@ -130,7 +130,7 @@ public class BendingBeamTTest {
     @Test
     public void test700() {
 
-        float mEd = 0.7f;
+        double mEd = 0.7f;
 
         BendingBeamT res = new BendingBeamT(mEd, fCk, fYk, bW, bEff, h, hF, a1, a2);
         double result1 = res.resultsBendingT()[0];
@@ -145,7 +145,7 @@ public class BendingBeamTTest {
     @Test
     public void test800() {
 
-        float mEd = 0.8f;
+        double mEd = 0.8f;
 
         BendingBeamT res = new BendingBeamT(mEd, fCk, fYk, bW, bEff, h, hF, a1, a2);
         double result1 = res.resultsBendingT()[0];
@@ -160,7 +160,7 @@ public class BendingBeamTTest {
     @Test
     public void test900() {
 
-        float mEd = 0.9f;
+        double mEd = 0.9f;
 
         BendingBeamT res = new BendingBeamT(mEd, fCk, fYk, bW, bEff, h, hF, a1, a2);
         double result1 = res.resultsBendingT()[0];
@@ -175,7 +175,7 @@ public class BendingBeamTTest {
     @Test
     public void test945() {
 
-        float mEd = 0.945f;
+        double mEd = 0.945f;
 
         BendingBeamT res = new BendingBeamT(mEd, fCk, fYk, bW, bEff, h, hF, a1, a2);
         double result1 = res.resultsBendingT()[0];
@@ -190,7 +190,7 @@ public class BendingBeamTTest {
     @Test
     public void test950() {
 
-        float mEd = 0.950f;
+        double mEd = 0.950f;
 
         BendingBeamT res = new BendingBeamT(mEd, fCk, fYk, bW, bEff, h, hF, a1, a2);
         double result1 = res.resultsBendingT()[0];
@@ -205,7 +205,7 @@ public class BendingBeamTTest {
     @Test
     public void test1000() {
 
-        float mEd = 1.0f;
+        double mEd = 1.0f;
 
         BendingBeamT res = new BendingBeamT(mEd, fCk, fYk, bW, bEff, h, hF, a1, a2);
         double result1 = res.resultsBendingT()[0];
@@ -220,7 +220,7 @@ public class BendingBeamTTest {
     @Test
     public void test1100() {
 
-        float mEd = 1.1f;
+        double mEd = 1.1f;
 
         BendingBeamT res = new BendingBeamT(mEd, fCk, fYk, bW, bEff, h, hF, a1, a2);
         double result1 = res.resultsBendingT()[0];
@@ -235,7 +235,7 @@ public class BendingBeamTTest {
     @Test
     public void test1200() {
 
-        float mEd = 1.2f;
+        double mEd = 1.2f;
 
         BendingBeamT res = new BendingBeamT(mEd, fCk, fYk, bW, bEff, h, hF, a1, a2);
         double result1 = res.resultsBendingT()[0];
@@ -250,7 +250,7 @@ public class BendingBeamTTest {
     @Test
     public void test1300() {
 
-        float mEd = 1.3f;
+        double mEd = 1.3f;
 
         BendingBeamT res = new BendingBeamT(mEd, fCk, fYk, bW, bEff, h, hF, a1, a2);
         double result1 = res.resultsBendingT()[0];
@@ -265,7 +265,7 @@ public class BendingBeamTTest {
     @Test
     public void test1400() {
 
-        float mEd = 1.4f;
+        double mEd = 1.4f;
 
         BendingBeamT res = new BendingBeamT(mEd, fCk, fYk, bW, bEff, h, hF, a1, a2);
         double result1 = res.resultsBendingT()[0];
@@ -280,7 +280,7 @@ public class BendingBeamTTest {
     @Test
     public void test1500() {
 
-        float mEd = 1.5f;
+        double mEd = 1.5f;
 
         BendingBeamT res = new BendingBeamT(mEd, fCk, fYk, bW, bEff, h, hF, a1, a2);
         double result1 = res.resultsBendingT()[0];
@@ -295,7 +295,7 @@ public class BendingBeamTTest {
     @Test
     public void test1600() {
 
-        float mEd = 1.6f;
+        double mEd = 1.6f;
 
         BendingBeamT res = new BendingBeamT(mEd, fCk, fYk, bW, bEff, h, hF, a1, a2);
         double result1 = res.resultsBendingT()[0];

@@ -5,7 +5,7 @@ import pl.pawz.zelbet.BasicValuesPillars;
 import pl.pawz.zelbet.PolynomialSolver;
 
 public class DiagnosticCompression {
-    private float nEd;
+    private double nEd;
     private double epsilonCu3;
     private double epsilonC3;
     private double fCd;
@@ -13,10 +13,10 @@ public class DiagnosticCompression {
     private double etaConcrete;
     private double lambdaConcrete;
     private double dDimension;
-    private float bDimension;
-    private float hDimension;
-    private float a1;
-    private float a2;
+    private double bDimension;
+    private double hDimension;
+    private double a1;
+    private double a2;
     private int E_S;
     private double xLim;
     private double xMinusMinYd;
@@ -33,8 +33,8 @@ public class DiagnosticCompression {
     private double sigmaS2;
 
 
-    public DiagnosticCompression(float nEd, float mEd, double fCk, double fYk,
-                                 float bDimension, float hDimension, float a1, float a2, double aS1, double aS2) {
+    public DiagnosticCompression(double nEd, double mEd, double fCk, double fYk,
+                                 double bDimension, double hDimension, double a1, double a2, double aS1, double aS2) {
         this.nEd = nEd;
         this.fCd = BasicValues.fCdValue(fCk);
         this.epsilonCu3 = BasicValues.epsilonCu3Value(fCk);

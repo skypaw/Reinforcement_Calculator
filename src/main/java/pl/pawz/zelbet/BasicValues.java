@@ -5,23 +5,23 @@ public class BasicValues {
         return 200000;
     }
 
-    public static float gammaCConcrete() {
+    public static double gammaCConcrete() {
         return 1.4f;
     }
 
-    public static double dValue(float h, float a1) {
+    public static double dValue(double h, double a1) {
         return h - a1;
     }
 
     public static double fCdValue(double fCk) {
-        float alphaCc = 1f;
-        float gammaC = gammaCConcrete();
+        double alphaCc = 1f;
+        double gammaC = gammaCConcrete();
         return alphaCc * fCk / gammaC;
     }
 
     public static double fYdValue(double fYk) {
-        float alphaCc = 1f;
-        float gammaC = 1.15f;
+        double alphaCc = 1f;
+        double gammaC = 1.15f;
         return alphaCc * fYk / gammaC;
     }
 
