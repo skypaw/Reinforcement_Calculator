@@ -10,7 +10,7 @@ For bending without normal force SLS calculations are included.
 To do list:
 - [x] check ULS
 - [x] check SLS
-- [ ] print to pdf
+- [x] print to pdf
 
 ### Basic values:
 - Es = 200,000 MPa
